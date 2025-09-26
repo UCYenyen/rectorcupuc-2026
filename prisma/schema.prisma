@@ -1,0 +1,169 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  pdd_website
+  liason_officer
+  viewer
+}
+
+enum RegistrationStatus {
+  Registered
+  Pending
+  Failed
+}
+
+enum CompetitionCategory {
+  Sports
+  ESports
+  Arts
+  Learnings
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  user_id      String
+  expires      DateTime
+  user         User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model User {
+  id                         String                    @id @default(cuid())
+  name                       String?
+  email                      String?                   @unique
+  emailVerified              DateTime?
+  image                      String?
+  role                       Role                      @default(viewer)
+  accounts                   Account[]
+  sessions                   Session[]
+  createdAt                  DateTime                  @default(now())
+  updatedAt                  DateTime                  @updatedAt
+  competition_registrations  CompetitionRegistration[]
+  team_members               TeamMember[]
+  votesReceived              Vote[]                    @relation("VotesForUser")
+  votesCast                  Vote[]                    @relation("VotesByUser")
+
+  Team Team[]
+}
+
+model Competition {
+  id                         String                    @id @default(cuid())
+  name                       String
+  description                String                    @default("-")
+  price                      Float                     @default(0)
+  min_team_member            Int                       @default(1)
+  max_team_member            Int                       @default(1)
+  category                   CompetitionCategory
+  teams                      Team[] // Changed name for clarity
+  matches                    Match[]
+  competition_registrations  CompetitionRegistration[]
+  votes                      Vote[]
+}
+
+model CompetitionRegistration {
+  id             String      @id @default(cuid())
+  created_at     DateTime    @default(now())
+  user_id        String
+  competition_id String
+  imageUrl                    String
+  imagePublicId               String
+  registration_status                       RegistrationStatus                      @default(Pending)
+  rejection_reason String @default("")
+  user           User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  competition    Competition @relation(fields: [competition_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, competition_id]) // Recommendation: Ensures a user registers only once per competition
+}
+
+model TeamMember {
+  id      String @id @default(cuid())
+  user_id String
+  team_id String
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  team    Team   @relation(fields: [team_id], references: [id], onDelete: Cascade)
+  
+  @@unique([user_id, team_id]) // Ensures user doesn't join the same team twice
+}
+
+model Team {
+  id               String       @id @default(cuid())
+  name             String
+  competition_id   String
+  leader_id        String      
+  team_referal_code String    @unique @default(cuid())
+  created_at       DateTime     @default(now())
+  updated_at       DateTime     @updatedAt
+  competition      Competition  @relation(fields: [competition_id], references: [id], onDelete: Cascade)
+  members          TeamMember[]
+  current_team_member Int         @default(0)
+  min_team_member  Int           @default(1)
+  max_team_member  Int           @default(1)
+  registration_status RegistrationStatus @default(Pending)
+  rejection_reason String @default("")
+  leader          User?         @relation(fields: [leader_id], references: [id], onDelete: Cascade)
+  matchesAsTeamOne Match[]      @relation("TeamOneMatches") // Back-relation for Match
+  matchesAsTeamTwo Match[]      @relation("TeamTwoMatches") // Back-relation for Match
+
+  @@unique([name, competition_id]) // Recommendation: Prevents duplicate team names in the same competition
+}
+
+model Vote {
+  id                  String      @id @default(cuid())
+  competition_id      String
+  user_being_voted_id String
+  voter_id            String
+  
+  competition         Competition @relation(fields: [competition_id], references: [id], onDelete: Cascade) // FIX: Added relation
+  userBeingVoted      User        @relation("VotesForUser", fields: [user_being_voted_id], references: [id], onDelete: Cascade)
+  voter               User        @relation("VotesByUser", fields: [voter_id], references: [id], onDelete: Cascade)
+}
+
+model Match {
+  id              String      @id @default(cuid())
+  duration        Int
+  startTime       DateTime
+  endTime         DateTime
+  location        String
+  team_one_score  Int
+  team_two_score  Int
+  competition_id  String
+  team_one_id     String // FIX: Renamed for clarity
+  team_two_id     String // FIX: Renamed for clarity
+
+  competition      Competition @relation(fields: [competition_id], references: [id], onDelete: Cascade)
+  team_one_reference Team        @relation("TeamOneMatches", fields: [team_one_id], references: [id], onDelete: Cascade) // FIX: Named relation
+  team_two_reference Team        @relation("TeamTwoMatches", fields: [team_two_id], references: [id], onDelete: Cascade) // FIX: Named relation
+}
