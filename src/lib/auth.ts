@@ -59,10 +59,13 @@ export const authOptions: NextAuthOptions = {
         },
       });
 
-      // 2. Jika user ditemukan, perbarui token dengan data dari database
+      // Jika user belum ada di DB (pertama kali sign in), sertakan data provider ke token
       if (!dbUser) {
         if (user) {
           token.id = user?.id;
+          token.name = user?.name ?? token.name;
+          token.email = user?.email ?? token.email;
+          token.image = (user as any)?.image ?? token.image;
         }
         return token;
       }

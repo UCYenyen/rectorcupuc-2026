@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  seed     = "ts-node prisma/seed.ts"
 }
 
 datasource db {
@@ -66,16 +67,17 @@ model User {
   email                      String?                   @unique
   emailVerified              DateTime?
   image                      String?
-  role                       Role                      @default(viewer)
-  accounts                   Account[]
-  sessions                   Session[]
+
   createdAt                  DateTime                  @default(now())
   updatedAt                  DateTime                  @updatedAt
+  role                       Role                      @default(viewer)
+
+  accounts                   Account[]
+  sessions                   Session[]
   competition_registrations  CompetitionRegistration[]
   team_members               TeamMember[]
   votesReceived              Vote[]                    @relation("VotesForUser")
   votesCast                  Vote[]                    @relation("VotesByUser")
-
   Team Team[]
 }
 
@@ -83,7 +85,6 @@ model Competition {
   id                         String                    @id @default(cuid())
   name                       String
   description                String                    @default("-")
-  price                      Float                     @default(0)
   min_team_member            Int                       @default(1)
   max_team_member            Int                       @default(1)
   category                   CompetitionCategory
@@ -96,12 +97,12 @@ model Competition {
 model CompetitionRegistration {
   id             String      @id @default(cuid())
   created_at     DateTime    @default(now())
+  team_id       String      
   user_id        String
   competition_id String
-  imageUrl                    String
-  imagePublicId               String
   registration_status                       RegistrationStatus                      @default(Pending)
-  rejection_reason String @default("")
+  
+  team    Team   @relation(fields: [team_id], references: [id], onDelete: Cascade)
   user           User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
   competition    Competition @relation(fields: [competition_id], references: [id], onDelete: Cascade)
 
@@ -126,16 +127,17 @@ model Team {
   team_referal_code String    @unique @default(cuid())
   created_at       DateTime     @default(now())
   updated_at       DateTime     @updatedAt
-  competition      Competition  @relation(fields: [competition_id], references: [id], onDelete: Cascade)
-  members          TeamMember[]
   current_team_member Int         @default(0)
   min_team_member  Int           @default(1)
   max_team_member  Int           @default(1)
-  registration_status RegistrationStatus @default(Pending)
-  rejection_reason String @default("")
+
+  competition      Competition  @relation(fields: [competition_id], references: [id], onDelete: Cascade)
+  
   leader          User?         @relation(fields: [leader_id], references: [id], onDelete: Cascade)
   matchesAsTeamOne Match[]      @relation("TeamOneMatches") // Back-relation for Match
   matchesAsTeamTwo Match[]      @relation("TeamTwoMatches") // Back-relation for Match
+  competitionRegistrations CompetitionRegistration[]
+  members          TeamMember[]
 
   @@unique([name, competition_id]) // Recommendation: Prevents duplicate team names in the same competition
 }

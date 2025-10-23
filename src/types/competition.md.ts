@@ -1,4 +1,4 @@
-import { Match } from "@prisma/client";
+import { CompetitionCategory, Match } from "@prisma/client";
 import { Team } from "@prisma/client";
 
 export interface Competition{
@@ -18,4 +18,13 @@ export interface TeamInterface extends Team {
         id: string;
         name: string | null;
     }
+}
+
+export interface CompetitionContainerProps{
+    id: String;                   
+    name: String
+    description: String                   
+    min_team_member: number                      
+    max_team_member: number                       
+    category: CompetitionCategory
 }
