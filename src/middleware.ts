@@ -1,7 +1,6 @@
 import withAuth from "next-auth/middleware";
 import { NextResponse } from "next/server";
 import { Role } from "@prisma/client";
-import path from "path";
 
 export default withAuth(
     function middleware(req) {
@@ -22,7 +21,6 @@ export default withAuth(
 
         if(pathname.startsWith("/web")){
             if (!token) {
-                console.log("token : ", token)
                 return NextResponse.redirect(new URL('/login', req.url));
             }
 

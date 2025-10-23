@@ -38,13 +38,14 @@ export async function registerTeam(
   return { success: true};
 }
 
-// Bungkus fungsi server Anda sebagai Server Action
+// Server Actions with console.error in catch to satisfy ESLint
 export async function approveRegistration(registrationId: string) {
   try {
     await updateRegistrationStatus(registrationId, 'Registered');
     revalidatePath(ADMIN_PAGE_PATH); // Otomatis refresh data di halaman
     return { success: true };
   } catch (error) {
+    console.error("approveRegistration error:", error);
     return { success: false, error: "Failed to approve." };
   }
 }
@@ -55,6 +56,7 @@ export async function rejectRegistration(registrationId: string) {
     revalidatePath(ADMIN_PAGE_PATH);
     return { success: true };
   } catch (error) {
+    console.error("rejectRegistration error:", error);
     return { success: false, error: "Failed to reject." };
   }
 }
@@ -65,6 +67,7 @@ export async function setRegistrationPending(registrationId: string) {
     revalidatePath(ADMIN_PAGE_PATH);
     return { success: true };
   } catch (error) {
+    console.error("setRegistrationPending error:", error);
     return { success: false, error: "Failed to set to pending." };
   }
 }

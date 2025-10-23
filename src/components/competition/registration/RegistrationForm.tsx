@@ -3,7 +3,7 @@ import { registerTeam, RegisterTeamFormState } from "@/lib/action";
 import React, { useEffect } from "react";
 import { useActionState } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 interface RegistrationFormProps {
   competitionId: string;
@@ -17,15 +17,13 @@ export default function RegistrationForm({
   const isLoading = status === "loading";
   const router = useRouter();
 
-  // Get the leader ID from the session
-  const leaderId = session?.user.id;
-  if (!leaderId) {
-    console.error("User is not authenticated.");
-    return <></>;
-  }
+  // Always compute leaderId (may be empty string) so hooks are not conditional
+  const leaderId = session?.user?.id ?? "";
 
+  // bind even when leaderId is empty; registerTeam checks leaderId server-side
   const registerTeamWithArgs = registerTeam.bind(null, leaderId, competitionId);
 
+  // Call hooks unconditionally
   const [state, formAction] = useActionState<RegisterTeamFormState, FormData>(
     registerTeamWithArgs,
     {}
@@ -56,7 +54,7 @@ export default function RegistrationForm({
           <div className="space-y-2">
             <label htmlFor="teamName" className="block font-medium">
               Team Name: {`${competitionId}`}
-              Leader Name: {`${leaderId}`}
+              Leader Name: {`${leaderId || "Not signed in"}`}
             </label>
             <input
               type="text"
@@ -66,6 +64,7 @@ export default function RegistrationForm({
               className="w-full border rounded p-2"
             />
           </div>
+
           {isLoading ? (
             <div>Loading...</div>
           ) : !isLoggedIn ? (

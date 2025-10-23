@@ -1,11 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
-  const { id: userId } = params;
+  // tunggu params agar cocok dengan tipe yang diharapkan oleh Next.js
+  const { id: userId } = await context.params;
   console.log("STEP 0: userId =", userId);
 
   // 1. Get direct registrations where user is the team leader
@@ -14,7 +15,8 @@ export async function GET(
     include: {
       team: true,
       competition: true,
-    }
+      user: true,
+    },
   });
   console.log("STEP 1A: leaderRegistrations =", leaderRegistrations);
 
@@ -33,6 +35,7 @@ export async function GET(
         include: {
           team: true,
           competition: true,
+          user: true,
         },
       });
       console.log(`STEP 2: competitionRegistration for teamMember[${idx}] (team_id=${teamMember.team.id}) =`, regis);

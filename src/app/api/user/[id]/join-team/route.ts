@@ -1,13 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { joinTeamByReferalCode } from "@/lib/team";
 
 export async function POST(
-  req: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id: userId } = params;
-    const { referalCode }: { referalCode: string } = await req.json();
+    const { id: userId } = await context.params;
+    const { referalCode }: { referalCode: string } = await request.json();
 
     if (!referalCode) {
       return NextResponse.json({ success: false, error: "Referral code is required" }, { status: 400 });
@@ -15,9 +15,9 @@ export async function POST(
 
     const team = await joinTeamByReferalCode(userId, referalCode);
 
-    // jika joinTeamByReferalCode mengembalikan null/undefined maka treat sebagai error
-    if (!team) {
-      return NextResponse.json({ success: false, error: "Invalid referral code or failed to join" }, { status: 400 });
+    // handle joinTeamByReferalCode returning { error: string } or null/undefined
+    if (!team || (typeof team === "object" && "error" in team)) {
+      return NextResponse.json({ success: false, error: team?.error || "Invalid referral code or failed to join" }, { status: 400 });
     }
 
     return NextResponse.json(

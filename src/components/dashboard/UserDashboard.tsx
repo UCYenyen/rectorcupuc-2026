@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { BsCopy } from "react-icons/bs";
 
@@ -24,22 +24,24 @@ export default function UserDashboard() {
   const [referalCode, setReferalCode] = useState<string>("");
   const [isJoining, setIsJoining] = useState<boolean>(false);
 
-  async function fetchRegistrations() {
+  const fetchRegistrations = useCallback(async () => {
     if (!session?.user?.id) return;
     try {
       const res = await fetch(`/api/user/${session.user.id}/registrations`);
       if (res.ok) {
         const data = await res.json();
         setRegistrations(data);
+      } else {
+        console.error("Failed to fetch registrations, status:", res.status);
       }
     } catch (err) {
       console.error("Failed to fetch registrations", err);
     }
-  }
+  }, [session?.user?.id]);
 
   useEffect(() => {
     fetchRegistrations();
-  }, [session?.user?.id]);
+  }, [fetchRegistrations]);
 
   const openJoinModal = () => {
     setReferalCode("");
@@ -125,7 +127,7 @@ export default function UserDashboard() {
               {registrations.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="py-4 text-center text-black">
-                    You haven't joined any competitions yet.
+                    You have not joined any competitions yet.
                   </td>
                 </tr>
               ) : (

@@ -21,9 +21,9 @@ export interface TeamInterface extends Team {
 }
 
 export interface CompetitionContainerProps{
-    id: String;                   
-    name: String
-    description: String                   
+    id: string;                   
+    name: string
+    description: string                   
     min_team_member: number                      
     max_team_member: number                       
     category: CompetitionCategory
