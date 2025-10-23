@@ -1,11 +1,9 @@
-// auth.ts (SESUDAH)
-
-import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import prisma from "@/lib/prisma";
-import { Role } from "@prisma/client"
+import { NextAuthOptions } from "next-auth";
 import { revalidatePath } from "next/cache";
+import { Role } from "@prisma/client";
+import prisma from "@/lib/prisma";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -23,12 +21,11 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ profile, user }) {
-      // ... (Fungsi signIn tidak perlu diubah)
       if (!profile?.email) {
         throw new Error("No profile email found");
       }
 
-      if (profile.email.includes("ciputra.ac.id") || profile.email.includes("gmail.com")) {
+      if (profile.email.includes("ciputra.ac.id")) {
         if (user && user.id) {
           const dbUser = await prisma.user.findUnique({
             where: { id: user.id },
@@ -44,7 +41,7 @@ export const authOptions: NextAuthOptions = {
           }
         }
 
-        revalidatePath("/dashboard");
+        revalidatePath("/dashboard/tech");
 
         return true;
       } else {
@@ -52,39 +49,23 @@ export const authOptions: NextAuthOptions = {
       }
     },
     async jwt({ token, user }) {
-      // 1. Ambil data user dari database
-      const dbUser = await prisma.user.findFirst({
-        where: {
-          email: token.email!, // Gunakan email dari token untuk mencari
-        },
-      });
-
-      // Jika user belum ada di DB (pertama kali sign in), sertakan data provider ke token
-      if (!dbUser) {
-        if (user) {
-          token.id = user.id;
-          token.name = user.name || token.name;
-          token.email = user.email || token.email;
-          token.image = user.image || token.image;
-        }
-        return token;
+      if (user) {
+        token.id = user.id;
       }
 
-      return {
-        id: dbUser.id,
-        name: dbUser.name,
-        email: dbUser.email,
-        image: dbUser.image,
-        role: dbUser.role,
-      };
+      if (token.id) {
+        const dbUser = await prisma.user.findUnique({
+          where: { id: token.id as string },
+          select: { role: true },
+        });
+        token.role = dbUser?.role;
+      }
+
+      return token;
     },
     async session({ session, token }) {
-      // 3. Salin data dari token yang sudah diperbarui ke objek session
-      if (token) {
+      if (session.user) {
         session.user.id = token.id as string;
-        session.user.name = token.name;
-        session.user.email = token.email;
-        session.user.image = token.image as string | null | undefined;
         session.user.role = token.role as Role;
       }
 
