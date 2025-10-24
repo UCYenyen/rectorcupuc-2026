@@ -12,6 +12,13 @@ interface CompetitionRegistration {
     team_name: string;
     referal_code: string;
   };
+  team:{
+    id: string;
+    name: string;
+    min_team_members: number;
+    current_team_members: number;
+    max_team_members: number;
+  }
   registration_status: string;
 }
 
@@ -119,6 +126,7 @@ export default function UserDashboard() {
                 <th className="py-2 px-4 border-b text-left">Competition Name</th>
                 <th className="py-2 px-4 border-b text-left">Category</th>
                 <th className="py-2 px-4 border-b text-left">Team</th>
+                <th className="py-2 px-4 border-b text-left">Members</th>
                 <th className="py-2 px-4 border-b text-left">Code</th>
                 <th className="py-2 px-4 border-b text-left">Status</th>
               </tr>
@@ -136,6 +144,7 @@ export default function UserDashboard() {
                     <td className="py-2 px-4 border-b">{reg.competition.name}</td>
                     <td className="py-2 px-4 border-b">{reg.competition.category}</td>
                     <td className="py-2 px-4 border-b">{reg.competition.team_name}</td>
+                    <td className="py-2 px-4 border-b">{reg.team.current_team_members + `` + reg.team.max_team_members}</td>
                     <td className="overflow-ellipsis py-2 px-4 border-b items-center gap-2">
                       <button
                         className="text-zinc-800 hover:text-zinc-600 flex items-center gap-1"
