@@ -96,9 +96,11 @@ export async function joinTeamByReferalCode(userId: string, referalCode: string)
         },
     });
 
+    const newMemberCount = team.current_team_member + 1;
+
     await prisma.team.update({
         where: { id: team.id },
-        data: { current_team_member: team.current_team_member + 1 },
+        data: { current_team_member: newMemberCount},
     });
 
     if(!teamMember){
