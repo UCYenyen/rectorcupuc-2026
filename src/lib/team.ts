@@ -71,7 +71,7 @@ export async function joinTeamByReferalCode(userId: string, referalCode: string)
     }
 
     const alreadyRegisteredToAnotherTeam = await prisma.team.findFirst({
-        where: {team_referal_code: referalCode, competition_id: team.competition_id}
+        where: {team_referal_code: referalCode, competition_id: team.competition_id, members: { some: { user_id: userId } } },
     })
 
     if(alreadyRegisteredToAnotherTeam){
