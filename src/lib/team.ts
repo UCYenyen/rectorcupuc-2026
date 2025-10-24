@@ -5,6 +5,14 @@ export async function createTeam(name: string, competitionId: string, leaderId: 
         where: { name_competition_id: { name: name, competition_id: competitionId } },
     });
 
+    const competitionData = await prisma.competition.findUnique({
+        where: { id: competitionId },
+    });
+    
+    if(!competitionData){
+        return { error: "Competition does not exist." };
+    }
+
     if (isTeamExist) {
         return { error: "Team with this name is already registered in the competition." };
     }
@@ -14,6 +22,9 @@ export async function createTeam(name: string, competitionId: string, leaderId: 
             name: name,
             competition_id: competitionId,
             leader_id: leaderId,
+            min_team_member: competitionData.min_team_member,
+            max_team_member: competitionData.max_team_member,
+            current_team_member: 1,
         },
     });
 
