@@ -66,9 +66,9 @@ export async function GET(
     team:{
       id: regis.team.id,
       name: regis.team.name,
-      min_team_members: regis.team.min_team_member,
+      min_team_members: regis.competition.min_team_member,
       current_team_members: regis.team.current_team_member,
-      max_team_members: regis.team.max_team_member,
+      max_team_members: regis.competition.max_team_member,
     },
     registration_status: regis.registration_status,
   }));
