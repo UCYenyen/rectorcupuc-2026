@@ -2,7 +2,7 @@
 
 export default function UnderDevelopmentPage() {
   return (
-    <div className="min-h-screen bg-zinc-300 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#390D62] to-[#6226A4] flex items-center justify-center p-4">
       <div className="bg-white/90 backdrop-blur-sm p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
         <div className="mx-auto w-20 h-20 bg-gradient-to-br from-zinc-400 to-zinc-600 rounded-full flex items-center justify-center mb-6">
           <svg

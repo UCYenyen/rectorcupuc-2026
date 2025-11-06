@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function NotFoundPage() {
   return (
     <>
-      <div className="min-h-screen bg-zinc-300 flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-b from-[#390D62] to-[#6226A4] flex items-center justify-center p-4 relative overflow-hidden">
 
         {/* Main content card with error badge on top */}
         <div className="bg-white/90 backdrop-blur-sm p-12 rounded-2xl shadow-2xl text-center max-w-md w-full border border-white/20 transform transition-all duration-500 hover:scale-105 relative">
