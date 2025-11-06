@@ -15,9 +15,7 @@ export default withAuth(
     if (!isLocalDev) {
       // apply redirect only for protected paths handled by this middleware
       if (
-        pathname.startsWith("/dashboard") ||
-        pathname.startsWith("/admin") ||
-        pathname.startsWith("/web")
+        !pathname.startsWith("/underdevelopment")
       ) {
         return NextResponse.redirect(new URL("/underdevelopment", req.url));
       }
