@@ -8,6 +8,7 @@ export async function middleware(req: NextRequest) {
   const isLocalHost =
     host.includes("localhost") ||
     host.includes("127.0.0.1") ||
+    host.includes("vercel")
     host.includes("::1");
 
   const { pathname } = req.nextUrl;
