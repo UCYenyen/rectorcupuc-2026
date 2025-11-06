@@ -1,118 +1,96 @@
-import withAuth from "next-auth/middleware";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
 import { Role } from "@prisma/client";
 
-export default withAuth(
-  function middleware(req) {
-    const host = req.headers.get("host") || "";
-    const isLocalHost =
-      host.includes("localhost") ||
-      host.includes("127.0.0.1") ||
-      host.includes("::1");
+export async function middleware(req: NextRequest) {
+  const host = req.headers.get("host") || "";
+  const isLocalHost =
+    host.includes("localhost") ||
+    host.includes("127.0.0.1") ||
+    host.includes("::1");
 
-    const { pathname } = req.nextUrl;
+  const { pathname } = req.nextUrl;
 
-    // Allowlist paths that should always be accessible
-    const allowList = [
-      "/underdevelopment",
-      "/_next",
-      "/api/auth",
-      "/auth/error",
-      "/favicon.ico",
-      "/",
-      "/competitions",
-      "/votes",
-      "/storyline",
-    ];
+  // Allowlist paths that should always be accessible
+  const allowList = [
+    "/underdevelopment",
+    "/_next",
+    "/api/auth",
+    "/auth/error",
+    "/favicon.ico",
+    "/robots.txt",
+    "/sitemap.xml",
+  ];
 
-    // If NOT localhost and NOT in allowlist, redirect to underdevelopment
-    if (!isLocalHost) {
-      const isAllowed = allowList.some((path) => pathname === path || pathname.startsWith(path));
-      if (!isAllowed) {
-        return NextResponse.redirect(new URL("/underdevelopment", req.url));
-      }
+  // Allow all image extensions
+  const imageExtensions = ['.webp', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico'];
+  const isImage = imageExtensions.some(ext => pathname.toLowerCase().endsWith(ext));
+
+  // PRIORITAS PERTAMA: Redirect ke underdevelopment jika bukan localhost
+  if (!isLocalHost) {
+    const isAllowed = allowList.some((path) => pathname.startsWith(path)) || isImage;
+    if (!isAllowed) {
+      return NextResponse.redirect(new URL("/underdevelopment", req.url));
+    }
+    // Jika sudah di underdevelopment atau allowlist, langsung next (skip auth check)
+    return NextResponse.next();
+  }
+
+  // HANYA JALANKAN AUTH CHECK DI LOCALHOST
+  // Public routes yang tidak butuh auth
+  const publicPaths = [
+    "/",
+    "/competitions",
+    "/votes",
+    "/storyline",
+    "/unauthorized",
+    "/not-found",
+    "/auth/error",
+  ];
+
+  // Skip auth untuk public paths dan static files
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api/auth") ||
+    pathname === "/favicon.ico" ||
+    publicPaths.some(path => pathname === path || pathname.startsWith(path))
+  ) {
+    return NextResponse.next();
+  }
+
+  // Get token untuk protected routes
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+
+  // Protected routes: dashboard, admin, web
+  if (
+    pathname.startsWith("/dashboard") ||
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/web")
+  ) {
+    if (!token) {
+      return NextResponse.redirect(new URL("/api/auth/signin", req.url));
     }
 
-    // Role-based checks (only runs on localhost or after allowlist check)
-    const token = req.nextauth?.token;
-
+    // Role-based access control
     if (pathname.startsWith("/admin") || pathname.startsWith("/dashboard/admin")) {
-      if (!token) {
-        return NextResponse.redirect(new URL("/api/auth/signin", req.url));
-      }
       if (
-        token?.role !== Role.liason_officer &&
-        token?.role !== Role.pdd_website
+        token.role !== Role.liason_officer &&
+        token.role !== Role.pdd_website
       ) {
         return NextResponse.redirect(new URL("/unauthorized", req.url));
       }
     }
 
     if (pathname.startsWith("/web")) {
-      if (!token) {
-        return NextResponse.redirect(new URL("/api/auth/signin", req.url));
-      }
-      if (token?.role !== Role.pdd_website) {
+      if (token.role !== Role.pdd_website) {
         return NextResponse.redirect(new URL("/unauthorized", req.url));
       }
     }
-
-    // Dashboard biasa butuh auth tapi tidak perlu role khusus
-    if (pathname.startsWith("/dashboard") && !pathname.startsWith("/dashboard/admin")) {
-      if (!token) {
-        return NextResponse.redirect(new URL("/api/auth/signin", req.url));
-      }
-    }
-
-    return NextResponse.next();
-  },
-  {
-    callbacks: {
-      // Hanya require auth untuk protected routes
-      authorized: ({ token, req }) => {
-        const { pathname } = req.nextUrl;
-
-        // Public routes yang tidak butuh token
-        const publicPaths = [
-          "/",
-          "/underdevelopment",
-          "/auth/error",
-          "/competitions",
-          "/votes",
-          "/storyline",
-          "/unauthorized",
-          "/not-found",
-        ];
-
-        // Allow NextAuth API routes dan static files
-        if (
-          pathname.startsWith("/_next") ||
-          pathname.startsWith("/api/auth") ||
-          pathname === "/favicon.ico"
-        ) {
-          return true;
-        }
-
-        // Allow public paths
-        if (publicPaths.some(path => pathname === path || pathname.startsWith(path))) {
-          return true;
-        }
-
-        // Protected routes butuh token
-        if (
-          pathname.startsWith("/dashboard") ||
-          pathname.startsWith("/admin") ||
-          pathname.startsWith("/web")
-        ) {
-          return !!token;
-        }
-
-        // Default: allow (untuk path lain yang belum didefinisikan)
-        return true;
-      },
-    },
   }
-);
+
+  return NextResponse.next();
+}
 
 export const config = {
   matcher: [
