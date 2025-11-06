@@ -19,7 +19,7 @@ export default withAuth(
         pathname.startsWith("/admin") ||
         pathname.startsWith("/web")
       ) {
-        return NextResponse.redirect(new URL("/under-development", req.url));
+        return NextResponse.redirect(new URL("/underdevelopment", req.url));
       }
     }
 
