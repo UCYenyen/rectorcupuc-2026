@@ -21,7 +21,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body>
+      <body className="bg-gradient-to-b from-[#390D62] to-[#6226A4]">
         <Provider session={session}>
           <NavigationBar />
           {children}
