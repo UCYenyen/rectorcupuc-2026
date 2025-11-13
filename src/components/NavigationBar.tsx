@@ -15,7 +15,7 @@ export default function NavigationBar() {
         <Link href="/competitions" className="bg-zinc-300 rounded-lg px-4 py-2 hover:underline w-full">
           Competitions
         </Link>
-        <Link href="/votes" className="bg-zinc-300 rounded-lg px-4 py-2 hover:underline w-full">
+        <Link href="/vote" className="bg-zinc-300 rounded-lg px-4 py-2 hover:underline w-full">
           Votes
         </Link>
         <div className="flex items-center">
