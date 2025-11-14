@@ -2,7 +2,7 @@ import AboutSection from "@/components/home/AboutSection";
 import CountdownContainer from "@/components/home/CountdownContainer";
 import TrailerSection from "@/components/home/TrailerSection";
 import Image from "next/image";
-
+import "@/styles/home.css"
 export default function Home() {
   return (
     <div className="overflow-x-hidden">
@@ -40,37 +40,38 @@ export default function Home() {
           src={"/home/tv.webp"}
           width={250}
           height={250}
-          alt="rectorcupuc giant arcade machine"
-          className="z-[5] absolute bottom-0 right-0"
+          alt="rectorcupuc tv right"
+          className="z-[5] tv-right absolute bottom-0 right-0"
         ></Image>
         <Image
           src={"/home/arcade-medium-left.webp"}
           width={550}
           height={550}
-          alt="rectorcupuc giant arcade machine"
-          className="z-[5] absolute bottom-[-10%] right-[8rem]"
+          alt="rectorcupuc medium arcade machine"
+          className="z-[5] arcade-medium-right absolute bottom-[-10%] right-[8rem]"
         ></Image>
         <Image
           src={"/home/tv.webp"}
           width={250}
           height={250}
-          alt="rectorcupuc medium arcade machine"
-          className="z-[5] rotate-y-180  absolute bottom-0 left-0"
+          alt="rectorcupuc tv left"
+          className="z-[5] tv-left rotate-y-180  absolute bottom-0 left-0"
         ></Image>
         <Image
           src={"/home/arcade-medium-right.webp"}
           width={550}
           height={550}
           alt="rectorcupuc meidum arcade machine"
-          className="z-[5] absolute bottom-[-10%] left-[8rem]"
+          className="z-[5] absolute arcade-medium-left bottom-[-10%] left-[8rem]"
         ></Image>
+
         <div className="relative flex flex-col gap-4">
           <Image
             src={"/home/rector-title.svg"}
             width={1050}
             height={1050}
             alt="rectorcupuc title"
-            className="z-[5] w-[50vw] h-auto"
+            className="rector-title z-[5] w-[50vw] h-auto"
           ></Image>
         </div>
         <CountdownContainer endDate="2026-01-01T00:00:00Z" />
