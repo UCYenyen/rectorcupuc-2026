@@ -1,6 +1,7 @@
 import React from 'react'
 import { Countdown } from '@/types/countdown.md'
 import Image from "next/image";
+import "@/styles/home.css"
 
 type Props = {
   properties: Countdown;
@@ -11,11 +12,7 @@ type Props = {
 export default function CountdownCard({ properties, cardWidth, innerRef }: Props) {
   return (
     <div 
-      className="flex flex-col gap-6" // gap lebih besar
-      style={{ 
-        width: cardWidth || '220px',  // default lebih lebar
-        minWidth: '160px'  // Minimum width agar tidak terlalu kecil
-      }}
+      className="countdown-card w-[220px] flex flex-col gap-6" // gap lebih besar
     >
       {/* Card container dengan aspect ratio sesuai image */}
       <div

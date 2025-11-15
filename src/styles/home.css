@@ -20,7 +20,140 @@
 }
 @media (max-width: 2560px) and (max-height: 1140px) {
 }
+@media (max-width: 1920px) and (max-height: 945px) {
+    /* Countdown Section */
+    .rector-title{
+        width: 50rem;
+    }
+    .big-yellow-star{
+        width: 120rem;
+        top: 3.5rem;
+        left: 5rem;
+    }
+    .big-green-star {
+        width: 110rem;
+        top: -2rem;
+        left: 15rem;
+    }
+    .rector-card{
+        width: 50rem;
+        left: 350px;
+    }
+    .rector-card-2{
+        width: 50rem;
+        top: 4rem;
+        right: 3rem;
+    }
+    .arcade-machine-big {
+        width: 44rem;
+        top: 6rem;
+    }
+    .arcade-medium-left{
+        width: 35rem;
+        left: 13rem;
+    }
+    .arcade-medium-right{
+        width: 35rem;
+        right: 13rem;
+    }
+    .tv-left{
+        width: 20rem;
+
+    }
+    .tv-right{
+        width: 20rem;
+    }
+    .camera-right{
+
+    }
+    .camera-background-right{
+
+    }
+    .congrats-left{
+        width: 14rem;
+        top: 15px;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 50rem;
+    }
+    .about-border-top{
+
+    }
+    .about-border-bottom{
+
+    }
+
+    /* Trailer Section */
+}
 @media (max-width: 1920px) and (max-height: 1080px) {
+    /* Countdown Section */
+    .rector-title{
+        width: 50rem;
+    }
+    .big-yellow-star{
+        width: 120rem;
+        top: 3.5rem;
+        left: 5rem;
+    }
+    .big-green-star {
+        width: 110rem;
+        top: -2rem;
+        left: 15rem;
+    }
+    .rector-card{
+        width: 50rem;
+        left: 350px;
+        top: 15rem;
+    }
+    .rector-card-2{
+        width: 50rem;
+        top: 5rem;
+        right: 3rem;
+    }
+    .arcade-machine-big {
+        width: 47rem;
+        top: 10rem;
+    }
+    .arcade-medium-left{
+        width: 35rem;
+        left: 13rem;
+    }
+    .arcade-medium-right{
+        width: 35rem;
+        right: 13rem;
+    }
+    .tv-left{
+        width: 20rem;
+
+    }
+    .tv-right{
+        width: 20rem;
+    }
+    .camera-right{
+
+    }
+    .camera-background-right{
+
+    }
+    .congrats-left{
+        width: 14rem;
+        top: 15px;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 50rem;
+    }
+    .about-border-top{
+
+    }
+    .about-border-bottom{
+
+    }
+
+    /* Trailer Section */
 }
 @media (max-width: 1900px) and (max-height: 1920px) {
 }
@@ -85,6 +218,34 @@
 @media (max-width: 440px) and (max-height: 956px) and (orientation: portrait) {
 }
 @media (max-width: 430px) and (max-height: 932px) and (orientation: portrait) {
+    .big-green-star {
+        top: 40rem;
+    }
+    .arcade-machine-big {
+        width: 11rem;
+        top: 44.6rem;
+    }
+    .arcade-medium-left{
+        width: 7rem;
+        left: 2.8rem;
+        top: 50.7rem;
+    }
+    .arcade-medium-right{
+        width: 7rem;
+        right: 3rem;
+        top: 50.7rem;
+    }
+    .tv-left{
+        width: 4.5rem;
+        top: 50,7rem;
+    }
+    .tv-right{
+        width: 4.5rem;
+        top: 53rem;
+    }
+    .countdown-card {
+        width: 180px;
+    }
 }
 @media (max-width: 412px) and (max-height: 914px) and (orientation: portrait){
     

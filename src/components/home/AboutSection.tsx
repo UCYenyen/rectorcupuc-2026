@@ -3,17 +3,17 @@ import Image from "next/image";
 
 export default function AboutSection() {
   return (
-    <section className="relative min-h-[50vh] flex flex-col justify-center gap-12 items-center z-10 w-screen backdrop-blur-md bg-gradient-to-b from-[#3B81E5]/90 to-[#112440]">
+    <section className="bg-about relative min-h-[50vh] flex flex-col justify-center gap-12 items-center z-10 w-screen backdrop-blur-md bg-gradient-to-b from-[#3B81E5]/90 to-[#112440]">
         <Image
             src={"/home/border.svg"}
-            className="absolute top-[-5%] left-0 w-full h-auto pointer-events-none"
+            className="about-border-top absolute top-[-5%] left-0 w-full h-auto pointer-events-none"
             alt="rectorcupuc border-top"
             width={1000}
             height={1000}
         />
         <Image
             src={"/home/border.svg"}
-            className="absolute bottom-[-5%] left-0 w-full h-auto pointer-events-none"
+            className="about-border-bottom absolute bottom-[-5%] left-0 w-full h-auto pointer-events-none"
             alt="rectorcupuc border-bottom"
             width={1000}
             height={1000}
