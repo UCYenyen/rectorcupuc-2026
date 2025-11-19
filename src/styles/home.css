@@ -1,18 +1,91 @@
+/* DONE */
 @media (max-width: 3840px) and (max-height: 2160px) {
+/* Countdown Section */
+    .countdown-card{
+        width: 35rem;
+    }
+    .rector-title{
+        width: 110rem;
+    }
+    .big-yellow-star{
+        width: 230rem;
+        top: 10rem;
+        left: 8rem;
+        opacity: 80%;
+    }
+    .big-green-star {
+        width: 220rem;
+        top: 0rem;
+        left: 24rem;
+        opacity: 80%;
+    }
+    /* Depan Bawah */
+    .rector-card{
+        width: 80rem;
+        top: 40rem;
+        left: 55rem;
+        opacity: 60%;
+    }
+    /* Belakang Atas*/
+    .rector-card-2{
+        width: 90rem;
+        top: 17rem;
+        left: 67rem;
+        opacity: 60%;
+    }
+    .arcade-machine-big {
+        width: 90rem;
+        top: 25rem;
+        opacity: 100%;
+    }
     .arcade-medium-left{
-        width: 60rem;
-        left: 14rem;
+        width: 65rem;
+        left: 19rem;
+        top: 66rem;
+        opacity: 90%;
     }
     .arcade-medium-right{
-        width: 60rem;
-        right: 14rem;
+        width: 65rem;
+        right: 19rem;
+        top: 66rem;
+        opacity: 90%;
     }
     .tv-left{
-        width: 25rem;
+        width: 35rem;
+        opacity: 90%;
     }
     .tv-right{
-        width: 25rem;
+        width: 35rem;
+        opacity: 90%;
     }
+    .camera-right{
+        width: 30rem;
+        top: 3rem;
+        opacity: 80%;
+    }
+    .camera-background-right{
+        width: 26rem;
+        top: 5rem;
+        opacity: 80%;
+    }
+    .congrats-left{
+        width: 20rem;
+        top: 30rem;
+        opacity: 90%;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 80rem;
+    }
+    .about-border-top{
+
+    }
+    .about-border-bottom{
+
+    }
+
+    /* Trailer Section */
 }
 @media (max-width: 2850px) and (max-height: 1800px) {
 }
@@ -20,8 +93,107 @@
 }
 @media (max-width: 2560px) and (max-height: 1140px) {
 }
+
+/* DONE */
+@media (max-width: 1920px) and (max-height: 1080px) {
+    /* Countdown Section */
+    .countdown-card{
+        width: 20rem;
+    }
+    .rector-title{
+        width: 50rem;
+    }
+    .big-yellow-star{
+        width: 120rem;
+        top: 3.5rem;
+        left: 0rem;
+        opacity: 80%;
+    }
+    .big-green-star {
+        width: 110rem;
+        top: -2rem;
+        left: 10rem;
+        opacity: 80%;
+    }
+    /* Depan Bawah */
+    .rector-card{
+        width: 50rem;
+        left: 380px;
+        top: 15rem;
+        opacity: 60%;
+    }
+    /* Belakang Atas*/
+    .rector-card-2{
+        width: 50rem;
+        left: 32rem;
+        top: 4.5rem;
+        opacity: 60%;
+    }
+    .arcade-machine-big {
+        width: 50rem;
+        top: 7.5rem;
+        height: 60rem;
+        opacity: 100%;
+    }
+    .arcade-medium-left{
+        width: 33rem;
+        left: 10rem;
+        top: 32rem;
+        opacity: 90%;
+    }
+    .arcade-medium-right{
+        width: 33rem;
+        right: 10rem;
+        top: 32rem;
+        opacity: 90%;
+    }
+    .tv-left{
+        width: 18.5rem;
+        opacity: 90%;
+
+    }
+    .tv-right{
+        width: 18.5rem;
+        opacity: 90%;
+    }
+    .camera-right{
+        width: 15rem;
+        top: 2rem;
+        opacity: 80%;
+    }
+    .camera-background-right{
+        width: 12rem;
+        right: 0rem;
+        opacity: 80%;
+    }
+    .congrats-left{
+        width: 12rem;
+        top: 12rem;
+        opacity: 80%;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 50rem;
+    }
+    .about-border-top{
+
+    }
+    .about-border-bottom{
+
+    }
+
+    /* Trailer Section */
+    .bg-trailer{
+    }
+}
+
+/* DONE */
 @media (max-width: 1920px) and (max-height: 945px) {
     /* Countdown Section */
+    .countdown-card{
+        width: 15rem;
+    }
     .rector-title{
         width: 50rem;
     }
@@ -29,49 +201,68 @@
         width: 120rem;
         top: 3.5rem;
         left: 5rem;
+        opacity: 80%;
     }
     .big-green-star {
         width: 110rem;
         top: -2rem;
-        left: 15rem;
+        left: 13rem;
+        opacity: 80%;
     }
+    /* Depan Bawah */
     .rector-card{
         width: 50rem;
         left: 350px;
+        opacity: 60%;
     }
+    /* Belakang Atas*/
     .rector-card-2{
         width: 50rem;
         top: 4rem;
         right: 3rem;
+        opacity: 60%;
     }
     .arcade-machine-big {
         width: 44rem;
         top: 6rem;
+        opacity: 100%;
     }
     .arcade-medium-left{
         width: 35rem;
-        left: 13rem;
+        left: 10rem;
+        top: 22rem;
+        opacity: 90%;
     }
     .arcade-medium-right{
         width: 35rem;
-        right: 13rem;
+        right: 10rem;
+        top: 22rem;
+        opacity: 90%;
     }
     .tv-left{
         width: 20rem;
-
+        opacity: 90%;
     }
     .tv-right{
         width: 20rem;
+        opacity: 90%;
     }
     .camera-right{
-
+        width: 14rem;
+        top: 1rem;
+        right: 0.5rem;
+        opacity: 80%;
     }
     .camera-background-right{
-
+        width: 12rem;
+        right: 0rem;
+        top: 2rem;
+        opacity: 80%;
     }
     .congrats-left{
-        width: 14rem;
-        top: 15px;
+        width: 12rem;
+        top: 12rem;
+        opacity: 80%;
     }
 
     /* About Section */
@@ -87,8 +278,18 @@
 
     /* Trailer Section */
 }
-@media (max-width: 1920px) and (max-height: 1080px) {
+
+@media (max-width: 1900px) and (max-height: 1920px) {
+}
+@media (max-width: 1900px) and (max-height: 1200px) {
+}
+
+/* DONE */
+@media (max-width: 1728px) and (max-height: 1117px) {
     /* Countdown Section */
+    .countdown-card{
+        width: 20rem;
+    }
     .rector-title{
         width: 50rem;
     }
@@ -96,83 +297,88 @@
         width: 120rem;
         top: 3.5rem;
         left: 5rem;
+        opacity: 80%;
     }
     .big-green-star {
         width: 110rem;
         top: -2rem;
-        left: 15rem;
+        left: 7rem;
+        opacity: 80%;
     }
+    /* Depan Bawah */
     .rector-card{
         width: 50rem;
-        left: 350px;
+        left: 280px;
         top: 15rem;
+        opacity: 60%;
     }
+    /* Belakang Atas*/
     .rector-card-2{
         width: 50rem;
+        left: 25rem;
         top: 5rem;
-        right: 3rem;
+        opacity: 60%;
     }
     .arcade-machine-big {
-        width: 47rem;
-        top: 10rem;
+        width: 52rem;
+        top: 9.5rem;
+        height: 60rem;
+        opacity: 100%;
     }
     .arcade-medium-left{
-        width: 35rem;
-        left: 13rem;
+        width: 30rem;
+        left: 4rem;
+        top: 35.5rem;
+        opacity: 90%;
     }
     .arcade-medium-right{
-        width: 35rem;
-        right: 13rem;
+        width: 30rem;
+        right: 4rem;
+        top: 35.5rem;
+        opacity: 90%;
     }
     .tv-left{
-        width: 20rem;
-
+        width: 14rem;
+        top: 51rem;
+        left: -1.5rem;
+        opacity: 90%;
     }
     .tv-right{
-        width: 20rem;
+        width: 14rem;
+        top: 51rem;
+        right: -1.5rem;
+        opacity: 90%;
     }
     .camera-right{
-
+        width: 15rem;
+        opacity: 80%;
     }
     .camera-background-right{
-
+        width: 13rem;
+        opacity: 80%;
     }
     .congrats-left{
-        width: 14rem;
-        top: 15px;
+        width: 12rem;
+        top: 14rem;
+        opacity: 80%;
     }
 
     /* About Section */
     .bg-about{
-        height: 50rem;
     }
     .about-border-top{
-
+        top: -2rem;
     }
     .about-border-bottom{
-
+        bottom: -2rem;
     }
 
     /* Trailer Section */
-}
-@media (max-width: 1900px) and (max-height: 1920px) {
-}
-@media (max-width: 1900px) and (max-height: 1200px) {
-}
-@media (max-width: 1728px) and (max-height: 1117px) {
-    .arcade-medium-left{
-        width: 30rem;
-        left: 10rem;
+    .video-frame{
+        
     }
-    .arcade-medium-right{
-        width: 30rem;
-        right: 10rem;
-    }
-    .tv-left{
-        width: 250px;
-    }
-    .tv-right{
-        width: 250px;
+    .trailer-border-bottom{
+        top: 65rem;
     }
 }
 @media (max-width: 1538px) and (max-height: 2048px) {
@@ -185,9 +391,210 @@
 }
 @media (max-width: 1280px) and (max-height: 800px) {
 }
+
+/* DONE */
 @media (max-width: 1180px) and (max-height: 820px) {
+    /* Countdown Section */
+    .countdown-card{
+        width: 15rem;
+    }
+    .rector-title{
+        width: 40rem;
+    }
+    .big-yellow-star{
+        width: 120rem;
+        top: 5rem;
+        left: 5rem;
+        opacity: 80%;
+    }
+    .big-green-star {
+        width: 110rem;
+        top: 0rem;
+        left: 6rem;
+        opacity: 80%;
+    }
+
+    /*Depan Bawah*/
+    .rector-card{
+        width: 40rem;
+        top: 12rem;
+        left: 10rem;
+        opacity: 60%;
+    }
+
+    /* Belakang Atas*/
+    .rector-card-2{   
+        width: 35rem;
+        top: 7rem;
+        left: 280px;
+        opacity: 60%;
+    }
+    .arcade-machine-big {
+        width: 35rem;
+        top: 10rem;
+        height: 40rem;
+        opacity: 100%;
+    }
+    .arcade-medium-left{
+        width: 20rem;
+        left: 4rem;
+        top: 28.5rem;
+        opacity: 90%;
+    }
+    .arcade-medium-right{
+        width: 20rem;
+        right: 4rem;
+        top: 28.5rem;
+        opacity: 90%;
+    }
+    .tv-left{
+        width: 12rem;
+        top: 36rem;
+        left: -1.5rem;
+        opacity: 90%;
+
+    }
+    .tv-right{
+        width: 12rem;
+        top: 36rem;
+        right: -1.5rem;
+        opacity: 90%;
+    }
+    .camera-right{
+        width: 11rem;
+        top: 1rem;
+        left: 62rem;
+        opacity: 80%;
+    }
+    .camera-background-right{
+        width: 9rem;
+        top: 2rem;
+        opacity: 80%;
+    }
+    .congrats-left{
+        width: 8rem;
+        top: 10rem;
+        opacity: 80%;
+    }
+
+    /* About Section */
+    .bg-about{
+    }
+    .about-border-top{
+    }
+    .about-border-bottom{
+        bottom: -2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        
+    }
+    .trailer-border-bottom{
+        top: 48rem;
+    }
 }
+
+/* DONE */
 @media (max-width: 1024px) and (max-height: 1366px) and (orientation: portrait) {
+    /* Countdown Section */
+    .countdown-card{
+        width: 13rem;
+    }
+    .rector-title{
+        width: 40rem;
+    }
+    .big-yellow-star{
+        width: 120rem;
+        top: 40rem;
+        left: 5rem;
+        opacity: 80%;
+    }
+    .big-green-star {
+        width: 110rem;
+        top: 35rem;
+        left: 6rem;
+        opacity: 80%;
+    }
+
+    /*Depan Bawah*/
+    .rector-card{
+        width: 40rem;
+        left: 7rem;
+        top: 50rem;
+        opacity: 60%;
+    }
+
+    /* Belakang Atas*/
+    .rector-card-2{   
+        width: 35rem;
+        top: 40rem;
+        left: 200px;
+        opacity: 60%;
+    }
+    .arcade-machine-big {
+        width: 35rem;
+        top: 44.5rem;
+        height: 40rem;
+        opacity: 100%;
+    }
+    .arcade-medium-left{
+        width: 23rem;
+        left: 2rem;
+        top: 59.5rem;
+        opacity: 90%;
+    }
+    .arcade-medium-right{
+        width: 23rem;
+        right: 2rem;
+        top: 59.5rem;
+        opacity: 90%;
+    }
+    .tv-left{
+        width: 12rem;
+        top: 70rem;
+        left: -1.5rem;
+        opacity: 90%;
+
+    }
+    .tv-right{
+        width: 12rem;
+        top: 70rem;
+        right: -1.5rem;
+        opacity: 90%;
+    }
+    .camera-right{
+        width: 15rem;
+        top: 3rem;
+        opacity: 80%;
+    }
+    .camera-background-right{
+        width: 14rem;
+        opacity: 80%;
+    }
+    .congrats-left{
+        width: 9.5rem;
+        top: 29rem;
+        opacity: 80%;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 30rem;
+    }
+    .about-border-top{
+    }
+    .about-border-bottom{
+        bottom: -2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        
+    }
+    .trailer-border-bottom{
+        bottom: 0rem;
+    }
 }
 @media (max-width: 1024px) and (max-height: 768px) and (orientation: landscape) {
 }
@@ -197,7 +604,106 @@
 }
 @media (max-width: 932px) and (max-height: 430px) {
 }
+
+/* DONE */
 @media (max-width: 912px) and (max-height: 1368px) and (orientation: portrait) {
+    /* Countdown Section */
+    .countdown-card{
+        width: 12rem;
+        padding-top: 2rem;
+    }
+    .rector-title{
+        width: 45rem; 
+    }
+    .big-yellow-star{
+        width: 120rem;
+        top: 44rem;
+        left: 5rem;
+        opacity: 80%;
+    }
+    .big-green-star {
+        width: 130rem;
+        top: 42rem;
+        left: 6rem;
+        opacity: 80%;
+    }
+    /*Depan Bawah*/
+    .rector-card{
+        width: 30rem;
+        left: 7rem;
+        top: 54.5rem;
+        opacity: 60%;
+    }
+    /* Belakang Atas*/
+    .rector-card-2{   
+        width: 28rem;
+        top: 47.5rem;
+        left: 200px;
+        opacity: 60%;
+    }
+    .arcade-machine-big {
+        width: 30rem;
+        top: 51rem;
+        height: 35rem;
+        opacity: 100%;
+    }
+    .arcade-medium-left{
+        width: 17rem;
+        left: 2rem;
+        top: 68rem;
+        opacity: 90%;
+    }
+    .arcade-medium-right{
+        width: 17rem;
+        right: 2rem;
+        top: 68rem;
+        opacity: 90%;
+    }
+    .tv-left{
+        width: 9rem;
+        top: 75rem;
+        left: -1.5rem;
+        opacity: 90%;
+    }
+    .tv-right{
+        width: 9rem;
+        top: 75rem;
+        right: -1.5rem;
+        opacity: 90%;
+    }
+    .camera-right{
+        width: 15rem;
+        top: 3rem;
+        opacity: 80%;
+    }
+    .camera-background-right{
+        width: 15rem;
+        opacity: 80%;
+    }
+    .congrats-left{
+        width: 10rem;
+        top: 30rem;
+        opacity: 80%;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 30rem;
+    }
+    .about-border-top{
+        top: -8px;
+    }
+    .about-border-bottom{
+        bottom: -2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        
+    }
+    .trailer-border-bottom{
+        top: 83rem;
+    }
 }
 @media (max-width: 853px) and (max-height: 1280px) and (orientation: portrait) {
 }
@@ -213,38 +719,296 @@
 }
 @media (max-width: 540px) and (max-height: 720px) and (orientation: portrait) {
 }
+/* DONE */
 @media(max-width: 459px) and (max-height: 841px) and (orientation: portrait){
-}
-@media (max-width: 440px) and (max-height: 956px) and (orientation: portrait) {
-}
-@media (max-width: 430px) and (max-height: 932px) and (orientation: portrait) {
+    .rector-title{
+        width: 23rem;
+        padding-top: 55px;
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 50rem;
+        left: 2rem;
+        opacity: 80%;
+    }
     .big-green-star {
-        top: 40rem;
+        width:50rem;
+        top: 48rem;
+        left: 2rem;
+        opacity: 80%;
+    }
+    .rector-card{
+        width: 10rem;
+        left: 100px;
+        top: 55rem;
+        opacity: 60%;
+    }
+    .rector-card-2{
+        width: 10rem;
+        top: 51.5rem;
+        left: 120px;
+        opacity: 60%;
     }
     .arcade-machine-big {
-        width: 11rem;
-        top: 44.6rem;
+        width: 12rem;
+        top: 52.5rem;
+        height: 15.5rem;
+        opacity: 100%;
     }
     .arcade-medium-left{
-        width: 7rem;
-        left: 2.8rem;
-        top: 50.7rem;
+        width: 9rem;
+        left: 2rem;
+        top: 57.5rem;
+        opacity: 90%;
     }
     .arcade-medium-right{
-        width: 7rem;
-        right: 3rem;
-        top: 50.7rem;
+        width: 9rem;
+        right: 2rem;
+        top: 57.5rem;
+        opacity: 90%;
     }
     .tv-left{
         width: 4.5rem;
-        top: 50,7rem;
+        top: 62.5rem;
+        left: 0rem;
+        opacity: 90%;
+
     }
     .tv-right{
         width: 4.5rem;
-        top: 53rem;
+        top: 62.5rem;
+        right: 0rem;
+        opacity: 90%;
     }
-    .countdown-card {
-        width: 180px;
+    .camera-right{
+        width: 8rem;
+        top: 2rem;
+        opacity: 80%;
+    }
+    .camera-background-right{
+        width: 9rem;
+        top: 1rem;
+        opacity: 80%;
+    }
+    .congrats-left{
+        width: 6rem;
+        top: 15rem;
+        opacity: 80%;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 100%;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+        bottom: -2px;
+    }
+    .about-head{
+        padding-top: 2rem;
+    }
+
+    /* Trailer Section */
+    .bg-trailer{
+        height: 40rem;
+    }
+    .trailer-border-bottom{
+        top: 39rem;
+    }
+}
+
+/* DONE */
+@media (max-width: 440px) and (max-height: 956px) and (orientation: portrait) {
+    .rector-title{
+        width: 23rem;
+        padding-top: 3rem;
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 51.5rem;
+        left: 2rem;
+        opacity: 80%;
+    }
+    .big-green-star {
+        width:45rem;
+        top: 50rem;
+        left: 2rem;
+        opacity: 80%;
+    }
+    .rector-card{
+        width: 10rem;
+        left: 100px;
+        top: 55rem;
+        opacity: 60%;
+    }
+    .rector-card-2{
+        width: 10rem;
+        top: 52rem;
+        left: 120px;
+        opacity: 60%;
+    }
+    .arcade-machine-big {
+        width: 12rem;
+        top: 53rem;
+        height: 15.5rem;
+        opacity: 100%;
+    }
+    .arcade-medium-left{
+        width: 8rem;
+        left: 2rem;
+        top: 59.5rem;
+        opacity: 90%;
+    }
+    .arcade-medium-right{
+        width: 8rem;
+        right: 2rem;
+        top: 59.5rem;
+        opacity: 90%;
+    }
+    .tv-left{
+        width: 4.5rem;
+        top: 63rem;
+        left: 0rem;
+        opacity: 90%;
+
+    }
+    .tv-right{
+        width: 4.5rem;
+        top: 63rem;
+        right: 0rem;
+        opacity: 90%;
+    }
+    .camera-right{
+        width: 8rem;
+        top: 2rem;
+        opacity: 80%;
+    }
+    .camera-background-right{
+        width: 9rem;
+        top: 1rem;
+        opacity: 80%;
+    }
+    .congrats-left{
+        width: 6rem;
+        top: 15rem;
+        opacity: 80%;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 40rem;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+
+    }
+
+    /* Trailer Section */
+        .bg-trailer{
+        height: 40rem;
+    }
+    .trailer-border-bottom{
+        top: 39rem;
+    }
+}
+
+/* DONE */
+@media (max-width: 430px) and (max-height: 932px) and (orientation: portrait) {
+    .rector-title{
+        width: 23rem;
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 51rem;
+        left: 2rem;
+        opacity: 80%;
+    }
+    .big-green-star {
+        width: 42rem;
+        top: 50rem;
+        left: 2rem;
+        opacity: 80%;
+    }
+    .rector-card{
+        width: 10rem;
+        left: 80px;
+        top: 54rem;
+        opacity: 60%;
+    }
+    .rector-card-2{
+        width: 10rem;
+        top: 51.5rem;
+        left: 110px;
+        opacity: 60%;
+    }
+    .arcade-machine-big {
+        width: 12rem;
+        top: 52.5rem;
+        height: 15.5rem;
+        opacity: 100%;
+    }
+    .arcade-medium-left{
+        width: 8rem;
+        left: 2rem;
+        top: 60rem;
+        opacity: 90%;
+    }
+    .arcade-medium-right{
+        width: 8rem;
+        right: 2rem;
+        top: 60rem;
+        opacity: 90%;
+    }
+    .tv-left{
+        width: 4.5rem;
+        top: 63rem;
+        left: 0rem;
+        opacity: 90%;
+
+    }
+    .tv-right{
+        width: 4.5rem;
+        top: 63 rem;
+        right: 0rem;
+        opacity: 90%;
+    }
+    .camera-right{
+        width: 8rem;
+        top: 2rem;
+        opacity: 80%;
+    }
+    .camera-background-right{
+        width: 9rem;
+        top: 1rem;
+        opacity: 80%;
+    }
+    .congrats-left{
+        width: 6rem;
+        top: 15rem;
+        opacity: 80%;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 50rem;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+        bottom: -1rem;
+    }
+
+    /* Trailer Section */
+        .bg-trailer{
+        height: 40rem;
+    }
+    .trailer-border-bottom{
+        top: 39rem;
     }
 }
 @media (max-width: 412px) and (max-height: 914px) and (orientation: portrait){

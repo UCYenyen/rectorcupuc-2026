@@ -13,14 +13,14 @@ export default function Home() {
           width={1000}
           height={1000}
           alt="rectorcupuc green star"
-          className="big-green-star z-[2] w-[120vw] sm:w-screen h-auto absolute bottom-[-60%]"
+          className="big-green-star z-[3] w-[120vw] sm:w-screen h-auto absolute bottom-[-60%]"
         ></Image>
         <Image
           src={"/home/big-yellow-star.webp"}
           width={1000}
           height={1000}
           alt="rectorcupuc yellow star"
-          className="big-yellow-star z-[3] w-screen h-auto absolute bottom-[-50%]"
+          className="big-yellow-star z-[2] w-screen h-auto absolute bottom-[-50%]"
         ></Image>
         <Image
           src={"/home/arcade-machine-big.webp"}
@@ -55,7 +55,7 @@ export default function Home() {
           width={550}
           height={550}
           alt="rectorcupuc medium arcade machine"
-          className="z-[4] arcade-medium-left absolute bottom-[-10%] left-[8rem]"
+          className="z-[5] arcade-medium-left absolute bottom-[-10%] left-[8rem]"
         ></Image>
         <Image
           src={"/home/tv.webp"}
@@ -69,7 +69,7 @@ export default function Home() {
           width={550}
           height={550}
           alt="rectorcupuc meidum arcade machine"
-          className="z-[4] absolute arcade-medium-right bottom-[-10%] right-[8rem]"
+          className="z-[5] absolute arcade-medium-right bottom-[-10%] right-[8rem]"
         ></Image>
         <Image
           src={"/home/camera.webp"}

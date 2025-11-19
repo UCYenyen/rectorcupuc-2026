@@ -12,7 +12,7 @@ type Props = {
 export default function CountdownCard({ properties, cardWidth, innerRef }: Props) {
   return (
     <div 
-      className="countdown-card w-[220px] flex flex-col gap-6" // gap lebih besar
+      className="countdown-card w-[150px] sm:w-[220px] flex flex-col gap-6" // gap lebih besar
     >
       {/* Card container dengan aspect ratio sesuai image */}
       <div
