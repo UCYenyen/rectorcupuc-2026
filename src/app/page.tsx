@@ -6,9 +6,9 @@ import "@/styles/home.css"
 
 export default function Home() {
   return (
-    <div className="overflow-x-hidden">
-      <div className="pt-[12vh] sm:pt-5 relative bg-[url('/home/background.svg')] bg-cover min-h-screen w-screen flex flex-col justify-center items-center">
-        <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1]"></div>
+    <div className="overflow-hidden">
+      <div className="pt-[12vh] sm:pt-5 relative bg-[url('/home/background.svg')] bg-cover min-h-screen w-screen flex flex-col justify-center items-center overflow-hidden">
+        <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
         <Image
           src={"/home/big-green-star.webp"}
           width={1000}

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function AboutSection() {
   return (
-    <section className="bg-about relative h-fit sm:min-h-[50vh] flex flex-col justify-center gap-12 items-center z-10 w-screen backdrop-blur-md bg-gradient-to-b from-[#3B81E5]/90 to-[#112440]">
+    <section className="bg-about relative h-fit sm:min-h-[50vh] flex flex-col justify-center gap-12 items-center z-10 w-screen backdrop-blur-md bg-gradient-to-b from-[#3B81E5]/90 via-[#4C27A8] to-[#331140]/80">
         <Image
             src={"/home/border.svg"}
             className="about-border-top absolute top-[-5%] left-0 w-[100rem] sm:w-full h-auto pointer-events-none"
