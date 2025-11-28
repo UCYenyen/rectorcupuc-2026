@@ -27,6 +27,7 @@ export default async function page() {
             <CompetitionPicker
               src="/placeholder/football.svg"
               alt="card"
+              link="/competitions/sports"
             ></CompetitionPicker>
             <CompetitionPicker
               src="/placeholder/football.svg"
