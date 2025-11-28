@@ -86,8 +86,114 @@
     }
 
     /* Trailer Section */
+    
+    .pixelmon-right{
+        width: 45rem;
+        left: 185rem;
+    }
+    .ghost-pink-left{
+        width: 35rem;
+        right: 190rem;
+        top: 8rem;
+    }
 }
 @media (max-width: 2850px) and (max-height: 1800px) {
+/* Countdown Section */
+    .countdown-card{
+        width: 35rem;
+    }
+    .rector-title{
+        width: 110rem;
+    }
+    .big-yellow-star{
+        width: 230rem;
+        top: 10rem;
+        left: 8rem;
+        
+    }
+    .big-green-star {
+        width: 220rem;
+        top: 0rem;
+        left: 24rem;
+        
+    }
+    /* Depan Bawah */
+    .rector-card{
+        width: 80rem;
+        top: 40rem;
+        left: 55rem;
+        
+    }
+    /* Belakang Atas*/
+    .rector-card-2{
+        width: 90rem;
+        top: 17rem;
+        left: 67rem;
+        
+    }
+    .arcade-machine-big {
+        width: 90rem;
+        top: 25rem;
+        
+    }
+    .arcade-medium-left{
+        width: 65rem;
+        left: 19rem;
+        top: 66rem;
+        
+    }
+    .arcade-medium-right{
+        width: 65rem;
+        right: 19rem;
+        top: 66rem;
+        
+    }
+    .tv-left{
+        width: 35rem;
+        
+    }
+    .tv-right{
+        width: 35rem;
+        
+    }
+    .camera-right{
+        width: 30rem;
+        top: 3rem;
+        
+    }
+    .camera-background-right{
+        width: 26rem;
+        top: 5rem;
+        
+    }
+    .congrats-left{
+        width: 20rem;
+        top: 30rem;
+        
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 80rem;
+    }
+    .about-border-top{
+
+    }
+    .about-border-bottom{
+
+    }
+
+    /* Trailer Section */
+    
+    .pixelmon-right{
+        width: 45rem;
+        left: 185rem;
+    }
+    .ghost-pink-left{
+        width: 35rem;
+        right: 190rem;
+        top: 8rem;
+    }
 }
 @media (max-width: 2560px) and (max-height: 1600px) {
 }
@@ -184,7 +290,14 @@
     }
 
     /* Trailer Section */
-    .bg-trailer{
+    .pixelmon-right{
+        width: 20rem;
+        left: 85rem;
+    }
+    .ghost-pink-left{
+        width: 15rem;
+        right: 85rem;
+        top: 5rem;
     }
 }
 
@@ -277,6 +390,15 @@
     }
 
     /* Trailer Section */
+    .pixelmon-right{
+        width: 20rem;
+        left: 85rem;
+    }
+    .ghost-pink-left{
+        width: 15rem;
+        right: 85rem;
+        top: 5rem;
+    }
 }
 
 @media (max-width: 1900px) and (max-height: 1920px) {
@@ -380,9 +502,15 @@
     .trailer-border-bottom{
         top: 65rem;
     }
-
-    .countdown-card{
+    .pixelmon-right{
+        width: 20rem;
+        left: 80rem;
+        bottom: 4rem;
+    }
+    .ghost-pink-left{
         width: 15rem;
+        right: 80rem;
+        top: 5rem;
     }
 }
 @media (max-width: 1538px) and (max-height: 2048px) {
@@ -495,7 +623,17 @@
         
     }
     .trailer-border-bottom{
-        top: 48rem;
+        top: 50rem;
+    }
+    .pixelmon-right{
+        width: 12rem;
+        left: 60rem;
+        bottom: -2rem;
+    }
+    .ghost-pink-left{
+        width: 10rem;
+        right: 60rem;
+        top: 5rem;
     }
 }
 
@@ -598,6 +736,16 @@
     }
     .trailer-border-bottom{
         bottom: 0rem;
+    }
+    .pixelmon-right{
+        width: 15rem;
+        left: 50rem;
+        bottom: 10rem;
+    }
+    .ghost-pink-left{
+        width: 13rem;
+        right: 52rem;
+        top: 15rem;
     }
 }
 @media (max-width: 1024px) and (max-height: 768px) and (orientation: landscape) {
@@ -707,6 +855,16 @@
     }
     .trailer-border-bottom{
         top: 83rem;
+    }
+    .pixelmon-right{
+        width: 15rem;
+        left: 43rem;
+        bottom: 4rem;
+    }
+    .ghost-pink-left{
+        width: 15rem;
+        right: 43rem;
+        top: 5rem;
     }
 }
 @media (max-width: 853px) and (max-height: 1280px) and (orientation: portrait) {
@@ -821,6 +979,16 @@
     .trailer-border-bottom{
         top: 39rem;
     }
+    .pixelmon-right{
+        width: 10rem;
+        left: 19rem;
+        bottom: 2rem;
+    }
+    .ghost-pink-left{
+        width: 8rem;
+        right: 20rem;
+        top: 3rem;
+    }
 }
 
 /* DONE */
@@ -910,7 +1078,6 @@
     .about-border-bottom{
 
     }
-
     /* Trailer Section */
         .bg-trailer{
         height: 40rem;
@@ -918,10 +1085,23 @@
     .trailer-border-bottom{
         top: 39rem;
     }
+    .pixelmon-right{
+        width: 10rem;
+        left: 18rem;
+        bottom: 2rem;
+    }
+    .ghost-pink-left{
+        width: 8rem;
+        right: 20rem;
+        top: 3rem;
+    }
 }
 
 /* DONE */
 @media (max-width: 430px) and (max-height: 932px) and (orientation: portrait) {
+    .countdown-card{
+        width: 8rem;
+    }
     .rector-title{
         width: 23rem;
     }
@@ -1014,18 +1194,438 @@
     .trailer-border-bottom{
         top: 39rem;
     }
+    .pixelmon-right{
+        width: 10rem;
+        left: 17rem;
+        bottom: 2rem;
+    }
+    .ghost-pink-left{
+        width: 8rem;
+        right: 19rem;
+        top: 3rem;
+    }
+}
+
+/* DONE */
+@media (max-width: 412px) and (max-height: 914px) and (orientation: portrait){
     .countdown-card{
         width: 8rem;
     }
+    .rector-title{
+        width: 23rem;
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 39rem;
+        left: 2rem;
+        
+    }
+    .big-green-star {
+        width: 42rem;
+        top: 38rem;
+        left: 2rem;
+        
+    }
+    .rector-card{
+        width: 10rem;
+        left: 80px;
+        top: 43rem;
+        
+    }
+    .rector-card-2{
+        width: 10rem;
+        top: 40rem;
+        left: 110px;
+        
+    }
+    .arcade-machine-big {
+        width: 12rem;
+        top: 41.5rem;
+        height: 15.5rem;
+        
+    }
+    .arcade-medium-left{
+        width: 8rem;
+        left: 2rem;
+        top: 49rem;
+        
+    }
+    .arcade-medium-right{
+        width: 8rem;
+        right: 2rem;
+        top: 49rem;
+        
+    }
+    .tv-left{
+        width: 4.5rem;
+        top: 52rem;
+        left: 0rem;
+        
+
+    }
+    .tv-right{
+        width: 4.5rem;
+        top: 52rem;
+        right: 0rem;
+        
+    }
+    .camera-right{
+        width: 8rem;
+        top: 2rem;
+        
+    }
+    .camera-background-right{
+        width: 9rem;
+        top: 1rem;
+        
+    }
+    .congrats-left{
+        width: 6rem;
+        top: 17rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 50rem;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+        bottom: -1rem;
+    }
+
+    /* Trailer Section */
+        .bg-trailer{
+        height: 40rem;
+    }
+    .trailer-border-bottom{
+        top: 39rem;
+    }
+    .pixelmon-right{
+        width: 10rem;
+        left: 16rem;
+        bottom: 2rem;
+    }
+    .ghost-pink-left{
+        width: 8rem;
+        right: 18rem;
+        top: 3rem;
+    }
 }
-@media (max-width: 412px) and (max-height: 914px) and (orientation: portrait){
-    
-}
+
+/* DONE */
 @media (max-width: 414px) and (max-height: 896px) and (orientation: portrait){
+    .countdown-card{
+        width: 8rem;
+    }
+    .rector-title{
+        width: 23rem;
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 38.5rem;
+        left: 2rem;
+        
+    }
+    .big-green-star {
+        width: 42rem;
+        top: 36rem;
+        left: 2rem;
+        
+    }
+    .rector-card{
+        width: 10rem;
+        left: 80px;
+        top: 43rem;
+        
+    }
+    .rector-card-2{
+        width: 10rem;
+        top: 39.3rem;
+        left: 110px;
+        
+    }
+    .arcade-machine-big {
+        width: 12rem;
+        top: 40.5rem;
+        height: 15.5rem;
+        
+    }
+    .arcade-medium-left{
+        width: 8rem;
+        left: 2rem;
+        top: 48rem;
+        
+    }
+    .arcade-medium-right{
+        width: 8rem;
+        right: 2rem;
+        top: 48rem;
+        
+    }
+    .tv-left{
+        width: 4.5rem;
+        top: 51rem;
+        left: 0rem;
+    }
+    .tv-right{
+        width: 4.5rem;
+        top: 51rem;
+        right: 0rem;
+        
+    }
+    .camera-right{
+        width: 8rem;
+        top: 2rem;
+        
+    }
+    .camera-background-right{
+        width: 9rem;
+        top: 1rem;
+        
+    }
+    .congrats-left{
+        width: 6rem;
+        top: 17rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 50rem;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+        bottom: -1rem;
+    }
+
+    /* Trailer Section */
+        .bg-trailer{
+        height: 40rem;
+    }
+    .trailer-border-bottom{
+        top: 39rem;
+    }
+    .pixelmon-right{
+        width: 10rem;
+        left: 16rem;
+        bottom: 2rem;
+    }
+    .ghost-pink-left{
+        width: 8rem;
+        right: 18rem;
+        top: 3rem;
+    }
 }
+
+/* DONE */
 @media (max-width: 393px) and (max-height: 873px) and (orientation: portrait) {
+    .countdown-card{
+        width: 8rem;
+    }
+    .rector-title{
+        width: 23rem;
+        
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 37.5rem;
+        left: 2rem;
+        
+    }
+    .big-green-star {
+        width: 42rem;
+        top: 35rem;
+        left: 2rem;
+        
+    }
+    .rector-card{
+        width: 10rem;
+        left: 80px;
+        top: 42rem;
+        
+    }
+    .rector-card-2{
+        width: 10rem;
+        top: 37.5rem;
+        left: 100px;
+        
+    }
+    .arcade-machine-big {
+        width: 12rem;
+        top: 39rem;
+        height: 15.5rem;
+        
+    }
+    .arcade-medium-left{
+        width: 8rem;
+        left: 2rem;
+        top: 47rem;
+        
+    }
+    .arcade-medium-right{
+        width: 8rem;
+        right: 2rem;
+        top: 47rem;
+        
+    }
+    .tv-left{
+        width: 4.5rem;
+        top: 49.5rem;
+        left: 0rem;
+    }
+    .tv-right{
+        width: 4.5rem;
+        top: 49.5rem;
+        right: 0rem;
+        
+    }
+    .camera-right{
+        width: 8rem;
+        top: 2rem;
+        
+    }
+    .camera-background-right{
+        width: 9rem;
+        top: 1rem;
+        
+    }
+    .congrats-left{
+        width: 6rem;
+        top: 17rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 50rem;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+        bottom: -1rem;
+    }
+
+    /* Trailer Section */
+        .bg-trailer{
+        height: 40rem;
+    }
+    .trailer-border-bottom{
+        top: 39rem;
+    }
+    .pixelmon-right{
+        width: 10rem;
+        left: 15rem;
+        bottom: 2rem;
+    }
+    .ghost-pink-left{
+        width: 7rem;
+        right: 18rem;
+        top: 3rem;
+    }
 }
 @media (max-width: 390px) and (max-height: 844px) and (orientation: portrait) {
+    .countdown-card{
+        width: 8rem;
+    }
+    .rector-title{
+        width: 23rem;
+        
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 37.5rem;
+        left: 2rem;
+        
+    }
+    .big-green-star {
+        width: 42rem;
+        top: 35rem;
+        left: 2rem;
+        
+    }
+    .rector-card{
+        width: 10rem;
+        left: 80px;
+        top: 42rem;
+        
+    }
+    .rector-card-2{
+        width: 10rem;
+        top: 37.5rem;
+        left: 100px;
+        
+    }
+    .arcade-machine-big {
+        width: 12rem;
+        top: 39rem;
+        height: 15.5rem;
+        
+    }
+    .arcade-medium-left{
+        width: 8rem;
+        left: 2rem;
+        top: 46.5rem;
+        
+    }
+    .arcade-medium-right{
+        width: 8rem;
+        right: 2rem;
+        top: 46.5rem;
+        
+    }
+    .tv-left{
+        width: 4.5rem;
+        top: 49rem;
+        left: 0rem;
+    }
+    .tv-right{
+        width: 4.5rem;
+        top: 49rem;
+        right: 0rem;
+    }
+    .camera-right{
+        width: 8rem;
+        top: 2rem;
+    }
+    .camera-background-right{
+        width: 9rem;
+        top: 1rem;
+    }
+    .congrats-left{
+        width: 6rem;
+        top: 17rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 50rem;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+        bottom: -1rem;
+    }
+    /* Trailer Section */
+        .bg-trailer{
+        height: 40rem;
+    }
+    .trailer-border-bottom{
+        top: 39rem;
+    }
+    .pixelmon-right{
+        width: 10rem;
+        left: 15rem;
+        bottom: 2rem;
+    }
+    .ghost-pink-left{
+        width: 7rem;
+        right: 18rem;
+        top: 3rem;
+    }
 }
 @media (max-width: 375px) and (max-height: 667px) and (orientation: portrait) {
 }
