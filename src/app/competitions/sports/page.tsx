@@ -23,7 +23,23 @@ export default async function page() {
           <div className="w-full border-4 border-[#AAF3D5] rounded-2xl py-2 bg-gradient-to-r from-[#6427A8] to-[#EB79F0] flex justify-center items-center">
             <h1 className="text-2xl">COMPETITIONS</h1>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="hidden md:grid xl:hidden grid-cols-2 gap-4">
+            <CompetitionPicker
+              src="/placeholder/football.svg"
+              alt="card"
+            ></CompetitionPicker>
+            <CompetitionPicker
+              src="/placeholder/football.svg"
+              alt="card"
+            ></CompetitionPicker>
+            <CompetitionPicker
+              src="/placeholder/football.svg"
+              alt="card"
+            ></CompetitionPicker>
+            <CompetitionPicker
+              src="/placeholder/football.svg"
+              alt="card"
+            ></CompetitionPicker>
             <CompetitionPicker
               src="/placeholder/football.svg"
               alt="card"
@@ -37,7 +53,21 @@ export default async function page() {
               alt="card"
             ></CompetitionPicker>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:hidden sm:grid-cols-2 xl:grid xl:grid-cols-3 gap-4">
+            <CompetitionPicker
+              src="/placeholder/football.svg"
+              alt="card"
+            ></CompetitionPicker>
+            <CompetitionPicker
+              src="/placeholder/football.svg"
+              alt="card"
+            ></CompetitionPicker>
+            <CompetitionPicker
+              src="/placeholder/football.svg"
+              alt="card"
+            ></CompetitionPicker>
+          </div>
+          <div className="grid grid-cols-1 sm:hidden sm:grid-cols-4 xl:grid gap-4">
             <CompetitionPicker
               src="/placeholder/football.svg"
               alt="card"

@@ -32,14 +32,17 @@ export default async function page() {
             <CompetitionPicker
               src="/placeholder/football.svg"
               alt="card"
+              link="/competitions/arts"
             ></CompetitionPicker>
             <CompetitionPicker
               src="/placeholder/football.svg"
               alt="card"
+              link="/competitions/esports"
             ></CompetitionPicker>
             <CompetitionPicker
               src="/placeholder/football.svg"
               alt="card"
+              link="/competitions/learnings"
             ></CompetitionPicker>
           </div>
         </div>
