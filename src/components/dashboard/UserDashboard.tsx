@@ -12,13 +12,13 @@ interface CompetitionRegistration {
     team_name: string;
     referal_code: string;
   };
-  team:{
+  team: {
     id: string;
     name: string;
     min_team_members: number;
     current_team_members: number;
     max_team_members: number;
-  }
+  };
   registration_status: string;
 }
 
@@ -100,113 +100,171 @@ export default function UserDashboard() {
   };
 
   return (
-    <div className="flex bg-gradient-to-b from-[#390D62] to-[#6226A4] gap-4 flex-col min-h-screen w-screen overflow-x-hidden justify-start items-center">
-      <div className="mt-[5%] w-[90%] flex flex-col gap-3 p-4">
-        <div className="flex items-center justify-between">
-          <h1 className="text-4xl w-[90%] text-left font-bold text-white">
-           Hi, {session?.user?.name}
+    <div className="flex bg-gradient-to-b from-[#390D62] to-[#6226A4] gap-4 flex-col min-h-screen w-screen overflow-x-hidden justify-start items-center px-4 py-8">
+      <div className="mt-[10%] sm:mt-[5%] w-full max-w-7xl flex flex-col gap-6">
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+            Hi, {session?.user?.name}
           </h1>
 
-          {/* Join Team as a regular button (not a tab) */}
+          {/* Join Team Button */}
           <button
-            className="px-4 py-2 bg-gradient-to-r from-[#10233E]/40 to-[#3B80E3]/40 text-xl border-3 border-white text-white rounded"
+            className="px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-[#10233E]/40 to-[#3B80E3]/40 text-base sm:text-xl border-2 sm:border-3 border-white text-white rounded hover:scale-105 transition-transform duration-200 whitespace-nowrap"
             onClick={openJoinModal}
           >
             Join Team
           </button>
         </div>
 
-        <div className="mt-6">
-          <div className="grid grid-cols-6 bg-gradient-to-r from-[#6427A8]/80 from-18% to-[#EB79F0] border-[5px] border-[#AAF3D5] rounded-xl text-white font-semibold">
-            <div className="py-3 px-4 flex items-center">Competition Name</div>
-            <div className="py-3 px-4 flex items-center">Category</div>
-            <div className="py-3 px-4 flex items-center">Team</div>
-            <div className="py-3 px-4 flex items-center">Members</div>
-            <div className="py-3 px-4 flex items-center">Code</div>
-            <div className="py-3 px-4 flex items-center">Status</div>
-          </div>
+        {/* Table Section with Horizontal Scroll */}
+        <div className="overflow-x-auto rounded-xl border-4 sm:border-[5px] border-[#AAF3D5] bg-gradient-to-r from-[#390D62]/40 to-[#6226A4]/40">
+          <table className="min-w-full divide-y divide-gray-200">
+            {/* Table Header */}
+            <thead className="bg-gradient-to-r from-[#6427A8]/80 to-[#EB79F0]">
+              <tr>
+                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">
+                  Competition Name
+                </th>
+                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">
+                  Category
+                </th>
+                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">
+                  Team
+                </th>
+                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">
+                  Members
+                </th>
+                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">
+                  Code
+                </th>
+                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">
+                  Status
+                </th>
+              </tr>
+            </thead>
 
-          <div className="flex flex-col border-[5px] border-[#AAF3D5] rounded-xl bg-gradient-to-r from-[#390D62]/40 from-0% to-[#6226A4]/40 text-black overflow-hidden mt-4">
-            {registrations.length === 0 ? (
-              <div className="py-8 text-center text-white">
-                You have not joined any competitions yet.
-              </div>
-            ) : (
-              registrations.map((reg, index) => (
-                <div
-                  key={reg.id}
-                  className={`grid grid-cols-6 hover:bg-gray-50 ${
-                    index !== registrations.length - 1 ? "border-b border-gray-200" : ""
-                  }`}
-                >
-                  <div className="py-3 px-4 flex items-center overflow-hidden">
-                    <span className="truncate">{reg.competition.name}</span>
-                  </div>
-                  <div className="py-3 px-4 flex items-center">
-                    {reg.competition.category}
-                  </div>
-                  <div className="py-3 px-4 flex items-center">
-                    {reg.competition.team_name}
-                  </div>
-                  <div className="py-3 px-4 flex items-center">
-                    {reg.team.current_team_members}/{reg.team.max_team_members}
-                  </div>
-                  <div className="py-3 px-4 flex items-center">
-                    <button
-                      className="text-zinc-800 hover:text-zinc-600 flex items-center gap-1"
-                      onClick={() => {
-                        navigator.clipboard.writeText(reg.competition.referal_code);
-                        alert("Text copied to clipboard");
-                      }}
-                    >
-                      {reg.competition.referal_code.length > 20
-                        ? `${reg.competition.referal_code.slice(0, 20)}...`
-                        : reg.competition.referal_code}
-                      <BsCopy />
-                    </button>
-                  </div>
-                  <div className="py-3 px-4 flex items-center font-medium">
-                    {reg.registration_status}
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
+            {/* Table Body */}
+            <tbody className="divide-y divide-gray-200/20">
+              {registrations.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="px-4 py-8 text-center text-white text-sm sm:text-base"
+                  >
+                    You have not joined any competitions yet.
+                  </td>
+                </tr>
+              ) : (
+                registrations.map((reg) => (
+                  <tr
+                    key={reg.id}
+                    className="bg-black/25 hover:bg-white/10 transition-colors duration-200"
+                  >
+                    {/* Competition Name */}
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-white">
+                      <span className="line-clamp-2 max-w-[200px]">
+                        {reg.competition.name}
+                      </span>
+                    </td>
+
+                    {/* Category */}
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-white">
+                      {reg.competition.category}
+                    </td>
+
+                    {/* Team Name */}
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-white">
+                      <span className="line-clamp-1 max-w-[150px]">
+                        {reg.competition.team_name}
+                      </span>
+                    </td>
+
+                    {/* Members */}
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-white">
+                      {reg.team.current_team_members}/{reg.team.max_team_members}
+                    </td>
+
+                    {/* Referral Code */}
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-white">
+                      <button
+                        className="flex items-center gap-1 sm:gap-2 hover:text-[#AAF3D5] transition-colors"
+                        onClick={() => {
+                          navigator.clipboard.writeText(
+                            reg.competition.referal_code
+                          );
+                          alert("Code copied to clipboard!");
+                        }}
+                        title="Click to copy"
+                      >
+                        <span className="max-w-[100px] truncate">
+                          {reg.competition.referal_code}
+                        </span>
+                        <BsCopy className="flex-shrink-0" />
+                      </button>
+                    </td>
+
+                    {/* Status */}
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm">
+                      <span
+                        className={`inline-flex px-2 py-1 rounded-full text-xs font-semibold ${
+                          reg.registration_status === "Pending"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : reg.registration_status === "Registered"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
+                      >
+                        {reg.registration_status}
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
 
       {/* Join Team Modal */}
       {showJoinModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-black opacity-40" onClick={closeJoinModal} />
-          <div className="relative bg-white rounded-lg shadow-lg w-11/12 max-w-md p-6 z-10">
-            <h3 className="text-xl text-black font-semibold mb-4">Join Team</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black opacity-60"
+            onClick={closeJoinModal}
+          />
+          <div className="relative bg-white rounded-lg shadow-2xl w-full max-w-md p-6 z-10">
+            <h3 className="text-xl sm:text-2xl text-black font-bold mb-4">
+              Join Team
+            </h3>
             <form onSubmit={handleJoinSubmit}>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Referral Code</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Referral Code
+              </label>
               <input
                 type="text"
                 value={referalCode}
                 onChange={(e) => setReferalCode(e.target.value)}
-                className="w-full border rounded px-3 py-2 mb-4 text-gray-600"
+                className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 mb-4 text-gray-700 focus:border-blue-500 focus:outline-none"
                 placeholder="Enter team referral code"
                 required
               />
 
-              <div className="flex justify-end gap-2">
+              <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3">
                 <button
                   type="button"
                   onClick={closeJoinModal}
-                  className="px-4 py-2 bg-zinc-200 rounded text-black"
+                  className="w-full sm:w-auto px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-black font-medium transition-colors"
                   disabled={isJoining}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded"
+                  className="w-full sm:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={isJoining}
                 >
-                  {isJoining ? "Joining..." : "Join"}
+                  {isJoining ? "Joining..." : "Join Team"}
                 </button>
               </div>
             </form>
