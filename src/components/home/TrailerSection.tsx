@@ -17,6 +17,21 @@ export default function TrailerSection() {
                     width={1000}
                     height={1000}
                 />
+        <Image
+                    src={"/home/pixelmon.webp"}
+                    className="z-[10] pixelmon-right absolute bottom-0 left-0"
+                    alt="rectorcupuc pixelmon"
+                    width={1000}
+                    height={1000}
+                />
+        <Image  
+                    src={"/home/ghost-pink.webp"}
+                    className="z-[10] ghost-pink-left absolute top-0 right-0"
+                    alt="rectorcupuc pixelmon"
+                    width={1000}
+                    height={1000}
+                />
     </div>
+    
   )
 }
