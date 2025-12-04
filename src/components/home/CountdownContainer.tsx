@@ -45,7 +45,7 @@ export default function CountdownContainer({ endDate }: { endDate?: string | Dat
 
   return (
     <>
-      <div className='relative z-[5] grid grid-cols-2 sm:grid-cols-4 gap-4 place-items-center justify-items-center mt-16'>
+      <div className='relative z-[5] grid grid-cols-2 sm:grid-cols-4 gap-4 place-items-center justify-items-center mt-16 mb-16 sm:mb-0'>
         <CountdownCard innerRef={(el) => (cardRefs.current[0] = el)} cardWidth={cardWidth} properties={{label: "Days", countdown: remaining.days}}/>
         <CountdownCard innerRef={(el) => (cardRefs.current[1] = el)} cardWidth={cardWidth} properties={{label: "Hours", countdown: remaining.hours}}/>
         <CountdownCard innerRef={(el) => (cardRefs.current[2] = el)} cardWidth={cardWidth} properties={{label: "Minutes", countdown: remaining.minutes}}/>
