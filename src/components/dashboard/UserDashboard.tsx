@@ -100,16 +100,16 @@ export default function UserDashboard() {
   };
 
   return (
-    <div className="flex bg-zinc-300 gap-4 flex-col min-h-screen w-screen overflow-x-hidden justify-start items-center">
-      <div className="mt-[5%] w-[90%] flex flex-col gap-4 p-4 bg-white rounded-lg">
+    <div className="flex bg-gradient-to-b from-[#390D62] to-[#6226A4] gap-4 flex-col min-h-screen w-screen overflow-x-hidden justify-start items-center">
+      <div className="mt-[5%] w-[90%] flex flex-col gap-3 p-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-4xl w-[90%] text-left font-bold text-black">
-            {session?.user?.name}
+          <h1 className="text-4xl w-[90%] text-left font-bold text-white">
+           Hi, {session?.user?.name}
           </h1>
 
           {/* Join Team as a regular button (not a tab) */}
           <button
-            className="px-4 py-2 bg-blue-600 text-white rounded"
+            className="px-4 py-2 bg-gradient-to-r from-[#10233E]/40 to-[#3B80E3]/40 text-xl border-3 border-white text-white rounded"
             onClick={openJoinModal}
           >
             Join Team
@@ -117,54 +117,61 @@ export default function UserDashboard() {
         </div>
 
         <div className="mt-6">
-          <h2 className="text-2xl font-semibold text-black mb-2">
-            Competitions You Joined
-          </h2>
-          <table className="text-black min-w-full bg-white border border-zinc-300 rounded">
-            <thead className="bg-black text-white">
-              <tr>
-                <th className="py-2 px-4 border-b text-left">Competition Name</th>
-                <th className="py-2 px-4 border-b text-left">Category</th>
-                <th className="py-2 px-4 border-b text-left">Team</th>
-                <th className="py-2 px-4 border-b text-left">Members</th>
-                <th className="py-2 px-4 border-b text-left">Code</th>
-                <th className="py-2 px-4 border-b text-left">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {registrations.length === 0 ? (
-                <tr>
-                  <td colSpan={5} className="py-4 text-center text-black">
-                    You have not joined any competitions yet.
-                  </td>
-                </tr>
-              ) : (
-                registrations.map((reg) => (
-                  <tr key={reg.id} className="text-black">
-                    <td className="py-2 px-4 border-b">{reg.competition.name}</td>
-                    <td className="py-2 px-4 border-b">{reg.competition.category}</td>
-                    <td className="py-2 px-4 border-b">{reg.competition.team_name}</td>
-                    <td className="py-2 px-4 border-b">{reg.team.current_team_members + `/` + reg.team.max_team_members}</td>
-                    <td className="overflow-ellipsis py-2 px-4 border-b items-center gap-2">
-                      <button
-                        className="text-zinc-800 hover:text-zinc-600 flex items-center gap-1"
-                        onClick={() => {
-                          navigator.clipboard.writeText(reg.competition.referal_code);
-                          alert("Text copied to clipboard");
-                        }}
-                      >
-                        {reg.competition.referal_code.length > 20
-                          ? `${reg.competition.referal_code.slice(0, 20)}...`
-                          : reg.competition.referal_code}
-                        <BsCopy />
-                      </button>
-                    </td>
-                    <td className="py-2 px-4 border-b border-black">{reg.registration_status}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+          <div className="grid grid-cols-6 bg-gradient-to-r from-[#6427A8]/80 from-18% to-[#EB79F0] border-[5px] border-[#AAF3D5] rounded-xl text-white font-semibold">
+            <div className="py-3 px-4 flex items-center">Competition Name</div>
+            <div className="py-3 px-4 flex items-center">Category</div>
+            <div className="py-3 px-4 flex items-center">Team</div>
+            <div className="py-3 px-4 flex items-center">Members</div>
+            <div className="py-3 px-4 flex items-center">Code</div>
+            <div className="py-3 px-4 flex items-center">Status</div>
+          </div>
+
+          <div className="flex flex-col border-[5px] border-[#AAF3D5] rounded-xl bg-gradient-to-r from-[#390D62]/40 from-0% to-[#6226A4]/40 text-black overflow-hidden mt-4">
+            {registrations.length === 0 ? (
+              <div className="py-8 text-center text-white">
+                You have not joined any competitions yet.
+              </div>
+            ) : (
+              registrations.map((reg, index) => (
+                <div
+                  key={reg.id}
+                  className={`grid grid-cols-6 hover:bg-gray-50 ${
+                    index !== registrations.length - 1 ? "border-b border-gray-200" : ""
+                  }`}
+                >
+                  <div className="py-3 px-4 flex items-center overflow-hidden">
+                    <span className="truncate">{reg.competition.name}</span>
+                  </div>
+                  <div className="py-3 px-4 flex items-center">
+                    {reg.competition.category}
+                  </div>
+                  <div className="py-3 px-4 flex items-center">
+                    {reg.competition.team_name}
+                  </div>
+                  <div className="py-3 px-4 flex items-center">
+                    {reg.team.current_team_members}/{reg.team.max_team_members}
+                  </div>
+                  <div className="py-3 px-4 flex items-center">
+                    <button
+                      className="text-zinc-800 hover:text-zinc-600 flex items-center gap-1"
+                      onClick={() => {
+                        navigator.clipboard.writeText(reg.competition.referal_code);
+                        alert("Text copied to clipboard");
+                      }}
+                    >
+                      {reg.competition.referal_code.length > 20
+                        ? `${reg.competition.referal_code.slice(0, 20)}...`
+                        : reg.competition.referal_code}
+                      <BsCopy />
+                    </button>
+                  </div>
+                  <div className="py-3 px-4 flex items-center font-medium">
+                    {reg.registration_status}
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
         </div>
       </div>
 
@@ -196,7 +203,7 @@ export default function UserDashboard() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded text-black"
+                  className="px-4 py-2 bg-blue-600 text-white rounded"
                   disabled={isJoining}
                 >
                   {isJoining ? "Joining..." : "Join"}
