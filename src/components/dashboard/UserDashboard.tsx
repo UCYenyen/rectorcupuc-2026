@@ -119,7 +119,7 @@ export default function UserDashboard() {
 
         {/* Table Section with Horizontal Scroll */}
         <div className="overflow-x-auto rounded-xl border-4 sm:border-[5px] border-[#AAF3D5] bg-gradient-to-r from-[#390D62]/40 to-[#6226A4]/40">
-          <table className="min-w-full divide-y divide-gray-200">
+          <table className="min-w-full divide-y-4 divide-[#AAF3D5]">
             {/* Table Header */}
             <thead className="bg-gradient-to-r from-[#6427A8]/80 to-[#EB79F0]">
               <tr>

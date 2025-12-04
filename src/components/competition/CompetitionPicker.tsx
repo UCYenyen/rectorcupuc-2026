@@ -16,21 +16,21 @@ export default function CompetitionPicker({
   return (
     <Link
       href={link || "#"}
-      className="relative w-full h-full flex flex-col justify-center items-center group border-2 sm:border-4 border-[#AAF3D5] rounded-lg shadow-lg overflow-hidden"
+      className="relative w-full h-full flex flex-col justify-center items-center group border-4 border-[#AAF3D5] rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] min-h-[200px]"
     >
-      {/* Container with overflow hidden to clip the zoomed image */}
+      {/* Image container with zoom effect */}
       <div className="w-full h-full overflow-hidden">
         <Image
           src={src}
           width={800}
           height={800}
           alt={alt}
-          className="w-full h-full transition-transform duration-300 group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         />
       </div>
       
       {/* Title overlay */}
-      <h1 className="absolute text-white text-2xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 px-4 py-2 rounded-lg">
+      <h1 className="absolute text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 px-4 py-2 sm:px-6 sm:py-3 rounded-lg z-10 text-center">
         {title || "Competition"}
       </h1>
     </Link>
