@@ -11,7 +11,20 @@ export default async function page() {
       <div className="h-[7vh]"></div>
       <div className="relative min-h-screen bg-[url('/home/background.svg')] w-screen overflow-hidden flex flex-col justify-center items-center">
         <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
-        <Image src={"/home/background.svg"} width={1000} height={1000} alt="rectorcupuc background" className="w-full h-full object-center object-cover opacity-25 z-1 absolute"></Image>
+        <Image
+          src={"/home/background.svg"}
+          width={1000}
+          height={1000}
+          alt="rectorcupuc background"
+          className="w-full h-full object-center object-cover opacity-25 z-1 absolute"
+        ></Image>
+        <Image
+          src={"/competitions/filler-asset-competition.webp"}
+          width={1000}
+          height={1000}
+          alt="background"
+          className="w-full h-full object-center object-cover opacity-50 z-2 absolute"
+        />
         <div className="relative z-2 mt-[10%] flex flex-col gap-4 w-[90%] justify-center items-center border-2 sm:border-4 border-[#AAF3D5] p-4 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
           <Image
             src={"/logos/rector-title.svg"}
@@ -31,7 +44,7 @@ export default async function page() {
               link="/competitions/sports"
             ></CompetitionPicker>
             <CompetitionPicker
-              title="Arts"  
+              title="Arts"
               src="/placeholder/arts.svg"
               alt="card"
               link="/competitions/arts"
