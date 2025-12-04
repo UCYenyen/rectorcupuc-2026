@@ -74,7 +74,7 @@ export default function PacmanAnimation() {
         {[...Array(10)].map((_, i) => (
           <div
             key={i}
-            ref={(el) => (dotsRef.current[i] = el)}
+            ref={(el) => { dotsRef.current[i] = el; }}
             className="w-4 h-4 bg-[#FFD700] shadow-lg"
           />
         ))}
