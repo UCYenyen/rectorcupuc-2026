@@ -580,73 +580,62 @@
 @media (max-width: 1900px) and (max-height: 1920px) {
     /* Countdown Section */
     .countdown-card{
-        width: 27rem;
+        width: 1rem;
     }
     .rector-title{
-        width: 80rem;
+        width: 50rem;
     }
     .big-yellow-star{
         width: 120rem;
         top: 50.5rem;
         left: 5rem;
-        
     }
     .big-green-star {
         width: 110rem;
         top: 45rem;
         left: 13rem;
-        
     }
     /* Depan Bawah */
     .rector-card{
         width: 50rem;
         left: 350px;
         top: 80rem;
-        
     }
     /* Belakang Atas*/
     .rector-card-2{
         width: 50rem;
         top: 59rem;
         left: 32rem;
-        
     }
     .arcade-machine-big {
-        width: 44rem;
+        width: 20rem;
         top: 65rem;
-        
     }
     .arcade-medium-left{
-        width: 35rem;
+        width: 10rem;
         left: 10rem;
         top: 82rem;
-        
     }
     .arcade-medium-right{
-        width: 35rem;
+        width: 5rem;
         right: 10rem;
         top: 82rem;
-        
     }
     .tv-left{
         width: 20rem;
-        
     }
     .tv-right{
         width: 20rem;
-        
     }
     .camera-right{
         width: 20rem;
         top: 4rem;
         right: 1rem;
-        
     }
     .camera-background-right{
         width: 22rem;
         right: 0rem;
         top: 2rem;
-        
     }
     .congrats-left{
         width: 18rem;
@@ -1314,13 +1303,15 @@
         top: 3rem;
     }
 }
+
+/* DONE */
 @media (max-width: 1280px) and (max-height: 800px) {
     /* Countdown Section */
     .countdown-card{
-        width: 15rem;
+        width: 12rem;
     }
     .rector-title{
-        width: 40rem;
+        width: 35rem;
     }
     .big-yellow-star{
         width: 120rem;
@@ -1336,7 +1327,7 @@
     /*Depan Bawah*/
     .rector-card{
         width: 40rem;
-        top: 12rem;
+        top: 14rem;
         left: 10rem;
     }
 
@@ -1348,41 +1339,41 @@
     }
     .arcade-machine-big {
         width: 35rem;
-        top: 9rem;
+        top: 2.5rem;
         height: 40rem;
     }
     .arcade-medium-left{
         width: 20rem;
-        left: 4rem;
-        top: 28.5rem;
+        left: 6rem;
+        top: 22.5rem;
     }
     .arcade-medium-right{
         width: 20rem;
-        right: 4rem;
-        top: 28.5rem;
+        right: 6rem;
+        top: 22.5rem;
     }
     .tv-left{
         width: 12rem;
-        top: 36rem;
-        left: -1.5rem;
+        top: 35rem;
+        left: -.5rem;
 
     }
     .tv-right{
         width: 12rem;
-        top: 36rem;
+        top: 35rem;
         right: -1.5rem;
     }
     .camera-right{
-        width: 11rem;
-        top: 1rem;
-        left: 62rem;
+        width: 13rem;
+        top: 1.5rem;
+        left: 66rem;
     }
     .camera-background-right{
-        width: 9rem;
+        width: 12rem;
         top: 2rem;
     }
     .congrats-left{
-        width: 8rem;
+        width: 9rem;
         top: 10rem;
     }
 
@@ -1400,16 +1391,16 @@
         
     }
     .trailer-border-bottom{
-        top: 50rem;
+        top: 47rem;
     }
     .pixelmon-right{
         width: 12rem;
         left: 65rem;
-        bottom: -2rem;
+        bottom: 1rem;
     }
     .ghost-pink-left{
         width: 10em;
-        right: 70rem;
+        left: 3rem;
         top: 5rem;
     }
 }
@@ -1626,13 +1617,425 @@
         top: 15rem;
     }
 }
+
+/* DONE */
 @media (max-width: 1024px) and (max-height: 768px) and (orientation: landscape) {
+    /* Countdown Section */
+    .countdown-card{
+        width: 12rem;
+    }
+    .rector-title{
+        width: 35rem;
+    }
+    .big-yellow-star{
+        width: 120rem;
+        top: 5rem;
+        left: 5rem;
+        
+    }
+    .big-green-star {
+        width: 110rem;
+        top: 3rem;
+        left: 10rem;
+        
+    }
+
+    /*Depan Bawah*/
+    .rector-card{
+        width: 40rem;
+        left: 5rem;
+        top: 15rem;
+        
+    }
+
+    /* Belakang Atas*/
+    .rector-card-2{   
+        width: 35rem;
+        top: 4rem;
+        left: 10rem;
+        
+    }
+    .arcade-machine-big {
+        width: 35rem;
+        top: 2.5rem;
+        height: 40rem;
+        
+    }
+    .arcade-medium-left{
+        width: 23rem;
+        left: 2rem;
+        top: 19.5rem;
+        
+    }
+    .arcade-medium-right{
+        width: 23rem;
+        right: 2rem;
+        top: 19.5rem;
+        
+    }
+    .tv-left{
+        width: 12rem;
+        top: 32.5rem;
+        left: -1.5rem;
+        
+
+    }
+    .tv-right{
+        width: 12rem;
+        top: 32.5rem;
+        right: -1.5rem;
+        
+    }
+    .camera-right{
+        width: 13rem;
+        top: 1.5rem;
+        left: 50rem;
+    }
+    .camera-background-right{
+        width: 12rem;
+        
+    }
+    .congrats-left{
+        width: 9.5rem;
+        top: 9rem;
+        
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 30rem;
+    }
+    .about-border-top{
+    }
+    .about-border-bottom{
+        bottom: -2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        
+    }
+    .trailer-border-bottom{
+        top: 46rem;
+    }
+    .pixelmon-right{
+        width: 10rem;
+        left: 54rem;
+        bottom: -1rem;
+    }
+    .ghost-pink-left{
+        width: 10rem;
+        left: 0rem;
+        top: 2rem;
+    }
 }
+
+/* DONE */
 @media (max-width: 1024px) and (max-height: 600px) {
+    /* Countdown Section */
+    .countdown-card{
+        width: 10rem;
+    }
+    .rector-title{
+        width: 30rem;
+        padding: 0rem;
+    }
+    .big-yellow-star{
+        width: 120rem;
+        top: 4rem;
+        left: 2rem;
+        
+    }
+    .big-green-star {
+        width: 110rem;
+        top: 3rem;
+        left: 7rem;
+    }
+
+    /*Depan Bawah*/
+    .rector-card{
+        width: 40rem;
+        left: 5rem;
+        top: 15rem;
+    }
+
+    /* Belakang Atas*/
+    .rector-card-2{   
+        width: 35rem;
+        top: 4rem;
+        left: 10rem;
+    }
+    .arcade-machine-big {
+        width: 30rem;
+        top: 3rem;
+        height: 30rem;
+    }
+    .arcade-medium-left{
+        width: 17rem;
+        left: 4rem;
+        top: 16.5rem;
+    }
+    .arcade-medium-right{
+        width: 17rem;
+        right: 4rem;
+        top: 16.5rem;
+    }
+    .tv-left{
+        width: 9rem;
+        top: 25.5rem;
+        left: -1.5rem;
+    }
+    .tv-right{
+        width: 9rem;
+        top: 25.5rem;
+        right: -1.5rem;
+    }
+    .camera-right{
+        width: 12rem;
+        top: 1.5rem;
+        left: 51rem;
+    }
+    .camera-background-right{
+        width: 11rem;
+    }
+    .congrats-left{
+        width: 8rem;
+        top: 9rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 30rem;
+    }
+    .about-border-top{
+    }
+    .about-border-bottom{
+        bottom: -2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        
+    }
+    .trailer-border-bottom{
+        top: 46rem;
+    }
+    .pixelmon-right{
+        width: 10rem;
+        left: 54rem;
+        bottom: -1rem;
+    }
+    .ghost-pink-left{
+        width: 10rem;
+        left: 0rem;
+        top: 2rem;
+    }
 }
+
+/* DONE */
 @media (max-width: 956px) and (max-height: 440px) and (orientation: landscape) {
+    /* Countdown Section */
+    .countdown-card{
+        width: 10rem;
+        padding-bottom: 4rem;
+    }
+    .rector-title{
+        width: 35rem;
+        padding-top: 5rem;
+    }
+    .big-yellow-star{
+        width: 120rem;
+        top: 5rem;
+        left: 2rem;
+    }
+    .big-green-star {
+        width: 110rem;
+        top: 3rem;
+        left: 7rem;
+    }
+
+    /*Depan Bawah*/
+    .rector-card{
+        width: 40rem;
+        left: 5rem;
+        top: 20rem;
+    }
+
+    /* Belakang Atas*/
+    .rector-card-2{   
+        width: 35rem;
+        top: 6.5rem;
+        left: 9rem;
+    }
+    .arcade-machine-big {
+        width: 30rem;
+        top: 10rem;
+        height: 30rem;
+    }
+    .arcade-medium-left{
+        width: 17rem;
+        left: 4rem;
+        top: 28.5rem;
+    }
+    .arcade-medium-right{
+        width: 17rem;
+        right: 4rem;
+        top: 28.5rem;
+    }
+    .tv-left{
+        width: 9rem;
+        top: 30.5rem;
+        left: -1.5rem;
+    }
+    .tv-right{
+        width: 9rem;
+        top: 30.5rem;
+        right: -1.5rem;
+    }
+    .camera-right{
+        width: 10rem;
+        top: 2rem;
+        left: 46rem;
+    }
+    .camera-background-right{
+        width: 10rem;
+    }
+    .congrats-left{
+        width: 8rem;
+        top: 9rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 30rem;
+    }
+    .about-border-top{
+    }
+    .about-border-bottom{
+        bottom: -2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        width: 40rem;
+        height: 24rem;
+    }
+    .trailer-border-bottom{
+        top: 38rem;
+    }
+    .pixelmon-right{
+        width: 9rem;
+        left: 48rem;
+        bottom: 1rem;
+    }
+    .ghost-pink-left{
+        width: 9rem;
+        left: 1rem;
+        top: 2rem;
+    }
 }
+
+/* DONE */
 @media (max-width: 932px) and (max-height: 430px) {
+    /* Countdown Section */
+    .countdown-card{
+        width: 12rem;
+        padding-bottom: 5rem;
+    }
+    .rector-title{
+        width: 35rem;
+        padding-top: 5rem;
+    }
+    .big-yellow-star{
+        width: 120rem;
+        top: 8rem;
+        left: 2rem;
+    }
+    .big-green-star {
+        width: 110rem;
+        top: 5rem;
+        left: 7rem;
+    }
+
+    /*Depan Bawah*/
+    .rector-card{
+        width: 40rem;
+        left: 4rem;
+        top: 25rem;
+    }
+
+    /* Belakang Atas*/
+    .rector-card-2{   
+        width: 35rem;
+        top: 12.5rem;
+        left: 8rem;
+    }
+    .arcade-machine-big {
+        width: 30rem;
+        top: 15rem;
+        height: 30rem;
+    }
+    .arcade-medium-left{
+        width: 17rem;
+        left: 4rem;
+        top: 30.5rem;
+    }
+    .arcade-medium-right{
+        width: 17rem;
+        right: 4rem;
+        top: 30.5rem;
+    }
+    .tv-left{
+        width: 9rem;
+        top: 35.5rem;
+        left: -1.5rem;
+    }
+    .tv-right{
+        width: 9rem;
+        top: 35.5rem;
+        right: -1.5rem;
+    }
+    .camera-right{
+        width: 10rem;
+        top: 2rem;
+        left: 48rem;
+    }
+    .camera-background-right{
+        width: 10rem;
+    }
+    .congrats-left{
+        width: 8rem;
+        top: 9rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 30rem;
+    }
+    .about-border-top{
+    }
+    .about-border-bottom{
+        bottom: -2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        width: 40rem;
+        height: 24rem;
+    }
+    .trailer-border-bottom{
+        top: 38rem;
+    }
+    .pixelmon-right{
+        width: 8rem;
+        left: 50rem;
+        bottom: 1rem;
+    }
+    .ghost-pink-left{
+        width: 8rem;
+        left: 2rem;
+        top: 3rem;
+    }
 }
 
 /* DONE */
@@ -1856,17 +2259,640 @@
         top: 6rem;
     }
 }
+
+/* DONE */
 @media (max-width: 844px) and (max-height: 390px) {
+    .rector-title{
+        width: 23rem;
+        padding-top: 55px;
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 5rem;
+        left: 2rem;
+    }
+    .big-green-star {
+        width:50rem;
+        top: 6rem;
+        left: 2rem;
+    }
+
+    /* Depan Bawah */
+    .rector-card{
+        width: 20rem;
+        left: 10rem;
+        top: 15rem;
+    }
+
+    /* Belakang Atas */
+    .rector-card-2{
+        width: 20rem;
+        top: 8.2rem;
+        left: 15rem;
+    }
+    .arcade-machine-big {
+        width: 20rem;
+        top: 9.5rem;
+        height: 20.5rem;
+    }
+    .arcade-medium-left{
+        width: 15rem;
+        left: 5rem;
+        top: 17.5rem;
+    }
+    .arcade-medium-right{
+        width: 15rem;
+        right: 5rem;
+        top: 17.5rem;
+    }
+    .tv-left{
+        width: 8rem;
+        top: 21.5rem;
+        left: 0rem;
+    }
+    .tv-right{
+        width: 8rem;
+        top: 21.5rem;
+        right: 0rem;
+    }
+    .camera-right{
+        width: 8rem;
+        top: 2rem;
+        left: 44rem;
+    }
+    .camera-background-right{
+        width: 9rem;
+        top: 1rem;
+    }
+    .congrats-left{
+        width: 6rem;
+        top: 8rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 100%;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+        bottom: -2rem;
+    }
+    .about-head{
+        padding-top: 2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        width: 40rem;
+        height: 20rem;
+    }
+    .trailer-border-bottom{
+        top: 39rem;
+    }
+    .pixelmon-right{
+        width: 9rem;
+        left: 42rem;
+        bottom: -1rem;
+    }
+    .ghost-pink-left{
+        width: 8rem;
+        right: 20rem;
+        top: 3rem;
+    }
 }
+
+/* DONE */
 @media (max-width: 820px) and (max-height: 1180px) {
+    .countdown-card{
+        width: 11rem;
+    }
+    .rector-title{
+        width: 40rem;
+        padding-bottom: 0rem
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 42rem;
+        left: 2rem;
+    }
+    .big-green-star {
+        width:50rem;
+        top: 43rem;
+        left: 5rem;
+    }
+
+    /* Depan Bawah */
+    .rector-card{
+        width: 20rem;
+        left: 8rem;
+        top: 55rem;
+    }
+
+    /* Belakang Atas */
+    .rector-card-2{
+        width: 20rem;
+        top: 46rem;
+        left: 12rem;
+    }
+    .arcade-machine-big {
+        width: 20rem;
+        top: 30.5rem;
+        height: 25.5rem;
+    }
+    .arcade-medium-left{
+        width: 15rem;
+        left: 5rem;
+        top: 42.5rem;
+    }
+    .arcade-medium-right{
+        width: 15rem;
+        right: 5rem;
+        top: 42.5rem;
+    }
+    .tv-left{
+        width: 8rem;
+        top: 64.5rem;
+        left: 0rem;
+    }
+    .tv-right{
+        width: 8rem;
+        top: 64.5rem;
+        right: 0rem;
+    }
+    .camera-right{
+        width: 12rem;
+        top: 3rem;
+        left: 38rem;
+    }
+    .camera-background-right{
+        width: 14rem;
+        top: 1rem;
+    }
+    .congrats-left{
+        width: 8rem;
+        top: 8rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 100%;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+        bottom: -2rem;
+    }
+    .about-head{
+        padding-top: 2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        width: 40rem;
+        height: 20rem;
+    }
+    .trailer-border-bottom{
+        top: 72rem;
+    }
+    .pixelmon-right{
+        width: 13rem;
+        left: 38rem;
+        bottom: 2rem;
+    }
+    .ghost-pink-left{
+        width: 10rem;
+        left: 0rem;
+        top: 5rem;
+    }
 }
+
+/* DONE */
 @media (max-width: 768px) and (max-height: 1024px) and (orientation: portrait) {
+    .countdown-card{
+        width: 10.5rem;
+    }
+    .rector-title{
+        width: 40rem;
+        padding-bottom: 0rem
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 34rem;
+        left: 2rem;
+    }
+    .big-green-star {
+        width:50rem;
+        top: 35rem;
+        left: 5rem;
+    }
+
+    /* Depan Bawah */
+    .rector-card{
+        width: 20rem;
+        left: 8rem;
+        top: 45rem;
+    }
+
+    /* Belakang Atas */
+    .rector-card-2{
+        width: 20rem;
+        top: 37rem;
+        left: 12rem;
+    }
+    .arcade-machine-big {
+        width: 20em;
+        top: 25.5rem;
+        height: 25.5rem;
+    }
+    .arcade-medium-left{
+        width: 15rem;
+        left: 3rem;
+        top: 37.5rem;
+    }
+    .arcade-medium-right{
+        width: 15rem;
+        right: 3rem;
+        top: 37.5rem;
+    }
+    .tv-left{
+        width: 8rem;
+        top: 54.5rem;
+        left: 0rem;
+    }
+    .tv-right{
+        width: 8rem;
+        top: 54.5rem;
+        right: 0rem;
+    }
+    .camera-right{
+        width: 11rem;
+        top: 2.5rem;
+        left: 36rem;
+    }
+    .camera-background-right{
+        width: 13rem;
+        top: 1rem;
+    }
+    .congrats-left{
+        width: 8rem;
+        top: 22rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 100%;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+        bottom: -2rem;
+    }
+    .about-head{
+        padding-top: 2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        width: 40rem;
+
+    }
+    .trailer-border-bottom{
+        top: 62rem;
+    }
+    .pixelmon-right{
+        width: 13rem;
+        left: 35rem;
+        bottom: 2rem;
+    }
+    .ghost-pink-left{
+        width: 10rem;
+        left: 0rem;
+        top: 5rem;
+    }
 }
+
+/* DONE */
 @media (max-width: 740px) and (max-height: 360px) and (orientation: landscape) {
+    .countdown-card{
+        width: 10rem;
+        padding-bottom: 2rem;
+    }
+    .rector-title{
+        width: 30rem;
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 8rem;
+        left: 2rem;
+    }
+    .big-green-star {
+        width:50rem;
+        top: 7rem;
+        left: 4rem;
+    }
+
+    /* Depan Bawah */
+    .rector-card{
+        width: 20rem;
+        left: 6rem;
+        top: 20rem;
+    }
+
+    /* Belakang Atas */
+    .rector-card-2{
+        width: 20rem;
+        top: 9rem;
+        left: 10rem;
+    }
+    .arcade-machine-big {
+        width: 20em;
+        top: 10rem;
+        height: 25.5rem;
+    }
+    .arcade-medium-left{
+        width: 15rem;
+        left: 3rem;
+        top: 24.5rem;
+    }
+    .arcade-medium-right{
+        width: 15rem;
+        right: 3rem;
+        top: 24.5rem;
+    }
+    .tv-left{
+        width: 7rem;
+        top: 28rem;
+        left: 0rem;
+    }
+    .tv-right{
+        width: 7rem;
+        top: 28rem;
+        right: 0rem;
+    }
+    .camera-right{
+        width: 8rem;
+        top: 3rem;
+        left: 38rem;
+    }
+    .camera-background-right{
+        width: 10rem;
+        top: 1rem;
+    }
+    .congrats-left{
+        width: 7rem;
+        top: 8rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 100%;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+        bottom: -2rem;
+    }
+    .about-head{
+        padding-top: 2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        width: 40rem;
+
+    }
+    .trailer-border-bottom{
+        top: 38.5rem;
+    }
+    .pixelmon-right{
+        width: 8rem;
+        left: 38rem;
+        bottom: 0rem;
+    }
+    .ghost-pink-left{
+        width: 7rem;
+        left: 0rem;
+        top: 3rem;
+    }
 }
+
+/* DONE */
 @media (max-width: 720px) and (max-height: 540px) and (orientation: landscape) {
+    .countdown-card{
+        width: 9rem;
+        padding-bottom: 2rem;
+    }
+    .rector-title{
+        width: 28rem;
+        padding-top: 4rem;
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 7rem;
+        left: 2rem;
+    }
+    .big-green-star {
+        width:50rem;
+        top: 7rem;
+        left: 4rem;
+    }
+
+    /* Depan Bawah */
+    .rector-card{
+        width: 20rem;
+        left: 6rem;
+        top: 20rem;
+    }
+
+    /* Belakang Atas */
+    .rector-card-2{
+        width: 20rem;
+        top: 9rem;
+        left: 10rem;
+    }
+    .arcade-machine-big {
+        width: 20em;
+        top: 10rem;
+        height: 25.5rem;
+    }
+    .arcade-medium-left{
+        width: 15rem;
+        left: 3rem;
+        top: 24.5rem;
+    }
+    .arcade-medium-right{
+        width: 15rem;
+        right: 3rem;
+        top: 24.5rem;
+    }
+    .tv-left{
+        width: 7rem;
+        top: 28rem;
+        left: 0rem;
+    }
+    .tv-right{
+        width: 7rem;
+        top: 28rem;
+        right: 0rem;
+    }
+    .camera-right{
+        width: 8rem;
+        top: 2.5rem;
+        left: 36.5rem;
+    }
+    .camera-background-right{
+        width: 10rem;
+        top: 1rem;
+    }
+    .congrats-left{
+        width: 7rem;
+        top: 8rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 100%;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+        bottom: -2rem;
+    }
+    .about-head{
+        padding-top: 2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        width: 40rem;
+
+    }
+    .trailer-border-bottom{
+        top: 38.5rem;
+    }
+    .pixelmon-right{
+        width: 8rem;
+        left: 37rem;
+        bottom: 0rem;
+    }
+    .ghost-pink-left{
+        width: 7rem;
+        left: 0rem;
+        top: 3rem;
+    }
 }
+
+/* DONE */
 @media (max-width: 540px) and (max-height: 720px) and (orientation: portrait) {
+    .countdown-card{
+
+    }
+    .rector-title{
+        width: 25rem;
+        padding-top: 55px;
+    }
+    .big-yellow-star{
+        width: 50rem;
+        top: 50rem;
+        left: 2rem;
+    }
+    .big-green-star {
+        width:50rem;
+        top: 48rem;
+        left: 2rem;
+    }
+
+    /* Depan Bawah */
+    .rector-card{
+        width: 14rem;
+        left: 3rem;
+        top: 58rem;
+    }
+
+    /* Belakang Atas */
+    .rector-card-2{
+        width: 14rem;
+        top: 53rem;
+        left: 120px;
+    }
+    .arcade-machine-big {
+        width: 14rem;
+        top: 49.2rem;
+        height: 15.5rem;
+    }
+    .arcade-medium-left{
+        width: 10rem;
+        left: 2rem;
+        top: 58.5rem;
+    }
+    .arcade-medium-right{
+        width: 10rem;
+        right: 2rem;
+        top: 58.5rem;
+    }
+    .tv-left{
+        width: 5rem;
+        top: 63.9rem;
+        left: 0rem;
+
+    }
+    .tv-right{
+        width: 5rem;
+        top: 63.9rem;
+        right: 0rem;
+    }
+    .camera-right{
+        width: 7rem;
+        top: 3rem;
+        left: 26rem;
+    }
+    .camera-background-right{
+        width: 9rem;
+        top: 1rem;
+    }
+    .congrats-left{
+        width: 6rem;
+        top: 15rem;
+    }
+
+    /* About Section */
+    .bg-about{
+        height: 100%;
+    }
+    .about-border-top{
+        top: -6px;
+    }
+    .about-border-bottom{
+        bottom: -2px;
+    }
+    .about-head{
+        padding-top: 2rem;
+    }
+
+    /* Trailer Section */
+    .video-frame{
+        width: 30rem;
+    }
+
+    .trailer-border-bottom{
+        top: 38.8rem;
+    }
+    .pixelmon-right{
+        width: 8rem;
+        left: 26rem;
+        bottom: 0rem;
+    }
+    .ghost-pink-left{
+        width: 7rem;
+        right: 20rem;
+        top: 3rem;
+    }
 }
 /* DONE */
 @media(max-width: 459px) and (max-height: 841px) and (orientation: portrait){
@@ -1932,6 +2958,7 @@
     .camera-right{
         width: 8rem;
         top: 2rem;
+        right: 0rem;
         
     }
     .camera-background-right{
@@ -2309,66 +3336,61 @@
     }
     .big-yellow-star{
         width: 50rem;
-        top: 38.5rem;
-        left: 2rem;
-        
+        top: 43.5rem;
+        left: 1rem;
     }
     .big-green-star {
-        width: 42rem;
-        top: 36rem;
+        width: 50rem;
+        top: 44rem;
         left: 2rem;
-        
     }
+
+    /* Depan Bawah */
     .rector-card{
-        width: 10rem;
-        left: 80px;
-        top: 43rem;
-        
+        width: 13rem;
+        left: 4rem;
+        top: 53rem;
     }
+
+    /* Belakang Atas */
     .rector-card-2{
-        width: 10rem;
-        top: 39.3rem;
-        left: 110px;
-        
+        width: 13rem;
+        top: 45.5rem;
+        left: 5rem;
     }
     .arcade-machine-big {
         width: 12rem;
         top: 40.5rem;
         height: 15.5rem;
-        
     }
     .arcade-medium-left{
         width: 8rem;
         left: 2rem;
-        top: 48rem;
-        
+        top: 51rem;
     }
     .arcade-medium-right{
         width: 8rem;
         right: 2rem;
-        top: 48rem;
-        
+        top: 51rem;
     }
     .tv-left{
         width: 4.5rem;
-        top: 51rem;
+        top: 57rem;
         left: 0rem;
     }
     .tv-right{
         width: 4.5rem;
-        top: 51rem;
+        top: 57rem;
         right: 0rem;
-        
     }
     .camera-right{
-        width: 8rem;
-        top: 2rem;
-        
+        width: 7rem;
+        top: 2.5rem;
+        left: 18.5rem;
     }
     .camera-background-right{
-        width: 9rem;
+        width: 8rem;
         top: 1rem;
-        
     }
     .congrats-left{
         width: 6rem;
@@ -2387,19 +3409,20 @@
     }
 
     /* Trailer Section */
-        .bg-trailer{
-        height: 40rem;
+    .video-frame{
+        width: 22rem;
+        height: 13rem;
     }
     .trailer-border-bottom{
         top: 39rem;
     }
     .pixelmon-right{
-        width: 10rem;
-        left: 16rem;
-        bottom: 2rem;
+        width: 8rem;
+        left: 18rem;
+        bottom: 2.5rem;
     }
     .ghost-pink-left{
-        width: 8rem;
+        width: 7rem;
         right: 18rem;
         top: 3rem;
     }
@@ -2412,70 +3435,64 @@
     }
     .rector-title{
         width: 23rem;
-        
     }
     .big-yellow-star{
         width: 50rem;
-        top: 37.5rem;
-        left: 2rem;
-        
+        top: 45.5rem;
+        left: 1rem;
     }
     .big-green-star {
         width: 42rem;
-        top: 35rem;
-        left: 2rem;
-        
+        top: 46rem;
+        left: 1.5rem;
     }
+
+    /* Depan Bawah */
     .rector-card{
-        width: 10rem;
-        left: 80px;
-        top: 42rem;
-        
+        width: 12rem;
+        left: 3rem;
+        top: 52rem;
     }
+
+    /* Belakang Atas */
     .rector-card-2{
-        width: 10rem;
-        top: 37.5rem;
-        left: 100px;
-        
+        width: 12rem;
+        top: 45.5rem;
+        left: 5rem;
     }
     .arcade-machine-big {
         width: 12rem;
-        top: 39rem;
+        top: 40.5rem;
         height: 15.5rem;
-        
     }
     .arcade-medium-left{
         width: 8rem;
         left: 2rem;
-        top: 47rem;
-        
+        top: 51rem;
     }
     .arcade-medium-right{
         width: 8rem;
         right: 2rem;
-        top: 47rem;
-        
+        top: 51rem;
     }
     .tv-left{
         width: 4.5rem;
-        top: 49.5rem;
+        top: 57rem;
         left: 0rem;
     }
     .tv-right{
         width: 4.5rem;
-        top: 49.5rem;
+        top: 57rem;
         right: 0rem;
-        
     }
     .camera-right{
-        width: 8rem;
+        width: 7.5rem;
         top: 2rem;
-        
+        left: 17rem;
     }
     .camera-background-right{
         width: 9rem;
         top: 1rem;
-        
     }
     .congrats-left{
         width: 6rem;
@@ -2494,15 +3511,16 @@
     }
 
     /* Trailer Section */
-        .bg-trailer{
-        height: 40rem;
+    .video-frame{
+        width: 22rem;
+        height: 13rem;
     }
     .trailer-border-bottom{
         top: 39rem;
     }
     .pixelmon-right{
-        width: 10rem;
-        left: 15rem;
+        width: 8rem;
+        left: 16.5rem;
         bottom: 2rem;
     }
     .ghost-pink-left{
@@ -2511,72 +3529,72 @@
         top: 3rem;
     }
 }
+
+/* DONE */
 @media (max-width: 390px) and (max-height: 844px) and (orientation: portrait) {
     .countdown-card{
-        width: 8rem;
+        width: 9rem;
     }
     .rector-title{
         width: 23rem;
-        
+        padding-top: 4rem;
     }
     .big-yellow-star{
         width: 50rem;
-        top: 37.5rem;
-        left: 2rem;
-        
+        top: 50.5rem;
+        left: 0rem;
     }
     .big-green-star {
         width: 42rem;
-        top: 35rem;
-        left: 2rem;
-        
+        top: 51.5rem;
+        left: 1rem;
     }
+
+    /* Depan Bawah */
     .rector-card{
         width: 10rem;
         left: 80px;
-        top: 42rem;
-        
+        top: 57rem;
     }
+
+    /* Belakang Atas */
     .rector-card-2{
         width: 10rem;
-        top: 37.5rem;
+        top: 52.5rem;
         left: 100px;
-        
     }
     .arcade-machine-big {
-        width: 12rem;
-        top: 39rem;
-        height: 15.5rem;
-        
+        width: 10rem;
+        top: 47.6rem;
+        height: 12.5rem;
     }
     .arcade-medium-left{
         width: 8rem;
         left: 2rem;
-        top: 46.5rem;
-        
+        top: 55.5rem;
     }
     .arcade-medium-right{
         width: 8rem;
         right: 2rem;
-        top: 46.5rem;
-        
+        top: 55.5rem;
     }
     .tv-left{
         width: 4.5rem;
-        top: 49rem;
+        top: 61rem;
         left: 0rem;
     }
     .tv-right{
         width: 4.5rem;
-        top: 49rem;
+        top: 61rem;
         right: 0rem;
     }
     .camera-right{
         width: 8rem;
         top: 2rem;
+        left: 16rem;
     }
     .camera-background-right{
-        width: 9rem;
+        width: 8rem;
         top: 1rem;
     }
     .congrats-left{
@@ -2595,29 +3613,23 @@
         bottom: -1rem;
     }
     /* Trailer Section */
-        .bg-trailer{
-        height: 40rem;
+    .video-frame{
+        width: 20rem;
+        height: 12rem;
     }
     .trailer-border-bottom{
         top: 39rem;
     }
     .pixelmon-right{
-        width: 10rem;
-        left: 14rem;
-        bottom: 2rem;
+        width: 8rem;
+        left: 16rem;
+        bottom: 3.5rem;
     }
     .ghost-pink-left{
-        width: 7rem;
+        width: 6rem;
         right: 18rem;
         top: 3rem;
     }
-}
-
-/* SALAH */
-@media (max-width: 375px) and (max-height: 667px) and (orientation: portrait) {
-}
-/* SALAH */
-@media (max-width: 360px) and (max-height: 740px) and (orientation: portrait) {
 }
 
 /* DONE */
@@ -2630,59 +3642,64 @@
     }
     .big-yellow-star{
         width: 50rem;
-        top: 37.5rem;
-        left: 2rem;
+        top: 46.5rem;
+        left: 1.5rem;
     }
     .big-green-star {
         width: 42rem;
-        top: 35rem;
-        left: 2rem;
+        top: 47rem;
+        left: 1.5rem;
     }
+
+    /* Depan Bawah */
     .rector-card{
         width: 10rem;
         left: 50px;
-        top: 42rem;
+        top: 53rem;
     }
+
+    /* Belakang Atas */
     .rector-card-2{
         width: 10rem;
-        top: 38.2rem;
+        top: 48rem;
         left: 70px;
     }
     .arcade-machine-big {
-        width: 12rem;
-        top: 39.5rem;
-        height: 15.5rem;
+        width: 10rem;
+        top: 42.5rem;
+        height: 12.5rem;
     }
     .arcade-medium-left{
-        width: 8rem;
+        width: 6.5rem;
         left: 2rem;
-        top: 47.5rem;
+        top: 52rem;
     }
     .arcade-medium-right{
-        width: 8rem;
+        width: 6rem;
         right: 2rem;
-        top: 47.5rem;
+        top: 52rem;
     }
     .tv-left{
-        width: 4.5rem;
-        top: 50rem;
+        width: 3.5rem;
+        top: 57rem;
         left: 0rem;
     }
     .tv-right{
-        width: 4.5rem;
-        top: 50rem;
+        width: 3.5rem;
+        top: 57rem;
         right: 0rem;
     }
     .camera-right{
-        width: 8rem;
-        top: 2rem;
+        width: 7rem;
+        top: 2.5rem;
+        left: 14rem;
     }
     .camera-background-right{
-        width: 9rem;
+        width: 8rem;
         top: 1rem;
     }
     .congrats-left{
-        width: 6rem;
+        width: 5.5rem;
         top: 16rem;
     }
 
@@ -2697,20 +3714,21 @@
         bottom: -1rem;
     }
     /* Trailer Section */
-    .bg-trailer{
-        height: 40rem;
+    .video-frame{
+        width: 20rem;
+        height: 12rem;
     }
     .trailer-border-bottom{
         top: 39rem;
     }
     .pixelmon-right{
-        width: 10rem;
-        left: 12rem;
+        width: 8rem;
+        left: 13rem;
         bottom: 2rem;
     }
     .ghost-pink-left{
         width: 7rem;
-        right: 15rem;
+        right: 14rem;
         top: 3rem;
     }
 }
