@@ -1,18 +1,10 @@
 "use client";
-import Image from "next/image";
+
 export default function UnderDevelopmentPage() {
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-[#390D62] to-[#6226A4] flex items-center justify-center p-4">
-      <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
-      <Image
-        src={"/home/background.svg"}
-        width={1000}
-        height={1000}
-        alt="rectorcupuc background"
-        className="w-full h-full object-center object-cover opacity-25 z-1 absolute"
-      ></Image>
-      <div className="relative z-10 border-[#AAF3D5] border-4 bg-white/10 backdrop-blur-sm p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
-        <div className="mx-auto w-20 h-20 bg-gradient-to-r from-[#E94BFF] to-[#FF6BDB] rounded-full flex items-center justify-center mb-6">
+    <div className="min-h-screen bg-gradient-to-b from-[#390D62] to-[#6226A4] flex items-center justify-center p-4">
+      <div className="bg-white/90 backdrop-blur-sm p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
+        <div className="mx-auto w-20 h-20 bg-gradient-to-br from-zinc-400 to-zinc-600 rounded-full flex items-center justify-center mb-6">
           <svg
             className="w-10 h-10 text-white"
             fill="currentColor"
@@ -26,16 +18,16 @@ export default function UnderDevelopmentPage() {
           </svg>
         </div>
 
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-[#E94BFF] to-[#FF6BDB] bg-clip-text text-transparent mb-4">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-zinc-700 via-zinc-800 to-black bg-clip-text text-transparent mb-4">
           Under Development
         </h1>
 
-        <p className="text-white text-lg leading-relaxed mb-6">
+        <p className="text-zinc-600 text-lg leading-relaxed mb-6">
           We&apos;re working hard to bring you an amazing experience. The site
           is currently under development and will be available soon!
         </p>
 
-        <div className="text-sm text-[#AAF3D5] font-bold">
+        <div className="text-sm text-zinc-500">
           <p>Expected launch: Coming Soon</p>
         </div>
       </div>

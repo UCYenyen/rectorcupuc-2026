@@ -782,7 +782,7 @@
 @media (max-width: 1728px) and (max-height: 1117px) {
     /* Countdown Section */
     .countdown-card{
-        width: 16rem;
+        width: 20rem;
     }
     .rector-title{
         width: 50rem;
@@ -844,13 +844,11 @@
         
     }
     .camera-right{
-        top: 0;
         width: 15rem;
         
     }
     .camera-background-right{
         width: 13rem;
-        top: 0rem;
         
     }
     .congrats-left{
@@ -2926,7 +2924,7 @@
     }
     .arcade-machine-big {
         width: 12rem;
-        top: 50.5rem;
+        top: 52.5rem;
         height: 15.5rem;
         
     }
