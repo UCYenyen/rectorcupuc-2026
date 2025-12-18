@@ -1,10 +1,6 @@
 import prisma from "@/lib/prisma";
 
 export async function createTeam(name: string, competitionId: string, leaderId: string) {
-    const isTeamExist = await prisma.team.findUnique({
-        where: { name_competition_id: { name: name, competition_id: competitionId } },
-    });
-
     const competitionData = await prisma.competition.findUnique({
         where: { id: competitionId },
     });
@@ -13,26 +9,30 @@ export async function createTeam(name: string, competitionId: string, leaderId: 
         return { error: "Competition does not exist." };
     }
 
+    const isTeamExist = await prisma.team.findUnique({
+        where: { name_competition_id: { name: name, competition_id: competitionId } },
+    });
+
     if (isTeamExist) {
         return { error: "Team with this name is already registered in the competition." };
     }
 
-    const team = await prisma.team.create({
-        data: {
-            name: name,
-            competition_id: competitionId,
-            leader_id: leaderId,
-            min_team_member: competitionData.min_team_member,
-            max_team_member: competitionData.max_team_member,
-            current_team_member: 1,
-        },
-    });
-
-    if (!team) {
-        return { error: "Failed to create team. Due to connection issue" };
+    try {
+        const team = await prisma.team.create({
+            data: {
+                name: name,
+                competition_id: competitionId,
+                leader_id: leaderId,
+                min_team_member: competitionData.min_team_member,
+                max_team_member: competitionData.max_team_member,
+                current_team_member: 1,
+            },
+        });
+        return team;
+    } catch (error) {
+        console.error("Prisma Create Team Error:", error);
+        return { error: "Leader ID tidak ditemukan atau terjadi kesalahan database." };
     }
-
-    return team;
 }
 
 export async function getTeamByID(id: string) {
@@ -42,15 +42,13 @@ export async function getTeamByID(id: string) {
 }
 
 export async function deleteTeam(id: string) {
-    const deletedTeam = await prisma.team.delete({
-        where: { id: id },
-    });
-
-    if (!deletedTeam) {
-        return { error: "Failed to delete team. Due to connection issue" };
+    try {
+        return await prisma.team.delete({
+            where: { id: id },
+        });
+    } catch (error) {
+        return { error: "Failed to delete team." };
     }
-
-    return deletedTeam;
 }
 
 export async function getTeamByUserID(id: string){
@@ -82,11 +80,14 @@ export async function joinTeamByReferalCode(userId: string, referalCode: string)
     }
 
     const alreadyRegisteredToAnotherTeam = await prisma.team.findFirst({
-        where: {team_referal_code: referalCode, competition_id: team.competition_id, members: { some: { user_id: userId } } },
-    })
+        where: { 
+            competition_id: team.competition_id, 
+            members: { some: { user_id: userId } } 
+        },
+    });
 
     if(alreadyRegisteredToAnotherTeam){
-        return {error:"You are already registered to another team for this competition."}
+        return { error: "You are already registered to another team for this competition." };
     }
 
     const teamMember = await prisma.teamMember.create({
@@ -96,16 +97,10 @@ export async function joinTeamByReferalCode(userId: string, referalCode: string)
         },
     });
 
-    const newMemberCount = team.current_team_member + 1;
-
     await prisma.team.update({
         where: { id: team.id },
-        data: { current_team_member: newMemberCount},
+        data: { current_team_member: { increment: 1 } },
     });
-
-    if(!teamMember){
-        return { error: "Failed to join team. Due to connection issue" };
-    }
 
     return teamMember;
 }

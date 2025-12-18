@@ -18,14 +18,23 @@ export default function NavigationBar() {
         <Link href="/vote" className="bg-zinc-300 rounded-lg px-4 py-2 hover:underline w-full">
           Votes
         </Link>
+        {(session?.user.role === "liason_officer") && (
+          <Link href="/dashboard/admin/lo" className="bg-zinc-300 rounded-lg px-4 py-2 hover:underline w-full whitespace-nowrap">
+           Admin
+          </Link>
+        )}
+        {(session?.user.role === "pdd_website") && (
+          <Link href="/dashboard/admin/web" className="bg-zinc-300 rounded-lg px-4 py-2 hover:underline w-full whitespace-nowrap">
+            Admin
+          </Link>
+        )}
         <div className="flex items-center">
           {status === "loading" ? (
-            // placeholder ukuran sama dengan avatar agar layout tidak bergeser
-            <div className="w-10 h-10 rounded-full bg-zinc-200 animate-pulse" />
+        <div className="w-10 h-10 rounded-full bg-zinc-200 animate-pulse" />
           ) : session ? (
-            <UserProfileButton />
+        <UserProfileButton />
           ) : (
-            <GoogleLogin />
+        <GoogleLogin />
           )}
         </div>
       </div>

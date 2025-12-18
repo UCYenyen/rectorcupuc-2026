@@ -1,4 +1,4 @@
-import { CompetitionCategory, Match } from "@prisma/client";
+import { CompetitionCategory, Match, Rules } from "@prisma/client";
 import { Team } from "@prisma/client";
 
 export interface Competition{
@@ -20,11 +20,21 @@ export interface TeamInterface extends Team {
     }
 }
 
+export interface CompetitionRulesModel {
+    id: string;
+    description: string;
+    competition_id: string;
+}
+
 export interface CompetitionContainerProps{
     id: string;                   
     name: string
+    slug: string
+    location: string
     description: string                   
     min_team_member: number                      
     max_team_member: number                       
     category: CompetitionCategory
+    rules?: Rules[];
+    matches?: Match[];
 }

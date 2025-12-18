@@ -1,10 +1,9 @@
-'use server' // Tandai ini sebagai file khusus Server Actions
+'use server'
 
 import { registerTeamToCompetition } from "@/lib/competition";
 import updateRegistrationStatus from "./admin";
 import { revalidatePath } from "next/cache";
 
-// Definisikan tipe state untuk form Anda di sini
 export interface RegisterTeamFormState {
   error?: string;
   success?: boolean;
@@ -15,37 +14,37 @@ const ADMIN_PAGE_PATH = "/admin/registrations";
 
 export async function registerTeam(
   leaderId: string, 
-  competitionId: string,
-
+  competitionSlug: string,
   prevState: RegisterTeamFormState,
   formData: FormData
 ): Promise<RegisterTeamFormState> {
-  console.log(prevState);
   const teamName = formData.get("teamName") as string;
+  const imageUrl = formData.get("instagramProofUrl") as string;
 
   if (!leaderId) {
     return { error: "User is not authenticated." };
   }
 
-  const registration = await registerTeamToCompetition(competitionId, teamName, leaderId);
+  const registration = await registerTeamToCompetition(
+    competitionSlug, 
+    teamName, 
+    leaderId, 
+    imageUrl
+  );
 
   if ("error" in registration) {
     return { error: registration.error };
   }
   
-  // console.log("Registering team:", { teamName, competitionId, leaderId });
-
-  return { success: true};
+  return { success: true };
 }
 
-// Server Actions with console.error in catch to satisfy ESLint
 export async function approveRegistration(registrationId: string) {
   try {
     await updateRegistrationStatus(registrationId, 'Registered');
-    revalidatePath(ADMIN_PAGE_PATH); // Otomatis refresh data di halaman
+    revalidatePath(ADMIN_PAGE_PATH);
     return { success: true };
   } catch (error) {
-    console.error("approveRegistration error:", error);
     return { success: false, error: "Failed to approve." };
   }
 }
@@ -56,7 +55,6 @@ export async function rejectRegistration(registrationId: string) {
     revalidatePath(ADMIN_PAGE_PATH);
     return { success: true };
   } catch (error) {
-    console.error("rejectRegistration error:", error);
     return { success: false, error: "Failed to reject." };
   }
 }
@@ -67,7 +65,6 @@ export async function setRegistrationPending(registrationId: string) {
     revalidatePath(ADMIN_PAGE_PATH);
     return { success: true };
   } catch (error) {
-    console.error("setRegistrationPending error:", error);
     return { success: false, error: "Failed to set to pending." };
   }
 }
