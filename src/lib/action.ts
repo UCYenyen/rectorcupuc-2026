@@ -10,6 +10,12 @@ export interface RegisterTeamFormState {
   teamId?: string;
 }
 
+export interface CreateMatchFormState {
+  error?: string;
+  success?: boolean;
+  matchId?: string;
+}
+
 const ADMIN_PAGE_PATH = "/admin/registrations"; 
 
 export async function registerTeam(

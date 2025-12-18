@@ -1,9 +1,17 @@
+'use server'
 import prisma from "@/lib/prisma";
 import { deleteTeam, createTeam } from "./team";
 import { CompetitionContainerProps } from "@/types/competition.md";
+import { DateTime } from "next-auth/providers/kakao";
+import { Match } from "@prisma/client";
+import { CreateMatchFormState } from "./action";
 
-export async function getAllCompetitions(){
-    return await prisma.competition.findMany();
+export async function getAllCompetitions() : Promise<CompetitionContainerProps[]>{
+    return await prisma.competition.findMany({
+        include: {
+            teams: true,
+        },
+    });
 }
 
 export async function getCompetitionByID(id: string){
@@ -80,3 +88,136 @@ export async function getAllRegistrations(){
         },
     });
 }
+
+export async function createMatch(prevState: CreateMatchFormState,
+  formData: FormData) : Promise<CreateMatchFormState> {
+    const competitionId = formData.get('competitionId') as string;
+    const team1_id = formData.get("team1") as string;
+    const team2_id = formData.get("team2") as string;
+    const startTime = new Date(formData.get("startDate") as string);
+    const endTime = new Date(formData.get("endDate") as string);
+    const duration = Number(formData.get("duration") as string);
+    
+    const competition = await prisma.competition.findUnique({
+        where: { id: competitionId },
+    });
+    if(!competition) return { error: "Competition not found." };
+
+    try {
+        await prisma.match.create({
+            data: {
+                competition_id: competition.id,
+                duration: duration,
+                team_one_score: 0,
+                team_two_score: 0,
+                team_one_id: team1_id,
+                team_two_id: team2_id,
+                startTime: startTime,
+                endTime: endTime,
+            },
+            include:{
+                team_one_reference: true,
+                team_two_reference: true,
+            }
+        });
+        return {success: true};
+    } catch (error) {
+        return { error: "Failed to create match." + error };
+    }
+}
+
+export async function startMatch(
+    matchId: string,
+    competitionSlug: string,
+    status: "ONGOING"
+): Promise<Match | { error: string }> {
+    const competition = await prisma.competition.findUnique({
+        where: { slug: competitionSlug },
+    }); 
+    if (!competition) return { error: "Competition not found." };
+
+    const match = await prisma.match.findUnique({
+        where: { id: matchId },
+    });
+    if (!match) return { error: "Match not found." };
+
+    if (match.competition_id !== competition.id) {
+        return { error: "Match does not belong to this competition." };
+    }
+
+    try {
+        const updatedMatch = await prisma.match.update({
+            where: { id: matchId },
+            data: { 
+                match_status: status,
+            },
+        });
+        return updatedMatch;
+    } catch (error) {
+        return { error: "Failed to start match." };
+    }   
+}
+export async function completeMatch(
+    matchId: string,
+    competitionSlug: string,
+    status: "COMPLETED"
+): Promise<Match | { error: string }> {
+    const competition = await prisma.competition.findUnique({
+        where: { slug: competitionSlug },
+    }); 
+    if (!competition) return { error: "Competition not found." };
+
+    const match = await prisma.match.findUnique({
+        where: { id: matchId },
+    });
+    if (!match) return { error: "Match not found." };
+
+    if (match.competition_id !== competition.id) {
+        return { error: "Match does not belong to this competition." };
+    }
+
+    try {
+        const updatedMatch = await prisma.match.update({
+            where: { id: matchId },
+            data: { 
+                match_status: status,
+            },
+        });
+        return updatedMatch;
+    } catch (error) {
+        return { error: "Failed to complete match." };
+    }   
+}
+
+export async function pendMatch(
+    matchId: string,
+    competitionSlug: string,
+    status: "ONGOING"
+): Promise<Match | { error: string }> {
+    const competition = await prisma.competition.findUnique({
+        where: { slug: competitionSlug },
+    }); 
+    if (!competition) return { error: "Competition not found." };
+
+    const match = await prisma.match.findUnique({
+        where: { id: matchId },
+    });
+    if (!match) return { error: "Match not found." };
+
+    if (match.competition_id !== competition.id) {
+        return { error: "Match does not belong to this competition." };
+    }
+
+    try {
+        const updatedMatch = await prisma.match.update({
+            where: { id: matchId },
+            data: { 
+                match_status: status,
+            },
+        });
+        return updatedMatch;
+    } catch (error) {
+        return { error: "Failed to pend match." };
+    }   
+}   
+

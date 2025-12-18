@@ -179,7 +179,7 @@ model Match {
   competition_id String
   team_one_id    String
   team_two_id    String
-  matsh_status   CompetitionMatchStatus @default(UPCOMMING)
+  match_status   CompetitionMatchStatus @default(UPCOMMING)
 
   competition        Competition @relation(fields: [competition_id], references: [id], onDelete: Cascade)
   team_one_reference Team        @relation("TeamOneMatches", fields: [team_one_id], references: [id], onDelete: Cascade) // FIX: Named relation

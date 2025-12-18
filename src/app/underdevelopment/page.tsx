@@ -3,15 +3,16 @@ import Image from "next/image";
 export default function UnderDevelopmentPage() {
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#390D62] to-[#6226A4] flex items-center justify-center p-4">
-      <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
-      <Image
-        src={"/home/background.svg"}
-        width={1000}
-        height={1000}
-        alt="rectorcupuc background"
-        className="w-full h-full object-center object-cover opacity-25 z-1 absolute"
-      ></Image>
-      <div className="relative z-10 border-[#AAF3D5] border-4 bg-white/10 backdrop-blur-sm p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
+          <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
+          <Image
+            src={"/home/background.svg"}
+            width={1000}
+            height={1000}
+            alt="rectorcupuc background"
+            className="w-full h-full object-center object-cover opacity-25 z-1 absolute"
+          ></Image>
+          <div className="relative z-10 border-[#AAF3D5] border-4 bg-white/10 backdrop-blur-sm p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
+             <div className="relative z-10 border-[#AAF3D5] border-4 bg-white/10 backdrop-blur-sm p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
         <div className="mx-auto w-20 h-20 bg-gradient-to-r from-[#E94BFF] to-[#FF6BDB] rounded-full flex items-center justify-center mb-6">
           <svg
             className="w-10 h-10 text-white"
@@ -39,6 +40,7 @@ export default function UnderDevelopmentPage() {
           <p>Expected launch: Coming Soon</p>
         </div>
       </div>
-    </div>
+          </div>
+        </div>
   );
 }

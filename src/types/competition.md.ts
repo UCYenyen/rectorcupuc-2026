@@ -37,4 +37,5 @@ export interface CompetitionContainerProps{
     category: CompetitionCategory
     rules?: Rules[];
     matches?: Match[];
+    teams?: Team[];
 }
