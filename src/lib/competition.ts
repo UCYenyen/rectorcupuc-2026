@@ -26,6 +26,7 @@ export async function getCompetitionBySlug(slug: string) : Promise<CompetitionCo
         include: {
             matches: true,
             rules: true,
+            teams: true,
         }
     });
 
@@ -88,6 +89,8 @@ export async function getAllRegistrations(){
         },
     });
 }
+
+// Match
 
 export async function createMatch(prevState: CreateMatchFormState,
   formData: FormData) : Promise<CreateMatchFormState> {
@@ -220,4 +223,3 @@ export async function pendMatch(
         return { error: "Failed to pend match." };
     }   
 }   
-

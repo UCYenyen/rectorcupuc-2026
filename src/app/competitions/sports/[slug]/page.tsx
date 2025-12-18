@@ -6,7 +6,17 @@ interface ProblemPageProps {
   }>;
 }
 export default async function BasketballPutraPage({ params }: ProblemPageProps) {
-   const { slug } = await params;
+  const { slug } = await params;
   const competitionData = await getCompetitionBySlug(slug);
+
+  if ("error" in competitionData) {
+    return <div className="p-8 text-center">Competition not found.</div>;
+  }
+
+  if (!competitionData) {
+    return <div className="p-8 text-center">Loading...</div>;
+  }
+
+
   return <CompetitionDetailsDataReciever competitionData={competitionData} />;
 }
