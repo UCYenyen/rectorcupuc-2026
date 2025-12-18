@@ -7,7 +7,6 @@ interface FormattedMatch {
   time: string;
   team1Name: string;
   team2Name: string;
-  venue: string;
   status: string;
 }
 
@@ -39,7 +38,6 @@ export default function Schedule({ matches, teams }: { matches: MatchWithVenue[]
       time,
       team1Name: getTeamName(m.team_one_id),
       team2Name: getTeamName(m.team_two_id),
-      venue: m.venue || '-', 
       status: (m.match_status || 'UPCOMMING').toLowerCase(),
     };
 
@@ -89,16 +87,15 @@ export default function Schedule({ matches, teams }: { matches: MatchWithVenue[]
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-white font-bold text-lg">{match.time}</span>
-                    <div className={`px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(match.status)}`}>
-                      {match.status.toUpperCase()}
-                    </div>
                   </div>
                   <div className="flex-1 flex items-center justify-center gap-3">
                     <span className="text-white font-medium text-center">{match.team1Name}</span>
                     <span className="text-[#AAF3D5] font-bold">VS</span>
                     <span className="text-white font-medium text-center">{match.team2Name}</span>
                   </div>
-                  <div className="text-white/70 text-sm">{match.venue}</div>
+                  <div className={`px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(match.status)}`}>
+                      {match.status.toUpperCase()}
+                    </div>
                 </div>
               ))}
             </div>
