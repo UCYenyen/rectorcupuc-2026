@@ -26,13 +26,7 @@ export default async function page() {
             alt="Rectorcupuc Title"
             className="absolute w-1/4 h-auto -top-[6rem]"
           ></Image>
-          <Image
-            src={"/competitions/filler-asset-competition.webp"}
-            width={1000}
-            height={1000}
-            alt="background"
-            className="w-full h-full object-center object-cover opacity-50 z-2 absolute"
-          />
+          
           <div className="w-full border-4 border-[#AAF3D5] rounded-2xl py-2 bg-gradient-to-r from-[#6427A8] to-[#EB79F0] flex justify-center items-center">
             <h1 className="text-2xl">COMPETITIONS</h1>
           </div>

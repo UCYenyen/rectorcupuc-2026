@@ -1,16 +1,15 @@
-import GoogleProvider from "next-auth/providers/google";
+import NextAuth from "next-auth";
+import Google from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { NextAuthOptions } from "next-auth";
-import { revalidatePath } from "next/cache";
 import { Role } from "@prisma/client";
 import prisma from "@/lib/prisma";
 
-export const authOptions: NextAuthOptions = {
+export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   session: {
@@ -21,56 +20,62 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ profile, user }) {
-      if (!profile?.email) {
-        throw new Error("No profile email found");
+      const email = profile?.email || user?.email;
+      
+      if (!email) {
+        console.error("SignIn Error: No email found in profile");
+        return false;
       }
 
-      if (profile.email.includes("ciputra.ac.id")) {
-        if (user && user.id) {
-          const dbUser = await prisma.user.findUnique({
-            where: { id: user.id },
-          });
-
-          if (dbUser) {
-            const assignedRole: Role = dbUser.role;
-
-            await prisma.user.update({
+      if (email.endsWith("ciputra.ac.id")) {
+        try {
+          if (user && user.id) {
+            const dbUser = await prisma.user.findUnique({
               where: { id: user.id },
-              data: { role: assignedRole },
             });
+
+            if (dbUser) {
+              await prisma.user.update({
+                where: { id: user.id },
+                data: { role: dbUser.role },
+              });
+            }
           }
+          return true;
+        } catch (error) {
+          console.error("Database Error during signIn:", error);
+          return true; // Tetap izinkan login meski update gagal, atau ganti false jika wajib update
         }
-
-        revalidatePath("/dashboard/tech");
-
-        return true;
-      } else {
-        throw new Error("You must use a @ciputra.ac.id email to sign in");
       }
+
+      console.warn(`Access Denied: ${email} is not a Ciputra email`);
+      return false;
     },
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
+        token.sub = user.id;
       }
+      
+      const userId = token.sub || token.id;
 
-      if (token.id) {
+      if (userId) {
         const dbUser = await prisma.user.findUnique({
-          where: { id: token.id as string },
+          where: { id: userId as string },
           select: { role: true },
         });
-        token.role = dbUser?.role;
+        if (dbUser) {
+          token.role = dbUser.role;
+        }
       }
-
+      
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string;
+        session.user.id = (token.sub || token.id) as string;
         session.user.role = token.role as Role;
       }
-
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
-};
+});
