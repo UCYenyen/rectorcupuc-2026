@@ -23,7 +23,7 @@ export default function UserProfileButton() {
     session?.user?.name?.split(" ").map(s => s[0]).join("").slice(0, 2).toUpperCase() || "U";
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} className="relative border-white border-3 rounded-full">
       <button
         type="button"
         aria-label="User menu"

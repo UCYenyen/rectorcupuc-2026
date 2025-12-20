@@ -4,6 +4,7 @@ import CompetitionPicker from "@/components/competition/CompetitionPicker";
 import StripeBackground from "@/components/StripeBackground";
 import RectorInlineTitle from "@/components/competition/RectorInlineTitle";
 import BottomAsset from "@/components/competition/BottomAsset";
+import CompetitionTitleHeader from "@/components/competition/CompetitionTitleHeader";
 
 export default async function page() {
   // const competitionData = await getAllCompetitions();
@@ -15,9 +16,7 @@ export default async function page() {
         <StripeBackground />
         <div className="relative z-2 my-[10rem] md:my-[10%] flex flex-col gap-4 w-[90%] justify-center items-center border-2 sm:border-4 border-[#AAF3D5] p-12 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
           <RectorInlineTitle />
-          <div className="w-full border-2 sm:border-4 border-[#AAF3D5] rounded-2xl py-2 bg-gradient-to-r from-[#6427A8] to-[#EB79F0] flex justify-center items-center">
-            <h1 className="text-2xl">COMPETITIONS</h1>
-          </div>
+         <CompetitionTitleHeader title="COMPETITIONS" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <CompetitionPicker
               title="Sports"
