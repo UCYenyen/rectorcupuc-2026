@@ -20,7 +20,7 @@ export async function getCompetitionByID(id: string){
     });
 }
 
-export async function getCompetitionBySlug(slug: string) : Promise<CompetitionContainerProps>{
+export async function getCompetitionBySlug(slug: string) : Promise<CompetitionContainerProps | null>{
     const data = await prisma.competition.findUnique({
         where: { slug: slug },
         include: {
@@ -30,7 +30,7 @@ export async function getCompetitionBySlug(slug: string) : Promise<CompetitionCo
         }
     });
 
-    if(!data) throw new Error("Competition not found");
+    if(!data) return null;
     return data;
 }
 

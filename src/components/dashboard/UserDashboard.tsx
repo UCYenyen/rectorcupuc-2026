@@ -101,7 +101,7 @@ export default function UserDashboard() {
 
   return (
     <div className="flex bg-gradient-to-b from-[#390D62] to-[#6226A4] gap-4 flex-col min-h-screen w-screen overflow-x-hidden justify-start items-center px-4 py-8">
-      <div className="mt-[10%] sm:mt-[5%] w-full max-w-7xl flex flex-col gap-6">
+      <div className="mt-[10%] sm:mt-[5%] w-[90%] flex flex-col gap-6">
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">

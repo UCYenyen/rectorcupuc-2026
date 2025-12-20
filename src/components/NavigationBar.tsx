@@ -12,7 +12,7 @@ export default function NavigationBar() {
   const { data: session, status } = useSession();
   // bg-[url('/layout/navbar-bg.svg')]
   return (
-    <nav className="fixed z-[100] bg-gradient-to-r from-[#6427A6] to-[#E979EE] flex min-h-[7vh] py-2 px-[5%] justify-between items-center w-screen overflow-visible shadow-2xl border-y-4 border-[#ADDCE7]">
+    <nav className="fixed z-[100] bg-gradient-to-r from-[#6427A6] to-[#E979EE] flex h-[10vh] md:h-[7vh] py-2 px-[5%] justify-between items-center w-screen overflow-visible shadow-2xl border-y-4 border-[#ADDCE7]">
       <StripeBackground />
       <Link href={"/"} className=""><Image src={"/layout/rector-logo.svg"} className="relative z-10 w-14 h-auto" height={80} width={80} alt="rectorcupuc logo"></Image></Link>
       <div className="relative z-10 hidden md:flex gap-1 sm:gap-4 text-white items-center justify-center uppercase">
