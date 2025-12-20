@@ -9,10 +9,10 @@ export async function main() {
     // Create competitions individually to get their IDs
   // Sports
     /*const basketball = */ await prisma.competition.create({
-        data: { name: "Basketball Putra", slug: "basketball-putra", location: "Parkiran UC", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 10 },
+        data: { name: "Basketball", slug: "basketball", location: "Parkiran UC", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 10 },
     });
     await prisma.competition.create({
-        data: { name: "Basketball", slug: "basketball", location: "Parkiran UC", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 3, max_team_member: 4 },
+        data: { name: "Basketball Putri", slug: "basketball-putri", location: "Parkiran UC", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 3, max_team_member: 4 },
     });
     /*const futsal =  */ await prisma.competition.create({
         data: { name: "Futsal", slug: "futsal", location: "Parkiran UC", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 10 },

@@ -6,6 +6,7 @@ import Image from "next/image";
 import "@/styles/home.css"
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import StripeBackground from "@/components/StripeBackground";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -194,13 +195,13 @@ export default function Home() {
 
   return (
     <div className="overflow-hidden">
-      <div 
+      <div
         ref={containerRef}
         className="pt-[12vh] sm:pt-5 relative bg-[url('/home/background.svg')] bg-cover min-h-screen w-screen flex flex-col justify-center items-center overflow-hidden"
       >
         <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
-        <Image src={"/home/background.svg"} width={1000} height={1000} alt="rectorcupuc background" className="w-screen h-full object-center object-cover opacity-25 z-1 absolute"></Image>
-        
+        <StripeBackground />
+
         <div ref={starsRef}>
           <Image
             src={"/home/big-green-star.webp"}
@@ -307,7 +308,7 @@ export default function Home() {
         <CountdownContainer endDate="2026-01-01T00:00:00Z" />
       </div>
       <AboutSection />
-      <TrailerSection/>
+      <TrailerSection />
     </div>
   );
 }

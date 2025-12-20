@@ -7,17 +7,20 @@ export default function CompetitionPicker({
   alt,
   link,
   title,
+  className
 }: {
   src: string;
   alt: string;
   link?: string;
   title?: string;
+  className?: string;
 }) {
   return (
     <Link
       href={link || "#"}
-      className="relative w-full h-full flex flex-col justify-center items-center group border-4 border-[#AAF3D5] rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] min-h-[200px]"
+      className={`relative w-full h-full flex flex-col justify-center items-center group border-4 border-[#AAF3D5] rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl min-h-[200px] ${className || ""}`}
     >
+      <div className="z-50 absolute w-full h-full bg-purple-500/20"></div>
       {/* Image container with zoom effect */}
       <div className="w-full h-full overflow-hidden">
         <Image
