@@ -2,7 +2,7 @@ import React from "react";
 import { CompetitionRulesModel } from "@/types/competition.md";
 import Link from "next/link";
 
-export default function CompetitionRules({ rules, slug }: { rules?: CompetitionRulesModel[]; slug: string }) {
+export default function CompetitionRules({ rules, slug, isRegistered }: { rules?: CompetitionRulesModel[]; slug: string, isRegistered: boolean }) {
   return (
     <div className="border-4 border-[#AAF3D5] flex flex-col rounded-lg overflow-hidden">
       <div className="bg-gradient-to-r from-[#E94BFF] to-[#FF6BDB] px-4 py-2">
@@ -22,9 +22,15 @@ export default function CompetitionRules({ rules, slug }: { rules?: CompetitionR
         </ul>
 
         <div className="flex flex-col gap-2 justify-center items-center">
-          <Link href={`/competitions/${slug}/register`} className="w-full text-center border-3 border-white bg-black/40 hover:bg-purple-800 text-white font-bold py-3 rounded-lg uppercase transition-all duration-200">
-            Register
-          </Link>
+          {!isRegistered ? (
+            <Link href={`/competitions/${slug}/register`} className="w-full text-center border-3 border-white bg-black/40 hover:bg-purple-800 text-white font-bold py-3 rounded-lg uppercase transition-all duration-200">
+              Register
+            </Link>
+          ) : (
+            <span className="w-full text-center border-3 border-white bg-yellow-600/20 text-white font-bold py-3 rounded-lg uppercase transition-all duration-200">
+              You are registered for this competition
+            </span>
+          )}
           {/* Download Button */}
           <button className="w-full text-center border-3 border-white bg-black/40 hover:bg-purple-800 text-white font-bold py-3 rounded-lg uppercase transition-all duration-200">
             Download Guidebook.pdf

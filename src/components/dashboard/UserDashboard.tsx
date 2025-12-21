@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { BsCopy } from "react-icons/bs";
+import StripeBackground from "../StripeBackground";
 
 interface CompetitionRegistration {
   id: string;
@@ -100,8 +101,9 @@ export default function UserDashboard() {
   };
 
   return (
-    <div className="flex bg-gradient-to-b from-[#390D62] to-[#6226A4] gap-4 flex-col min-h-screen w-screen overflow-x-hidden justify-start items-center px-4 py-8">
-      <div className="mt-[10%] sm:mt-[5%] w-[90%] flex flex-col gap-6">
+    <div className="relative flex bg-gradient-to-b from-[#390D62] to-[#6226A4] gap-4 flex-col min-h-screen w-screen overflow-x-hidden justify-start items-center px-4 py-8">
+      <StripeBackground />
+      <div className="relative z-4 mt-[10%] sm:mt-[5%] w-[90%] flex flex-col gap-6">
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
@@ -110,7 +112,7 @@ export default function UserDashboard() {
 
           {/* Join Team Button */}
           <button
-            className="px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-[#10233E]/40 to-[#3B80E3]/40 text-base sm:text-xl border-2 sm:border-3 border-white text-white rounded hover:scale-105 transition-transform duration-200 whitespace-nowrap"
+            className="backdrop-blur-2xl px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-[#10233E]/40 to-[#3B80E3]/40 text-base sm:text-xl border-2 sm:border-3 border-white text-white rounded hover:scale-105 transition-transform duration-200 whitespace-nowrap"
             onClick={openJoinModal}
           >
             Join Team
@@ -118,7 +120,7 @@ export default function UserDashboard() {
         </div>
 
         {/* Table Section with Horizontal Scroll */}
-        <div className="overflow-x-auto rounded-xl border-4 sm:border-[5px] border-[#AAF3D5] bg-gradient-to-r from-[#390D62]/40 to-[#6226A4]/40">
+        <div className="relative z-5 backdrop-blur-2xl overflow-x-auto rounded-xl border-4 sm:border-[5px] border-[#AAF3D5] bg-gradient-to-r from-[#390D62]/40 to-[#6226A4]/40">
           <table className="min-w-full divide-y-4 divide-[#AAF3D5]">
             {/* Table Header */}
             <thead className="bg-gradient-to-r from-[#6427A8]/80 to-[#EB79F0]">

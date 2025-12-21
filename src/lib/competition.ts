@@ -47,6 +47,22 @@ export async function getCompetitionBySlug(slug: string): Promise<CompetitionCon
     };
 }
 
+export async function checkUserRegistrationStatus(userId: string, competitionId: string): Promise<boolean> {
+    const registration = await prisma.competitionRegistration.findFirst({
+        where: {
+            competition_id: competitionId,
+            team: {
+                OR: [
+                    { leader_id: userId },
+                    { members: { some: { user_id: userId } } }
+                ]
+            }
+        }
+    });
+
+    return registration !== null;
+}
+
 export async function registerTeamToCompetition(
     slug: string, 
     teamName: string, 

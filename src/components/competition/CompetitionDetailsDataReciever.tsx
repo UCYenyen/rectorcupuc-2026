@@ -12,7 +12,7 @@ import { CompetitionContainerProps } from "@/types/competition.md";
 import StripeBackground from "@/components/StripeBackground";
 import RectorInlineTitle from "./RectorInlineTitle";
 
-export default function CompetitionDetailsDataReciever({ competitionData }: { competitionData: CompetitionContainerProps }) {
+export default function CompetitionDetailsDataReciever({ competitionData, isRegistered }: { competitionData: CompetitionContainerProps, isRegistered: boolean }) {
   const [activeTab, setActiveTab] = useState<
     "details" | "brackets" | "schedule" | "live"
   >("details");
@@ -32,7 +32,7 @@ export default function CompetitionDetailsDataReciever({ competitionData }: { co
           </div>
 
           <div className="w-full overflow-hidden flex flex-col gap-4 backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40 rounded-lg">
-            <div className="hidden md:flex gap-4">
+            <div className="hidden lg:flex gap-4">
               <div className="flex basis-1/2 flex-col gap-2">
                 <Image
                   src={"/competitions/competition-overview.svg"}
@@ -68,7 +68,7 @@ export default function CompetitionDetailsDataReciever({ competitionData }: { co
                 <PacmanAnimation />
               </div>
             </div>
-            <div className="flex md:hidden flex-col gap-4">
+            <div className="flex lg:hidden flex-col gap-4">
               <Image
                 src={"/competitions/competition-overview.svg"}
                 alt={`${competitionData.name} Image`}
@@ -108,6 +108,7 @@ export default function CompetitionDetailsDataReciever({ competitionData }: { co
                   <CompetitionRules
                     rules={competitionData.rules || undefined}
                     slug={competitionData.slug}
+                    isRegistered={isRegistered}
                   />
                 </div>
               )}
