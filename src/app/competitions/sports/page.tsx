@@ -16,45 +16,45 @@ export default async function page() {
         <RectorInlineTitle />
          <CompetitionTitleHeader title="SPORTS" shouldFitContent={false} />
           
-          <div className="w-full grid grid-cols-1 md:grid-cols-6 md:grid-rows-7 gap-4">
+          <div className="w-full grid grid-cols-1 md:grid-cols-6 md:grid-rows-7 gap-3 md:h-[70vh]">
             <CompetitionPicker
-              src="/placeholder/basketball-putra.jpeg"
-              link="/competitions/sports/basketball"
-              title="Basketball"
+              src="/competitions/hero/basketball-putra.webp"
+              link="/competitions/sports/basketball-putra"
+              title="Basketball Putra"
               alt="rectorcup"
-              className="w-full md:col-start-1 md:row-start-1 md:col-span-4 md:row-span-2 min-h-[150px]"
+              className="w-full h-full md:col-start-1 md:row-start-1 md:col-span-4 md:row-span-2"
             />
             
             <CompetitionPicker
-              src="/placeholder/basketball-putra.jpeg"
+              src="/competitions/hero/basketball-putri.webp"
               link="/competitions/sports/basketball-putri"
               title="Basketball Putri"
               alt="rectorcup"
-              className="w-full md:col-start-5 md:row-start-1 md:col-span-2 md:row-span-2 min-h-[150px]"
+              className="w-full h-full md:col-start-5 md:row-start-1 md:col-span-2 md:row-span-2"
             />
             
             <CompetitionPicker
-              src="/placeholder/basketball-putra.jpeg"
+              src="/competitions/hero/futsal.webp"
               link="/competitions/sports/futsal"
               title="Futsal"
               alt="rectorcup"
-              className="w-full md:col-start-1 md:row-start-3 md:col-span-2 md:row-span-3 min-h-[150px]"
+              className="w-full h-full md:col-start-1 md:row-start-3 md:col-span-2 md:row-span-3"
             />
             
             <CompetitionPicker
-              src="/placeholder/basketball-putra.jpeg"
+              src="/competitions/hero/billiard.webp"
               link="/competitions/sports/billiard"
               title="Billiard"
               alt="rectorcup"
-              className="w-full md:col-start-3 md:row-start-3 md:col-span-2 md:row-span-2 min-h-[150px]"
+              className="w-full h-full md:col-start-3 md:row-start-3 md:col-span-2 md:row-span-2"
             />
             
             <CompetitionPicker
-              src="/placeholder/basketball-putra.jpeg"
+              src="/competitions/hero/badminton.webp"
               link="/competitions/sports/badminton"
               title="Badminton"
               alt="rectorcup"
-              className="w-full md:col-start-5 md:row-start-3 md:col-span-2 md:row-span-5 min-h-[150px]"
+              className="w-full h-full md:col-start-5 md:row-start-3 md:col-span-2 md:row-span-5"
             />
             
             <CompetitionPicker
@@ -62,7 +62,7 @@ export default async function page() {
               link="/competitions/sports/ping-pong"
               title="Ping Pong"
               alt="rectorcup"
-              className="w-full md:col-start-3 md:row-start-5 md:col-span-2 md:row-span-3 min-h-[150px]"
+              className="w-full h-full md:col-start-3 md:row-start-5 md:col-span-2 md:row-span-3"
             />
             
             <CompetitionPicker
@@ -70,7 +70,7 @@ export default async function page() {
               link="/competitions/sports/taekwondo"
               title="Taekwondo"
               alt="rectorcup"
-              className="w-full md:col-start-1 md:row-start-6 md:col-span-2 md:row-span-2 min-h-[150px]"
+              className="w-full h-full md:col-start-1 md:row-start-6 md:col-span-2 md:row-span-2"
             />
           </div>
         </div>
