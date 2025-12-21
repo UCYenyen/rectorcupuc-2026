@@ -16,19 +16,19 @@ export default function NavigationBar() {
       <StripeBackground />
       <Link href={"/"} className=""><Image src={"/layout/rector-logo.svg"} className="relative z-10 w-14 h-auto" height={80} width={80} alt="rectorcupuc logo"></Image></Link>
       <div className="relative z-10 hidden md:flex gap-1 sm:gap-4 text-white items-center justify-center uppercase">
-        <Link href="/competitions" className="bg-black/30 backdrop-blur-2xl border-white border-3 rounded-lg px-4 py-2 hover:underline w-full">
+        <Link href="/competitions" className="bg-black/30 backdrop-blur-2xl border-white border-3 rounded-lg px-4 py-2 hover:bg-purple-800 w-full">
           Competitions
         </Link>
-        <Link href="/vote" className="bg-black/30 backdrop-blur-2xl border-white border-3 rounded-lg px-4 py-2 hover:underline w-full">
+        <Link href="/vote" className="bg-black/30 backdrop-blur-2xl border-white border-3 rounded-lg px-4 py-2 hover:bg-purple-800 w-full">
           Votes
         </Link>
         {(session?.user.role === "liason_officer") && (
-          <Link href="/dashboard/admin/lo" className="bg-black/30 backdrop-blur-2xl border-white border-3 rounded-lg px-4 py-2 hover:underline w-full whitespace-nowrap">
+          <Link href="/dashboard/admin/lo" className="bg-black/30 backdrop-blur-2xl border-white border-3 rounded-lg px-4 py-2 hover:bg-purple-800 w-full whitespace-nowrap">
             Admin
           </Link>
         )}
         {(session?.user.role === "pdd_website") && (
-          <Link href="/dashboard/admin/web" className="bg-black/30 backdrop-blur-2xl border-white border-3 rounded-lg px-4 py-2 hover:underline w-full whitespace-nowrap">
+          <Link href="/dashboard/admin/web" className="bg-black/30 hover:bg-purple-800 backdrop-blur-2xl border-white border-3 rounded-lg px-4 py-2 w-full whitespace-nowrap">
             Admin
           </Link>
         )}
@@ -42,7 +42,7 @@ export default function NavigationBar() {
           )}
         </div>
       </div>
-      <div className="flex md:hidden items-center bg-black/30 backdrop-blur-2xl border-white border-3 rounded-lg p-1 justify-center">
+      <div className="flex md:hidden items-center bg-black/30 hover:bg-purple-800 backdrop-blur-2xl border-white border-3 rounded-lg p-1 justify-center">
         <MenuIcon className="text-white w-8 h-8"/>
         </div>
     </nav>
