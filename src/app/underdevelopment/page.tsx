@@ -18,7 +18,7 @@ export default function UnderDevelopmentPage() {
             <div className="bg-black/40 border-white border-3 rounded-full p-4">
               <Settings className="w-16 h-16 text-white" />
             </div>
-            <p className="text-white text-lg leading-relaxed text-center mb-6">
+            <p className="text-white text-lg leading-relaxed text-center">
               The site
               is currently under development and will be available soon!
               We&apos;re working hard to bring you an amazing experience.
