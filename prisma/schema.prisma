@@ -25,6 +25,11 @@ enum CompetitionMatchStatus {
   COMPLETED
 }
 
+enum CompetitionMatchType{
+  QUARTERFINAL
+  SEMIFINALS
+  FINALS
+}
 enum CompetitionCategory {
   Sports
   ESports
@@ -180,6 +185,7 @@ model Match {
   team_one_id    String
   team_two_id    String
   match_status   CompetitionMatchStatus @default(UPCOMMING)
+  match_type CompetitionMatchType @default(QUARTERFINAL)
 
   competition        Competition @relation(fields: [competition_id], references: [id], onDelete: Cascade)
   team_one_reference Team        @relation("TeamOneMatches", fields: [team_one_id], references: [id], onDelete: Cascade) // FIX: Named relation

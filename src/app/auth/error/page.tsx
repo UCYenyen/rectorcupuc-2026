@@ -1,42 +1,33 @@
 "use client";
 
 import Link from "next/link";
-import { MailIcon } from "lucide-react";
+import { Mail, MailIcon } from "lucide-react";
+import Image from "next/image";
+import StripeBackground from "@/components/StripeBackground";
+import RectorInlineTitle from "@/components/competition/RectorInlineTitle";
+import CompetitionTitleHeader from "@/components/competition/CompetitionTitleHeader";
 
 export default function AuthErrorPage() {
     return (
-        <div className="min-h-screen bg-zinc-300 flex items-center justify-center p-4 relative overflow-hidden">
-            {/* Main content card */}
-            <div className="backdrop-blur-sm max-w-md w-full relative border border-white/20 hover:scale-105 transition-all duration-500 shadow-2xl bg-white/90 rounded-lg">
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-6 py-2 text-sm font-mono bg-zinc-800 text-white rounded-md shadow-md">
-                    Auth Error
-                </div>
-
-                <div className="pt-10 text-center">
-                    <div className="mx-auto w-20 h-20 bg-gradient-to-br from-zinc-400 to-zinc-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                        <MailIcon className="w-10 h-10 text-white" />
+        <>
+            <div className='w-screen h-[10vh] md:h-[7vh]'></div>
+            <div className="relative min-h-screen bg-[url('/home/background.svg')] w-screen overflow-hidden flex flex-col justify-center items-center">
+                <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
+                <StripeBackground />
+                <div className="relative z-2 my-[7.5rem] md:my-[10%] flex flex-col gap-4 w-[90%] justify-center items-center border-8 border-[#AAF3D5] p-8 md:p-12 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
+                    <RectorInlineTitle />
+                    <CompetitionTitleHeader title="UNAUTHORIZED" shouldFitContent={true} />
+                    <div className="flex flex-col justify-center items-center gap-4">
+                        <div className="bg-black/40 border-white border-3 rounded-full p-4">
+                            <MailIcon className="w-16 h-16 text-white" />
+                        </div>
+                        <p className="text-white text-center text-lg md:text-xl">
+                           You must use a valid ciputra email to log in!
+                        </p>
+                        <Link href={"/"} className="text-white text-2xl font-bold bg-black/30 border-white border-3 px-4 py-2 rounded-lg hover:cursor-pointer uppercase">Back To Home</Link>
                     </div>
-                    <h1 className="text-4xl font-bold bg-gradient-to-r from-zinc-700 via-zinc-800 to-black bg-clip-text text-transparent">
-                        Access Denied
-                    </h1>
-                </div>
-                
-                <div className="text-center px-6 py-4">
-                    <p className="text-zinc-600 text-lg leading-relaxed">
-                        Authentication failed! You must use a valid 
-                        <span className="font-semibold text-zinc-800"> @ciputra.ac.id </span>
-                        email account to access this application.
-                    </p>
-                </div>
-                
-                <div className="flex justify-center pb-8">
-                    <Link href="/">
-                        <button className="px-6 py-3 bg-zinc-800 hover:bg-black text-white text-lg font-medium rounded-lg shadow-md">
-                            🔄 Try Again
-                        </button>
-                    </Link>
                 </div>
             </div>
-        </div>
+        </>
     );
 }

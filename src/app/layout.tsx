@@ -6,6 +6,7 @@ import { Provider } from "@/components/Provider";
 import NavigationBar from "@/components/NavigationBar";
 import { auth } from "@/lib/auth";
 import PixelTrail from "@/components/PixelTrail";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Rector Cup 2026",
@@ -25,6 +26,7 @@ export default async function RootLayout({
         <Provider session={session}>
           <NavigationBar />
           {children}
+          <Footer />
           <div className="fixed inset-0 z-[9999] pointer-events-none">
             <PixelTrail
               gridSize={50}

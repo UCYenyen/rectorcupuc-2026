@@ -13,13 +13,6 @@ export default function TrailerSection() {
       </div>
       <StripeBackground />
       <Image
-        src={"/home/border.svg"}
-        className="z-[5] trailer-border-bottom absolute bottom-[-5%] left-0 w-[100rem] sm:w-full h-auto pointer-events-none"
-        alt="rectorcupuc border-bottom"
-        width={1000}
-        height={1000}
-      />
-      <Image
         src={"/home/pixelmon.webp"}
         className="z-[10] pixelmon-right absolute bottom-0 left-0"
         alt="rectorcupuc pixelmon"

@@ -74,17 +74,6 @@
         
     }
 
-    /* About Section */
-    .bg-about{
-        height: 80rem;
-    }
-    .about-border-top{
-
-    }
-    .about-border-bottom{
-
-    }
-
     /* Trailer Section */
     
     .pixelmon-right{
@@ -164,21 +153,7 @@
         top: 15rem;
     }
 
-    /* About Section */
-    .bg-about{
-        height: 50rem;
-    }
-    .about-border-top{
-
-    }
-    .about-border-bottom{
-
-    }
-
     /* Trailer Section */
-    .trailer-border-bottom{
-        bottom: -1rem;
-    }
     .pixelmon-right{
         width: 30rem;
         left: 140rem;
@@ -258,16 +233,6 @@
         top: 15rem;
     }
 
-    /* About Section */
-    .bg-about{
-        height: 50rem;
-    }
-    .about-border-top{
-
-    }
-    .about-border-bottom{
-
-    }
 
     /* Trailer Section */
     .pixelmon-right{
@@ -350,17 +315,6 @@
         width: 18rem;
         top: 11rem;
         
-    }
-
-    /* About Section */
-    .bg-about{
-        height: 50rem;
-    }
-    .about-border-top{
-
-    }
-    .about-border-bottom{
-
     }
 
     /* Trailer Section */
@@ -454,17 +408,6 @@
         
     }
 
-    /* About Section */
-    .bg-about{
-        height: 50rem;
-    }
-    .about-border-top{
-
-    }
-    .about-border-bottom{
-
-    }
-
     /* Trailer Section */
     .pixelmon-right{
         width: 20rem;
@@ -554,17 +497,6 @@
         
     }
 
-    /* About Section */
-    .bg-about{
-        height: 50rem;
-    }
-    .about-border-top{
-
-    }
-    .about-border-bottom{
-
-    }
-
     /* Trailer Section */
     .pixelmon-right{
         width: 20rem;
@@ -643,20 +575,8 @@
     }
 
     /* About Section */
-    .bg-about{
-        height: 50rem;
-    }
-    .about-border-top{
-
-    }
-    .about-border-bottom{
-
-    }
 
     /* Trailer Section */
-    .trailer-border-bottom{
-        bottom: -1rem;
-    }
     .pixelmon-right{
         width: 25rem;
         left: 85rem;
@@ -750,22 +670,7 @@
     }
 
     /* About Section */
-    .bg-about{
-    }
-    .about-border-top{
-        top: -2rem;
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
 
-    /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        top: 71rem;
-    }
     .pixelmon-right{
         width: 20rem;
         left: 90rem;
@@ -859,23 +764,6 @@
         
     }
 
-    /* About Section */
-    .bg-about{
-    }
-    .about-border-top{
-        top: -2rem;
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        top: 65rem;
-    }
     .pixelmon-right{
         width: 20rem;
         left: 80rem;
@@ -969,23 +857,6 @@
         
     }
 
-    /* About Section */
-    .bg-about{
-    }
-    .about-border-top{
-        top: -2rem;
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        top: 124rem;
-    }
     .pixelmon-right{
         width: 20rem;
         left: 75rem;
@@ -1072,22 +943,6 @@
         top: 10rem;
     }
 
-    /* About Section */
-    .bg-about{
-    }
-    .about-border-top{
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        top: 58rem;
-    }
     .pixelmon-right{
         width: 15rem;
         right: 2rem;
@@ -1172,23 +1027,6 @@
     .congrats-left{
         width: 13rem;
         top: 10rem;
-    }
-
-    /* About Section */
-    .bg-about{
-    }
-    .about-border-top{
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        top: 61rem;
     }
     .pixelmon-right{
         width: 15rem;
@@ -1276,22 +1114,6 @@
         top: 10rem;
     }
 
-    /* About Section */
-    .bg-about{
-    }
-    .about-border-top{
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        top: 45rem;
-    }
     .pixelmon-right{
         width: 15rem;
         left: 70rem;
@@ -1378,21 +1200,7 @@
     }
 
     /* About Section */
-    .bg-about{
-    }
-    .about-border-top{
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
     /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        top: 47rem;
-    }
     .pixelmon-right{
         width: 12rem;
         left: 65rem;
@@ -1478,22 +1286,6 @@
         top: 10rem;
     }
 
-    /* About Section */
-    .bg-about{
-    }
-    .about-border-top{
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        top: 50rem;
-    }
     .pixelmon-right{
         width: 12rem;
         left: 60rem;
@@ -1589,23 +1381,6 @@
         
     }
 
-    /* About Section */
-    .bg-about{
-        height: 30rem;
-    }
-    .about-border-top{
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        bottom: 0rem;
-    }
     .pixelmon-right{
         width: 15rem;
         left: 50rem;
@@ -1701,23 +1476,6 @@
         
     }
 
-    /* About Section */
-    .bg-about{
-        height: 30rem;
-    }
-    .about-border-top{
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        top: 46rem;
-    }
     .pixelmon-right{
         width: 10rem;
         left: 54rem;
@@ -1803,23 +1561,6 @@
         top: 9rem;
     }
 
-    /* About Section */
-    .bg-about{
-        height: 30rem;
-    }
-    .about-border-top{
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        top: 46rem;
-    }
     .pixelmon-right{
         width: 10rem;
         left: 54rem;
@@ -1905,24 +1646,6 @@
         top: 9rem;
     }
 
-    /* About Section */
-    .bg-about{
-        height: 30rem;
-    }
-    .about-border-top{
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        width: 40rem;
-        height: 24rem;
-    }
-    .trailer-border-bottom{
-        top: 38rem;
-    }
     .pixelmon-right{
         width: 9rem;
         left: 48rem;
@@ -2008,24 +1731,6 @@
         top: 9rem;
     }
 
-    /* About Section */
-    .bg-about{
-        height: 30rem;
-    }
-    .about-border-top{
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        width: 40rem;
-        height: 24rem;
-    }
-    .trailer-border-bottom{
-        top: 38rem;
-    }
     .pixelmon-right{
         width: 8rem;
         left: 50rem;
@@ -2117,25 +1822,6 @@
         width: 10rem;
         top: 30rem;
         
-    }
-
-    /* About Section */
-    .bg-about{
-        height: 30rem;
-    }
-    .about-border-top{
-        top: -8px;
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        top: 83rem;
     }
     .pixelmon-right{
         width: 15rem;
@@ -2230,24 +1916,6 @@
         
     }
 
-    /* About Section */
-    .bg-about{
-        height: 30rem;
-    }
-    .about-border-top{
-        top: -8px;
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        
-    }
-    .trailer-border-bottom{
-        top: 83rem;
-    }
     .pixelmon-right{
         width: 18rem;
         left: 35rem;
@@ -2327,29 +1995,6 @@
     .congrats-left{
         width: 6rem;
         top: 8rem;
-    }
-
-    /* About Section */
-    .bg-about{
-        height: 100%;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-    .about-head{
-        padding-top: 2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        width: 40rem;
-        height: 20rem;
-    }
-    .trailer-border-bottom{
-        top: 39rem;
     }
     .pixelmon-right{
         width: 9rem;
@@ -2435,28 +2080,6 @@
         top: 8rem;
     }
 
-    /* About Section */
-    .bg-about{
-        height: 100%;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-    .about-head{
-        padding-top: 2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        width: 40rem;
-        height: 20rem;
-    }
-    .trailer-border-bottom{
-        top: 72rem;
-    }
     .pixelmon-right{
         width: 13rem;
         left: 38rem;
@@ -2539,29 +2162,6 @@
     .congrats-left{
         width: 8rem;
         top: 22rem;
-    }
-
-    /* About Section */
-    .bg-about{
-        height: 100%;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-    .about-head{
-        padding-top: 2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        width: 40rem;
-
-    }
-    .trailer-border-bottom{
-        top: 62rem;
     }
     .pixelmon-right{
         width: 13rem;
@@ -2647,28 +2247,6 @@
         top: 8rem;
     }
 
-    /* About Section */
-    .bg-about{
-        height: 100%;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-    .about-head{
-        padding-top: 2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        width: 40rem;
-
-    }
-    .trailer-border-bottom{
-        top: 38.5rem;
-    }
     .pixelmon-right{
         width: 8rem;
         left: 38rem;
@@ -2753,29 +2331,6 @@
         width: 7rem;
         top: 8rem;
     }
-
-    /* About Section */
-    .bg-about{
-        height: 100%;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -2rem;
-    }
-    .about-head{
-        padding-top: 2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        width: 40rem;
-
-    }
-    .trailer-border-bottom{
-        top: 38.5rem;
-    }
     .pixelmon-right{
         width: 8rem;
         left: 37rem;
@@ -2859,29 +2414,6 @@
     .congrats-left{
         width: 6rem;
         top: 15rem;
-    }
-
-    /* About Section */
-    .bg-about{
-        height: 100%;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -2px;
-    }
-    .about-head{
-        padding-top: 2rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        width: 30rem;
-    }
-
-    .trailer-border-bottom{
-        top: 38.8rem;
     }
     .pixelmon-right{
         width: 8rem;
@@ -2970,27 +2502,6 @@
         top: 15rem;
     }
 
-    /* About Section */
-    .bg-about{
-        height: 100%;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -2px;
-    }
-    .about-head{
-        padding-top: 2rem;
-    }
-
-    /* Trailer Section */
-    .bg-trailer{
-        height: 40rem;
-    }
-    .trailer-border-bottom{
-        top: 39rem;
-    }
     .pixelmon-right{
         width: 10rem;
         left: 19rem;
@@ -3078,24 +2589,6 @@
         width: 6rem;
         top: 15rem;
         
-    }
-
-    /* About Section */
-    .bg-about{
-        height: 40rem;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-
-    }
-    /* Trailer Section */
-        .bg-trailer{
-        height: 40rem;
-    }
-    .trailer-border-bottom{
-        top: 39rem;
     }
     .pixelmon-right{
         width: 10rem;
@@ -3187,25 +2680,6 @@
         top: 15rem;
         
     }
-
-    /* About Section */
-    .bg-about{
-        height: 50rem;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -1rem;
-    }
-
-    /* Trailer Section */
-        .bg-trailer{
-        height: 40rem;
-    }
-    .trailer-border-bottom{
-        top: 39rem;
-    }
     .pixelmon-right{
         width: 10rem;
         left: 17rem;
@@ -3295,25 +2769,6 @@
         width: 6rem;
         top: 17rem;
     }
-
-    /* About Section */
-    .bg-about{
-        height: 50rem;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -1rem;
-    }
-
-    /* Trailer Section */
-        .bg-trailer{
-        height: 40rem;
-    }
-    .trailer-border-bottom{
-        top: 39rem;
-    }
     .pixelmon-right{
         width: 10rem;
         left: 16rem;
@@ -3397,25 +2852,6 @@
         top: 17rem;
     }
 
-    /* About Section */
-    .bg-about{
-        height: 50rem;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -1rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        width: 22rem;
-        height: 13rem;
-    }
-    .trailer-border-bottom{
-        top: 39rem;
-    }
     .pixelmon-right{
         width: 8rem;
         left: 18rem;
@@ -3497,26 +2933,6 @@
     .congrats-left{
         width: 6rem;
         top: 17rem;
-    }
-
-    /* About Section */
-    .bg-about{
-        height: 50rem;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -1rem;
-    }
-
-    /* Trailer Section */
-    .video-frame{
-        width: 22rem;
-        height: 13rem;
-    }
-    .trailer-border-bottom{
-        top: 39rem;
     }
     .pixelmon-right{
         width: 8rem;
@@ -3601,25 +3017,6 @@
         width: 6rem;
         top: 17rem;
     }
-
-    /* About Section */
-    .bg-about{
-        height: 50rem;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -1rem;
-    }
-    /* Trailer Section */
-    .video-frame{
-        width: 20rem;
-        height: 12rem;
-    }
-    .trailer-border-bottom{
-        top: 39rem;
-    }
     .pixelmon-right{
         width: 8rem;
         left: 16rem;
@@ -3701,25 +3098,6 @@
     .congrats-left{
         width: 5.5rem;
         top: 16rem;
-    }
-
-    /* About Section */
-    .bg-about{
-        height: 50rem;
-    }
-    .about-border-top{
-        top: -6px;
-    }
-    .about-border-bottom{
-        bottom: -1rem;
-    }
-    /* Trailer Section */
-    .video-frame{
-        width: 20rem;
-        height: 12rem;
-    }
-    .trailer-border-bottom{
-        top: 39rem;
     }
     .pixelmon-right{
         width: 8rem;
