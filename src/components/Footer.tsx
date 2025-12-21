@@ -10,7 +10,6 @@ export default function Footer() {
             </div>
             <div className='w-full bg-gradient-to-b from-[#390D62] to-[#6226A4] flex flex-col justify-center items-center py-4'>
                 <p className='text-white text-sm sm:text-base'>&copy; 2026 Rector Cup. All rights reserved.</p>
-                <p className='text-white text-sm sm:text-base'>Developed by Panit IT Division</p>
             </div>
         </footer>
     )

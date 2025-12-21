@@ -1,8 +1,7 @@
 'use server'
 import prisma from "@/lib/prisma";
 import { deleteTeam, createTeam } from "./team";
-import { CompetitionContainerProps } from "@/types/competition.md";
-import { DateTime } from "next-auth/providers/kakao";
+import { CompetitionContainerProps, MatchWithTeams } from "@/types/competition.md";
 import { Match } from "@prisma/client";
 import { CreateMatchFormState } from "./action";
 
@@ -20,18 +19,32 @@ export async function getCompetitionByID(id: string){
     });
 }
 
-export async function getCompetitionBySlug(slug: string) : Promise<CompetitionContainerProps | null>{
+export async function getCompetitionBySlug(slug: string): Promise<CompetitionContainerProps | null> {
     const data = await prisma.competition.findUnique({
         where: { slug: slug },
         include: {
-            matches: true,
+            matches: {
+                include: {
+                    team_one_reference: true,
+                    team_two_reference: true,
+                }
+            },
             rules: true,
             teams: true,
         }
     });
 
-    if(!data) return null;
-    return data;
+    if (!data) return null;
+
+    const matchesWithTeams: MatchWithTeams[] = data.matches.map(match => ({
+        ...match,
+        teams: [match.team_one_reference, match.team_two_reference]
+    }));
+
+    return {
+        ...data,
+        matches: matchesWithTeams
+    };
 }
 
 export async function registerTeamToCompetition(
@@ -89,8 +102,6 @@ export async function getAllRegistrations(){
         },
     });
 }
-
-// Match
 
 export async function createMatch(prevState: CreateMatchFormState,
   formData: FormData) : Promise<CreateMatchFormState> {

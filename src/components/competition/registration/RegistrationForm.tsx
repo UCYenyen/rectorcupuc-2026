@@ -76,7 +76,7 @@ export default function RegistrationForm({
   }, [state.success, router]);
 
   return (
-    <div className="max-w-md mx-auto p-4 flex flex-col justify-center items-start w-full gap-8">
+    <div className="max-w-md mx-auto p-4 flex flex-col justify-center items-start w-full gap-8 text-white">
       <h1 className="text-2xl md:text-4xl font-bold w-full text-center">REGISTRATION</h1>
       {state.error && (
         <div className="bg-red-100 text-red-700 p-3 rounded mb-4 w-full text-center">
@@ -132,7 +132,7 @@ export default function RegistrationForm({
           ) : (
             <button
               type="submit"
-              className="bg-zinc-100 text-black py-2 px-4 w-full rounded-lg uppercase font-bold"
+              className="bg-black/40 border-white border-3 text-white py-2 px-4 w-full rounded-lg uppercase font-bold"
             >
               Register
             </button>

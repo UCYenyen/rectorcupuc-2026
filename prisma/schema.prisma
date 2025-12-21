@@ -27,8 +27,8 @@ enum CompetitionMatchStatus {
 
 enum CompetitionMatchType{
   QUARTERFINAL
-  SEMIFINALS
-  FINALS
+  SEMIFINAL
+  FINAL
 }
 enum CompetitionCategory {
   Sports

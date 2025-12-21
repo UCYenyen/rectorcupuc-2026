@@ -14,7 +14,7 @@ export default async function page() {
         <StripeBackground />
         <div className="relative z-2 my-[7.5rem] md:my-[10%] flex flex-col gap-4 w-[90%] justify-center items-center border-8 border-[#AAF3D5] p-4 md:p-12 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
         <RectorInlineTitle />
-         <CompetitionTitleHeader title="COMPETITIONS" shouldFitContent={false} />
+         <CompetitionTitleHeader title="SPORTS" shouldFitContent={false} />
           
           <div className="w-full grid grid-cols-1 md:grid-cols-6 md:grid-rows-7 gap-4">
             <CompetitionPicker

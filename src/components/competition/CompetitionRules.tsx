@@ -22,11 +22,11 @@ export default function CompetitionRules({ rules, slug }: { rules?: CompetitionR
         </ul>
 
         <div className="flex flex-col gap-2 justify-center items-center">
-          <Link href={`/competitions/${slug}/register`} className="w-full text-center bg-white/90 hover:bg-white text-[#390D62] font-bold py-3 rounded-lg uppercase transition-all duration-200">
+          <Link href={`/competitions/${slug}/register`} className="w-full text-center border-3 border-white bg-black/40 hover:bg-purple-800 text-white font-bold py-3 rounded-lg uppercase transition-all duration-200">
             Register
           </Link>
           {/* Download Button */}
-          <button className="w-full bg-white/90 hover:bg-white text-[#390D62] font-bold py-3 rounded-lg uppercase transition-all duration-200">
+          <button className="w-full text-center border-3 border-white bg-black/40 hover:bg-purple-800 text-white font-bold py-3 rounded-lg uppercase transition-all duration-200">
             Download Guidebook.pdf
           </button>
         </div>

@@ -112,8 +112,8 @@ export default function CompetitionDetailsDataReciever({ competitionData }: { co
                 </div>
               )}
 
-              {activeTab === "brackets" && (
-                <Brackets competitionId={competitionData.id} />
+              {activeTab === "brackets" && competitionData.matches && (
+                <Brackets matches={competitionData.matches!!} />
               )}
 
               {activeTab === "schedule" && competitionData.matches && (

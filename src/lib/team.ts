@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-
+import { Team, toTeamResponse, TeamWithMembersPayload } from "@/types/team.md";
 export async function createTeam(name: string, competitionId: string, leaderId: string) {
     const competitionData = await prisma.competition.findUnique({
         where: { id: competitionId },
@@ -35,12 +35,23 @@ export async function createTeam(name: string, competitionId: string, leaderId: 
     }
 }
 
-export async function getTeamByID(id: string) {
-    return await prisma.team.findUnique({
-        where: { id: id },
-    });
-}
+export async function getTeamByID(id: string): Promise<Team | null> {
+    if (!id || id === "undefined") return null;
 
+    const team = await prisma.team.findUnique({
+        where: { id: id },
+        include: {
+            members: {
+                include: {
+                    user: true
+                }
+            }
+        },
+    });
+
+    if (!team) return null;
+    return toTeamResponse(team as TeamWithMembersPayload);
+}
 export async function deleteTeam(id: string) {
     try {
         return await prisma.team.delete({
