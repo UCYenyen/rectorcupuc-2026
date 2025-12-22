@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import Link from "next/link";
 import GoogleLogin from "./auth/GoogleLogin";
@@ -6,32 +7,39 @@ import UserProfileButton from "./auth/UserProfileButton";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import StripeBackground from "./StripeBackground";
-import { MenuIcon } from "lucide-react";
+import StaggeredMenu from "./StaggeredMenu";
 
 export default function NavigationBar() {
   const { data: session, status } = useSession();
-  // bg-[url('/layout/navbar-bg.svg')]
+
+  const menuItems = [
+    { label: "Home", href: "/" },
+    { label: "Competitions", href: "/competitions" },
+    { label: "Votes", href: "/vote" },
+  ];
+
+  if (session?.user.role === "liason_officer") {
+    menuItems.push({ label: "Admin", href: "/dashboard/admin/lo" });
+  }
+  if (session?.user.role === "pdd_website") {
+    menuItems.push({ label: "Admin", href: "/dashboard/admin/web" });
+  }
+
   return (
-    <nav className="fixed z-[100] bg-gradient-to-r from-[#6427A6] to-[#E979EE] flex h-[10vh] md:h-[7vh] py-2 px-[5%] justify-between items-center w-screen overflow-visible shadow-2xl border-y-4 border-[#ADDCE7]">
+    <nav className="fixed top-0 left-0 z-[100] bg-gradient-to-r from-[#6427A6] to-[#E979EE] flex h-[10vh] md:h-[8vh] py-2 px-[5%] justify-between items-center w-screen overflow-visible shadow-2xl border-y-4 border-[#ADDCE7]">
       <StripeBackground />
-      <Link href={"/"} className=""><Image src={"/layout/rector-logo.svg"} className="relative z-10 w-14 h-auto" height={80} width={80} alt="rectorcupuc logo"></Image></Link>
-      <div className="relative z-10 hidden md:flex gap-1 sm:gap-4 text-white items-center justify-center uppercase">
-        <Link href="/competitions" className="bg-black/30 backdrop-blur-2xl border-white border-3 rounded-lg px-4 py-2 hover:bg-purple-800 w-full">
-          Competitions
-        </Link>
-        <Link href="/vote" className="bg-black/30 backdrop-blur-2xl border-white border-3 rounded-lg px-4 py-2 hover:bg-purple-800 w-full">
-          Votes
-        </Link>
-        {(session?.user.role === "liason_officer") && (
-          <Link href="/dashboard/admin/lo" className="bg-black/30 backdrop-blur-2xl border-white border-3 rounded-lg px-4 py-2 hover:bg-purple-800 w-full whitespace-nowrap">
-            Admin
+      
+      <Link href={"/"} className="relative z-10">
+        <Image src={"/layout/rector-logo.svg"} className="w-14 h-auto" height={80} width={80} alt="logo" />
+      </Link>
+
+      {/* DESKTOP */}
+      <div className="relative z-10 hidden md:flex gap-4 text-white items-center justify-center uppercase">
+        {menuItems.map((item) => (
+          <Link key={item.href} href={item.href} className="bg-black/30 backdrop-blur-2xl border-white border-2 rounded-lg px-4 py-2 hover:bg-purple-800 transition-all">
+            {item.label}
           </Link>
-        )}
-        {(session?.user.role === "pdd_website") && (
-          <Link href="/dashboard/admin/web" className="bg-black/30 hover:bg-purple-800 backdrop-blur-2xl border-white border-3 rounded-lg px-4 py-2 w-full whitespace-nowrap">
-            Admin
-          </Link>
-        )}
+        ))}
         <div className="flex items-center">
           {status === "loading" ? (
             <div className="w-10 h-10 rounded-full bg-zinc-200 animate-pulse" />
@@ -42,9 +50,15 @@ export default function NavigationBar() {
           )}
         </div>
       </div>
-      <div className="flex md:hidden items-center bg-black/30 hover:bg-purple-800 backdrop-blur-2xl border-white border-3 rounded-lg p-1 justify-center">
-        <MenuIcon className="text-white w-8 h-8"/>
-        </div>
+
+      {/* MOBILE */}
+      <div className="md:hidden flex items-center gap-3 relative z-10">
+        {/* Tombol Profile di Navbar (Opsional, jika mau dihapus silakan) */}
+        {!session && status !== "loading" && <GoogleLogin />}
+        
+        {/* Menu Staggered dengan Session */}
+        <StaggeredMenu items={menuItems} session={session} />
+      </div>
     </nav>
   );
 }

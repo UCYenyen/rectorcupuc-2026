@@ -47,11 +47,11 @@ export default function page() {
   return (
     <>
       <div className='w-screen h-[10vh] md:h-[7vh]'></div>
-      <div className="relative min-h-screen bg-[url('/home/background.svg')] w-screen overflow-hidden flex flex-col justify-center items-center">
+      <div className="relative min-h-screen gap-4 w-screen overflow-hidden flex flex-col justify-center items-center">
         <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
         <StripeBackground />
-        <div className="relative z-2 my-[7.5rem] md:my-[10%] flex flex-col gap-4 w-[90%] justify-center items-center border-8 border-[#AAF3D5] p-8 md:p-12 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
-          <RectorInlineTitle />
+        <RectorInlineTitle />
+        <div className="relative z-2 mb-48 flex flex-col gap-4 w-[90%] justify-center items-center border-8 border-[#AAF3D5] p-8 md:p-12 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
           <div className="w-full flex justify-center mt-4">
             <input
               type="text"
@@ -73,7 +73,7 @@ export default function page() {
                   <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
                 </div>
               </PixelCard>
-               <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
+              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
                 <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
                   <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
                   <div className="flex justify-center w-full flex-1 items-center">
@@ -82,7 +82,7 @@ export default function page() {
                   <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
                 </div>
               </PixelCard>
-               <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
+              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
                 <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
                   <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
                   <div className="flex justify-center w-full flex-1 items-center">
@@ -91,7 +91,7 @@ export default function page() {
                   <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
                 </div>
               </PixelCard>
-               <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
+              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
                 <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
                   <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
                   <div className="flex justify-center w-full flex-1 items-center">
@@ -100,7 +100,7 @@ export default function page() {
                   <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
                 </div>
               </PixelCard>
-               <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
+              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
                 <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
                   <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
                   <div className="flex justify-center w-full flex-1 items-center">
@@ -109,7 +109,7 @@ export default function page() {
                   <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
                 </div>
               </PixelCard>
-               <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
+              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
                 <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
                   <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
                   <div className="flex justify-center w-full flex-1 items-center">
@@ -118,7 +118,7 @@ export default function page() {
                   <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
                 </div>
               </PixelCard>
-               <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
+              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
                 <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
                   <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
                   <div className="flex justify-center w-full flex-1 items-center">
@@ -127,7 +127,7 @@ export default function page() {
                   <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
                 </div>
               </PixelCard>
-               <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
+              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
                 <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
                   <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
                   <div className="flex justify-center w-full flex-1 items-center">
@@ -136,7 +136,7 @@ export default function page() {
                   <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
                 </div>
               </PixelCard>
-               <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
+              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
                 <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
                   <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
                   <div className="flex justify-center w-full flex-1 items-center">
@@ -145,7 +145,7 @@ export default function page() {
                   <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
                 </div>
               </PixelCard>
-               <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
+              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
                 <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
                   <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
                   <div className="flex justify-center w-full flex-1 items-center">
