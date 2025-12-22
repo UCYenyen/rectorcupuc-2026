@@ -112,7 +112,7 @@ export default function UserDashboard() {
 
           {/* Join Team Button */}
           <button
-            className="backdrop-blur-2xl px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-[#10233E]/40 to-[#3B80E3]/40 text-base sm:text-xl border-2 sm:border-3 border-white text-white rounded hover:scale-105 transition-transform duration-200 whitespace-nowrap"
+            className="px-4 py-2 sm:px-6 sm:py-3 bg-black/40 backdrop-blur-2xl border-white border-3 rounded-lg hover:bg-purple-800 text-white text-base sm:text-xl sm:border-3 hover:scale-105 transition-transform duration-200 whitespace-nowrap"
             onClick={openJoinModal}
           >
             Join Team
@@ -235,19 +235,19 @@ export default function UserDashboard() {
             className="absolute inset-0 bg-black opacity-60"
             onClick={closeJoinModal}
           />
-          <div className="relative bg-white rounded-lg shadow-2xl w-full max-w-md p-6 z-10">
-            <h3 className="text-xl sm:text-2xl text-black font-bold mb-4">
+          <div className="relative bg-gradient-to-b from-[#390D62] to-[#6226A4] backdrop-blur-2xl border-[#AAF3D5] border-3 rounded-lg shadow-2xl w-full max-w-md p-6 z-10">
+            <h3 className="text-xl sm:text-2xl text-white font-bold mb-4">
               Join Team
             </h3>
             <form onSubmit={handleJoinSubmit}>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-white mb-2">
                 Referral Code
               </label>
               <input
                 type="text"
                 value={referalCode}
                 onChange={(e) => setReferalCode(e.target.value)}
-                className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 mb-4 text-gray-700 focus:border-blue-500 focus:outline-none"
+                className="w-full border-2 border-white rounded-lg px-4 py-2 mb-4 text-white focus:border-[#AAF3D5] focus:outline-none"
                 placeholder="Enter team referral code"
                 required
               />
@@ -256,14 +256,14 @@ export default function UserDashboard() {
                 <button
                   type="button"
                   onClick={closeJoinModal}
-                  className="w-full sm:w-auto px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-black font-medium transition-colors"
+                  className="w-full sm:w-auto px-4 py-2 bg-black/40 backdrop-blur-2xl border-white border-3 rounded-lg hover:bg-purple-800 text-white font-medium transition-colors"
                   disabled={isJoining}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto px-4 py-2 bg-black/40 backdrop-blur-2xl border-white border-3 rounded-lg hover:bg-purple-800 text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={isJoining}
                 >
                   {isJoining ? "Joining..." : "Join Team"}
