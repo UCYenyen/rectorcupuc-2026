@@ -21,7 +21,7 @@ export default async function page() {
               link="/competitions/sports/basketball-putra"
               title="Basketball Putra"
               alt="rectorcup"
-              className="w-full h-full row-start-1 colstar-1 col-span-1  md:col-start-1 md:row-start-1 md:col-span-4 md:row-span-2"
+              className="w-full h-full row-start-1 col-start-1 col-span-1  md:col-start-1 md:row-start-1 md:col-span-4 md:row-span-2"
             />
 
             <CompetitionPicker
