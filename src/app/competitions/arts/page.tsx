@@ -15,53 +15,53 @@ export default async function page() {
         <div className="relative z-2 my-[7.5rem] md:my-[10%] flex flex-col gap-4 w-[90%] justify-center items-center border-8 border-[#AAF3D5] p-4 md:p-12 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
         <RectorInlineTitle />
         <CompetitionTitleHeader title="SPORTS" shouldFitContent={false} />
-          <div className="w-full grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-3 md:h-[70vh]">
+          <div className="w-full grid grid-cols-1 md:grid-cols-5 md:grid-rows-6 gap-3 md:h-[70vh]">
             <CompetitionPicker
               src="/competitions/hero/dance.webp"
               link="/competitions/arts"
               title="Dance"
               alt="rectorcupuc dance"
-              className="w-full h-full md:row-span-2"
+              className="w-full h-full row-start-1 col-start-1 col-span-1 md:col-start-1 md:row-start-1 md:col-span-2 md:row-span-4"
             />
-
+            
             <CompetitionPicker
               src="/competitions/hero/solo-singing.webp"
               link="/competitions/arts"
               title="Solo Singing"
               alt="rectorcupuc solo-singing"
-              className="w-full h-full"
+              className="w-full h-full md:col-start-3 md:row-start-1 md:col-span-1 md:row-span-2"
             />
-
+            
             <CompetitionPicker
               src="/competitions/hero/duet-singing.webp"
               link="/competitions/arts"
               title="Duet Singing"
               alt="rectorcupuc duet-singing"
-              className="w-full h-full md:row-span-2"
+              className="w-full h-full md:col-start-4 md:row-start-1 md:col-span-2 md:row-span-4"
             />
-
+            
             <CompetitionPicker
               src="/competitions/hero/photography.webp"
               link="/competitions/arts"
               title="Photography"
               alt="rectorcupuc photography"
-              className="w-full h-full"
+              className="w-full h-full md:col-start-1 md:row-start-3 md:row-span-1 rounded-md p-10"
             />
-
+            
             <CompetitionPicker
               src="/competitions/hero/poster.webp"
               link="/competitions/arts"
               title="Poster"
               alt="rectorcupuc poster"
-              className="w-full h-full"
+              className="w-full h-full md:col-start-2 md:row-start-2 md:row-span-2 rounded-md p-10"
             />
-
+            
             <CompetitionPicker
               src="/competitions/hero/poetry.webp"
               link="/competitions/arts"
               title="Poetry"
               alt="rectorcupuc poetry"
-              className="w-full h-full"
+              className="w-full h-full md:col-start-3 md:row-start-3 md:row-span-1 rounded-md p-10"
             />
           </div>
         </div>
