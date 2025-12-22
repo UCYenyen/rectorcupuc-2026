@@ -2233,11 +2233,11 @@
     }
     .camera-right{
         width: 8rem;
-        top: 3rem;
+        top: 1rem;
         left: 38rem;
     }
     .camera-background-right{
-        width: 10rem;
+        width: 9rem;
         top: 1rem;
     }
     .congrats-left{
@@ -2434,56 +2434,56 @@
         width: 50rem;
         top: 50rem;
         left: 2rem;
-        
+        display: none;
     }
     .big-green-star {
         width:50rem;
         top: 48rem;
         left: 2rem;
-        
+        display: none;
     }
     .rector-card{
         width: 10rem;
         left: 100px;
         top: 55rem;
-        
+        display: none;
     }
     .rector-card-2{
         width: 10rem;
         top: 51.5rem;
         left: 120px;
-        
+        display: none;
     }
     .arcade-machine-big {
         width: 12rem;
         top: 50.5rem;
         height: 15.5rem;
-        
+        display: none;
     }
     .arcade-medium-left{
         width: 9rem;
         left: 2rem;
         top: 57.5rem;
-        
+        display: none;
     }
     .arcade-medium-right{
         width: 9rem;
         right: 2rem;
         top: 57.5rem;
-        
+        display: none;
     }
     .tv-left{
         width: 4.5rem;
         top: 62.5rem;
         left: 0rem;
-        
+        display: none;
 
     }
     .tv-right{
         width: 4.5rem;
         top: 62.5rem;
         right: 0rem;
-        
+        display: none;
     }
     .camera-right{
         width: 8rem;
@@ -2522,61 +2522,61 @@
         width: 50rem;
         top: 51.5rem;
         left: 2rem;
-        
+        display: none;
     }
     .big-green-star {
         width:45rem;
         top: 50rem;
         left: 2rem;
-        
+        display: none;
     }
     .rector-card{
         width: 10rem;
         left: 100px;
         top: 55rem;
-        
+        display: none;
     }
     .rector-card-2{
         width: 10rem;
         top: 52rem;
         left: 120px;
-        
+        display: none;
     }
     .arcade-machine-big {
         width: 12rem;
         top: 53rem;
         height: 15.5rem;
-        
+        display: none;
     }
     .arcade-medium-left{
         width: 8rem;
         left: 2rem;
         top: 59.5rem;
-        
+        display: none;
     }
     .arcade-medium-right{
         width: 8rem;
         right: 2rem;
         top: 59.5rem;
-        
+        display: none;
     }
     .tv-left{
         width: 4.5rem;
         top: 63rem;
         left: 0rem;
-        
+        display: none;
 
     }
     .tv-right{
         width: 4.5rem;
         top: 63rem;
         right: 0rem;
-        
+        display: none;
     }
     .camera-right{
         width: 8rem;
         top: 2rem;
-        
+        left: 20rem;
     }
     .camera-background-right{
         width: 9rem;
@@ -2612,56 +2612,56 @@
         width: 50rem;
         top: 41rem;
         left: 2rem;
-        
+        display: none;
     }
     .big-green-star {
         width: 42rem;
         top: 40rem;
         left: 2rem;
-        
+        display: none;
     }
     .rector-card{
         width: 10rem;
         left: 80px;
         top: 54rem;
-        
+        display: none;
     }
     .rector-card-2{
         width: 10rem;
         top: 51.5rem;
         left: 110px;
-        
+        display: none;
     }
     .arcade-machine-big {
         width: 12rem;
         top: 42.5rem;
         height: 15.5rem;
-        
+        display: none;
     }
     .arcade-medium-left{
         width: 8rem;
         left: 2rem;
         top: 51rem;
-        
+        display: none;
     }
     .arcade-medium-right{
         width: 8rem;
         right: 2rem;
         top: 51rem;
-        
+        display: none;
     }
     .tv-left{
         width: 4.5rem;
         top: 54rem;
         left: 0rem;
-        
+        display: none;
 
     }
     .tv-right{
         width: 4.5rem;
         top: 54rem;
         right: 0rem;
-        
+        display: none;
     }
     .camera-right{
         width: 8rem;
@@ -2702,55 +2702,56 @@
         width: 50rem;
         top: 39rem;
         left: 2rem;
-        
+        display: none;
     }
     .big-green-star {
         width: 42rem;
         top: 38rem;
         left: 2rem;
-        
+        display: none;
     }
     .rector-card{
         width: 10rem;
         left: 80px;
         top: 43rem;
-        
+        display: none;
     }
     .rector-card-2{
         width: 10rem;
         top: 40rem;
         left: 110px;
-        
+        display: none;
     }
     .arcade-machine-big {
         width: 12rem;
         top: 41.5rem;
         height: 15.5rem;
-        
+        display: none;
     }
     .arcade-medium-left{
         width: 8rem;
         left: 2rem;
         top: 49rem;
-        
+        display: none;
     }
     .arcade-medium-right{
         width: 8rem;
         right: 2rem;
         top: 49rem;
-        
+        display: none;
     }
     .tv-left{
         width: 4.5rem;
         top: 52rem;
         left: 0rem;
-        
+        display: none;
 
     }
     .tv-right{
         width: 4.5rem;
         top: 52rem;
         right: 0rem;
+        display: none;
         
     }
     .camera-right{
@@ -2791,11 +2792,13 @@
         width: 50rem;
         top: 43.5rem;
         left: 1rem;
+        display: none;
     }
     .big-green-star {
         width: 50rem;
         top: 44rem;
         left: 2rem;
+        display: none;
     }
 
     /* Depan Bawah */
@@ -2803,6 +2806,7 @@
         width: 13rem;
         left: 4rem;
         top: 53rem;
+        display: none;
     }
 
     /* Belakang Atas */
@@ -2810,31 +2814,37 @@
         width: 13rem;
         top: 45.5rem;
         left: 5rem;
+        display: none;
     }
     .arcade-machine-big {
         width: 12rem;
         top: 40.5rem;
         height: 15.5rem;
+        display: none;
     }
     .arcade-medium-left{
         width: 8rem;
         left: 2rem;
         top: 51rem;
+        display: none;
     }
     .arcade-medium-right{
         width: 8rem;
         right: 2rem;
         top: 51rem;
+        display: none;
     }
     .tv-left{
         width: 4.5rem;
         top: 57rem;
         left: 0rem;
+        display: none;
     }
     .tv-right{
         width: 4.5rem;
         top: 57rem;
         right: 0rem;
+        display: none;
     }
     .camera-right{
         width: 7rem;
@@ -2874,11 +2884,13 @@
         width: 50rem;
         top: 45.5rem;
         left: 1rem;
+        display: none;
     }
     .big-green-star {
         width: 42rem;
         top: 46rem;
         left: 1.5rem;
+        display: none;
     }
 
     /* Depan Bawah */
@@ -2886,6 +2898,7 @@
         width: 12rem;
         left: 3rem;
         top: 52rem;
+        display: none;
     }
 
     /* Belakang Atas */
@@ -2893,31 +2906,37 @@
         width: 12rem;
         top: 45.5rem;
         left: 5rem;
+        display: none;
     }
     .arcade-machine-big {
         width: 12rem;
         top: 40.5rem;
         height: 15.5rem;
+        display: none;
     }
     .arcade-medium-left{
         width: 8rem;
         left: 2rem;
         top: 51rem;
+        display: none;
     }
     .arcade-medium-right{
         width: 8rem;
         right: 2rem;
         top: 51rem;
+        display: none;
     }
     .tv-left{
         width: 4.5rem;
         top: 57rem;
         left: 0rem;
+        display: none;
     }
     .tv-right{
         width: 4.5rem;
         top: 57rem;
         right: 0rem;
+        display: none;
     }
     .camera-right{
         width: 7.5rem;
@@ -2957,11 +2976,13 @@
         width: 50rem;
         top: 50.5rem;
         left: 0rem;
+        display: none;
     }
     .big-green-star {
         width: 42rem;
         top: 51.5rem;
         left: 1rem;
+        display: none;
     }
 
     /* Depan Bawah */
@@ -2969,6 +2990,7 @@
         width: 10rem;
         left: 80px;
         top: 57rem;
+        display: none;
     }
 
     /* Belakang Atas */
@@ -2976,31 +2998,37 @@
         width: 10rem;
         top: 52.5rem;
         left: 100px;
+        display: none;
     }
     .arcade-machine-big {
         width: 10rem;
         top: 47.6rem;
         height: 12.5rem;
+        display: none;
     }
     .arcade-medium-left{
         width: 8rem;
         left: 2rem;
         top: 55.5rem;
+        display: none;
     }
     .arcade-medium-right{
         width: 8rem;
         right: 2rem;
         top: 55.5rem;
+        display: none;
     }
     .tv-left{
         width: 4.5rem;
         top: 61rem;
         left: 0rem;
+        display: none;
     }
     .tv-right{
         width: 4.5rem;
         top: 61rem;
         right: 0rem;
+        display: none;
     }
     .camera-right{
         width: 8rem;
@@ -3039,11 +3067,13 @@
         width: 50rem;
         top: 46.5rem;
         left: 1.5rem;
+        display: none;
     }
     .big-green-star {
         width: 42rem;
         top: 47rem;
         left: 1.5rem;
+        display: none;
     }
 
     /* Depan Bawah */
@@ -3051,6 +3081,7 @@
         width: 10rem;
         left: 50px;
         top: 53rem;
+        display: none;
     }
 
     /* Belakang Atas */
@@ -3058,31 +3089,37 @@
         width: 10rem;
         top: 48rem;
         left: 70px;
+        display: none;
     }
     .arcade-machine-big {
         width: 10rem;
         top: 42.5rem;
         height: 12.5rem;
+        display: none;
     }
     .arcade-medium-left{
         width: 6.5rem;
         left: 2rem;
         top: 52rem;
+        display: none;
     }
     .arcade-medium-right{
         width: 6rem;
         right: 2rem;
         top: 52rem;
+        display: none;
     }
     .tv-left{
         width: 3.5rem;
         top: 57rem;
         left: 0rem;
+        display: none;
     }
     .tv-right{
         width: 3.5rem;
         top: 57rem;
         right: 0rem;
+        display: none;
     }
     .camera-right{
         width: 7rem;
