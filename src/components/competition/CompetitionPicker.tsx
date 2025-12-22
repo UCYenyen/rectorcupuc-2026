@@ -20,13 +20,14 @@ export default function CompetitionPicker({
       href={link || "#"}
       className={`relative w-full h-full flex flex-col justify-center items-center group border-4 border-[#AAF3D5] rounded-md overflow-hidden transition-all duration-300 hover:shadow-2xl ${className || ""}`}
     >
-      <div className="z-50 absolute w-full h-full bg-purple-700/20"></div>
+      <div className="z-50 absolute w-full h-full bg-purple-900/40"></div>
       {/* Image container with zoom effect */}
       <div className="w-full h-full overflow-hidden">
         <Image
           src={src}
           width={800}
           height={800}
+          loading="eager"
           alt={alt}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         />
