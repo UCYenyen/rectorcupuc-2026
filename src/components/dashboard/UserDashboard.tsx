@@ -235,7 +235,7 @@ export default function UserDashboard() {
             className="absolute inset-0 bg-black opacity-60"
             onClick={closeJoinModal}
           />
-          <div className="relative bg-gradient-to-b from-[#390D62] to-[#6226A4] backdrop-blur-2xl border-[#AAF3D5] border-3 rounded-lg shadow-2xl w-full max-w-md p-6 z-10">
+          <div className="relative bg-white/10 backdrop-blur-sm border-[#AAF3D5] border-3 rounded-lg shadow-2xl w-full max-w-md p-6 z-10">
             <h3 className="text-xl sm:text-2xl text-white font-bold mb-4">
               Join Team
             </h3>
