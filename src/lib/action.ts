@@ -99,7 +99,10 @@ export async function handleUpdateMatchScore(
   team2Score: number,
   slug: string
 ) {
-  await updateMatchScoreDB(matchId, team1Score, team2Score);
-  revalidatePath(`/dashboard/admin/web/competitions/${slug}`);
-  revalidatePath(`/competitions/sports/${slug}`);
+  try {
+    await updateMatchScoreDB(matchId, team1Score, team2Score);
+    revalidatePath(`/dashboard/admin/web/competitions/${slug}`);
+  } catch (error) {
+    console.error("Database update failed:", error);
+  }
 }
