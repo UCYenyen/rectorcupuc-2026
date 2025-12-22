@@ -5,7 +5,7 @@ import { CompetitionContainerProps } from '@/types/competition.md'
 import { CreateMatchFormState } from '@/lib/action';
 import { createMatch } from '@/lib/competition';
 
-export default function MatchCreatingForm({ competitions }: { competitions: CompetitionContainerProps[] }) {
+export default function MatchCreatingForm({ competition }: { competition: CompetitionContainerProps }) {
     const initialState: CreateMatchFormState = {
         error: "",
         success: undefined,
@@ -20,23 +20,7 @@ export default function MatchCreatingForm({ competitions }: { competitions: Comp
 
     return (
         <form action={formAction} className="relative z-10 border-[#AAF3D5] flex flex-col justify-center items-center gap-4 border-4 bg-white/10 text-white backdrop-blur-sm p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
-            <h1 className='text-3xl font-bold'>Create Matches</h1>
-            <div className='w-full flex flex-col gap-2 text-left'>
-                <label htmlFor="competitionId" className='font-semibold'>Competition</label>
-                <select
-                    name="competitionId"
-                    id="competitionId"
-                    required
-                    className='w-full px-4 py-2 rounded-lg border-2 border-white bg-black/20 text-white focus:outline-none focus:ring-2 focus:ring-[#AAF3D5]'
-                >
-                    <option value="" disabled defaultValue="">Pilih kompetisi</option>
-                    {competitions.map((competition) => (
-                        <option key={competition.id} value={competition.id}>
-                            {competition.name}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <h1 className='text-3xl font-bold'>Create Matches - {competition.name}</h1>
             <div className='w-full flex flex-col gap-2 text-left'>
                 <label htmlFor="startDate" className='font-semibold'>Start Date</label>
                 <input
@@ -83,13 +67,11 @@ export default function MatchCreatingForm({ competitions }: { competitions: Comp
                     className='w-full px-4 py-2 rounded-lg border-2 border-white bg-black/20 text-white focus:outline-none focus:ring-2 focus:ring-[#AAF3D5]'
                 >
                     <option value="" disabled defaultValue="">Pilih tim 1</option>
-                    {competitions.map((competition) =>
-                        competition.teams?.map((team: Team) => (
-                            <option key={team.id} value={team.id}>
-                                {team.name}
-                            </option>
-                        ))
-                    )}
+                     {competition.teams?.map((team: Team) => (
+                        <option key={team.id} value={team.id}>
+                            {team.name}
+                        </option>
+                    ))}
                 </select>
             </div>
             <div className='w-full flex flex-col gap-2 text-left'>
@@ -101,13 +83,11 @@ export default function MatchCreatingForm({ competitions }: { competitions: Comp
                     className='w-full px-4 py-2 rounded-lg border-2 border-white bg-black/20 text-white focus:outline-none focus:ring-2 focus:ring-[#AAF3D5]'
                 >
                     <option value="" disabled defaultValue="">Pilih tim 2</option>
-                    {competitions.map((competition) =>
-                        competition.teams?.map((team: Team) => (
-                            <option key={team.id} value={team.id}>
-                                {team.name}
-                            </option>
-                        ))
-                    )}
+                    {competition.teams?.map((team: Team) => (
+                        <option key={team.id} value={team.id}>
+                            {team.name}
+                        </option>
+                    ))}
                 </select>
             </div>
             <button

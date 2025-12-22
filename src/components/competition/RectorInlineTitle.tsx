@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function RectorInlineTitle() {
     return (
-        <Image draggable={false} src={"/competitions/rector-inline-title.svg"} alt="Rector Inline Title" width={1000} height={1000} className='w-[90%] absolute -top-[12.5%] sm:-top-[1rem] md:-top-[6rem] xl:-top-[15%] 2xl:-top-[18%] md:w-[40%]'></Image>
+        <Image draggable={false} src={"/competitions/rector-inline-title.svg"} alt="Rector Inline Title" width={1000} height={1000} className='mt-24 relative z-5 w-[90%] md:w-[40%]'></Image>
         // <div className="absolute w-[80%] md:w-1/4 -top-[4rem] md:-top-[6rem]">
         //     <Image
         //         src={"/logos/rector-title.svg"}

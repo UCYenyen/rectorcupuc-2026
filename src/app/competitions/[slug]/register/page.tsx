@@ -1,7 +1,6 @@
 'use server'
 import RegistrationForm from "@/components/competition/registration/RegistrationForm";
 import Image from "next/image";
-
 interface ProblemPageProps {
   params: Promise<{
     slug: string;
@@ -9,11 +8,7 @@ interface ProblemPageProps {
 }
 
 export default async function Page({ params }: ProblemPageProps) {
-
   const { slug } = await params;
-  // Get the current session to access user information
-
-  // Pass both competitionId and leaderId to the form
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#390D62] to-[#6226A4] flex items-center justify-center p-4">
       <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>

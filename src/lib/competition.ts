@@ -158,22 +158,13 @@ export async function createMatch(prevState: CreateMatchFormState,
 
 export async function startMatch(
     matchId: string,
-    competitionSlug: string,
     status: "ONGOING"
 ): Promise<Match | { error: string }> {
-    const competition = await prisma.competition.findUnique({
-        where: { slug: competitionSlug },
-    }); 
-    if (!competition) return { error: "Competition not found." };
 
     const match = await prisma.match.findUnique({
         where: { id: matchId },
     });
     if (!match) return { error: "Match not found." };
-
-    if (match.competition_id !== competition.id) {
-        return { error: "Match does not belong to this competition." };
-    }
 
     try {
         const updatedMatch = await prisma.match.update({
@@ -189,22 +180,13 @@ export async function startMatch(
 }
 export async function completeMatch(
     matchId: string,
-    competitionSlug: string,
     status: "COMPLETED"
 ): Promise<Match | { error: string }> {
-    const competition = await prisma.competition.findUnique({
-        where: { slug: competitionSlug },
-    }); 
-    if (!competition) return { error: "Competition not found." };
 
     const match = await prisma.match.findUnique({
         where: { id: matchId },
     });
     if (!match) return { error: "Match not found." };
-
-    if (match.competition_id !== competition.id) {
-        return { error: "Match does not belong to this competition." };
-    }
 
     try {
         const updatedMatch = await prisma.match.update({
@@ -221,22 +203,13 @@ export async function completeMatch(
 
 export async function pendMatch(
     matchId: string,
-    competitionSlug: string,
-    status: "ONGOING"
+    status: "UPCOMMING"
 ): Promise<Match | { error: string }> {
-    const competition = await prisma.competition.findUnique({
-        where: { slug: competitionSlug },
-    }); 
-    if (!competition) return { error: "Competition not found." };
 
     const match = await prisma.match.findUnique({
         where: { id: matchId },
     });
     if (!match) return { error: "Match not found." };
-
-    if (match.competition_id !== competition.id) {
-        return { error: "Match does not belong to this competition." };
-    }
 
     try {
         const updatedMatch = await prisma.match.update({
@@ -250,3 +223,22 @@ export async function pendMatch(
         return { error: "Failed to pend match." };
     }   
 }   
+
+export async function updateMatchScoreDB(
+    matchId: string,
+    team1Score: number,
+    team2Score: number
+) {
+    try {
+        const updatedMatch = await prisma.match.update({
+            where: { id: matchId },
+            data: { 
+                team_one_score: team1Score,
+                team_two_score: team2Score,
+            },
+        });
+        return updatedMatch;
+    } catch (error) {
+        return { error: "Failed to update score." };
+    }   
+}

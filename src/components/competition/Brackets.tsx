@@ -42,7 +42,7 @@ export default function Brackets({ matches }: BracketsProps) {
     return (
       <div
         key={match.id}
-        className="flex flex-col bg-gradient-to-r from-[#390D62]/60 to-[#6226A4]/60 border-2 border-[#AAF3D5] rounded-lg p-4 shadow-lg mb-4"
+        className="flex flex-col bg-black/40 backdrop-blur-2xl border-3 border-white rounded-lg p-4 shadow-lg mb-4"
       >
         <div className="text-[10px] text-[#AAF3D5]/70 mb-2 font-mono">
           Match
