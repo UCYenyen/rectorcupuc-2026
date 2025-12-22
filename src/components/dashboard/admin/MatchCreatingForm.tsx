@@ -19,7 +19,7 @@ export default function MatchCreatingForm({ competitions }: { competitions: Comp
     );
 
     return (
-        <form action={formAction} className="relative z-10 border-[#AAF3D5] flex flex-col justify-center items-center gap-4 border-4 bg-white/10 backdrop-blur-sm p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
+        <form action={formAction} className="relative z-10 border-[#AAF3D5] flex flex-col justify-center items-center gap-4 border-4 bg-white/10 text-white backdrop-blur-sm p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
             <h1 className='text-3xl font-bold'>Create Matches</h1>
             <div className='w-full flex flex-col gap-2 text-left'>
                 <label htmlFor="competitionId" className='font-semibold'>Competition</label>

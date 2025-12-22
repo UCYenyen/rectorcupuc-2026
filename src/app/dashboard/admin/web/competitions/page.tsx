@@ -1,43 +1,23 @@
 import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { getAllCompetitions } from '@/lib/competition'
-import MatchCreatingForm from '@/components/dashboard/admin/MatchCreatingForm';
-
-export default async function page() {
-    const competitions = await getAllCompetitions();
-    if (!competitions) {
-        return (
-            <div className="relative min-h-screen bg-gradient-to-b from-[#390D62] to-[#6226A4] flex items-center justify-center p-4">
-                <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
-                <Image
-                    src={"/home/background.svg"}
-                    width={1000}
-                    height={1000}
-                    alt="rectorcupuc background"
-                    draggable={false}
-                    className="w-full h-full object-center object-cover opacity-25 z-1 absolute"
-                ></Image>
-                <div className="relative z-10 border-[#AAF3D5] flex flex-col justify-center items-center gap-4 border-4 bg-white/10 backdrop-blur-sm p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
-                    <h1 className='text-3xl font-bold'>No Competitions Found</h1>
-                    <Link href={"/dashboard/admin/web/competitions"} className='bg-black/30 px-4 py-2 text-white rounded-lg text-center border-white border-4 w-fit'>Manage Competitions</Link>
-                </div>
-            </div>
-        )
-    }
-
-    return (
-        <div className="relative min-h-screen bg-gradient-to-b from-[#390D62] to-[#6226A4] flex items-center justify-center p-4">
-            <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
-            <Image
-                src={"/home/background.svg"}
-                width={1000}
-                height={1000}
-                alt="rectorcupuc background"
-                draggable={false}
-                className="w-full h-full object-center object-cover opacity-25 z-1 absolute"
-            ></Image>
-            <MatchCreatingForm competitions={competitions} />
+import StripeBackground from '@/components/StripeBackground';
+import CompetitionTitleHeader from '@/components/competition/CompetitionTitleHeader';
+import Link from 'next/link';
+export default function page() {
+  return (
+    <>
+      <div className='w-screen h-[10vh] md:h-[7vh]'></div>
+      <div className="relative min-h-screen bg-[url('/home/background.svg')] w-screen overflow-hidden flex flex-col justify-center items-center">
+        <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
+        <StripeBackground />
+        <div className="relative z-2 flex flex-col gap-4 justify-center items-center border-8 border-[#AAF3D5] p-4 md:p-12 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
+          <CompetitionTitleHeader title="💀 PDD WEBSITE 💀" shouldFitContent={false} />
+          <div className="w-full gap-4 text-white font-bold text-2xl flex-col flex">
+            <Link href={"/dashboard/admin/lo/registration"} rel='manage registrations' className='bg-black/40 border-white border-3 rounded-lg px-4 py-2 text-center hover:bg-purple-800'>MANAGE REGISTRATIONS</Link>
+            <Link href={"/dashboard/admin/web/competitions/match"} rel='create match' className='bg-black/40 border-white border-3 rounded-lg px-4 py-2 text-center hover:bg-purple-800'>MANAGE MATCH</Link>
+          </div>
         </div>
-    )
+      </div>
+    </>
+
+  )
 }
