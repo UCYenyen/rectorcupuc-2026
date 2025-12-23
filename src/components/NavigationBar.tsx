@@ -52,7 +52,7 @@ export default function NavigationBar() {
       </div>
 
       {/* MOBILE */}
-      <div className="md:hidden flex items-center gap-3 relative z-10">
+      <div className="md:hidden flex items-center gap-14 relative z-10">
         {/* Tombol Profile di Navbar (Opsional, jika mau dihapus silakan) */}
         {!session && status !== "loading" && <GoogleLogin />}
         
