@@ -25,7 +25,7 @@ export default function BottomAsset() {
         width={1000}
         height={1000}
         alt="rectorcupuc pacman"
-        className="w-auto h-18 md:h-32 absolute hidden md:block md:bottom-6 right-0 z-3"
+        className="w-auto hidden md:inline-block h-32 absolute bottom-6 right-0 z-3"
         draggable={false}
       ></Image>
       <Image
@@ -33,7 +33,7 @@ export default function BottomAsset() {
         width={1000}
         height={1000}
         alt="rectorcupuc pacman ghost"
-        className="w-auto h-32 absolute hidden md:block bottom-24 z-3"
+        className="w-auto hidden md:inline-block h-32 absolute bottom-24 z-3"
         draggable={false}
       ></Image>
       <Image
@@ -41,7 +41,7 @@ export default function BottomAsset() {
         width={1000}
         height={1000}
         alt="rectorcupuc pacman portal"
-        className="w-auto h-48 md:h-58 absolute hidden md:block md:bottom-0 right-0 z-1"
+        className="w-auto hidden md:inline-block h-58 absolute bottom-0 right-0 z-1"
         draggable={false}
       ></Image>
       <Image
@@ -49,7 +49,7 @@ export default function BottomAsset() {
         width={1000}
         height={1000}
         alt="rectorcupuc book"
-        className="w-auto h-48 md:h-58 absolute hidden md:block left-0 z-5"
+        className="w-auto hidden md:inline-block h-58 absolute bottom-14 left-0 z-5"
         draggable={false}
       ></Image>
     </>

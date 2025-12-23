@@ -197,12 +197,12 @@ export default function Home() {
     <div className="overflow-hidden">
       <div
         ref={containerRef}
-        className="pt-[12vh] sm:pt-24 relative min-h-screen w-screen flex flex-col justify-center items-center overflow-hidden"
+        className="pt-[12vh] sm:pt-24 relative min-h-screen w-screen flex flex-col justify-center items-center"
       >
         <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
         <StripeBackground />
 
-        <div ref={starsRef} className="overflow-x-hidden">
+        <div ref={starsRef}>
           <Image
             src={"/home/big-green-star.webp"}
             width={1000}
@@ -219,7 +219,7 @@ export default function Home() {
           />
         </div>
 
-        <div ref={arcadeRef} className="relative w-full flex justify-center items-end overflow-x-hidden">
+        <div ref={arcadeRef} className="relative w-full flex justify-center items-end">
           <Image
             src={"/home/arcade-machine-big.webp"}
             width={1000}
@@ -243,7 +243,7 @@ export default function Home() {
           />
         </div>
 
-        <div ref={decorRef} className="overflow-x-hidden">
+        <div ref={decorRef}>
           <Image
             src={"/home/card.svg"}
             width={1000}
@@ -295,7 +295,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="relative flex flex-col gap-4 overflow-x-hidden">
+        <div className="relative flex flex-col gap-4">
           <Image
             ref={titleRef}
             src={"/home/rector-title.svg"}
