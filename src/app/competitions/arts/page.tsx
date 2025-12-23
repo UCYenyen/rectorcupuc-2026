@@ -21,7 +21,7 @@ export default async function page() {
               link="/competitions/arts"
               title="Dance"
               alt="rectorcupuc dance"
-              className="w-full h-full row-start-1 col-start-1 col-span-1 md:col-start-1 md:row-start-1 md:col-span-2 md:row-span-4"
+              className="w-full h-full md:row-start-1 md:col-start-1"
             />
             
             <CompetitionPicker
@@ -29,7 +29,7 @@ export default async function page() {
               link="/competitions/arts"
               title="Solo Singing"
               alt="rectorcupuc solo-singing"
-              className="w-full h-full md:col-start-3 md:row-start-1 md:col-span-1 md:row-span-2"
+              className="w-full h-full md:row-start-1 md:col-start-2"
             />
             
             <CompetitionPicker
@@ -37,7 +37,7 @@ export default async function page() {
               link="/competitions/arts"
               title="Duet Singing"
               alt="rectorcupuc duet-singing"
-              className="w-full h-full md:col-start-4 md:row-start-1 md:col-span-2 md:row-span-4"
+              className="w-full h-full md:row-start-1 md:col-start-3"
             />
             
             <CompetitionPicker
@@ -45,7 +45,7 @@ export default async function page() {
               link="/competitions/arts"
               title="Photography"
               alt="rectorcupuc photography"
-              className="w-full h-full md:col-start-1 md:row-start-3 md:row-span-1 rounded-md p-10"
+              className="w-full h-full md:row-start-2 md:col-start-1"
             />
             
             <CompetitionPicker
@@ -53,7 +53,7 @@ export default async function page() {
               link="/competitions/arts"
               title="Poster"
               alt="rectorcupuc poster"
-              className="w-full h-full md:col-start-2 md:row-start-2 md:row-span-2 rounded-md p-10"
+              className="w-full h-full md:row-start-2 md:col-start-2"
             />
             
             <CompetitionPicker
@@ -61,7 +61,7 @@ export default async function page() {
               link="/competitions/arts"
               title="Poetry"
               alt="rectorcupuc poetry"
-              className="w-full h-full md:col-start-3 md:row-start-3 md:row-span-1 rounded-md p-10"
+              className="w-full h-full md:row-start-2 md:col-start-3"
             />
           </div>
         </div>
