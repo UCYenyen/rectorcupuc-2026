@@ -1,13 +1,26 @@
+'use client'
 import Image from "next/image";
 import StripeBackground from "@/components/StripeBackground";
 import RectorInlineTitle from "@/components/competition/RectorInlineTitle";
 import CompetitionTitleHeader from "@/components/competition/CompetitionTitleHeader";
+import Snowfall from "react-snowfall";
 import { Settings } from "lucide-react";
 export default function UnderDevelopmentPage() {
   return (
     <>
       <div className='w-screen h-[10vh] md:h-[7vh]'></div>
       <div className="relative min-h-screen gap-4 w-screen overflow-hidden flex flex-col justify-center items-center">
+        <div className="absolute w-screen h-screen z-100">
+          <Snowfall
+            // Optional configuration
+            color="#ffffff" // Snowflake color
+            snowflakeCount={150} // Number of snowflakes
+            speed={[0.5, 3.0]} // Vertical speed range
+            wind={[-0.5, 2.0]} // Horizontal wind speed range
+            radius={[1, 4]} // Snowflake radius range
+            opacity={[0.3, 0.8]} // Snowflake opacity range
+          />
+        </div>
         <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
         <StripeBackground />
         <RectorInlineTitle />
@@ -23,7 +36,9 @@ export default function UnderDevelopmentPage() {
               is currently under development and will be available soon!
               We&apos;re working hard to bring you an amazing experience.
             </p>
-
+            <p className="text-white text-lg leading-relaxed text-center font-bold">
+              Merry Christmas and Happy New Year!
+            </p>
             <div className="text-sm text-[#AAF3D5] text-center font-bold">
               <p>Expected launch: 3 January 2026</p>
             </div>
