@@ -67,7 +67,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       tl.to(layer, { xPercent: 0, duration: 0.4, ease: 'power2.inOut' }, i * 0.08);
     });
     tl.to(panel, { xPercent: 0, duration: 0.5, ease: 'power4.out' }, "-=0.2");
-    tl.to(itemLabels, { yPercent: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'back.out(1.2)' }, "-=0.3");
+    tl.to(itemLabels, { yPercent: 0, opacity: 1, duration: 0.3, stagger: 0.05, ease: 'back.out(1.2)' }, "-=0.5");
     openTlRef.current = tl;
   }, []);
 
