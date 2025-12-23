@@ -30,7 +30,7 @@ export default function CountdownCard({ properties, cardWidth, innerRef }: Props
         
         {/* Content overlay - countdown number */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl text-white font-bold z-10"> {/* Lebih besar */}
+          <h1 className="text-5xl md:text-7xl lg:text-7xl text-white font-bold z-10"> {/* Lebih besar */}
             {properties.countdown}
           </h1>
         </div>

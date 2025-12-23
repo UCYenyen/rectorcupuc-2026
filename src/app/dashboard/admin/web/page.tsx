@@ -5,7 +5,6 @@ import CompetitionTitleHeader from '@/components/competition/CompetitionTitleHea
 export default function page() {
   return (
     <>
-      <div className='w-screen h-[10vh] md:h-[7vh]'></div>
       <div className="relative min-h-screen bg-[url('/home/background.svg')] w-screen overflow-hidden flex flex-col justify-center items-center">
         <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
         <StripeBackground />

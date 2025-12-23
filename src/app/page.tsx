@@ -197,7 +197,7 @@ export default function Home() {
     <div className="overflow-hidden">
       <div
         ref={containerRef}
-        className="pt-[12vh] sm:pt-5 relative bg-[url('/home/background.svg')] bg-cover min-h-screen w-screen flex flex-col justify-center items-center overflow-hidden"
+        className="pt-[12vh] sm:pt-24 relative bg-[url('/home/background.svg')] bg-cover min-h-screen w-screen flex flex-col justify-center items-center overflow-hidden"
       >
         <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
         <StripeBackground />

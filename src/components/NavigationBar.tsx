@@ -26,7 +26,7 @@ export default function NavigationBar() {
   }
 
   return (
-    <nav className="fixed top-0 left-0 z-[100] bg-gradient-to-r from-[#6427A6] to-[#E979EE] flex h-[10vh] md:h-[8vh] py-2 px-[5%] justify-between items-center w-screen overflow-visible shadow-2xl border-y-4 border-[#ADDCE7]">
+    <nav className="fixed top-0 left-0 z-[100] bg-gradient-to-r from-[#6427A6] to-[#E979EE] flex min-h-[7vh] py-2 px-[5%] justify-between items-center w-screen overflow-visible shadow-2xl border-y-4 border-[#ADDCE7]">
       <StripeBackground />
       
       <Link href={"/"} className="relative z-10">
@@ -36,7 +36,7 @@ export default function NavigationBar() {
       {/* DESKTOP */}
       <div className="relative z-10 hidden md:flex gap-4 text-white items-center justify-center uppercase">
         {menuItems.map((item) => (
-          <Link key={item.href} href={item.href} className="bg-black/30 backdrop-blur-2xl border-white border-2 rounded-lg px-4 py-2 hover:bg-purple-800 transition-all">
+          <Link key={item.href} href={item.href} className="bg-black/30 backdrop-blur-2xl text-md border-white border-2 rounded-lg px-4 py-2 hover:bg-purple-800 transition-all">
             {item.label}
           </Link>
         ))}

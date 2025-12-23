@@ -28,6 +28,7 @@ export default function CompetitionPicker({
           width={800}
           height={800}
           loading="eager"
+          draggable={false}
           alt={alt}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         />
