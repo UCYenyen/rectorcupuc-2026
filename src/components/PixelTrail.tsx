@@ -78,12 +78,21 @@ const DotMaterial = shaderMaterial(
     }
 
     void main() {
+      if (resolution.x <= 0.0 || resolution.y <= 0.0) {
+        gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
+        return;
+      }
+      
       vec2 screenUv = gl_FragCoord.xy / resolution;
       vec2 uv = coverUv(screenUv);
       vec2 gridUvCenter = (floor(uv * gridSize) + 0.5) / gridSize;
       
       vec2 clampedUv = clamp(gridUvCenter, 0.0, 1.0);
       float trail = texture2D(mouseTrail, clampedUv).r;
+      
+      if (trail < 0.0 || trail > 1.0 || isnan(trail) || isinf(trail)) {
+        trail = 0.0;
+      }
       
       gl_FragColor = vec4(pixelColor, trail);
     }
@@ -113,6 +122,8 @@ function Scene({ gridSize, trailSize, maxAge, interpolate, easingFunction, pixel
       trail.wrapT = THREE.ClampToEdgeWrapping;
       trail.format = THREE.RGBAFormat;
       trail.type = THREE.UnsignedByteType;
+      trail.generateMipmaps = false;
+      trail.needsUpdate = true;
     }
   }, [trail]);
 
@@ -143,7 +154,9 @@ export default function PixelTrail({
     powerPreference: 'high-performance',
     alpha: true,
     preserveDrawingBuffer: false,
-    premultipliedAlpha: true
+    premultipliedAlpha: true,
+    depth: false,
+    stencil: false
   },
   gooeyFilter,
   color = '#ffffff',
