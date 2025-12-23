@@ -26,23 +26,30 @@ export async function registerTeam(
   formData: FormData
 ): Promise<RegisterTeamFormState> {
   const teamName = formData.get("teamName") as string;
-  const imageUrl = formData.get("instagramProofUrl") as string;
+  const instagramProofUrl = formData.get("instagramProofUrl") as string;
+  const profileImageUrl = formData.get("profileImageUrl") as string;
 
   if (!leaderId) {
     return { error: "User is not authenticated." };
+  }
+
+  if (!instagramProofUrl || !profileImageUrl) {
+    return { error: "Both images are required." };
   }
 
   const registration = await registerTeamToCompetition(
     competitionSlug,
     teamName,
     leaderId,
-    imageUrl
+    instagramProofUrl,
+    profileImageUrl
   );
 
   if ("error" in registration) {
     return { error: registration.error };
   }
 
+  revalidatePath("/dashboard/user");
   return { success: true };
 }
 
@@ -105,4 +112,17 @@ export async function handleUpdateMatchScore(
   } catch (error) {
     console.error("Database update failed:", error);
   }
+}
+
+export async function deleteUploadedImage(url: string) {
+    if (!url) return;
+    try {
+        await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/image/delete`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ url }),
+        });
+    } catch (err) {
+        console.error(err);
+    }
 }

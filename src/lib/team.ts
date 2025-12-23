@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { Team, toTeamResponse, TeamWithMembersPayload } from "@/types/team.md";
+import { deleteUploadedImage } from "./action";
 export async function createTeam(name: string, competitionId: string, leaderId: string) {
     const competitionData = await prisma.competition.findUnique({
         where: { id: competitionId },
@@ -69,17 +70,47 @@ export async function getTeamByUserID(id: string){
     });
 }
 
-export async function joinTeamByReferalCode(userId: string, referalCode: string){
+export async function joinTeamByReferalCode(userId: string, referalCode: string, followProofUrl: string, profileUrl: string){
     const team = await prisma.team.findFirst({
         where: { team_referal_code: referalCode },
     });
 
+    // harusnya disini ada upload image urlnya untuk bukti follow dan selfienya
     if(!team){
+        if (followProofUrl) await deleteUploadedImage(followProofUrl);
+        if (profileUrl) await deleteUploadedImage(profileUrl);
         return { error: "Team with this referal code does not exist." };
     }
 
+    const competitionRegistration = await prisma.competitionRegistration.findFirst({
+        where: {
+            competition_id: team.competition_id,
+            user_id: team.leader_id
+        }
+    });
+
+    if(!competitionRegistration){
+        if (followProofUrl) await deleteUploadedImage(followProofUrl);
+        if (profileUrl) await deleteUploadedImage(profileUrl);
+        return { error: "Team leader is not registered for the competition!" };
+    }
+
+    if(team.leader_id === userId){
+        if (followProofUrl) await deleteUploadedImage(followProofUrl);
+        if (profileUrl) await deleteUploadedImage(profileUrl);
+        return { error: "Team leader cannot join their own team as a member!" };
+    }
+
+    if(competitionRegistration.registration_status != "Registered"){
+        if (followProofUrl) await deleteUploadedImage(followProofUrl);
+        if (profileUrl) await deleteUploadedImage(profileUrl);
+        return { error: `Team registration status for ${team.name} is ${competitionRegistration.registration_status}! Please wait until the approval is granted.` };
+    }
+
     if(team.current_team_member >= team.max_team_member){
-        return { error: "Team is already full." };
+        if (followProofUrl) await deleteUploadedImage(followProofUrl);
+        if (profileUrl) await deleteUploadedImage(profileUrl);
+        return { error: "Team is already full!" };
     }
 
     const isAlreadyMember = await prisma.teamMember.findFirst({
@@ -87,7 +118,9 @@ export async function joinTeamByReferalCode(userId: string, referalCode: string)
     });
 
     if(isAlreadyMember){
-        return { error: "You are already a member of this team." };
+        if (followProofUrl) await deleteUploadedImage(followProofUrl);
+        if (profileUrl) await deleteUploadedImage(profileUrl);
+        return { error: "You are already a member of this team!" };
     }
 
     const alreadyRegisteredToAnotherTeam = await prisma.team.findFirst({
@@ -98,13 +131,17 @@ export async function joinTeamByReferalCode(userId: string, referalCode: string)
     });
 
     if(alreadyRegisteredToAnotherTeam){
-        return { error: "You are already registered to another team for this competition." };
+        if (followProofUrl) await deleteUploadedImage(followProofUrl);
+        if (profileUrl) await deleteUploadedImage(profileUrl);
+        return { error: "You are already registered to another team for this competition!" };
     }
 
     const teamMember = await prisma.teamMember.create({
         data: {
             user_id: userId,
             team_id: team.id,
+            follow_proof_url: followProofUrl,
+            profile_url: profileUrl
         },
     });
 

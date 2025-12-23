@@ -7,17 +7,22 @@ export async function POST(
 ) {
   try {
     const { id: userId } = await context.params;
-    const { referalCode }: { referalCode: string } = await request.json();
+    const { referalCode, followProofUrl, profileUrl } = await request.json();
 
-    if (!referalCode) {
-      return NextResponse.json({ success: false, error: "Referral code is required" }, { status: 400 });
+    if (!referalCode || !followProofUrl || !profileUrl) {
+      return NextResponse.json(
+        { success: false, error: "Referral code, profile image, and follow proof are required" }, 
+        { status: 400 }
+      );
     }
 
-    const team = await joinTeamByReferalCode(userId, referalCode);
+    const team = await joinTeamByReferalCode(userId, referalCode, followProofUrl, profileUrl);
 
-    // handle joinTeamByReferalCode returning { error: string } or null/undefined
     if (!team || (typeof team === "object" && "error" in team)) {
-      return NextResponse.json({ success: false, error: team?.error || "Invalid referral code or failed to join" }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: team?.error || "Invalid referral code or failed to join" }, 
+        { status: 400 }
+      );
     }
 
     return NextResponse.json(

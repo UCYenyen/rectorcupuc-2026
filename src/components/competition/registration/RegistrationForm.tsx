@@ -32,41 +32,43 @@ export default function RegistrationForm({
 
     const formEl = e.currentTarget;
     const fd = new FormData(formEl);
-    const file = fd.get("instagramProof") as File | null;
 
-    let imageUrl = "";
+    const instagramFile = fd.get("instagramProof") as File | null;
+    const profileFile = fd.get("profileImage") as File | null;
 
-    if (file && file instanceof File) {
-      try {
-        setUploading(true);
-        const uploadFd = new FormData();
-        uploadFd.append("file", file);
+    try {
+      setUploading(true);
 
-        const res = await fetch("/api/image/upload", {
-          method: "POST",
-          body: uploadFd,
-        });
-        const json = await res.json();
-        if (!res.ok) throw new Error(json?.error || "Upload failed");
-        imageUrl = json.url;
-      } catch (err) {
-        setUploadError(err instanceof Error ? err.message : String(err));
-        setUploading(false);
-        return;
-      } finally {
-        setUploading(false);
+      let instagramProofUrl = "";
+      let profileImageUrl = "";
+
+      if (instagramFile && instagramFile.size > 0) {
+        const f1 = new FormData();
+        f1.append("file", instagramFile);
+        const res1 = await fetch("/api/image/upload", { method: "POST", body: f1 });
+        const json1 = await res1.json();
+        if (!res1.ok) throw new Error(json1.error || "Gagal upload bukti instagram");
+        instagramProofUrl = json1.url;
       }
+
+      if (profileFile && profileFile.size > 0) {
+        const f2 = new FormData();
+        f2.append("file", profileFile);
+        const res2 = await fetch("/api/image/upload", { method: "POST", body: f2 });
+        const json2 = await res2.json();
+        if (!res2.ok) throw new Error(json2.error || "Gagal upload foto profil");
+        profileImageUrl = json2.url;
+      }
+
+      fd.set("instagramProofUrl", instagramProofUrl);
+      fd.set("profileImageUrl", profileImageUrl);
+
+      formAction(fd);
+    } catch (err: any) {
+      setUploadError(err.message);
+    } finally {
+      setUploading(false);
     }
-
-    // Kirim ke server action (registerTeam) sebagai FormData
-    const submitFd = new FormData();
-    submitFd.append("teamName", String(fd.get("teamName") ?? ""));
-    if (imageUrl) submitFd.append("instagramProofUrl", imageUrl);
-
-    // Jalankan pemanggilan action di dalam transition agar isPending ter-update
-    React.startTransition(() => {
-      void formAction(submitFd);
-    });
   }
 
   useEffect(() => {
@@ -76,22 +78,24 @@ export default function RegistrationForm({
   }, [state.success, router]);
 
   return (
-    <div className="max-w-md mx-auto p-4 flex flex-col justify-center items-start w-full gap-8 text-white">
-      <h1 className="text-2xl md:text-4xl font-bold w-full text-center">REGISTRATION</h1>
-      {state.error && (
-        <div className="bg-red-100 text-red-700 p-3 rounded mb-4 w-full text-center">
-          {state.error}
-        </div>
-      )}
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-4 text-white" 
+    >
+      {state.success ? (
+        <div className="text-green-600 font-bold">Registration Successful!</div>
+      ) : (
+        <>
+          <h2 className="text-3xl text-white text-center uppercase font-bold">
+            Register Team
+          </h2>
 
-      {state.success && (
-        <div className="bg-green-100 text-green-700 p-3 rounded mb-4 w-full text-center">
-          Registration Success!
-        </div>
-      )}
+          {state.error && (
+            <div className="bg-red-100 border-2 border-red-600 text-red-600 p-3 rounded font-bold text-sm">
+              {state.error}
+            </div>
+          )}
 
-      {!state.success && (
-        <form onSubmit={handleSubmit} className="space-y-4 w-full justify-center items-start flex flex-col gap-2">
           <div className="space-y-2 w-full flex flex-col gap-1 items-center justify-center">
             <label htmlFor="teamName" className="block text-start w-full font-bold">
               Team Name
@@ -101,11 +105,10 @@ export default function RegistrationForm({
               id="teamName"
               name="teamName"
               required
-              className="w-full border rounded p-2"
+              className="w-full border-2 rounded p-2 focus:ring-2 focus:ring-purple-500 outline-none"
             />
           </div>
 
-          {/* Upload Instagram Proof */}
           <div className="space-y-2 w-full flex flex-col gap-1 items-center justify-center">
             <label htmlFor="instagramProof" className="block text-start w-full font-bold">
               Screenshot Follow Rector's Instagram
@@ -116,29 +119,44 @@ export default function RegistrationForm({
               name="instagramProof"
               accept="image/*"
               required
-              className="w-full border rounded p-2"
+              className="w-full border-2 rounded p-2"
             />
           </div>
 
-          {uploadError && <div className="text-red-600">{uploadError}</div>}
-          {uploading && <div>Uploading image...</div>}
-          
+          <div className="space-y-2 w-full flex flex-col gap-1 items-center justify-center">
+            <label htmlFor="profileImage" className="block text-start w-full font-bold">
+              Selfie Image
+            </label>
+            <input
+              type="file"
+              id="profileImage"
+              name="profileImage"
+              accept="image/*"
+              required
+              className="w-full border-2 rounded p-2"
+            />
+          </div>
+
+          {uploadError && <div className="text-red-600 font-bold text-sm">{uploadError}</div>}
+          {uploading && <div className="text-purple-600 font-bold animate-pulse text-sm">Uploading images...</div>}
+
           {isLoading ? (
-            <div>Loading...</div>
+            <div className="text-center font-bold">Loading...</div>
           ) : !isLoggedIn ? (
-            <div className="bg-yellow-100 text-yellow-700 p-3 rounded">
+            <div className="bg-yellow-100 border-2 border-yellow-600 text-yellow-700 p-3 rounded font-bold text-sm">
               Please log in to register your team.
             </div>
           ) : (
             <button
               type="submit"
-              className="bg-black/40 border-white border-3 text-white py-2 px-4 w-full rounded-lg uppercase font-bold"
+              disabled={uploading}
+              className="bg-black/40 border-white border-3 text-white py-3 px-4 w-full rounded-xl uppercase font-black hover:bg-purple-700 transition-colors disabled:bg-gray-400"
             >
-              Register
+              {uploading ? "Processing..." : "Register"}
             </button>
           )}
-        </form>
+        </>
       )}
-    </div>
+    </form>
   );
 }

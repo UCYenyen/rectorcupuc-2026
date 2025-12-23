@@ -67,7 +67,8 @@ export async function registerTeamToCompetition(
     slug: string, 
     teamName: string, 
     leaderId: string, 
-    proofUrl: string
+    proofUrl: string,
+    profileUrl: string
 ){
     const competition = await prisma.competition.findUnique({
         where: { slug: slug },
@@ -99,7 +100,8 @@ export async function registerTeamToCompetition(
                 competition_id: competition.id,
                 team_id: team.id,
                 user_id: leaderId,
-                image_url: proofUrl, 
+                follow_proof_url: proofUrl,
+                profile_url: profileUrl,
             },
         });
         return { team, registration };

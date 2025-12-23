@@ -133,15 +133,40 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
             <div className="mt-8 space-y-3">
               <p className="text-[#AAF3D5]/70 text-xs uppercase tracking-wider font-bold">Instagram Proof Screenshot</p>
               <div className="rounded-xl overflow-hidden border-2 border-[#AAF3D5]/30 bg-black/20">
-                {selectedReg.image_url ? (
+                {selectedReg.follow_proof_url ? (
                   <>
                     <img
-                      src={selectedReg.image_url}
+                      src={selectedReg.follow_proof_url}
                       alt="Proof"
                       className="w-full h-auto object-contain max-h-[500px]"
                     />
                     <a
-                      href={selectedReg.image_url}
+                      href={selectedReg.follow_proof_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block w-full text-center bg-[#AAF3D5] text-black font-bold py-3 hover:bg-white transition-colors uppercase text-sm"
+                    >
+                      Open Full Quality Image
+                    </a>
+                  </>
+                ) : (
+                  <div className="p-8 text-center text-red-400 italic">No proof image found</div>
+                )}
+              </div>
+            </div>
+
+             <div className="mt-8 space-y-3">
+              <p className="text-[#AAF3D5]/70 text-xs uppercase tracking-wider font-bold">Selfie Image</p>
+              <div className="rounded-xl overflow-hidden border-2 border-[#AAF3D5]/30 bg-black/20">
+                {selectedReg.profile_url ? (
+                  <>
+                    <img
+                      src={selectedReg.profile_url}
+                      alt="Proof"
+                      className="w-full h-auto object-contain max-h-[500px]"
+                    />
+                    <a
+                      href={selectedReg.profile_url}
                       target="_blank"
                       rel="noreferrer"
                       className="block w-full text-center bg-[#AAF3D5] text-black font-bold py-3 hover:bg-white transition-colors uppercase text-sm"
