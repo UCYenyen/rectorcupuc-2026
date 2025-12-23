@@ -29,7 +29,7 @@ export default async function RootLayout({
           <NavigationBar />
           {children}
           <Footer />
-          {/* <div className="fixed inset-0 z-[9999] pointer-events-none">
+          <div className="fixed inset-0 z-[9999] pointer-events-none">
             <PixelTrail
               gridSize={50}
               trailSize={0.05}
@@ -38,7 +38,7 @@ export default async function RootLayout({
               color="#AAF3D5"
               className="pointer-events-none"
             />
-          </div> */}
+          </div>
         </Provider>
         <Analytics />
         <SpeedInsights />
