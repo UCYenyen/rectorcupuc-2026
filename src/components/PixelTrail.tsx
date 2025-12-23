@@ -81,7 +81,10 @@ const DotMaterial = shaderMaterial(
       vec2 screenUv = gl_FragCoord.xy / resolution;
       vec2 uv = coverUv(screenUv);
       vec2 gridUvCenter = (floor(uv * gridSize) + 0.5) / gridSize;
-      float trail = texture2D(mouseTrail, gridUvCenter).r;
+      
+      vec2 clampedUv = clamp(gridUvCenter, 0.0, 1.0);
+      float trail = texture2D(mouseTrail, clampedUv).r;
+      
       gl_FragColor = vec4(pixelColor, trail);
     }
   `
@@ -102,12 +105,16 @@ function Scene({ gridSize, trailSize, maxAge, interpolate, easingFunction, pixel
     ease: easingFunction || ((x: number) => x)
   }) as [THREE.Texture | null, (e: ThreeEvent<PointerEvent>) => void];
 
-  if (trail) {
-    trail.minFilter = THREE.NearestFilter;
-    trail.magFilter = THREE.NearestFilter;
-    trail.wrapS = THREE.ClampToEdgeWrapping;
-    trail.wrapT = THREE.ClampToEdgeWrapping;
-  }
+  useEffect(() => {
+    if (trail) {
+      trail.minFilter = THREE.NearestFilter;
+      trail.magFilter = THREE.NearestFilter;
+      trail.wrapS = THREE.ClampToEdgeWrapping;
+      trail.wrapT = THREE.ClampToEdgeWrapping;
+      trail.format = THREE.RGBAFormat;
+      trail.type = THREE.UnsignedByteType;
+    }
+  }, [trail]);
 
   const scale = Math.max(viewport.width, viewport.height) / 2;
 
@@ -134,7 +141,9 @@ export default function PixelTrail({
   glProps = {
     antialias: false,
     powerPreference: 'high-performance',
-    alpha: true
+    alpha: true,
+    preserveDrawingBuffer: false,
+    premultipliedAlpha: true
   },
   gooeyFilter,
   color = '#ffffff',
