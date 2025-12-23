@@ -18,7 +18,7 @@ export default async function page() {
           <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
             <CompetitionPicker
               src="/competitions/hero/dance.webp"
-              link="/competitions/dance/register"
+              link="/competitions/register/dance"
               title="Dance"
               alt="rectorcupuc dance"
               className="w-full h-full aspect-square object-cover"
@@ -26,7 +26,7 @@ export default async function page() {
             
             <CompetitionPicker
               src="/competitions/hero/solo-singing.webp"
-              link="/competitions/solo-singing/register"
+              link="/competitions/register/solo-singing"
               title="Solo Singing"
               alt="rectorcupuc solo-singing"
               className="w-full h-full aspect-square object-cover"
@@ -34,7 +34,7 @@ export default async function page() {
             
             <CompetitionPicker
               src="/competitions/hero/duet-singing.webp"
-              link="/competitions/duet-singing/register"
+              link="/competitions/register/duet-singing"
               title="Duet Singing"
               alt="rectorcupuc duet-singing"
               className="w-full h-full aspect-square object-cover"
@@ -42,7 +42,7 @@ export default async function page() {
             
             <CompetitionPicker
               src="/competitions/hero/photography.webp"
-              link="/competitions/photography/register"
+              link="/competitions/register/photography"
               title="Photography"
               alt="rectorcupuc photography"
               className="w-full h-full aspect-square object-cover"
@@ -50,7 +50,7 @@ export default async function page() {
             
             <CompetitionPicker
               src="/competitions/hero/poster.webp"
-              link="/competitions/poster/register"
+              link="/competitions/register/poster"
               title="Poster"
               alt="rectorcupuc poster"
               className="w-full h-full aspect-square object-cover"
@@ -58,7 +58,7 @@ export default async function page() {
             
             <CompetitionPicker
               src="/competitions/hero/poetry.webp"
-              link="/competitions/poetry/register"
+              link="/competitions/register/poetry"
               title="Poetry"
               alt="rectorcupuc poetry"
               className="w-full h-full aspect-square object-cover"

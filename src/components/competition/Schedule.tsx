@@ -20,17 +20,17 @@ type MatchWithVenue = Match & { venue?: string };
 export default function Schedule({ matches, teams }: { matches: MatchWithVenue[], teams: Team[] }) {
   const getTeamName = (teamId: string) => {
     if (!teams || teams.length === 0) return "No Teams Loaded";
-    
+
     const team = teams.find((t) => String(t.id) === String(teamId));
-    return team ? team.name : `Team Not Found (${teamId.substring(0,5)}...)`;
+    return team ? team.name : `Team Not Found (${teamId.substring(0, 5)}...)`;
   };
 
   const schedules = (matches || []).reduce<DailySchedule[]>((acc, m) => {
     const startTime = new Date(m.startTime);
     const date = startTime.toISOString().split('T')[0];
-    const time = startTime.toLocaleTimeString('en-US', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
+    const time = startTime.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit'
     });
 
     const matchData: FormattedMatch = {
@@ -42,13 +42,13 @@ export default function Schedule({ matches, teams }: { matches: MatchWithVenue[]
     };
 
     const existingDay = acc.find(day => day.date === date);
-    
+
     if (existingDay) {
       existingDay.matches.push(matchData);
     } else {
       acc.push({ date, matches: [matchData] });
     }
-    
+
     return acc;
   }, []);
 
@@ -67,41 +67,44 @@ export default function Schedule({ matches, teams }: { matches: MatchWithVenue[]
 
   return (
     <div className="p-4 sm:p-6">
-      <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">Match Schedule</h2>
-      <div className="space-y-6">
-        {schedules.map((day) => (
-          <div key={day.date} className="bg-gradient-to-r from-[#390D62]/40 to-[#6226A4]/40 border-2 border-[#AAF3D5] rounded-lg p-4">
-            <h3 className="text-lg font-bold text-[#AAF3D5] mb-4">
-              {new Date(day.date).toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </h3>
-            <div className="space-y-3">
-              {day.matches.map((match, matchIndex) => (
-                <div
-                  key={`${day.date}-${matchIndex}`}
-                  className="bg-black/30 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-white font-bold text-lg">{match.time}</span>
-                  </div>
-                  <div className="flex-1 flex items-center justify-center gap-3">
-                    <span className="text-white font-medium text-center">{match.team1Name}</span>
-                    <span className="text-[#AAF3D5] font-bold">VS</span>
-                    <span className="text-white font-medium text-center">{match.team2Name}</span>
-                  </div>
-                  <div className={`px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(match.status)}`}>
+      {schedules.length === 0 ? (
+        <div className="p-8 text-center text-white/40 border-2 border-dashed border-white/10 rounded-xl">No matches scheduled.</div>
+      ) : (
+        <div className="space-y-6">
+          {schedules.map((day) => (
+            <div key={day.date} className="bg-gradient-to-r from-[#390D62]/40 to-[#6226A4]/40 border-2 border-[#AAF3D5] rounded-lg p-4">
+              <h3 className="text-lg font-bold text-[#AAF3D5] mb-4">
+                {new Date(day.date).toLocaleDateString('en-US', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </h3>
+              <div className="space-y-3">
+                {day.matches.map((match, matchIndex) => (
+                  <div
+                    key={`${day.date}-${matchIndex}`}
+                    className="bg-black/30 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-white font-bold text-lg">{match.time}</span>
+                    </div>
+                    <div className="flex-1 flex items-center justify-center gap-3">
+                      <span className="text-white font-medium text-center">{match.team1Name}</span>
+                      <span className="text-[#AAF3D5] font-bold">VS</span>
+                      <span className="text-white font-medium text-center">{match.team2Name}</span>
+                    </div>
+                    <div className={`px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(match.status)}`}>
                       {match.status.toUpperCase()}
                     </div>
-                </div>
-              ))}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

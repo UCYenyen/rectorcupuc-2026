@@ -2,6 +2,7 @@ import { getCompetitionBySlug } from "@/lib/competition";
 import { redirect } from "next/dist/client/components/navigation";
 import { auth } from "@/lib/auth";
 import { checkUserRegistrationStatus } from "@/lib/competition";
+import CompetitionDetailsDataReciever from "@/components/competition/CompetitionDetailsDataReciever";
 
 interface ProblemPageProps {
   params: Promise<{
@@ -19,14 +20,10 @@ export default async function BasketballPutraPage({ params }: ProblemPageProps) 
   }
 
   if (!session) {
-    return redirect('/');
-  }
-
-  let isRegistered = false;
-  try {
-    isRegistered = await checkUserRegistrationStatus(session.user.id, competitionData.id);
-  } catch {
-    isRegistered = false;
+    return <CompetitionDetailsDataReciever competitionData={competitionData} isRegistered={false} />;
+  } else {
+    const isRegistered = await checkUserRegistrationStatus(session.user.id, competitionData.id);
+    return <CompetitionDetailsDataReciever competitionData={competitionData} isRegistered={isRegistered} />;
   }
 
   return;

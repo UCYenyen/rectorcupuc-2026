@@ -66,8 +66,8 @@ export default function RegistrationForm({
       fd.set("profileImageUrl", profileImageUrl);
 
       formAction(fd);
-    } catch (err: any) {
-      setUploadError(err.message);
+    } catch {
+      setUploadError("Failed to upload images");
     } finally {
       setUploading(false);
     }
@@ -107,7 +107,7 @@ export default function RegistrationForm({
               id="teamName"
               name="teamName"
               required
-              className="w-full border-2 rounded p-2 focus:ring-2 focus:ring-purple-500 outline-none"
+              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none"
             />
           </div>
 
@@ -121,7 +121,7 @@ export default function RegistrationForm({
               name="instagramProof"
               accept="image/*"
               required
-              className="w-full border-2 rounded p-2"
+              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl"
             />
           </div>
 
@@ -135,7 +135,7 @@ export default function RegistrationForm({
               name="profileImage"
               accept="image/*"
               required
-              className="w-full border-2 rounded p-2"
+              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none"
             />
           </div>
 

@@ -1,8 +1,9 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react"; // Tambah useRef
 import { useSession } from "next-auth/react";
 import { BsCopy } from "react-icons/bs";
 import StripeBackground from "../StripeBackground";
+import gsap from "gsap"; // Import GSAP
 
 interface CompetitionRegistration {
   id: string;
@@ -25,14 +26,16 @@ interface CompetitionRegistration {
 
 export default function UserDashboard() {
   const { data: session } = useSession();
-  const [registrations, setRegistrations] = useState<CompetitionRegistration[]>(
-    []
-  );
+  const [registrations, setRegistrations] = useState<CompetitionRegistration[]>([]);
   const [showJoinModal, setShowJoinModal] = useState<boolean>(false);
   const [referalCode, setReferalCode] = useState<string>("");
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [followProof, setFollowProof] = useState<File | null>(null);
   const [isJoining, setIsJoining] = useState<boolean>(false);
+
+  // REFS UNTUK GSAP
+  const modalRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   const fetchRegistrations = useCallback(async () => {
     if (!session?.user?.id) return;
@@ -52,6 +55,23 @@ export default function UserDashboard() {
   useEffect(() => {
     fetchRegistrations();
   }, [fetchRegistrations]);
+
+  // ANIMASI SAAT MODAL DIBUKA
+  useEffect(() => {
+    if (showJoinModal) {
+      // Overlay fade in
+      gsap.fromTo(overlayRef.current, 
+        { opacity: 0 }, 
+        { opacity: 1, duration: 0.3 }
+      );
+      
+      // Panel slide up & scale (iOS feel)
+      gsap.fromTo(modalRef.current, 
+        { y: 100, opacity: 0, scale: 0.95 }, 
+        { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power4.out" }
+      );
+    }
+  }, [showJoinModal]);
 
   const uploadFile = async (file: File) => {
     const uploadFd = new FormData();
@@ -73,11 +93,22 @@ export default function UserDashboard() {
   };
 
   const closeJoinModal = () => {
-    setShowJoinModal(false);
-    setReferalCode("");
-    setProfileImage(null);
-    setFollowProof(null);
-    setIsJoining(false);
+    // Animasi keluar sebelum menutup state
+    gsap.to(modalRef.current, {
+      y: 50,
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.3,
+      ease: "power2.in",
+      onComplete: () => {
+        setShowJoinModal(false);
+        setReferalCode("");
+        setProfileImage(null);
+        setFollowProof(null);
+        setIsJoining(false);
+      }
+    });
+    gsap.to(overlayRef.current, { opacity: 0, duration: 0.3 });
   };
 
   const handleJoinSubmit = async (e: React.FormEvent) => {
@@ -95,15 +126,13 @@ export default function UserDashboard() {
 
     setIsJoining(true);
     try {
-      // 1. Upload Images first
       const profileUrl = await uploadFile(profileImage);
       const followProofUrl = await uploadFile(followProof);
 
-      // 2. Join Team
       const res = await fetch(`/api/user/${session.user.id}/join-team`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           referalCode: referalCode.trim(),
           profileUrl: profileUrl,
           followProofUrl: followProofUrl
@@ -121,7 +150,6 @@ export default function UserDashboard() {
       closeJoinModal();
     } catch (err: any) {
       alert(err.message || "An error occurred");
-    } finally {
       setIsJoining(false);
     }
   };
@@ -143,90 +171,36 @@ export default function UserDashboard() {
           </button>
         </div>
 
+        {/* Tabel Tetap Sama */}
         <div className="relative z-5 backdrop-blur-2xl overflow-x-auto rounded-xl border-4 sm:border-[5px] border-[#AAF3D5] bg-gradient-to-r from-[#390D62]/40 to-[#6226A4]/40">
           <table className="min-w-full divide-y-4 divide-[#AAF3D5]">
             <thead className="bg-gradient-to-r from-[#6427A8]/80 to-[#EB79F0]">
               <tr>
-                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">
-                  Competition Name
-                </th>
-                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">
-                  Category
-                </th>
-                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">
-                  Team
-                </th>
-                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">
-                  Members
-                </th>
-                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">
-                  Code
-                </th>
-                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">
-                  Status
-                </th>
+                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">Competition Name</th>
+                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">Category</th>
+                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">Team</th>
+                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">Members</th>
+                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">Code</th>
+                <th className="px-4 py-3 sm:px-6 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white uppercase tracking-wider whitespace-nowrap">Status</th>
               </tr>
             </thead>
-
             <tbody className="divide-y divide-gray-200/20">
               {registrations.length === 0 ? (
-                <tr>
-                  <td
-                    colSpan={6}
-                    className="px-4 py-8 text-center text-white text-sm sm:text-base"
-                  >
-                    You have not joined any competitions yet.
-                  </td>
-                </tr>
+                <tr><td colSpan={6} className="px-4 py-8 text-center text-white text-sm sm:text-base">You have not joined any competitions yet.</td></tr>
               ) : (
                 registrations.map((reg) => (
-                  <tr
-                    key={reg.id}
-                    className="bg-black/25 hover:bg-white/10 transition-colors duration-200"
-                  >
+                  <tr key={reg.id} className="bg-black/25 hover:bg-white/10 transition-colors duration-200">
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-white">{reg.competition.name}</td>
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-white">{reg.competition.category}</td>
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-white">{reg.team.name}</td>
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-white">{reg.team.current_team_members}/{reg.team.max_team_members}</td>
                     <td className="px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-white">
-                      <span className="line-clamp-2 max-w-[200px]">
-                        {reg.competition.name}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-white">
-                      {reg.competition.category}
-                    </td>
-                    <td className="px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-white">
-                      <span className="line-clamp-1 max-w-[150px]">
-                        {reg.team.name}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-white">
-                      {reg.team.current_team_members}/{reg.team.max_team_members}
-                    </td>
-                    <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-white">
-                      <button
-                        className="flex items-center gap-1 sm:gap-2 hover:text-[#AAF3D5] transition-colors"
-                        onClick={() => {
-                          navigator.clipboard.writeText(
-                            reg.competition.referal_code
-                          );
-                          alert("Code copied to clipboard!");
-                        }}
-                        title="Click to copy"
-                      >
-                        <span className="max-w-[100px] truncate">
-                          {reg.competition.referal_code}
-                        </span>
-                        <BsCopy className="flex-shrink-0" />
+                      <button onClick={() => { navigator.clipboard.writeText(reg.competition.referal_code); alert("Code copied!"); }} className="flex items-center gap-2">
+                        {reg.competition.referal_code} <BsCopy />
                       </button>
                     </td>
-                    <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm">
-                      <span
-                        className={`inline-flex px-2 py-1 rounded-full text-xs font-semibold ${
-                          reg.registration_status === "Pending"
-                            ? "bg-yellow-100 text-yellow-800"
-                            : reg.registration_status === "Registered"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
-                        }`}
-                      >
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm">
+                      <span className={`px-2 py-1 rounded-full ${reg.registration_status === "Pending" ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800"}`}>
                         {reg.registration_status}
                       </span>
                     </td>
@@ -240,51 +214,53 @@ export default function UserDashboard() {
 
       {showJoinModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Tambahkan ref ke overlay */}
           <div
-            className="absolute inset-0 bg-black opacity-60"
+            ref={overlayRef}
+            className="absolute inset-0 bg-[#5D239F]/60 backdrop-blur-sm"
             onClick={closeJoinModal}
           />
-          <div className="relative bg-[#390D62] border-[#AAF3D5] border-3 rounded-lg shadow-2xl w-full max-w-md p-6 z-10 overflow-y-auto max-h-[90vh]">
-            <h3 className="text-xl sm:text-2xl text-white font-bold mb-4 uppercase">
-              Join Team
-            </h3>
-            <form onSubmit={handleJoinSubmit} className="flex flex-col gap-4">
-              <div>
-                <label className="block text-sm font-medium text-white mb-1">
-                  Referral Code
-                </label>
+          {/* Tambahkan ref ke modal panel */}
+          <div 
+            ref={modalRef}
+            className="relative z-10 border-[#DFE5E1] bg-gradient-to-r from-[#FFE694] via-white/80 to-white/60 border-4 backdrop-blur-2xl rounded-2xl shadow-2xl text-center max-w-md w-full overflow-hidden"
+          >
+            <div className="w-full flex justify-center items-center bg-gradient-to-r from-[#DD7CDF] via-[#FAE39F] to-white/0 py-2 shadow-xs border-b-4 border-[#DFE5E1]">
+              <h3 className="text-xl sm:text-2xl text-[#1E0843] font-bold uppercase">
+                Join Team
+              </h3>
+            </div>
+            <form onSubmit={handleJoinSubmit} className="flex flex-col gap-4 pt-4 px-8 pb-8 text-[#1E0843]">
+              <div className="flex flex-col w-full gap-1">
+                <label className="block text-lg w-full text-start font-bold">REFERRAL CODE</label>
                 <input
                   type="text"
                   value={referalCode}
                   onChange={(e) => setReferalCode(e.target.value)}
-                  className="w-full border-2 border-white bg-transparent rounded-lg px-4 py-2 text-white focus:border-[#AAF3D5] focus:outline-none"
+                  className="w-full border-2 border-white rounded-lg px-4 py-2 text-white bg-[#1E0843]/50 backdrop-blur-2xl"
                   placeholder="Enter team referral code"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-1">
-                  Profile Picture
-                </label>
+                <label className="block text-lg w-full text-start font-bold uppercase">Profile Picture</label>
                 <input
                   type="file"
                   accept="image/*"
                   onChange={(e) => setProfileImage(e.target.files?.[0] || null)}
-                  className="w-full text-white text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-white file:text-black hover:file:bg-gray-200 cursor-pointer"
+                  className="w-full border-2 border-white rounded-lg px-4 py-2 text-white bg-[#1E0843]/50 backdrop-blur-2xl"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-1">
-                  Follow Proof (Screenshot)
-                </label>
+                <label className="block text-lg w-full text-start font-bold uppercase">Follow Proof (Screenshot)</label>
                 <input
                   type="file"
                   accept="image/*"
                   onChange={(e) => setFollowProof(e.target.files?.[0] || null)}
-                  className="w-full text-white text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-white file:text-black hover:file:bg-gray-200 cursor-pointer"
+                  className="w-full border-2 border-white rounded-lg px-4 py-2 text-white bg-[#1E0843]/50 backdrop-blur-2xl"
                   required
                 />
               </div>
@@ -293,14 +269,14 @@ export default function UserDashboard() {
                 <button
                   type="button"
                   onClick={closeJoinModal}
-                  className="w-full sm:w-auto px-4 py-2 bg-black/40 backdrop-blur-2xl border-white border-3 rounded-lg hover:bg-red-900 text-white font-medium transition-colors"
+                  className="w-full sm:w-auto px-4 py-2 text-white bg-[#1E0843]/50 backdrop-blur-2xl border-white border-3 rounded-lg hover:bg-red-900 font-medium transition-colors"
                   disabled={isJoining}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-4 py-2 bg-black/40 backdrop-blur-2xl border-white border-3 rounded-lg hover:bg-purple-800 text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto px-4 py-2 text-white bg-[#1E0843]/50 backdrop-blur-2xl border-white border-3 rounded-lg hover:bg-purple-800 font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={isJoining}
                 >
                   {isJoining ? "Uploading..." : "Join Team"}

@@ -23,7 +23,7 @@ export default function CompetitionRules({ rules, slug, isRegistered }: { rules?
 
         <div className="flex flex-col gap-2 justify-center items-center">
           {!isRegistered ? (
-            <Link href={`/competitions/${slug}/register`} className="w-full text-center border-3 border-white bg-black/40 hover:bg-purple-800 text-white font-bold py-3 rounded-lg uppercase transition-all duration-200">
+            <Link href={`/competitions/register/${slug}`} className="w-full text-center border-3 border-white bg-black/40 hover:bg-purple-800 text-white font-bold py-3 rounded-lg uppercase transition-all duration-200">
               Register
             </Link>
           ) : (

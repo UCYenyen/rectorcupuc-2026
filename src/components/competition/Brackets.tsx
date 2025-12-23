@@ -25,8 +25,8 @@ interface BracketsProps {
 export default function Brackets({ matches }: BracketsProps) {
   if (!matches || matches.length === 0) {
     return (
-      <div className="p-8 text-center text-white/60">
-        No matches yet for this competition!
+      <div className="p-4 sm:p-6">
+        <div className="p-8 text-center text-white/40 border-2 border-dashed border-white/10 rounded-xl">No matches yet for this competition.</div>
       </div>
     );
   }

@@ -26,7 +26,7 @@ export default function LiveScore({ competitionId, initialMatches }: { competiti
 
   useEffect(() => {
     if (!socket) socket = io();
-    
+
     socket.emit("join-competition", competitionId);
 
     socket.on("score-updated-client", (data) => {
@@ -47,14 +47,18 @@ export default function LiveScore({ competitionId, initialMatches }: { competiti
   }, [competitionId, selectedMatchId]);
 
   if (ongoingMatches.length === 0) {
-    return <div className="p-12 text-center text-white/40 italic">Tidak ada pertandingan live.</div>;
+    return (
+      <div className="p-4 sm:p-6">
+        <div className="p-8 text-center text-white/40 border-2 border-dashed border-white/10 rounded-xl">No ongoing matches.</div>
+      </div>
+    );
   }
 
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2 px-4">
-        <label className="text-white text-[10px] font-bold uppercase tracking-wider opacity-60">Pilih Pertandingan Live</label>
-        <select 
+        <label className="text-white text-[10px] font-bold uppercase tracking-wider opacity-60">Select Live Match</label>
+        <select
           value={selectedMatchId}
           onChange={(e) => setSelectedMatchId(e.target.value)}
           className="bg-black/40 border-2 border-[#AAF3D5] text-white p-2 rounded-lg outline-none font-bold"

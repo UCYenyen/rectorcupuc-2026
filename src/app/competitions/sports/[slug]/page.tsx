@@ -19,11 +19,10 @@ export default async function BasketballPutraPage({ params }: ProblemPageProps) 
     return redirect('/not-found');
   }
 
-  if(!session){
-    return redirect('/');
+  if (!session) {
+    return <CompetitionDetailsDataReciever competitionData={competitionData} isRegistered={false} />;
+  } else {
+    const isRegistered = await checkUserRegistrationStatus(session.user.id, competitionData.id);
+    return <CompetitionDetailsDataReciever competitionData={competitionData} isRegistered={isRegistered} />;
   }
-  const isRegistered = await checkUserRegistrationStatus(session.user.id, competitionData.id);
-
-
-  return <CompetitionDetailsDataReciever competitionData={competitionData} isRegistered={isRegistered} />;
 }
