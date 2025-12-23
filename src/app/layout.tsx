@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Provider } from "@/components/Provider";
 import NavigationBar from "@/components/NavigationBar";
 import { auth } from "@/lib/auth";
-import PixelTrail from "@/components/PixelTrail";
+// import PixelTrail from "@/components/PixelTrail";
 import Footer from "@/components/Footer";
 import { montserrat, pressStart, brunson } from "./fonts";
 
@@ -29,7 +29,7 @@ export default async function RootLayout({
           <NavigationBar />
           {children}
           <Footer />
-          <div className="fixed inset-0 z-[9999] pointer-events-none">
+          {/* <div className="fixed inset-0 z-[9999] pointer-events-none">
             <PixelTrail
               gridSize={50}
               trailSize={0.05}
@@ -38,7 +38,7 @@ export default async function RootLayout({
               color="#AAF3D5"
               className="pointer-events-none"
             />
-          </div>
+          </div> */}
         </Provider>
         <Analytics />
         <SpeedInsights />
