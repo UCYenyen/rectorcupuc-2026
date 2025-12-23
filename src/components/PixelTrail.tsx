@@ -114,6 +114,23 @@ function Scene({ gridSize, trailSize, maxAge, interpolate, easingFunction, pixel
     ease: easingFunction || ((x: number) => x)
   }) as [THREE.Texture | null, (e: ThreeEvent<PointerEvent>) => void];
 
+  const [fallbackTexture] = useState(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 512;
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.fillStyle = 'black';
+      ctx.fillRect(0, 0, 512, 512);
+    }
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.minFilter = THREE.NearestFilter;
+    texture.magFilter = THREE.NearestFilter;
+    texture.wrapS = THREE.ClampToEdgeWrapping;
+    texture.wrapT = THREE.ClampToEdgeWrapping;
+    return texture;
+  });
+
   useEffect(() => {
     if (trail) {
       trail.minFilter = THREE.NearestFilter;
@@ -128,6 +145,7 @@ function Scene({ gridSize, trailSize, maxAge, interpolate, easingFunction, pixel
   }, [trail]);
 
   const scale = Math.max(viewport.width, viewport.height) / 2;
+  const activeTrail = trail || fallbackTexture;
 
   return (
     <mesh scale={[scale, scale, 1]} onPointerMove={onMove}>
@@ -136,7 +154,7 @@ function Scene({ gridSize, trailSize, maxAge, interpolate, easingFunction, pixel
         object={dotMaterial}
         gridSize={gridSize}
         resolution={[size.width * viewport.dpr, size.height * viewport.dpr]}
-        mouseTrail={trail}
+        mouseTrail={activeTrail}
       />
     </mesh>
   );
