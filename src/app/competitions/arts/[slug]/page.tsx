@@ -1,4 +1,3 @@
-import CompetitionDetailsDataReciever from "@/components/competition/CompetitionDetailsDataReciever";
 import { getCompetitionBySlug } from "@/lib/competition";
 import { redirect } from "next/dist/client/components/navigation";
 import { auth } from "@/lib/auth";
@@ -19,8 +18,15 @@ export default async function BasketballPutraPage({ params }: ProblemPageProps) 
     return redirect('/not-found');
   }
 
-  if(!session){
+  if (!session) {
     return redirect('/');
+  }
+
+  let isRegistered = false;
+  try {
+    isRegistered = await checkUserRegistrationStatus(session.user.id, competitionData.id);
+  } catch {
+    isRegistered = false;
   }
 
   return;
