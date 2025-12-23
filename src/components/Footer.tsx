@@ -3,7 +3,7 @@ import BottomAsset from './competition/BottomAsset'
 
 export default function Footer() {
     return (
-        <footer className='relative w-screen flex flex-col overflow-hidden'>
+        <footer className='relative w-full flex flex-col'>
             <div className='relative z-10 w-full h-[3rem]'>
                 <div className='bg-[#390D62] absolute z-4 w-screen h-full'></div>
                 <BottomAsset />

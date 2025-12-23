@@ -4,7 +4,7 @@ import StripeBackground from '../StripeBackground';
 
 export default function TrailerSection() {
   return (
-    <div className="relative bg-cover h-[40rem] sm:min-h-screen w-screen flex flex-col justify-center items-center">
+    <div className="relative bg-cover h-[40rem] sm:min-h-screen w-full flex flex-col justify-center items-center">
       <div className="bg-trailer absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] opacity-80"></div>
       <div className='relative z-10 flex flex-col justify-center items-center gap-12'>
         <h1 className='text-5xl font-bold text-white'>TRAILER</h1>
