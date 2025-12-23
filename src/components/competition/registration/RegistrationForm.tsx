@@ -7,10 +7,12 @@ import { useRouter } from "next/navigation";
 
 interface RegistrationFormProps {
   slug: string;
+  isSolo?: boolean;
 }
 
 export default function RegistrationForm({
   slug,
+  isSolo = false,
 }: RegistrationFormProps) {
   const { data: session, status } = useSession();
   const isLoggedIn = !!session;
@@ -80,15 +82,21 @@ export default function RegistrationForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-4 text-white" 
+      className="flex flex-col gap-4 text-white"
     >
       {state.success ? (
         <div className="text-green-600 font-bold">Registration Successful!</div>
       ) : (
         <>
-          <h2 className="text-3xl text-white text-center uppercase font-bold">
-            Register Team
-          </h2>
+          {isSolo ? (
+            <h2 className="text-3xl text-white text-center uppercase font-bold">
+              Register Solo for {slug.replace(/-/g, " ").toUpperCase()}
+            </h2>
+          ) : (
+            <h2 className="text-3xl text-white text-center uppercase font-bold">
+              Register Team for {slug.replace(/-/g, " ").toUpperCase()}
+            </h2>
+          )}
 
           {state.error && (
             <div className="bg-red-100 border-2 border-red-600 text-red-600 p-3 rounded font-bold text-sm">
@@ -98,7 +106,7 @@ export default function RegistrationForm({
 
           <div className="space-y-2 w-full flex flex-col gap-1 items-center justify-center">
             <label htmlFor="teamName" className="block text-start w-full font-bold">
-              Team Name
+             {isSolo ? "Your Name" : "Team Name"}
             </label>
             <input
               type="text"
