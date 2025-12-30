@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-export async function proxy(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   const imageExtensions = ['.webp', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico'];
@@ -41,13 +41,21 @@ export async function proxy(req: NextRequest) {
     secureCookie: process.env.NODE_ENV === "production"
   });
 
-  if (isProtectedRoute) {
-    if (!token) {
+  if (!token) {
+    if (isProtectedRoute) {
       const loginUrl = new URL("/api/auth/signin", req.url);
       loginUrl.searchParams.set("callbackUrl", req.nextUrl.href);
       return NextResponse.redirect(loginUrl);
     }
+    return NextResponse.next();
+  }
 
+  const email = token.email as string;
+  if (!email?.endsWith("@ciputra.ac.id") && !email?.endsWith("@student.ciputra.ac.id")) {
+    return NextResponse.redirect(new URL("/unauthorized", req.url));
+  }
+
+  if (isProtectedRoute) {
     const userRole = token.role as string;
     
     if (pathname.startsWith("/dashboard/admin/web")) {
