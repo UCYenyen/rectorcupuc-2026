@@ -1,6 +1,13 @@
 import { NextResponse } from "next/server";
+import withAuth from "next-auth/middleware";
 import type { NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
+import { Role } from "@prisma/client";
+
+const ROUTE_PERMISSIONS: Record<string, Role[]> = {
+  "/dashboard/admin/lo": [Role.liason_officer, Role.pdd_website],
+  "/dashboard/admin": [Role.pdd_website, Role.liason_officer],
+  "/dashboard/admin/web": [Role.pdd_website],
+};
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
