@@ -1,12 +1,9 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
-import { Role } from "@prisma/client";
 
-export async function proxy(req: NextRequest) {
-  const host = req.headers.get("host") || "";
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-
 
   const imageExtensions = ['.webp', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico'];
   const isImage = imageExtensions.some(ext => pathname.toLowerCase().endsWith(ext));
@@ -40,7 +37,8 @@ export async function proxy(req: NextRequest) {
 
   const token = await getToken({ 
     req, 
-    secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET 
+    secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET,
+    secureCookie: process.env.NODE_ENV === "production"
   });
 
   if (isProtectedRoute) {
@@ -53,13 +51,13 @@ export async function proxy(req: NextRequest) {
     const userRole = token.role as string;
     
     if (pathname.startsWith("/dashboard/admin/web")) {
-      if (userRole !== Role.pdd_website) {
+      if (userRole !== "pdd_website") {
         return NextResponse.redirect(new URL("/unauthorized", req.url));
       }
     } else if (pathname.startsWith("/dashboard/admin/lo")) {
       if (
-        userRole !== Role.liason_officer &&
-        userRole !== Role.pdd_website
+        userRole !== "liason_officer" &&
+        userRole !== "pdd_website"
       ) {
         return NextResponse.redirect(new URL("/unauthorized", req.url));
       }
