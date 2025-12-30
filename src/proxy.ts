@@ -7,23 +7,9 @@ export async function proxy(req: NextRequest) {
   const host = req.headers.get("host") || "";
   const { pathname } = req.nextUrl;
 
-  const isLocalHost =
-    host.includes("localhost") ||
-    host.includes("127.0.0.1") ||
-    host.includes("vercel") ||
-    host.includes("::1");
 
   const imageExtensions = ['.webp', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico'];
   const isImage = imageExtensions.some(ext => pathname.toLowerCase().endsWith(ext));
-
-  if (!isLocalHost) {
-    const allowList = ["/underdevelopment", "/api/auth", "/_next", "/favicon.ico"];
-    const isAllowed = allowList.some((path) => pathname.startsWith(path)) || isImage;
-    
-    if (!isAllowed && pathname !== "/underdevelopment") {
-      return NextResponse.redirect(new URL("/underdevelopment", req.url));
-    }
-  }
 
   const isProtectedRoute = 
     pathname.startsWith("/dashboard") || 
