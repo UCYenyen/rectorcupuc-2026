@@ -1,13 +1,6 @@
 import { NextResponse } from "next/server";
-import withAuth from "next-auth/middleware";
 import type { NextRequest } from "next/server";
-import { Role } from "@prisma/client";
-
-const ROUTE_PERMISSIONS: Record<string, Role[]> = {
-  "/dashboard/admin/lo": [Role.liason_officer, Role.pdd_website],
-  "/dashboard/admin": [Role.pdd_website, Role.liason_officer],
-  "/dashboard/admin/web": [Role.pdd_website],
-};
+import { getToken } from "next-auth/jwt";
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -48,21 +41,13 @@ export async function proxy(req: NextRequest) {
     secureCookie: process.env.NODE_ENV === "production"
   });
 
-  if (!token) {
-    if (isProtectedRoute) {
+  if (isProtectedRoute) {
+    if (!token) {
       const loginUrl = new URL("/api/auth/signin", req.url);
       loginUrl.searchParams.set("callbackUrl", req.nextUrl.href);
       return NextResponse.redirect(loginUrl);
     }
-    return NextResponse.next();
-  }
 
-  const email = token.email as string;
-  if (!email?.endsWith("@ciputra.ac.id") && !email?.endsWith("@student.ciputra.ac.id")) {
-    return NextResponse.redirect(new URL("/unauthorized", req.url));
-  }
-
-  if (isProtectedRoute) {
     const userRole = token.role as string;
     
     if (pathname.startsWith("/dashboard/admin/web")) {
