@@ -1,11 +1,15 @@
-import React from "react";
-import Image from "next/image";
 import CompetitionPicker from "@/components/competition/CompetitionPicker";
 import StripeBackground from "@/components/StripeBackground";
 import RectorInlineTitle from "@/components/competition/RectorInlineTitle";
 import CompetitionTitleHeader from "@/components/competition/CompetitionTitleHeader";
+import { Metadata } from "next";
 
-export default async function page() {
+export const metadata: Metadata = {
+  title: "SPORTS Competitions - Rector Cup 2026",
+  description: "Explore the thrilling SPORTS competitions at Rector Cup 2026. Join us for an unforgettable experience!",
+};
+
+export default function page() {
   return (
     <>
       <div className='w-screen h-[10vh] md:h-[7vh]'></div>

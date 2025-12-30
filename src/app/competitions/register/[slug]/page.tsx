@@ -5,6 +5,7 @@ import { notFound } from "next/dist/client/components/navigation";
 import StripeBackground from "@/components/StripeBackground";
 import { auth } from "@/lib/auth";
 import { checkUserRegistrationStatus } from "@/lib/competition";
+
 interface ProblemPageProps {
   params: Promise<{
     slug: string;

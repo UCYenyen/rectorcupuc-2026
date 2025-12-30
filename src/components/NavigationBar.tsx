@@ -84,7 +84,7 @@ export default function NavigationBar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 z-[210] bg-gradient-to-r from-[#6427A6] to-[#E979EE] flex min-h-[7vh] py-2 px-[5%] justify-between items-center w-full overflow-hidden shadow-2xl border-y-4 border-[#ADDCE7]">
+      <nav className="fixed top-0 left-0 z-[210] bg-gradient-to-r from-[#6427A6] to-[#E979EE] flex min-h-[7vh] py-2 px-[5%] justify-between items-center w-full shadow-2xl border-y-4 border-[#ADDCE7]">
         <StripeBackground />
         <Link href={"/"} className="relative z-10">
           <Image src={"/layout/rector-logo.svg"} className="w-14 h-auto" height={80} width={80} alt="logo" />
@@ -95,7 +95,7 @@ export default function NavigationBar() {
               {item.label}
             </Link>
           ))}
-          <div className="flex items-center">
+          <div className="flex items-center relative z-100">
             {status === "loading" ? (
               <div className="w-10 h-10 rounded-full bg-zinc-200 animate-pulse" />
             ) : session ? (

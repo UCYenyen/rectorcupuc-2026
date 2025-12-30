@@ -1,11 +1,15 @@
-import React from "react";
-import Image from "next/image";
 import CompetitionPicker from "@/components/competition/CompetitionPicker";
 import StripeBackground from "@/components/StripeBackground";
 import RectorInlineTitle from "@/components/competition/RectorInlineTitle";
 import CompetitionTitleHeader from "@/components/competition/CompetitionTitleHeader";
+import { Metadata } from "next";
 
-export default async function page() {
+export const metadata: Metadata = {
+  title: "E-SPORTS Competitions - Rector Cup 2024",
+  description: "Explore the thrilling E-SPORTS competitions at Rector Cup 2024. Join us for an unforgettable gaming experience!",
+};
+
+export default function page() {
   return (
     <>
       <div className='w-screen h-[10vh] md:h-[7vh]'></div>
@@ -18,23 +22,23 @@ export default async function page() {
           <div className="w-full grid grid-cols-1 md:grid-cols-4 md:grid-rows-3 gap-3 md:h-[70vh]">
             <CompetitionPicker
               src="/competitions/hero/fifa-2v2.webp"
-              link="/competitions/esports"
+              link="/competitions/esports/fifa-2v2"
               title="Fifa 2v2"
               alt="rectorcupuc fifa-2v2"
               className="w-full h-full md:row-start-1 md:col-start-1 md:col-end-5"
             />
-            
+
             <CompetitionPicker
               src="/competitions/hero/mobile-legends.webp"
-              link="/competitions/esports"
+              link="/competitions/esports/mobile-legends"
               title="Mobile Legends"
               alt="rectorcupuc mobile-legends"
               className="w-full h-full md:row-start-2 md:row-end-4 md:col-start-1 md:col-end-3"
             />
-            
+
             <CompetitionPicker
               src="/competitions/hero/pubg.webp"
-              link="/competitions/esports"
+              link="/competitions/esports/pubg"
               title="PUBG"
               alt="rectorcupuc pubg"
               className="w-full h-full md:row-start-2 md:row-end-4 md:col-start-3 md:col-end-5"

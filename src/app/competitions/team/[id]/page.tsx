@@ -1,10 +1,15 @@
 import { getTeamByID } from '@/lib/team'
-import React from 'react'
 import StripeBackground from '@/components/StripeBackground';
 import RectorInlineTitle from '@/components/competition/RectorInlineTitle';
 import CompetitionTitleHeader from '@/components/competition/CompetitionTitleHeader';
 import prisma from '@/lib/prisma';
-// Definisikan tipe params sebagai Promise
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Team Details - Rector Cup 2026",
+    description: "View detailed information about your team registered for competitions at Rector Cup 2026.",
+};
+
 export default async function page({ params }: { params: Promise<{ id: string }> }) {
     // 1. Await objek params terlebih dahulu [cite: 3]
     const resolvedParams = await params;

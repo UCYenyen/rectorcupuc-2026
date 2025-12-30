@@ -1,44 +1,39 @@
-import React from "react";
-import Image from "next/image";
 import CompetitionPicker from "@/components/competition/CompetitionPicker";
-// import { getAllCompetitions } from '@/lib/competition'
-// import CompetitionContainer from '@/components/competition/CompetitionContainer';
+import StripeBackground from "@/components/StripeBackground";
+import RectorInlineTitle from "@/components/competition/RectorInlineTitle";
+import CompetitionTitleHeader from "@/components/competition/CompetitionTitleHeader";
+import { Metadata } from "next";
 
-export default async function page() {
-  // const competitionData = await getAllCompetitions();
+export const metadata: Metadata = {
+  title: "Learning Competitions - Rector Cup 2026",
+  description: "Explore the thrilling Learning competitions at Rector Cup 2026. Join us for an unforgettable experience!",
+};
+
+export default function page() {
   return (
     <>
       <div className='w-screen h-[10vh] md:h-[7vh]'></div>
-      <div className="relative min-h-screen bg-[url('/home/background.svg')] w-screen overflow-hidden flex flex-col justify-center items-center">
+      <div className="relative min-h-screen w-screen overflow-hidden flex flex-col justify-center items-center gap-4">
         <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1] overflow-hidden"></div>
-        <Image src={"/home/background.svg"} width={1000} height={1000} alt="rectorcupuc background" className="w-full h-full object-center object-cover z-1 absolute"></Image>
-        <div className="relative z-2 mt-[10%] flex flex-col gap-4 w-[90%] justify-center items-center border-4 border-[#AAF3D5] p-4 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
-          <Image
-            src={"/logos/rector-title.svg"}
-            width={600}
-            height={600}
-            alt="Rectorcupuc Title"
-            className="absolute w-1/4 h-auto -top-[6rem]"
-          ></Image>
-          <div className="w-full border-4 border-[#AAF3D5] rounded-2xl py-2 bg-gradient-to-r from-[#6427A8] to-[#EB79F0] flex justify-center items-center">
-            <h1 className="text-2xl">COMPETITIONS</h1>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <StripeBackground />
+        <RectorInlineTitle />
+        <div className="relative z-2 flex flex-col gap-4 w-[90%] mb-48 justify-center items-center border-8 border-[#AAF3D5] p-4 md:p-12 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
+          <CompetitionTitleHeader title="E-SPORTS" shouldFitContent={false} />
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
             <CompetitionPicker
-              src="/placeholder/football.svg"
-              alt="card"
-              link="/competitions/sports"
+              src="/competitions/hero/cerdas-cermat.webp"
+              alt="rectorcupuc cerdas cermat"
+              title="Cerdas Cermat"
+              link="/competitions/learnings/cerdas-cermat"
             ></CompetitionPicker>
             <CompetitionPicker
-              src="/placeholder/football.svg"
-              alt="card"
-              link="/competitions/arts"
+              src="/competitions/hero/catur.webp"
+              alt="rectorcupuc catur"
+              title="Catur"
+              link="/competitions/learnings/catur"
             ></CompetitionPicker>
           </div>
         </div>
-        {/* <div className="w-full max-w-5xl">
-        <CompetitionContainer items={competitionData} />
-      </div> */}
       </div>
     </>
   );

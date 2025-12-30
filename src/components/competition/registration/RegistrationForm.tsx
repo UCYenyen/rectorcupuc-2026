@@ -89,7 +89,7 @@ export default function RegistrationForm({
       ) : (
         <>
           <h2 className="text-3xl text-white text-center uppercase font-bold">
-            Register
+            {slug} Registeration
           </h2>
 
           {state.error && (
