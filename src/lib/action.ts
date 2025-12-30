@@ -4,6 +4,8 @@ import { registerTeamToCompetition } from "@/lib/competition";
 import updateRegistrationStatus from "./admin";
 import { revalidatePath } from "next/cache";
 import { updateMatchScoreDB } from "@/lib/competition";
+import prisma from "@/lib/prisma";
+import updateTeamJoinRequestStatus from "./admin";
 
 export interface RegisterTeamFormState {
   error?: string;
@@ -17,7 +19,8 @@ export interface CreateMatchFormState {
   matchId?: string;
 }
 
-const ADMIN_PAGE_PATH = "/admin/registrations";
+const ADMIN_PAGE_PATH = "/dashboard/admin/";
+const TEAM_JOIN_REQUESTS_PATH = "dashboard/admin/lo/team-join-requests";
 
 export async function registerTeam(
   leaderId: string,
@@ -115,14 +118,114 @@ export async function handleUpdateMatchScore(
 }
 
 export async function deleteUploadedImage(url: string) {
-    if (!url) return;
-    try {
-        await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/image/delete`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ url }),
-        });
-    } catch (err) {
-        console.error(err);
-    }
+  if (!url) return;
+  try {
+    await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/image/delete`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url }),
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function approveTeamJoinRequest(teamMemberId: string) {
+  try {
+    await prisma.teamMember.update({
+      where: { id: teamMemberId },
+      data: {
+        join_request_status: "Registered",
+        team: {
+          update: {
+            current_team_member: { increment: 1 },
+          },
+        },
+      },
+    });
+
+    revalidatePath(TEAM_JOIN_REQUESTS_PATH);
+    return { success: true };
+  } catch (error) {
+    console.error("Approve Error:", error);
+    return { success: false, error: "Gagal menyetujui permintaan join." };
+  }
+}
+
+export async function rejectTeamJoinRequest(teamMemberId: string) {
+  try {
+    await prisma.teamMember.update({
+      where: { id: teamMemberId },
+      data: {
+        join_request_status: "Failed",
+        team: {
+          update: {
+            current_team_member: { decrement: 1 },
+          },
+        },
+      },
+    });
+
+    revalidatePath(TEAM_JOIN_REQUESTS_PATH);
+    return { success: true };
+  } catch (error) {
+    console.error("Reject Error:", error);
+    return { success: false, error: "Gagal menolak permintaan join." };
+  }
+}
+
+export async function setTeamJoinRequestPending(teamMemberId: string) {
+  try {
+    await prisma.teamMember.update({
+      where: { id: teamMemberId },
+      data: {
+        join_request_status: "Pending",
+        team: {
+          update: {
+            current_team_member: { decrement: 1 },
+          },
+        },
+      },
+    });
+
+    revalidatePath(TEAM_JOIN_REQUESTS_PATH);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: "Gagal mengubah status ke pending." };
+  }
+}
+
+export async function getTeamJoinRequestsAction(filters: {
+  status?: "Pending" | "Registered" | "Failed";
+  searchParticipant?: string;
+  competitionId?: string;
+  teamName?: string;
+}) {
+  const { status, searchParticipant, competitionId, teamName } = filters;
+
+  return await prisma.teamMember.findMany({
+    where: {
+      join_request_status: status || undefined,
+      user: searchParticipant
+        ? {
+            name: { contains: searchParticipant, mode: "insensitive" },
+          }
+        : undefined,
+      team: {
+        name: teamName
+          ? { contains: teamName, mode: "insensitive" }
+          : undefined,
+        competition_id: competitionId || undefined,
+      },
+    },
+    include: {
+      user: true,
+      team: {
+        include: {
+          competition: true,
+          leader: true,
+        },
+      },
+    },
+  });
 }

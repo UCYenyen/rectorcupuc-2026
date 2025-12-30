@@ -65,12 +65,12 @@ export async function proxy(req: NextRequest) {
     }
 
     const userRole = token.role as string;
-
+    
     if (pathname.startsWith("/dashboard/admin/web")) {
       if (userRole !== Role.pdd_website) {
         return NextResponse.redirect(new URL("/unauthorized", req.url));
       }
-    } else if (pathname.startsWith("/dashboard/admin")) {
+    } else if (pathname.startsWith("/dashboard/admin/lo")) {
       if (
         userRole !== Role.liason_officer &&
         userRole !== Role.pdd_website

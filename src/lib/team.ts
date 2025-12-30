@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { Team, toTeamResponse, TeamWithMembersPayload } from "@/types/team.md";
+import { TeamMember } from "@prisma/client";
 import { deleteUploadedImage } from "./action";
 export async function createTeam(name: string, competitionId: string, leaderId: string) {
     const competitionData = await prisma.competition.findUnique({
@@ -141,13 +142,9 @@ export async function joinTeamByReferalCode(userId: string, referalCode: string,
             user_id: userId,
             team_id: team.id,
             follow_proof_url: followProofUrl,
-            profile_url: profileUrl
+            profile_url: profileUrl,
+            join_request_status: "Pending"
         },
-    });
-
-    await prisma.team.update({
-        where: { id: team.id },
-        data: { current_team_member: { increment: 1 } },
     });
 
     return teamMember;

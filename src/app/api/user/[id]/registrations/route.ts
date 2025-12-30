@@ -22,7 +22,7 @@ export async function GET(
 
   // 2. Get registrations where user is a team member
   const registeredInTeam = await prisma.teamMember.findMany({
-    where: { user_id: userId },
+    where: { user_id: userId, join_request_status: "Registered" },
     include: { team: true },
   });
   console.log("STEP 1B: registeredInTeam =", registeredInTeam);

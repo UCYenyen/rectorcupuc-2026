@@ -137,6 +137,7 @@ model TeamMember {
   team_id String
   follow_proof_url String
   profile_url      String
+  join_request_status RegistrationStatus @default(Pending)
   user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
   team    Team   @relation(fields: [team_id], references: [id], onDelete: Cascade)
 
