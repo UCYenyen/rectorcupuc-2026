@@ -27,39 +27,25 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return false;
       }
 
-      // if (email.endsWith("ciputra.ac.id")) {
-      //   try {
-      //     if (user && user.id) {
-      //       const dbUser = await prisma.user.findUnique({
-      //         where: { id: user.id },
-      //       });
+      if (email.endsWith("ciputra.ac.id")) {
+        try {
+          if (user && user.id) {
+            const dbUser = await prisma.user.findUnique({
+              where: { id: user.id },
+            });
 
-      //       if (dbUser) {
-      //         await prisma.user.update({
-      //           where: { id: user.id },
-      //           data: { role: dbUser.role },
-      //         });
-      //       }
-      //     }
-      //     return true;
-      //   } catch (error) {
-      //     console.error("Database Error during signIn:", error);
-      //     return true; // Tetap izinkan login meski update gagal, atau ganti false jika wajib update
-      //   }
-      // }
-
-      if (user && user.id) {
-        const dbUser = await prisma.user.findUnique({
-          where: { id: user.id },
-        });
-
-        if (dbUser) {
-          await prisma.user.update({
-            where: { id: user.id },
-            data: { role: dbUser.role },
-          });
+            if (dbUser) {
+              await prisma.user.update({
+                where: { id: user.id },
+                data: { role: dbUser.role },
+              });
+            }
+          }
+          return true;
+        } catch (error) {
+          console.error("Database Error during signIn:", error);
+          return true;
         }
-        return true;
       }
 
       console.warn(`Access Denied: ${email} is not a Ciputra email`);
