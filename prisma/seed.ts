@@ -9,67 +9,67 @@ export async function main() {
     // 1. Buat Competition dulu
     // Create competitions individually to get their IDs
   // Sports
-    await prisma.competition.create({
-        data: { name: "Basketball Putra", slug: "basketball-putra", location: "-", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 10 },
+    /*const basketball = */ await prisma.competition.create({
+        data: { name: "Basketball Putra", slug: "basketball-putra", location: "UC Sports Hall", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 10 },
     });
     await prisma.competition.create({
-        data: { name: "Basketball Putri", slug: "basketball-putri", location: "-", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 3, max_team_member: 4 },
+        data: { name: "Basketball Putri", slug: "basketball-putri", location: "UC Sports Hall", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 3, max_team_member: 4 },
     });
     /*const futsal =  */ await prisma.competition.create({
-        data: { name: "Futsal", slug: "futsal", location: "-", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 10 },
+        data: { name: "Futsal", slug: "futsal", location: "UC Sports Hall", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 10 },
     });
     /* const billiard = */ await prisma.competition.create({
-        data: { name: "Billiard", slug: "billiard", location: "-", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 1, max_team_member: 1 },
+        data: { name: "Billiard", slug: "billiard", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 1, max_team_member: 1 },
     });
     /* const badminton  =*/ await prisma.competition.create({
-        data: { name: "Badminton", slug: "badminton", location: "-", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member:2, max_team_member:2},
+        data: { name: "Badminton", slug: "badminton", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member:2, max_team_member:2},
     });
-   /*const pingpong =*/ await prisma.competition.create({
-        data: { name: "Ping Pong", slug: "ping-pong", location: "-", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
+    /*const pingpong =*/ await prisma.competition.create({
+        data: { name: "Ping Pong", slug: "ping-pong", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
     });
     /*const taekwondo =*/ await prisma.competition.create({
-        data: { name: "Taekwondo", slug: "taekwondo", location: "-", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
+        data: { name: "Taekwondo", slug: "taekwondo", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
     });
 
 
     // ESports
     await prisma.competition.create({
-        data: { name: "Mobile Legends", slug: "mobile-legends", location: "-", category: CompetitionCategory.ESports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 6 },
+        data: { name: "Mobile Legends", slug: "mobile-legends", location: "Corepreneur UC", category: CompetitionCategory.ESports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 6 },
     });
     /*const pubg = */await prisma.competition.create({
-        data: { name: "PUBG", slug: "pubg", location: "-", category: CompetitionCategory.ESports, description: "Lorem Ipsum Yenyen", min_team_member: 4, max_team_member: 4 },
+        data: { name: "PUBG", slug: "pubg", location: "Corepreneur UC", category: CompetitionCategory.ESports, description: "Lorem Ipsum Yenyen", min_team_member: 4, max_team_member: 4 },
     });
     /*const FIFA = */await prisma.competition.create({
-        data: { name: "FIFA 2V2", slug: "fifa-2v2", location: "-", category: CompetitionCategory.ESports, description: "Lorem Ipsum Yenyen", min_team_member: 2, max_team_member: 2 },
+        data: { name: "FIFA 2V2", slug: "fifa-2v2", location: "Corepreneur UC", category: CompetitionCategory.ESports, description: "Lorem Ipsum Yenyen", min_team_member: 2, max_team_member: 2 },
     });
 
 
     // Arts
     /*const dance = */await prisma.competition.create({
-        data: { name: "Dance", slug: "dance", location: "-", category: CompetitionCategory.Arts, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 7 },
+        data: { name: "Dance", slug: "dance", location: "UC Sports Hall", category: CompetitionCategory.Arts, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 7 },
     });
     /*const Solo = */await prisma.competition.create({
-        data: { name: "Solo Singing", slug: "solo-singing", location: "-", category: CompetitionCategory.Arts, description: "Lorem Ipsum Yenyen", min_team_member: 1, max_team_member: 1 },
+        data: { name: "Solo Singing", slug: "solo-singing", location: "TBA", category: CompetitionCategory.Arts, description: "Lorem Ipsum Yenyen", min_team_member: 1, max_team_member: 1 },
     });
     /*const Duet = */await prisma.competition.create({
-        data: { name: "Duet Singing", slug: "duet-singing", location: "-", category: CompetitionCategory.Arts, description: "Lorem Ipsum Yenyen", min_team_member: 2, max_team_member: 2 },
+        data: { name: "Duet Singing", slug: "duet-singing", location: "TBA", category: CompetitionCategory.Arts, description: "Lorem Ipsum Yenyen", min_team_member: 2, max_team_member: 2 },
     });
     /*const Puisi = */await prisma.competition.create({
-        data: { name: "Puisi", slug: "puisi", location: "-", category: CompetitionCategory.Arts, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
+        data: { name: "Puisi", slug: "puisi", location: "TBA", category: CompetitionCategory.Arts, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
     });
     /*const Poster = */await prisma.competition.create({
-        data: { name: "Poster", slug: "poster", location: "-", category: CompetitionCategory.Arts, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
+        data: { name: "Poster", slug: "poster", location: "TBA", category: CompetitionCategory.Arts, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
     });
     /*const Poster = */await prisma.competition.create({
-        data: { name: "Fotografi", slug: "fotografi", location: "-", category: CompetitionCategory.Arts, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
+        data: { name: "Fotografi", slug: "fotografi", location: "TBA", category: CompetitionCategory.Arts, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
     });
 
     // Learnings
     /*const coc =*/ await prisma.competition.create({
-        data: { name: "Cerdas Cermat", slug: "cerdas-cermat", location: "-", category: CompetitionCategory.Learnings, description: "Lorem Ipsum Yenyen", min_team_member:3, max_team_member:3 },
+        data: { name: "Cerdas Cermat", slug: "cerdas-cermat", location: "TBA", category: CompetitionCategory.Learnings, description: "Lorem Ipsum Yenyen", min_team_member:3, max_team_member:3 },
     });
     await prisma.competition.create({
-        data: { name: "Catur", slug: "catur", location: "-", category: CompetitionCategory.Learnings, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1},
+        data: { name: "Catur", slug: "catur", location: "TBA", category: CompetitionCategory.Learnings, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1},
     });
 
     console.log("Competitions seeded.");
