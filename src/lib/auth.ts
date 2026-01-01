@@ -1,23 +1,21 @@
-import NextAuth from "next-auth";
-import Google from "next-auth/providers/google";
+import NextAuth, { NextAuthConfig } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { Role } from "@prisma/client";
 import prisma from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+  throw new Error("Missing Google OAuth environment variables");
+}
+
+const authOptions: NextAuthConfig = {
   adapter: PrismaAdapter(prisma),
   providers: [
-    Google({
+    GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  session: {
-    strategy: "jwt",
-  },
-  pages: {
-    error: "/auth/error",
-  },
   callbacks: {
     async signIn({ profile, user }) {
       const email = profile?.email || user?.email;
@@ -37,7 +35,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             if (dbUser) {
               await prisma.user.update({
                 where: { id: user.id },
-                data: { role: dbUser.role },
+                data: {
+                  role: dbUser.role,
+                  faculty: dbUser.faculty,
+                },
               });
             }
           }
@@ -51,31 +52,46 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       console.warn(`Access Denied: ${email} is not a Ciputra email`);
       return false;
     },
+
     async jwt({ token, user }) {
       if (user) {
-        token.sub = user.id;
-      }
+        token.id = user.id!;
+        token.name = user.name;
+        token.email = user.email;
+        token.picture = user.image;
 
-      const userId = token.sub || token.id;
-
-      if (userId) {
         const dbUser = await prisma.user.findUnique({
-          where: { id: userId as string },
-          select: { role: true },
+          where: { id: user.id! },
+          select: { role: true, faculty: true },
         });
+
         if (dbUser) {
           token.role = dbUser.role;
+          token.faculty = dbUser.faculty;
         }
       }
-
       return token;
     },
+
     async session({ session, token }) {
-      if (session.user) {
-        session.user.id = (token.sub || token.id) as string;
-        session.user.role = token.role as Role;
+      if (session?.user) {
+        session.user.id = token.id as string;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.picture;
+        session.user.role = token.role as any;
+        session.user.faculty = token.faculty as any;
       }
       return session;
     },
   },
-});
+  pages: {
+    signIn: "/auth/signin",
+    error: "/auth/error",
+  },
+  session: {
+    strategy: "jwt",
+  },
+};
+
+export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
