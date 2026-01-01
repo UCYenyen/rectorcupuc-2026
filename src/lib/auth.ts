@@ -1,21 +1,23 @@
-import NextAuth, { NextAuthConfig } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import NextAuth from "next-auth";
+import Google from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import { Role, Faculty } from "@prisma/client";
 import prisma from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
 
-if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
-  throw new Error("Missing Google OAuth environment variables");
-}
-
-const authOptions: NextAuthConfig = {
+export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
+  pages: {
+    error: "/auth/error",
+  },
   callbacks: {
     async signIn({ profile, user }) {
       const email = profile?.email || user?.email;
@@ -26,27 +28,7 @@ const authOptions: NextAuthConfig = {
       }
 
       if (email.endsWith("ciputra.ac.id")) {
-        try {
-          if (user && user.id) {
-            const dbUser = await prisma.user.findUnique({
-              where: { id: user.id },
-            });
-
-            if (dbUser) {
-              await prisma.user.update({
-                where: { id: user.id },
-                data: {
-                  role: dbUser.role,
-                  faculty: dbUser.faculty,
-                },
-              });
-            }
-          }
-          return true;
-        } catch (error) {
-          console.error("Database Error during signIn:", error);
-          return true;
-        }
+        return true;
       }
 
       console.warn(`Access Denied: ${email} is not a Ciputra email`);
@@ -55,43 +37,32 @@ const authOptions: NextAuthConfig = {
 
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id!;
-        token.name = user.name;
-        token.email = user.email;
-        token.picture = user.image;
+        token.sub = user.id;
+      }
 
+      // Always fetch latest role & faculty from database
+      const userId = token.sub || token.id;
+      if (userId) {
         const dbUser = await prisma.user.findUnique({
-          where: { id: user.id! },
+          where: { id: userId as string },
           select: { role: true, faculty: true },
         });
-
         if (dbUser) {
           token.role = dbUser.role;
           token.faculty = dbUser.faculty;
         }
       }
+
       return token;
     },
 
     async session({ session, token }) {
-      if (session?.user) {
-        session.user.id = token.id as string;
-        session.user.name = token.name;
-        session.user.email = token.email;
-        session.user.image = token.picture;
-        session.user.role = token.role as any;
-        session.user.faculty = token.faculty as any;
+      if (session.user) {
+        session.user.id = (token.sub || token.id) as string;
+        session.user.role = token.role as Role;
+        session.user.faculty = token.faculty as Faculty | null;
       }
       return session;
     },
   },
-  pages: {
-    signIn: "/auth/signin",
-    error: "/auth/error",
-  },
-  session: {
-    strategy: "jwt",
-  },
-};
-
-export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
+});
