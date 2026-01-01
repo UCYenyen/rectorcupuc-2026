@@ -1,15 +1,15 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { Role, Faculty } from "@prisma/client";
+import { Role } from "@prisma/client";
 import prisma from "@/lib/prisma";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
     Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   session: {
@@ -28,39 +28,52 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
 
       if (email.endsWith("ciputra.ac.id")) {
-        return true;
+        try {
+          if (user && user.id) {
+            const dbUser = await prisma.user.findUnique({
+              where: { id: user.id },
+            });
+
+            if (dbUser) {
+              await prisma.user.update({
+                where: { id: user.id },
+                data: { role: dbUser.role },
+              });
+            }
+          }
+          return true;
+        } catch (error) {
+          console.error("Database Error during signIn:", error);
+          return true;
+        }
       }
 
       console.warn(`Access Denied: ${email} is not a Ciputra email`);
       return false;
     },
-
     async jwt({ token, user }) {
       if (user) {
         token.sub = user.id;
       }
 
-      // Always fetch latest role & faculty from database
       const userId = token.sub || token.id;
+
       if (userId) {
         const dbUser = await prisma.user.findUnique({
           where: { id: userId as string },
-          select: { role: true, faculty: true },
+          select: { role: true },
         });
         if (dbUser) {
           token.role = dbUser.role;
-          token.faculty = dbUser.faculty;
         }
       }
 
       return token;
     },
-
     async session({ session, token }) {
       if (session.user) {
         session.user.id = (token.sub || token.id) as string;
         session.user.role = token.role as Role;
-        session.user.faculty = token.faculty as Faculty | null;
       }
       return session;
     },

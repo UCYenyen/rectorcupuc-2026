@@ -25,13 +25,14 @@ export default function NavigationBar() {
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "Competitions", href: "/competitions" },
-    // { label: "Votes", href: "/vote" },
   ];
 
-  if (session?.user.role === "liason_officer") {
+  const userRole = session?.user?.role;
+
+  if (userRole === "liason_officer") {
     menuItems.push({ label: "Admin", href: "/dashboard/admin/lo" });
   }
-  if (session?.user.role === "pdd_website") {
+  if (userRole === "pdd_website") {
     menuItems.push({ label: "Admin", href: "/dashboard/admin/web" });
   }
 
