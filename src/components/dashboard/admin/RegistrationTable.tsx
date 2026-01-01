@@ -17,6 +17,7 @@ interface RegistrationTableProps {
 export default function RegistrationTable({ registrations }: RegistrationTableProps) {
   const [filteredCompetition, setFilteredCompetition] = useState<string>("");
   const [filteredStatus, setFilteredStatus] = useState<string>("");
+  const [filteredFaculty, setFilteredFaculty] = useState<string>("");
   const [isPending, startTransition] = useTransition();
   const [selectedReg, setSelectedReg] = useState<RegistrationWithRelations | null>(null);
 
@@ -25,13 +26,17 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
   );
 
   const statuses = Object.values(RegistrationStatus);
+  
+  const faculties = ["SBM", "SCI", "SOT", "SIFT", "SOM", "SOP", "SOC"];
 
   const filteredRegistrations = registrations.filter((reg) => {
     const matchesCompetition =
       !filteredCompetition || reg.competition.name === filteredCompetition;
     const matchesStatus =
       !filteredStatus || reg.registration_status === filteredStatus;
-    return matchesCompetition && matchesStatus;
+    const matchesFaculty =
+      !filteredFaculty || reg.user.faculty === filteredFaculty;
+    return matchesCompetition && matchesStatus && matchesFaculty;
   });
 
   const handleApprove = (id: string) => {
@@ -125,6 +130,10 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
                 <p className="text-lg italic">{selectedReg.user.email}</p>
               </div>
               <div className="space-y-1">
+                <p className="text-[#AAF3D5]/70 text-xs uppercase tracking-wider font-bold">Faculty</p>
+                <p className="text-lg font-semibold">{selectedReg.user.faculty || 'Not Set'}</p>
+              </div>
+              <div className="space-y-1">
                 <p className="text-[#AAF3D5]/70 text-xs uppercase tracking-wider font-bold">Registered At</p>
                 <p className="text-lg">{new Date(selectedReg.created_at).toLocaleString()}</p>
               </div>
@@ -191,14 +200,16 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
           </div>
         </div>
       )}
-      <div className="flex flex-col w-full justify-center items-center gap-4 mb-6 text-white">
-        <div className='flex flex-col gap-1 font-bold w-full'>
-          <label htmlFor="competition-filter" className="w-full text-start block text-lg md:text-2xl mb-1 font-semibold">
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-white">
+        {/* Competition Filter */}
+        <div className='flex flex-col gap-1 font-bold'>
+          <label htmlFor="competition-filter" className="block text-lg font-semibold mb-1">
             Competition
           </label>
           <select
             id="competition-filter"
-            className="border rounded px-3 py-2 w-full text-white"
+            className="border-2 border-[#AAF3D5] rounded-lg px-3 py-2 bg-black/30 text-white focus:outline-none focus:ring-2 focus:ring-[#AAF3D5]"
             value={filteredCompetition}
             onChange={(e) => setFilteredCompetition(e.target.value)}
           >
@@ -211,13 +222,34 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
           </select>
         </div>
 
-        <div className='flex flex-col gap-1 font-bold w-full'>
-          <label htmlFor="status-filter" className="w-full text-start block text-lg md:text-2xl font-semibold mb-1">
+        {/* Faculty Filter */}
+        <div className='flex flex-col gap-1 font-bold'>
+          <label htmlFor="faculty-filter" className="block text-lg font-semibold mb-1">
+            Faculty
+          </label>
+          <select
+            id="faculty-filter"
+            className="border-2 border-[#AAF3D5] rounded-lg px-3 py-2 bg-black/30 text-white focus:outline-none focus:ring-2 focus:ring-[#AAF3D5]"
+            value={filteredFaculty}
+            onChange={(e) => setFilteredFaculty(e.target.value)}
+          >
+            <option value="">All Faculties</option>
+            {faculties.map((fac) => (
+              <option key={fac} value={fac}>
+                {fac}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Status Filter */}
+        <div className='flex flex-col gap-1 font-bold'>
+          <label htmlFor="status-filter" className="block text-lg font-semibold mb-1">
             Status
           </label>
           <select
             id="status-filter"
-            className="border rounded px-3 py-2 w-full text-white"
+            className="border-2 border-[#AAF3D5] rounded-lg px-3 py-2 bg-black/30 text-white focus:outline-none focus:ring-2 focus:ring-[#AAF3D5]"
             value={filteredStatus}
             onChange={(e) => setFilteredStatus(e.target.value)}
           >
@@ -239,6 +271,7 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
               <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Competition</th>
               <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Team Name</th>
               <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Team Leader</th>
+              <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Faculty</th>
               <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Registration Date</th>
               <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Status</th>
               <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Actions</th>
@@ -252,6 +285,7 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
                   <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm font-medium">{registration.competition.name}</td>
                   <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm">{registration.team.name}</td>
                   <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm">{registration.user.name}</td>
+                  <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm">{registration.user.faculty || 'N/A'}</td>
                   <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm">
                     {new Date(registration.created_at).toLocaleDateString()}
                   </td>
@@ -285,7 +319,7 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
               ))
             ) : (
               <tr>
-                <td colSpan={7} className="px-6 py-4 text-center text-sm text-white">
+                <td colSpan={8} className="px-6 py-4 text-center text-sm text-white">
                   No registrations found matching the current filters
                 </td>
               </tr>

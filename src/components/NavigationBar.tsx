@@ -25,7 +25,7 @@ export default function NavigationBar() {
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "Competitions", href: "/competitions" },
-    { label: "Votes", href: "/vote" },
+    // { label: "Votes", href: "/vote" },
   ];
 
   if (session?.user.role === "liason_officer") {

@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { Team, toTeamResponse, TeamWithMembersPayload } from "@/types/team.md";
-import { TeamMember } from "@prisma/client";
+import { TeamMember, Faculty } from "@prisma/client";
 import { deleteUploadedImage } from "./action";
 export async function createTeam(name: string, competitionId: string, leaderId: string) {
     const competitionData = await prisma.competition.findUnique({
@@ -71,16 +71,33 @@ export async function getTeamByUserID(id: string){
     });
 }
 
-export async function joinTeamByReferalCode(userId: string, referalCode: string, followProofUrl: string, profileUrl: string){
+export async function joinTeamByReferalCode(userId: string, referalCode: string, followProofUrl: string, profileUrl: string, faculty: string){
     const team = await prisma.team.findFirst({
         where: { team_referal_code: referalCode },
     });
 
-    // harusnya disini ada upload image urlnya untuk bukti follow dan selfienya
     if(!team){
         if (followProofUrl) await deleteUploadedImage(followProofUrl);
         if (profileUrl) await deleteUploadedImage(profileUrl);
         return { error: "Team with this referal code does not exist." };
+    }
+
+    // Get leader's faculty
+    const leader = await prisma.user.findUnique({
+        where: { id: team.leader_id },
+        select: { faculty: true }
+    });
+
+    if (!leader) {
+        if (followProofUrl) await deleteUploadedImage(followProofUrl);
+        if (profileUrl) await deleteUploadedImage(profileUrl);
+        return { error: "Team leader not found." };
+    }
+
+    if (leader.faculty !== faculty) {
+        if (followProofUrl) await deleteUploadedImage(followProofUrl);
+        if (profileUrl) await deleteUploadedImage(profileUrl);
+        return { error: `Faculty mismatch! This team is for ${leader.faculty} students only. You selected ${faculty}.` };
     }
 
     const competitionRegistration = await prisma.competitionRegistration.findFirst({
@@ -137,15 +154,27 @@ export async function joinTeamByReferalCode(userId: string, referalCode: string,
         return { error: "You are already registered to another team for this competition!" };
     }
 
-    const teamMember = await prisma.teamMember.create({
-        data: {
-            user_id: userId,
-            team_id: team.id,
-            follow_proof_url: followProofUrl,
-            profile_url: profileUrl,
-            join_request_status: "Pending"
-        },
-    });
+    try {
+      // Update user faculty
+      await prisma.user.update({
+        where: { id: userId },
+        data: { faculty: faculty as Faculty },
+      });
 
-    return teamMember;
+      const teamMember = await prisma.teamMember.create({
+          data: {
+              user_id: userId,
+              team_id: team.id,
+              follow_proof_url: followProofUrl,
+              profile_url: profileUrl,
+              join_request_status: "Pending"
+          },
+      });
+
+      return teamMember;
+    } catch (error) {
+        if (followProofUrl) await deleteUploadedImage(followProofUrl);
+        if (profileUrl) await deleteUploadedImage(profileUrl);
+        return { error: "Failed to join the team. Please try again." };
+    }
 }

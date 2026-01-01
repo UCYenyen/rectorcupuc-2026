@@ -29,9 +29,11 @@ export default function UserDashboard() {
   const [registrations, setRegistrations] = useState<CompetitionRegistration[]>([]);
   const [showJoinModal, setShowJoinModal] = useState<boolean>(false);
   const [referalCode, setReferalCode] = useState<string>("");
+  const [faculty, setFaculty] = useState<string>("");
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [followProof, setFollowProof] = useState<File | null>(null);
   const [isJoining, setIsJoining] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   // REFS UNTUK GSAP
   const modalRef = useRef<HTMLDivElement>(null);
@@ -60,14 +62,14 @@ export default function UserDashboard() {
   useEffect(() => {
     if (showJoinModal) {
       // Overlay fade in
-      gsap.fromTo(overlayRef.current, 
-        { opacity: 0 }, 
+      gsap.fromTo(overlayRef.current,
+        { opacity: 0 },
         { opacity: 1, duration: 0.3 }
       );
-      
+
       // Panel slide up & scale (iOS feel)
-      gsap.fromTo(modalRef.current, 
-        { y: 100, opacity: 0, scale: 0.95 }, 
+      gsap.fromTo(modalRef.current,
+        { y: 100, opacity: 0, scale: 0.95 },
         { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power4.out" }
       );
     }
@@ -87,6 +89,7 @@ export default function UserDashboard() {
 
   const openJoinModal = () => {
     setReferalCode("");
+    setFaculty("");
     setProfileImage(null);
     setFollowProof(null);
     setShowJoinModal(true);
@@ -103,9 +106,11 @@ export default function UserDashboard() {
       onComplete: () => {
         setShowJoinModal(false);
         setReferalCode("");
+        setFaculty("");
         setProfileImage(null);
         setFollowProof(null);
         setIsJoining(false);
+        setErrorMessage("");
       }
     });
     gsap.to(overlayRef.current, { opacity: 0, duration: 0.3 });
@@ -113,12 +118,18 @@ export default function UserDashboard() {
 
   const handleJoinSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage("");
+    
     if (!session?.user?.id) {
-      alert("You must be logged in to join a team.");
+      setErrorMessage("You must be logged in to join a team.");
       return;
     }
     if (!profileImage || !followProof) {
-      alert("Please upload both profile image and follow proof.");
+      setErrorMessage("Please upload both profile image and follow proof.");
+      return;
+    }
+    if (!faculty) {
+      setErrorMessage("Please select your faculty.");
       return;
     }
 
@@ -134,6 +145,7 @@ export default function UserDashboard() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           referalCode: referalCode.trim(),
+          faculty: faculty,
           profileUrl: profileUrl,
           followProofUrl: followProofUrl
         }),
@@ -141,7 +153,8 @@ export default function UserDashboard() {
 
       const json = await res.json();
       if (!res.ok || !json.success) {
-        alert(json.error || "Failed to join team");
+        setErrorMessage(json.error || "Failed to join team");
+        setIsJoining(false);
         return;
       }
 
@@ -149,7 +162,7 @@ export default function UserDashboard() {
       alert(json.message || "Joined team successfully!");
       closeJoinModal();
     } catch (err: any) {
-      alert(err.message || "An error occurred");
+      setErrorMessage(err.message || "An error occurred");
       setIsJoining(false);
     }
   };
@@ -221,7 +234,7 @@ export default function UserDashboard() {
             onClick={closeJoinModal}
           />
           {/* Tambahkan ref ke modal panel */}
-          <div 
+          <div
             ref={modalRef}
             className="relative z-10 border-[#DFE5E1] bg-gradient-to-r from-[#FFE694] via-white/80 to-white/60 border-4 backdrop-blur-2xl rounded-2xl shadow-2xl text-center max-w-md w-full overflow-hidden"
           >
@@ -231,6 +244,12 @@ export default function UserDashboard() {
               </h3>
             </div>
             <form onSubmit={handleJoinSubmit} className="flex flex-col gap-4 pt-4 px-8 pb-8 text-[#1E0843]">
+              {errorMessage && (
+                <div className="bg-red-100 border-2 border-red-600 text-red-600 p-3 rounded-lg font-bold text-sm">
+                  {errorMessage}
+                </div>
+              )}
+              
               <div className="flex flex-col w-full gap-1">
                 <label className="block text-lg w-full text-start font-bold">REFERRAL CODE</label>
                 <input
@@ -241,6 +260,28 @@ export default function UserDashboard() {
                   placeholder="Enter team referral code"
                   required
                 />
+              </div>
+
+              <div className="flex flex-col w-full gap-1">
+                <label className="block text-lg w-full text-start font-bold">
+                  FACULTY <span className="text-red-600">*</span>
+                </label>
+                <p className="text-xs text-gray-600 mb-1">Must match team leader's faculty</p>
+                <select
+                  value={faculty}
+                  onChange={(e) => setFaculty(e.target.value)}
+                  className="w-full border-2 border-white rounded-lg px-4 py-2 text-white bg-[#1E0843]/50 backdrop-blur-2xl focus:outline-none focus:ring-2 focus:ring-[#AAF3D5]"
+                  required
+                >
+                  <option value="">Select Faculty</option>
+                  <option value="SBM">SBM</option>
+                  <option value="SCI">SCI</option>
+                  <option value="SOT">SOT</option>
+                  <option value="SIFT">SIFT</option>
+                  <option value="SOM">SOM</option>
+                  <option value="SOP">SOP</option>
+                  <option value="SOC">SOC</option>
+                </select>
               </div>
 
               <div>

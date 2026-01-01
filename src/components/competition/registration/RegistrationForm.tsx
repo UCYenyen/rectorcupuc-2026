@@ -52,7 +52,6 @@ export default function RegistrationForm({
         if (!res1.ok) throw new Error(json1.error || "Gagal upload bukti instagram");
         instagramProofUrl = json1.url;
       }
-
       if (profileFile && profileFile.size > 0) {
         const f2 = new FormData();
         f2.append("file", profileFile);
@@ -109,6 +108,27 @@ export default function RegistrationForm({
               required
               className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none"
             />
+          </div>
+
+          <div className="space-y-2 w-full flex flex-col gap-1 items-center justify-center">
+            <label htmlFor="faculty" className="block text-start w-full font-bold">
+              FACULTY
+            </label>
+            <select
+              id="faculty"
+              name="faculty"
+              required
+              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none text-white focus:ring-2 focus:ring-[#AAF3D5]"
+            >
+              <option value="">Select Faculty</option>
+              <option value="SBM">SBM</option>
+              <option value="SCI">SCI</option>
+              <option value="SOT">SOT</option>
+              <option value="SIFT">SIFT</option>
+              <option value="SOM">SOM</option>
+              <option value="SOP">SOP</option>
+              <option value="SOC">SOC</option>
+            </select>
           </div>
 
           <div className="space-y-2 w-full flex flex-col gap-1 items-center justify-center">

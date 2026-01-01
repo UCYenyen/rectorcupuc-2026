@@ -5,7 +5,7 @@ import updateRegistrationStatus from "./admin";
 import { revalidatePath } from "next/cache";
 import { updateMatchScoreDB } from "@/lib/competition";
 import prisma from "@/lib/prisma";
-import updateTeamJoinRequestStatus from "./admin";
+import { Faculty } from "@prisma/client";
 
 export interface RegisterTeamFormState {
   error?: string;
@@ -29,6 +29,7 @@ export async function registerTeam(
   formData: FormData
 ): Promise<RegisterTeamFormState> {
   const teamName = formData.get("teamName") as string;
+  const faculty = formData.get("faculty") as string;
   const instagramProofUrl = formData.get("instagramProofUrl") as string;
   const profileImageUrl = formData.get("profileImageUrl") as string;
 
@@ -40,20 +41,35 @@ export async function registerTeam(
     return { error: "Both images are required." };
   }
 
-  const registration = await registerTeamToCompetition(
-    competitionSlug,
-    teamName,
-    leaderId,
-    instagramProofUrl,
-    profileImageUrl
-  );
-
-  if ("error" in registration) {
-    return { error: registration.error };
+  if (!faculty) {
+    return { error: "Faculty is required." };
   }
 
-  revalidatePath("/dashboard/user");
-  return { success: true };
+  try {
+    // Update user faculty
+    await prisma.user.update({
+      where: { id: leaderId },
+      data: { faculty: faculty as Faculty },
+    });
+
+    const registration = await registerTeamToCompetition(
+      competitionSlug,
+      teamName,
+      leaderId,
+      instagramProofUrl,
+      profileImageUrl
+    );
+
+    if ("error" in registration) {
+      return { error: registration.error };
+    }
+
+    revalidatePath("/dashboard");
+    return { success: true };
+  } catch (error) {
+    console.error("Register Team Error:", error);
+    return { error: "Failed to register team." };
+  }
 }
 
 export async function approveRegistration(registrationId: string) {

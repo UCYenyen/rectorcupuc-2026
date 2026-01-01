@@ -9,7 +9,7 @@ export default function CompetitionRules({ rules, slug, isRegistered }: { rules?
         <h3 className="text-white font-bold uppercase">Rules and Guidelines</h3>
       </div>
       <div className="bg-[#390D62]/60 p-6 h-full flex flex-col justify-between gap-4">
-        <ul className="text-white space-y-3">
+        {/* <ul className="text-white space-y-3">
           {rules && rules.length === 0 && (
             <li className="text-white">No rules available for this competition.</li>
           )}
@@ -19,7 +19,7 @@ export default function CompetitionRules({ rules, slug, isRegistered }: { rules?
               <span>{rule.description}</span>
             </li>
           ))}
-        </ul>
+        </ul> */}
 
         <div className="flex flex-col gap-2 justify-center items-center">
           {!isRegistered ? (
@@ -32,9 +32,9 @@ export default function CompetitionRules({ rules, slug, isRegistered }: { rules?
             </span>
           )}
           {/* Download Button */}
-          <button className="w-full text-center border-3 border-white bg-black/40 hover:bg-purple-800 text-white font-bold py-3 rounded-lg uppercase transition-all duration-200">
+          {/* <button className="w-full text-center border-3 border-white bg-black/40 hover:bg-purple-800 text-white font-bold py-3 rounded-lg uppercase transition-all duration-200">
             Download Guidebook.pdf
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

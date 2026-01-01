@@ -7,16 +7,16 @@ export async function POST(
 ) {
   try {
     const { id: userId } = await context.params;
-    const { referalCode, followProofUrl, profileUrl } = await request.json();
+    const { referalCode, faculty, followProofUrl, profileUrl } = await request.json();
 
-    if (!referalCode || !followProofUrl || !profileUrl) {
+    if (!referalCode || !followProofUrl || !profileUrl || !faculty) {
       return NextResponse.json(
-        { success: false, error: "Referral code, profile image, and follow proof are required" }, 
+        { success: false, error: "Referral code, faculty, profile image, and follow proof are required" }, 
         { status: 400 }
       );
     }
 
-    const team = await joinTeamByReferalCode(userId, referalCode, followProofUrl, profileUrl);
+    const team = await joinTeamByReferalCode(userId, referalCode, followProofUrl, profileUrl, faculty);
 
     if (!team || (typeof team === "object" && "error" in team)) {
       return NextResponse.json(
