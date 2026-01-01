@@ -1,4 +1,5 @@
 import { CompetitionCategory, PrismaClient } from "@prisma/client";
+import { SeedRules } from "./rules";
 
 const prisma = new PrismaClient();
 
@@ -8,7 +9,7 @@ export async function main() {
     // 1. Buat Competition dulu
     // Create competitions individually to get their IDs
   // Sports
-    /*const basketball = */ await prisma.competition.create({
+    await prisma.competition.create({
         data: { name: "Basketball Putra", slug: "basketball-putra", location: "-", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 10 },
     });
     await prisma.competition.create({
@@ -71,9 +72,9 @@ export async function main() {
         data: { name: "Catur", slug: "catur", location: "-", category: CompetitionCategory.Learnings, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1},
     });
 
-    // 2. Baru buat Match dengan competitionId yang valid
+    console.log("Competitions seeded.");
 
-    console.log("Dummy matches seeded.");
+    await SeedRules();
 }
 
 // Replace final call with safe runner:
