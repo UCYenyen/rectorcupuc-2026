@@ -9,7 +9,7 @@ export default function CompetitionRules({ rules, slug, isRegistered }: { rules?
         <h3 className="text-white font-bold uppercase">Rules and Guidelines</h3>
       </div>
       <div className="bg-[#390D62]/60 p-6 h-full flex flex-col justify-between gap-4">
-        {/* <ul className="text-white space-y-3">
+        <ul className="text-white space-y-3 max-h-48 overflow-y-auto">
           {rules && rules.length === 0 && (
             <li className="text-white">No rules available for this competition.</li>
           )}
@@ -19,7 +19,7 @@ export default function CompetitionRules({ rules, slug, isRegistered }: { rules?
               <span>{rule.description}</span>
             </li>
           ))}
-        </ul> */}
+        </ul>
 
         <div className="flex flex-col gap-2 justify-center items-center">
           {!isRegistered ? (
