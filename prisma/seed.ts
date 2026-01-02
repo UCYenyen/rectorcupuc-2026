@@ -68,7 +68,7 @@ export async function main() {
         data: { name: "Cerdas Cermat", slug: "cerdas-cermat", location: "TBA", category: CompetitionCategory.Learnings, description: "Lorem Ipsum Yenyen", min_team_member:3, max_team_member:3 },
     });
     await prisma.competition.create({
-        data: { name: "Catur", slug: "catur", location: "TBA", category: CompetitionCategory.Learnings, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1},
+        data: { name: "Catur", slug: "catur", location: "Room 504", category: CompetitionCategory.Learnings, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1},
     });
 
     // 2. Baru buat Match dengan competitionId yang valid
