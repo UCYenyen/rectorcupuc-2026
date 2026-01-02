@@ -105,6 +105,7 @@ model User {
 model Competition {
   id                        String                    @id @default(cuid())
   slug                      String                    @unique
+  isCompetitionOpenRegistration Boolean @default(false)
   location                  String
   name                      String
   description               String                    @default("-")
