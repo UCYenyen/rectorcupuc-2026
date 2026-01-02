@@ -15,10 +15,18 @@ export default function RegistrationForm({
   isSolo = false,
 }: RegistrationFormProps) {
   const { data: session, status } = useSession();
+  
   const isLoggedIn = !!session;
   const isLoading = status === "loading";
   const router = useRouter();
-  const leaderId = session?.user?.id ?? "";
+  if(!session || !session.user){
+    return null;
+  }
+
+  console.log("RegistrationForm session:", session);
+  console.log("RegistrationForm user_id:", session.user.id);
+
+  const leaderId = session.user.id;
   const registerTeamWithArgs = registerTeam.bind(null, leaderId, slug);
   const [state, formAction] = useActionState<RegisterTeamFormState, FormData>(
     registerTeamWithArgs,

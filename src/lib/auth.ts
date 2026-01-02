@@ -29,18 +29,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       if (email.endsWith("ciputra.ac.id")) {
         try {
-          if (user && user.id) {
-            const dbUser = await prisma.user.findUnique({
-              where: { id: user.id },
-            });
+          // Cari user berdasarkan email, bukan ID dari NextAuth
+          const dbUser = await prisma.user.findUnique({
+            where: { email: email },
+          });
 
-            if (dbUser) {
-              await prisma.user.update({
-                where: { id: user.id },
-                data: { role: dbUser.role },
-              });
-            }
+          if (dbUser) {
+            // Update role jika ada perubahan
+            await prisma.user.update({
+              where: { email: email },
+              data: { role: dbUser.role },
+            });
           }
+          
           return true;
         } catch (error) {
           console.error("Database Error during signIn:", error);
@@ -51,20 +52,32 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       console.warn(`Access Denied: ${email} is not a Ciputra email`);
       return false;
     },
-    async jwt({ token, user }) {
-      if (user) {
-        token.sub = user.id;
+    async jwt({ token, user, account }) {
+      // Saat login pertama kali, ambil User ID yang sebenarnya dari database
+      if (user?.email) {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: user.email },
+          select: { id: true, role: true, faculty: true },
+        });
+
+        if (dbUser) {
+          token.id = dbUser.id; // Gunakan ID dari database
+          token.role = dbUser.role;
+          token.faculty = dbUser.faculty;
+        }
       }
 
-      const userId = token.sub || token.id;
-
-      if (userId) {
+      // Refresh data dari database setiap kali token di-refresh
+      if (token.email) {
         const dbUser = await prisma.user.findUnique({
-          where: { id: userId as string },
-          select: { role: true },
+          where: { email: token.email as string },
+          select: { id: true, role: true, faculty: true },
         });
+
         if (dbUser) {
+          token.id = dbUser.id;
           token.role = dbUser.role;
+          token.faculty = dbUser.faculty;
         }
       }
 
@@ -72,8 +85,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = (token.sub || token.id) as string;
+        session.user.id = token.id as string; // Gunakan ID dari token yang sudah diperbaiki
         session.user.role = token.role as Role;
+        session.user.faculty = token.faculty as Faculty | null;
       }
       return session;
     },
