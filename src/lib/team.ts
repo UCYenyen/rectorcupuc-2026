@@ -71,7 +71,7 @@ export async function getTeamByUserID(id: string){
     });
 }
 
-export async function joinTeamByReferalCode(userId: string, referalCode: string, followProofUrl: string, profileUrl: string, faculty: string){
+export async function joinTeamByReferalCode(userId: string, referalCode: string, followProofUrl: string, profileUrl: string, faculty: string, nim: string){
     const team = await prisma.team.findFirst({
         where: { team_referal_code: referalCode },
     });
@@ -155,10 +155,13 @@ export async function joinTeamByReferalCode(userId: string, referalCode: string,
     }
 
     try {
-      // Update user faculty
+      // Update user faculty and NIM
       await prisma.user.update({
         where: { id: userId },
-        data: { faculty: faculty as Faculty },
+        data: { 
+          faculty: faculty as Faculty,
+          NIM: nim
+        },
       });
 
       const teamMember = await prisma.teamMember.create({

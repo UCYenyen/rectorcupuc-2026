@@ -30,6 +30,7 @@ export async function registerTeam(
 ): Promise<RegisterTeamFormState> {
   const teamName = formData.get("teamName") as string;
   const faculty = formData.get("faculty") as string;
+  const nim = formData.get("nim") as string;
   const instagramProofUrl = formData.get("instagramProofUrl") as string;
   const profileImageUrl = formData.get("profileImageUrl") as string;
 
@@ -45,11 +46,18 @@ export async function registerTeam(
     return { error: "Faculty is required." };
   }
 
+  if (!nim) {
+    return { error: "NIM is required." };
+  }
+
   try {
-    // Update user faculty
+    // Update user faculty and NIM
     await prisma.user.update({
       where: { id: leaderId },
-      data: { faculty: faculty as Faculty },
+      data: { 
+        faculty: faculty as Faculty,
+        NIM: nim
+      },
     });
 
     const registration = await registerTeamToCompetition(

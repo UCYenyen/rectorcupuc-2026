@@ -7,20 +7,35 @@ export async function POST(
 ) {
   try {
     const { id: userId } = await context.params;
-    const { referalCode, faculty, followProofUrl, profileUrl } = await request.json();
+    const { referalCode, faculty, nim, followProofUrl, profileUrl } =
+      await request.json();
 
-    if (!referalCode || !followProofUrl || !profileUrl || !faculty) {
+    if (!referalCode || !followProofUrl || !profileUrl || !faculty || !nim) {
       return NextResponse.json(
-        { success: false, error: "Referral code, faculty, profile image, and follow proof are required" }, 
+        {
+          success: false,
+          error:
+            "Referral code, faculty, NIM, profile image, and follow proof are required",
+        },
         { status: 400 }
       );
     }
 
-    const team = await joinTeamByReferalCode(userId, referalCode, followProofUrl, profileUrl, faculty);
+    const team = await joinTeamByReferalCode(
+      userId,
+      referalCode,
+      followProofUrl,
+      profileUrl,
+      faculty,
+      nim
+    );
 
     if (!team || (typeof team === "object" && "error" in team)) {
       return NextResponse.json(
-        { success: false, error: team?.error || "Invalid referral code or failed to join" }, 
+        {
+          success: false,
+          error: team?.error || "Invalid referral code or failed to join",
+        },
         { status: 400 }
       );
     }
@@ -30,7 +45,11 @@ export async function POST(
       { status: 200 }
     );
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Failed to join the team";
-    return NextResponse.json({ success: false, error: errorMessage }, { status: 400 });
+    const errorMessage =
+      error instanceof Error ? error.message : "Failed to join the team";
+    return NextResponse.json(
+      { success: false, error: errorMessage },
+      { status: 400 }
+    );
   }
 }

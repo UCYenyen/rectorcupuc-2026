@@ -30,6 +30,7 @@ export default function UserDashboard() {
   const [showJoinModal, setShowJoinModal] = useState<boolean>(false);
   const [referalCode, setReferalCode] = useState<string>("");
   const [faculty, setFaculty] = useState<string>("");
+  const [nim, setNim] = useState<string>("");
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [followProof, setFollowProof] = useState<File | null>(null);
   const [isJoining, setIsJoining] = useState<boolean>(false);
@@ -90,6 +91,7 @@ export default function UserDashboard() {
   const openJoinModal = () => {
     setReferalCode("");
     setFaculty("");
+    setNim("");
     setProfileImage(null);
     setFollowProof(null);
     setShowJoinModal(true);
@@ -107,6 +109,7 @@ export default function UserDashboard() {
         setShowJoinModal(false);
         setReferalCode("");
         setFaculty("");
+        setNim("");
         setProfileImage(null);
         setFollowProof(null);
         setIsJoining(false);
@@ -132,6 +135,10 @@ export default function UserDashboard() {
       setErrorMessage("Please select your faculty.");
       return;
     }
+    if (!nim) {
+      setErrorMessage("Please enter your NIM.");
+      return;
+    }
 
     if (!confirm("Are you sure you want to join this team?")) return;
 
@@ -146,6 +153,7 @@ export default function UserDashboard() {
         body: JSON.stringify({
           referalCode: referalCode.trim(),
           faculty: faculty,
+          nim: nim,
           profileUrl: profileUrl,
           followProofUrl: followProofUrl
         }),
@@ -168,7 +176,7 @@ export default function UserDashboard() {
   };
 
   return (
-    <div className="relative flex bg-gradient-to-b from-[#390D62] to-[#6226A4] gap-4 flex-col min-h-screen w-screen overflow-x-hidden justify-start items-center px-4 py-8">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#390D62] to-[#6226A4] flex items-center justify-center p-4 md:p-8">
       <StripeBackground />
       <div className="relative z-4 mt-[10%] sm:mt-[5%] w-[90%] flex flex-col gap-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -226,7 +234,7 @@ export default function UserDashboard() {
       </div>
 
       {showJoinModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           {/* Tambahkan ref ke overlay */}
           <div
             ref={overlayRef}
@@ -264,6 +272,20 @@ export default function UserDashboard() {
 
               <div className="flex flex-col w-full gap-1">
                 <label className="block text-lg w-full text-start font-bold">
+                  NIM (Student ID Number) <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  value={nim}
+                  onChange={(e) => setNim(e.target.value)}
+                  className="w-full border-2 border-white rounded-lg px-4 py-2 text-white bg-[#1E0843]/50 backdrop-blur-2xl"
+                  placeholder="e.g., 0123456789"
+                  required
+                />
+              </div>
+
+              <div className="flex flex-col w-full gap-1">
+                <label className="block text-lg w-full text-start font-bold">
                   FACULTY <span className="text-red-600">*</span>
                 </label>
                 <p className="text-xs text-gray-600 mb-1">Must match team leader's faculty</p>
@@ -284,8 +306,8 @@ export default function UserDashboard() {
                 </select>
               </div>
 
-              <div>
-                <label className="block text-lg w-full text-start font-bold uppercase">Profile Picture</label>
+              <div className="flex flex-col w-full gap-1">
+                <label className="block text-lg w-full text-start font-bold uppercase">Profile Image (Selfie)</label>
                 <input
                   type="file"
                   accept="image/*"
@@ -295,7 +317,7 @@ export default function UserDashboard() {
                 />
               </div>
 
-              <div>
+              <div className="flex flex-col w-full gap-1">
                 <label className="block text-lg w-full text-start font-bold uppercase">Follow Proof (Screenshot)</label>
                 <input
                   type="file"

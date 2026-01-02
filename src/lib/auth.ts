@@ -28,8 +28,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return false;
       }
 
-      if (email.endsWith("ciputra.ac.id")) {
-        try {
+      try {
           // Cari user berdasarkan email, bukan ID dari NextAuth
           const dbUser = await prisma.user.findUnique({
             where: { email: email },
@@ -48,7 +47,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           console.error("Database Error during signIn:", error);
           return true;
         }
-      }
 
       console.warn(`Access Denied: ${email} is not a Ciputra email`);
       return false;

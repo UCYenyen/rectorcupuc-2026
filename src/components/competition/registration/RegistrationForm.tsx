@@ -119,6 +119,20 @@ export default function RegistrationForm({
           </div>
 
           <div className="space-y-2 w-full flex flex-col gap-1 items-center justify-center">
+            <label htmlFor="nim" className="block text-start w-full font-bold">
+              NIM (Student ID Number)
+            </label>
+            <input
+              type="text"
+              id="nim"
+              name="nim"
+              required
+              placeholder="e.g., 0123456789"
+              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none"
+            />
+          </div>
+
+          <div className="space-y-2 w-full flex flex-col gap-1 items-center justify-center">
             <label htmlFor="faculty" className="block text-start w-full font-bold">
               FACULTY
             </label>
