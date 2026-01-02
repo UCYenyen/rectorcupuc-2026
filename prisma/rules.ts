@@ -359,7 +359,19 @@ async function MobileLegendsRules(){
         data: [
             {
                 competition_id: c.id,
-                description: "TBA",
+                description: "1. Participants who wish to enter the competition are only allowed from active Ciputra University students from the 2023-2025 intake.",
+            },
+            {
+                competition_id: c.id,
+                description: "2. Every student participating in the competition is required to attach their in-game name, face photo, and Student ID Card (KTM) during registration.",
+            },
+            {
+                competition_id: c.id,
+                description: "3. It is prohibited to use in-game names that contain elements of SARA, racism, provocation, or harsh words.",
+            },
+            {
+                competition_id: c.id,
+                description: "4. A team is only allowed to consist of: 5 starting players, 1 substitute (optional)",
             }
         ],  
     })
@@ -379,7 +391,31 @@ async function PUBGRules(){
         data: [
             {
                 competition_id: c.id,
-                description: "TBA",
+                description: "1. Participants in the 2026 Rector Cup Competition are teams that have registered previously.",
+            },
+            {
+                competition_id: c.id,
+                description: "2. Participants are active students from Universitas Ciputra, representing all faculties/study programs.",
+            },
+            {
+                competition_id: c.id,
+                description: "3. Participants are required to show their Student ID Card (KTM) during registration.",
+            },
+            {
+                competition_id: c.id,
+                description: "4. Participants are required to register as a team.",
+            },
+            {
+                competition_id: c.id,
+                description: "5. The team consists of 4 core players and 1 substitute (optional).",
+            },
+            {
+                competition_id: c.id,
+                description: "6. Participants are required to follow Instagram @rectorcup.uc for updates on the competition.",
+            },
+            {
+                competition_id: c.id,
+                description: "7. Participants are required to post a selfie using the Rector Cup 2026 twibbon and include the official hashtag determined by the committee.",
             }
         ],  
     })
@@ -399,7 +435,27 @@ async function FIFARules(){
         data: [
             {
                 competition_id: c.id,
-                description: "TBA",
+                description: "1. Participants are active students from Universitas Ciputra from all faculties/study programs.",
+            },
+            {
+                competition_id: c.id,
+                description: "2. Participants can only register as a team.",
+            },
+            {
+                competition_id: c.id,
+                description: "3. One team consists of 2 people (gender mix is allowed).",
+            },
+            {
+                competition_id: c.id,
+                description: "4. Participants are required to follow Instagram @rectorcup.uc for updates on the competition.",
+            },
+            {
+                competition_id: c.id,
+                description: "5. Participants are required to post a selfie using the Rector Cup 2026 twibbon and include the official hashtag determined by the committee.",
+            },
+            {
+                competition_id: c.id,
+                description: "6. Consisting of 14 teams",
             }
         ],  
     })
