@@ -30,48 +30,40 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       console.log("Account:", account);
 
       if (!email) {
-        console.error("❌ SignIn Error: No email found");
+        console.error("SignIn Error: No email found");
         return false;
       }
 
-      // Validasi domain email - case insensitive
       if (!email.includes("ciputra.ac.id")) {
-        console.warn(`❌ Access Denied: ${email} is not a valid Ciputra email`);
+        console.warn(`Access Denied: ${email} is not a valid Ciputra email`);
         return "/auth/error?error=InvalidDomain";
       }
 
       try {
-        // Cek apakah user sudah ada di database
         const dbUser = await prisma.user.findUnique({
           where: { email: email },
         });
 
         console.log("DB User found:", dbUser ? "Yes" : "No");
 
-        // Jika user sudah ada, pastikan rolenya up to date
         if (dbUser) {
-          console.log("✅ Existing user, role:", dbUser.role);
+          console.log("Existing user, role:", dbUser.role);
           // Update terakhir login atau data lainnya jika perlu
           await prisma.user.update({
             where: { email: email },
             data: { 
               role: dbUser.role,
-              // emailVerified: new Date(), // optional
             },
           });
         } else {
-          // User baru - biarkan PrismaAdapter yang handle pembuatan user
-          // Tapi kita bisa set default role di sini jika diperlukan
           console.log("⚠️ New user will be created by adapter");
         }
 
-        console.log("✅ SignIn allowed for:", email);
+        console.log("SignIn allowed for:", email);
         return true;
 
       } catch (error) {
-        console.error("❌ Database Error during signIn:", error);
-        // Tetap izinkan login meski ada error database
-        // Agar user tidak stuck
+        console.error("Database Error during signIn:", error);
         return true;
       }
     },
@@ -81,7 +73,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       console.log("Trigger:", trigger);
       console.log("Token email:", token.email);
 
-      // Saat login pertama kali atau saat update
       if (user?.email || trigger === "update") {
         const email = (user?.email || token.email) as string;
         
@@ -92,18 +83,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           });
 
           if (dbUser) {
-            console.log("✅ User data loaded:", { id: dbUser.id, role: dbUser.role });
+            console.log("User data loaded:", { id: dbUser.id, role: dbUser.role });
             token.id = dbUser.id;
             token.role = dbUser.role;
             token.faculty = dbUser.faculty;
           } else {
-            console.warn("⚠️ User not found in database:", email);
-            // Set default role untuk user baru
-            token.role = Role.viewer; // atau Role.USER, sesuai default Anda
+            console.warn("User not found in database:", email);
+            token.role = Role.viewer;
             token.faculty = null;
           }
         } catch (error) {
-          console.error("❌ Error fetching user in JWT callback:", error);
+          console.error("Error fetching user in JWT callback:", error);
         }
       }
 
