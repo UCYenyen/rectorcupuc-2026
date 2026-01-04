@@ -99,7 +99,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           } else {
             console.warn("⚠️ User not found in database:", email);
             // Set default role untuk user baru
-            token.role = Role.MAHASISWA; // atau Role.USER, sesuai default Anda
+            token.role = viewer.; // atau Role.USER, sesuai default Anda
             token.faculty = null;
           }
         } catch (error) {
@@ -113,7 +113,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.role = (token.role as Role) || Role.MAHASISWA;
+        session.user.role = (token.role as Role) || Role.viewer;
         session.user.faculty = token.faculty as Faculty | null;
         
         console.log("=== Session Created ===");
