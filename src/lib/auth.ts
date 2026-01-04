@@ -20,75 +20,105 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     error: "/auth/error",
   },
   callbacks: {
-    async signIn({ profile, user }) {
-      const email = profile?.email || user?.email;
+    async signIn({ profile, user, account }) {
+      const email = (profile?.email || user?.email)?.toLowerCase().trim();
+
+      console.log("=== SignIn Callback Debug ===");
+      console.log("Email:", email);
+      console.log("Profile:", profile);
+      console.log("User:", user);
+      console.log("Account:", account);
 
       if (!email) {
-        console.error("SignIn Error: No email found in profile");
+        console.error("❌ SignIn Error: No email found");
         return false;
       }
 
-      if (email.endsWith("ciputra.ac.id")) {
-        try {
-          // Cari user berdasarkan email, bukan ID dari NextAuth
-          const dbUser = await prisma.user.findUnique({
+      // Validasi domain email - case insensitive
+      if (!email.endsWith("@ciputra.ac.id")) {
+        console.warn(`❌ Access Denied: ${email} is not a valid Ciputra email`);
+        return "/auth/error?error=InvalidDomain";
+      }
+
+      try {
+        // Cek apakah user sudah ada di database
+        const dbUser = await prisma.user.findUnique({
+          where: { email: email },
+        });
+
+        console.log("DB User found:", dbUser ? "Yes" : "No");
+
+        // Jika user sudah ada, pastikan rolenya up to date
+        if (dbUser) {
+          console.log("✅ Existing user, role:", dbUser.role);
+          // Update terakhir login atau data lainnya jika perlu
+          await prisma.user.update({
             where: { email: email },
+            data: { 
+              role: dbUser.role,
+              // emailVerified: new Date(), // optional
+            },
+          });
+        } else {
+          // User baru - biarkan PrismaAdapter yang handle pembuatan user
+          // Tapi kita bisa set default role di sini jika diperlukan
+          console.log("⚠️ New user will be created by adapter");
+        }
+
+        console.log("✅ SignIn allowed for:", email);
+        return true;
+
+      } catch (error) {
+        console.error("❌ Database Error during signIn:", error);
+        // Tetap izinkan login meski ada error database
+        // Agar user tidak stuck
+        return true;
+      }
+    },
+
+    async jwt({ token, user, account, trigger }) {
+      console.log("=== JWT Callback Debug ===");
+      console.log("Trigger:", trigger);
+      console.log("Token email:", token.email);
+
+      // Saat login pertama kali atau saat update
+      if (user?.email || trigger === "update") {
+        const email = (user?.email || token.email) as string;
+        
+        try {
+          const dbUser = await prisma.user.findUnique({
+            where: { email: email.toLowerCase().trim() },
+            select: { id: true, role: true, faculty: true },
           });
 
           if (dbUser) {
-            // Update role jika ada perubahan
-            await prisma.user.update({
-              where: { email: email },
-              data: { role: dbUser.role },
-            });
+            console.log("✅ User data loaded:", { id: dbUser.id, role: dbUser.role });
+            token.id = dbUser.id;
+            token.role = dbUser.role;
+            token.faculty = dbUser.faculty;
+          } else {
+            console.warn("⚠️ User not found in database:", email);
+            // Set default role untuk user baru
+            token.role = Role.MAHASISWA; // atau Role.USER, sesuai default Anda
+            token.faculty = null;
           }
-          
-          return true;
         } catch (error) {
-          console.error("Database Error during signIn:", error);
-          return true;
-        }
-      }
-
-      console.warn(`Access Denied: ${email} is not a Ciputra email`);
-      return false;
-    },
-    async jwt({ token, user, account }) {
-      // Saat login pertama kali, ambil User ID yang sebenarnya dari database
-      if (user?.email) {
-        const dbUser = await prisma.user.findUnique({
-          where: { email: user.email },
-          select: { id: true, role: true, faculty: true },
-        });
-
-        if (dbUser) {
-          token.id = dbUser.id; // Gunakan ID dari database
-          token.role = dbUser.role;
-          token.faculty = dbUser.faculty;
-        }
-      }
-
-      // Refresh data dari database setiap kali token di-refresh
-      if (token.email) {
-        const dbUser = await prisma.user.findUnique({
-          where: { email: token.email as string },
-          select: { id: true, role: true, faculty: true },
-        });
-
-        if (dbUser) {
-          token.id = dbUser.id;
-          token.role = dbUser.role;
-          token.faculty = dbUser.faculty;
+          console.error("❌ Error fetching user in JWT callback:", error);
         }
       }
 
       return token;
     },
+
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string; // Gunakan ID dari token yang sudah diperbaiki
-        session.user.role = token.role as Role;
+        session.user.id = token.id as string;
+        session.user.role = (token.role as Role) || Role.MAHASISWA;
         session.user.faculty = token.faculty as Faculty | null;
+        
+        console.log("=== Session Created ===");
+        console.log("User ID:", session.user.id);
+        console.log("Role:", session.user.role);
       }
       return session;
     },
