@@ -35,7 +35,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
 
       // Validasi domain email - case insensitive
-      if (!email.endsWith("@ciputra.ac.id")) {
+      if (!email.includes("@ciputra.ac.id")) {
         console.warn(`❌ Access Denied: ${email} is not a valid Ciputra email`);
         return "/auth/error?error=InvalidDomain";
       }
