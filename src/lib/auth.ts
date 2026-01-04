@@ -99,7 +99,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           } else {
             console.warn("⚠️ User not found in database:", email);
             // Set default role untuk user baru
-            token.role = viewer; // atau Role.USER, sesuai default Anda
+            token.role = Role.viewer; // atau Role.USER, sesuai default Anda
             token.faculty = null;
           }
         } catch (error) {
