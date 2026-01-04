@@ -35,7 +35,7 @@ export default function CompetitionPicker({
       </div>
       
       {/* Title overlay */}
-      <h1 className="absolute text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 px-4 py-2 sm:px-6 sm:py-3 rounded-lg z-10 text-center">
+      <h1 className="absolute text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold opacity-50 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 px-4 py-2 sm:px-6 sm:py-3 rounded-lg z-10 text-center">
         {title || "Competition"}
       </h1>
     </Link>
