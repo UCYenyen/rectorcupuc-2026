@@ -18,7 +18,7 @@ export default function page() {
         <StripeBackground />
         <RectorInlineTitle />
         <div className="relative z-2 flex flex-col gap-4 w-[90%] mb-48 justify-center items-center border-8 border-[#AAF3D5] p-4 md:p-12 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
-          <CompetitionTitleHeader title="E-SPORTS" shouldFitContent={false} />
+          <CompetitionTitleHeader title="LEARNINGS" shouldFitContent={false} />
           <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
             <CompetitionPicker
               src="/competitions/hero/cerdas-cermat.webp"

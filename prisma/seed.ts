@@ -10,25 +10,31 @@ export async function main() {
     // Create competitions individually to get their IDs
   // Sports
     /*const basketball = */ await prisma.competition.create({
-        data: { name: "Basketball Putra", slug: "basketball-putra", location: "UC Sports Hall", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 10 },
+        data: { name: "Basketball Putra", slug: "basketball-putra", location: "UC Sports Hall", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 12 },
     });
     await prisma.competition.create({
         data: { name: "Basketball Putri", slug: "basketball-putri", location: "UC Sports Hall", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 3, max_team_member: 4 },
     });
     /*const futsal =  */ await prisma.competition.create({
-        data: { name: "Futsal", slug: "futsal", location: "UC Sports Hall", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 10 },
+        data: { name: "Futsal", slug: "futsal", location: "UC Sports Hall", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 12 },
     });
     /* const billiard = */ await prisma.competition.create({
-        data: { name: "Billiard", slug: "billiard", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 1, max_team_member: 1 },
+        data: { name: "Billiard Putra", slug: "billiard-putra", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 1, max_team_member: 1 },
+    });
+     /* const billiard = */ await prisma.competition.create({
+        data: { name: "Billiard Putri", slug: "billiard-putri", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member: 1, max_team_member: 1 },
     });
     /* const badminton  =*/ await prisma.competition.create({
         data: { name: "Badminton", slug: "badminton", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member:2, max_team_member:2},
     });
     /*const pingpong =*/ await prisma.competition.create({
-        data: { name: "Ping Pong", slug: "ping-pong", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
+        data: { name: "Ping Pong", slug: "ping-pong", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:2 },
     });
     /*const taekwondo =*/ await prisma.competition.create({
-        data: { name: "Taekwondo", slug: "taekwondo", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
+        data: { name: "Taekwondo Putra", slug: "taekwondo-putra", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
+    });
+     /*const taekwondo =*/ await prisma.competition.create({
+        data: { name: "Taekwondo Putri", slug: "taekwondo-putri", location: "TBA", category: CompetitionCategory.Sports, description: "Lorem Ipsum Yenyen", min_team_member:1, max_team_member:1 },
     });
 
 
@@ -37,10 +43,10 @@ export async function main() {
         data: { name: "Mobile Legends", slug: "mobile-legends", location: "Corepreneur UC", category: CompetitionCategory.ESports, description: "Lorem Ipsum Yenyen", min_team_member: 5, max_team_member: 6 },
     });
     /*const pubg = */await prisma.competition.create({
-        data: { name: "PUBG", slug: "pubg", location: "Corepreneur UC", category: CompetitionCategory.ESports, description: "Lorem Ipsum Yenyen", min_team_member: 4, max_team_member: 4 },
+        data: { name: "PUBG", slug: "pubg", location: "Corepreneur UC", category: CompetitionCategory.ESports, description: "Lorem Ipsum Yenyen", min_team_member: 4, max_team_member: 5 },
     });
     /*const FIFA = */await prisma.competition.create({
-        data: { name: "FIFA 2V2", slug: "fifa-2v2", location: "Corepreneur UC", category: CompetitionCategory.ESports, description: "Lorem Ipsum Yenyen", min_team_member: 2, max_team_member: 2 },
+        data: { name: "FIFA 2V2", slug: "fifa-2v2", location: "Corepreneur UC", category: CompetitionCategory.ESports, description: "Lorem Ipsum Yenyen", min_team_member: 2, max_team_member: 3 },
     });
 
 

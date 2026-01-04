@@ -159,11 +159,20 @@ async function FutsalRules(){
 
 async function BilliardRules(){
     const c = await prisma.competition.findUnique({
-        where: { slug: "billiard" },
+        where: { slug: "billiard-putra" },
         select: { id: true },
     });
 
     if (!c) {
+        throw new Error("Billiard competition not found");
+    }
+
+    const c2 = await prisma.competition.findUnique({
+        where: { slug: "billiard-putri" },
+        select: { id: true },
+    });
+
+    if (!c2) {
         throw new Error("Billiard competition not found");
     }
 
@@ -195,6 +204,39 @@ async function BilliardRules(){
             },
             {
                 competition_id: c.id,
+                description: "7. Participants are required to attend the opening and closing ceremonies of Rector Cup 2026.",
+            }
+        ],  
+    })
+
+    await prisma.rules.createMany({
+        data: [
+            {
+                competition_id: c2.id,
+                description: "1. Participants must be active students of Ciputra University, as evidenced by showing their Student ID Card (KTM) or a letter of active enrollment from their respective faculties.",
+            },
+            {
+                competition_id: c2.id,
+                description: "2. All participants are required to show their Student ID Card (KTM) during registration.",
+            },
+            {
+                competition_id: c2.id,
+                description: "3. Participants are representatives from each faculty or study program at Ciputra University.",
+            },
+            {
+                competition_id: c2.id,
+                description: "3. Participants are representatives from each faculty or study program at Ciputra University.",
+            },
+            {
+                competition_id: c2.id,
+                description: "5. Each faculty is required to send at least one representative in the Mixed Doubles category.",
+            },
+            {
+                competition_id: c2.id,
+                description: "6. Minimum total representation per faculty: 2 players.",
+            },
+            {
+                competition_id: c2.id,
                 description: "7. Participants are required to attend the opening and closing ceremonies of Rector Cup 2026.",
             }
         ],  
@@ -303,11 +345,20 @@ async function PingPongRules(){
 
 async function TaekwondoRules(){
     const c = await prisma.competition.findUnique({
-        where: { slug: "taekwondo" },
+        where: { slug: "taekwondo-putra" },
         select: { id: true },
     });
 
     if (!c) {
+        throw new Error("Taekwondo competition not found");
+    }
+
+     const c2 = await prisma.competition.findUnique({
+        where: { slug: "taekwondo-putri" },
+        select: { id: true },
+    });
+
+    if (!c2) {
         throw new Error("Taekwondo competition not found");
     }
 
@@ -339,6 +390,39 @@ async function TaekwondoRules(){
             },
             {
                 competition_id: c.id,
+                description: "7. Participants are divided into 2 (two) categories: a. Men's Category (Male) b. Women's Category (Female) 8. Maximum 21 participants per category.",
+            }
+        ],  
+    })
+
+    await prisma.rules.createMany({
+        data: [
+            {
+                competition_id: c2.id,
+                description: "1. Participants must be active students from each faculty/study program at Universitas Ciputra Surabaya.",
+            },
+            {
+                competition_id: c2.id,
+                description: "2. Participants are required to attend the Opening and Closing ceremonies; failure to do so will result in KP not being disbursed.",
+            },
+            {
+                competition_id: c2.id,
+                description: "3. All participants are required to show their Student ID Card (KTM) during registration and before matches.",
+            },
+            {
+                competition_id: c2.id,
+                description: "4. Each faculty/study program is allowed to send more than one participant as long as there are still available slots.",
+            },
+            {
+                competition_id: c2.id,
+                description: "5. Registered participants must be members of the Taekwondo Student Activity Unit (UKM) or have basic Taekwondo skills.",
+            },
+            {
+                competition_id: c2.id,
+                description: "6. Teams using ineligible players will be disqualified.",
+            },
+            {
+                competition_id: c2.id,
                 description: "7. Participants are divided into 2 (two) categories: a. Men's Category (Male) b. Women's Category (Female) 8. Maximum 21 participants per category.",
             }
         ],  

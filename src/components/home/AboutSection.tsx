@@ -34,8 +34,7 @@ export default function AboutSection() {
             />
             <h1 className="about-head text-3xl sm:text-5xl text-center font-bold">ABOUT</h1>
             <h3 className="about-text pb-12 sm:pb-0 text-md text-justify sm:text-2xl sm:text-center w-[80%] sm:w-1/2">
-                Rector Cup 2026 adalah acara tahunan Universitas Ciputra Surabaya di bawah Department of Student Organization dari Student Council. Acara Rector Cup 2026 diadakan sebagai tempat untuk mahasiswa Universitas Ciputra Surabaya dalam menemukan serta mengembangkan minat dan bakat, terutama di bidang non-akademik. Selain itu, acara Rector Cup yang diadakan setiap tahun bertujuan untuk membangun komunikasi serta relasi yang baik antar mahasiswa dari berbagai fakultas dan jurusan.
-                Rector Cup 2026 hadir dengan berbagai cabang lomba, termasuk sport, e-sport, learning, dan art, yang dapat melatih pengembangan skill mahasiswa, profesionalisme, serta kecerdasan intelektual.
+                The Rector Cup 2026 is an annual event held by Ciputra University Surabaya under the Student Organization Department of the Student Council. The Rector Cup 2026 event is held as a place for Ciputra University Surabaya students to discover and develop their interests and talents, especially in non-academic fields. Furthermore, the annual Rector Cup event aims to build communication and good relationships between students from various faculties and departments. The Rector Cup 2026 presents various competition branches, including sports, e-sports, learning, and art, which can train students' skill development, professionalism, and intellectual intelligence.
             </h3>
         </section>
     );
