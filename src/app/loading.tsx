@@ -12,11 +12,20 @@ export default function loading() {
                 <StripeBackground />
                 <RectorInlineTitle />
                 <div className="relative z-2 mb-48 flex flex-col gap-4 max-w-lg justify-center items-center border-8 border-[#AAF3D5] p-8 md:p-12 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
-                    <CompetitionTitleHeader title="UNDER DEVELOPMENT" shouldFitContent={true} />
+                    <CompetitionTitleHeader title="LOADING" shouldFitContent={true} />
 
                     <div className="flex flex-col justify-center items-center gap-4">
                         <div className="bg-black/40 border-white border-3 rounded-full p-4">
                             <LoaderCircle className="w-16 h-16 text-white spin-in" />
+                        <style>{`
+                            @keyframes spin {
+                                to { transform: rotate(360deg); }
+                            }
+                            .spin-in {
+                                animation: spin 1s linear infinite;
+                                transform-origin: center;
+                            }
+                        `}</style>
                         </div>
                         <p className="text-white text-lg leading-relaxed text-center">
                             Please wait, the page is loading...
