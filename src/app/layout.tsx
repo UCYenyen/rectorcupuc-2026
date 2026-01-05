@@ -10,8 +10,8 @@ import Footer from "@/components/Footer";
 import { montserrat, pressStart, brunson } from "./fonts";
 
 export const metadata: Metadata = {
-  title: "Rector Cup 2026",
-  description: "The Official Website of Rector Cup 2026",
+  title: "Rector Cup",
+  description: "The Official Website of Rector Cup",
 };
 
 export default async function RootLayout({
