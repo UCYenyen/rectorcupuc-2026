@@ -1214,6 +1214,94 @@
 }
 
 /* DONE */
+@media (max-width: 1280px) and (max-height:585px) {
+    /* Countdown Section */
+    .countdown-card{
+        width: 12rem;
+        padding-bottom: 7rem;
+    }
+    .rector-title{
+        width: 35rem;
+    }
+    .big-yellow-star{
+        width: 120rem;
+        top: 7rem;
+        left: 5rem;
+    }
+    .big-green-star {
+        width: 110rem;
+        top: 2rem;
+        left: 6rem;
+    }
+
+    /*Depan Bawah*/
+    .rector-card{
+        width: 40rem;
+        top: 18rem;
+        left: 10rem;
+    }
+
+    /* Belakang Atas*/
+    .rector-card-2{   
+        width: 35rem;
+        top: 9rem;
+        left: 280px;
+    }
+    .arcade-machine-big {
+        width: 35rem;
+        top: 6rem;
+        height: 40rem;
+    }
+    .arcade-medium-left{
+        width: 20rem;
+        left: 6rem;
+        top: 28rem;
+    }
+    .arcade-medium-right{
+        width: 20rem;
+        right: 6rem;
+        top: 28rem;
+    }
+    .tv-left{
+        width: 12rem;
+        top: 38rem;
+        left: -1.5rem;
+
+    }
+    .tv-right{
+        width: 12rem;
+        top: 38rem;
+        right: -1.5rem;
+    }
+    .camera-right{
+        width: 13rem;
+        top: 1.5rem;
+        left: 66rem;
+    }
+    .camera-background-right{
+        width: 12rem;
+        top: 2rem;
+    }
+    .congrats-left{
+        width: 9rem;
+        top: 10rem;
+    }
+
+    /* About Section */
+    /* Trailer Section */
+    .pixelmon-right{
+        width: 12rem;
+        left: 65rem;
+        bottom: 1rem;
+    }
+    .ghost-pink-left{
+        width: 10em;
+        left: 3rem;
+        top: 5rem;
+    }
+}
+
+/* DONE */
 @media (max-width: 1180px) and (max-height: 820px) {
     /* Countdown Section */
     .countdown-card{
