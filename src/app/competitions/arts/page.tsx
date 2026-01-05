@@ -38,7 +38,7 @@ export default function page() {
             
             <CompetitionPicker
               src="/competitions/hero/photography.webp"
-              link="/competitions/register/photography"
+              link="/competitions/register/fotografi"
               title="Photography"
               alt="rectorcupuc photography"
               className="w-full h-full aspect-square object-cover"
