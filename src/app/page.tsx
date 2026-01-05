@@ -305,7 +305,7 @@ export default function Home() {
             className="rector-title z-[5] w-[80vw] sm:w-[50vw] h-auto"
           />
         </div>
-        <CountdownContainer endDate="2026-01-01T00:00:00Z" />
+        <CountdownContainer endDate="2026-02-23T15:00:00Z" />
       </div>
       <AboutSection />
       <TrailerSection />

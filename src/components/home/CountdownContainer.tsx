@@ -9,7 +9,7 @@ export default function CountdownContainer({ endDate }: { endDate?: string | Dat
   const [remaining, setRemaining] = useState<CountdownValues>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   // parse endDate or default (example)
-  const target = useRef<Date>(endDate ? new Date(endDate) : new Date('2026-02-23T15:00:00'));
+  const target = useRef<Date>(endDate ? new Date(endDate) : new Date(Date.now() + 10 * 24 * 3600 * 1000)); // default 10 days
 
   // ukuran maksimum antar kartu
   useEffect(() => {
