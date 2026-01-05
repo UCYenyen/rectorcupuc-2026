@@ -24,7 +24,7 @@ export default async function RootLayout({
   return (
     <html lang="en"
     className={`${montserrat.variable} ${pressStart.variable} ${brunson.variable}`}>
-      <body id="root-layout" className="bg-gradient-to-b from-[#390D62] to-[#6226A4] font-sans antialiased">
+      <body id="root-layout" className="bg-gradient-to-b from-[#390D62] to-[#6226A4] font-sans antialiased overflow-x-hidden">
         <Provider session={session}>
           <NavigationBar />
           {children}
