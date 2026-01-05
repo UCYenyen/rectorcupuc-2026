@@ -31,7 +31,7 @@ async function BasketballPutraRules(){
         data: [
             {
                 competition_id: c.id,
-                description: "1. Each team must register a minimum of 10 players and a maximum of 12 players, including substitute players.",
+                description: "1. Each team must register a minimum of 5 players and a maximum of 12 players, including substitute players.",
             },
             {
                 competition_id: c.id,
