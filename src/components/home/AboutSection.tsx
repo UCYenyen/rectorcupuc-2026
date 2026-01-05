@@ -34,8 +34,11 @@ export default function AboutSection() {
             />
             <h1 className="about-head text-3xl sm:text-5xl text-center font-bold">ABOUT</h1>
             <h3 className="about-text pb-12 sm:pb-0 text-md text-justify sm:text-2xl sm:text-center w-[80%] sm:w-1/2">
-                The Rector Cup 2026 is an annual event held by Ciputra University Surabaya under the Student Organization Department of the Student Council. The Rector Cup 2026 event is held as a place for Ciputra University Surabaya students to discover and develop their interests and talents, especially in non-academic fields. Furthermore, the annual Rector Cup event aims to build communication and good relationships between students from various faculties and departments. The Rector Cup 2026 presents various competition branches, including sports, e-sports, learning, and art, which can train students' skill development, professionalism, and intellectual intelligence.
-            </h3>
+                Rector Cup is an annual event held by Ciputra University Surabaya under the Student Organization Department of the Student Council. This event serves as a platform for students to discover and develop their interests and talents, especially in non-academic fields. Furthermore, the Rector Cup aims to build communication and foster positive relationships between students from various faculties and departments through various competitions, including sports, e-sports, academic challenges, and arts.
+             </h3>
+              <h3 className="about-text pb-12 sm:pb-0 text-md text-justify sm:text-2xl sm:text-center w-[80%] sm:w-1/2">
+                 To maintain the integrity of our competitions, Rector Cup web uses Google OAuth (Google Sign-In) specifically to ensure that all registered participants are active students of Ciputra University Surabaya. We use your Google profile information (name and email) solely for student identity verification and registration management. Your data is used internally and will not be shared with any third parties.
+             </h3>
         </section>
     );
 }
