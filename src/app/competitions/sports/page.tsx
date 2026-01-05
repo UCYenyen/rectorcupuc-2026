@@ -87,7 +87,7 @@ export default function page() {
             />
 
             <CompetitionPicker
-              src="/competitions/hero/taekwondo-putri.webp"
+              src="/competitions/hero/taekwondo_putri.webp"
               link="/competitions/sports/taekwondo-putri"
               title="Taekwondo Putri"
               alt="rectorcup"
