@@ -11,13 +11,25 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        }
+      }
     }),
   ],
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
   },
+  trustHost: true,
+  useSecureCookies: process.env.NODE_ENV === "production",
+  secret: process.env.AUTH_SECRET,
   pages: {
     error: "/auth/error",
+    signIn: "/auth/signin",
   },
   callbacks: {
     async signIn({ profile, user, account }) {
@@ -25,9 +37,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       console.log("=== SignIn Callback Debug ===");
       console.log("Email:", email);
-      console.log("Profile:", profile);
-      console.log("User:", user);
-      console.log("Account:", account);
 
       if (!email) {
         console.error("SignIn Error: No email found");
@@ -48,7 +57,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         if (dbUser) {
           console.log("Existing user, role:", dbUser.role);
-          // Update terakhir login atau data lainnya jika perlu
           await prisma.user.update({
             where: { email: email },
             data: { 
@@ -56,7 +64,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             },
           });
         } else {
-          console.log("⚠️ New user will be created by adapter");
+          console.log("New user will be created by adapter");
         }
 
         console.log("SignIn allowed for:", email);

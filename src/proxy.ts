@@ -43,7 +43,7 @@ export async function proxy(req: NextRequest) {
 
   if (isProtectedRoute) {
     if (!token) {
-      const loginUrl = new URL("/api/auth/signin", req.url);
+      const loginUrl = new URL("/api/auth/signin", req.url); // atau "/auth/signin" jika pakai opsi 2
       loginUrl.searchParams.set("callbackUrl", req.nextUrl.href);
       return NextResponse.redirect(loginUrl);
     }

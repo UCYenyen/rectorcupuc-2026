@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 };
 
 export default async function page({ params }: { params: Promise<{ id: string }> }) {
-    // 1. Await objek params terlebih dahulu [cite: 3]
     const resolvedParams = await params;
     const id = resolvedParams.id;
 

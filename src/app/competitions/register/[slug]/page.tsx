@@ -1,7 +1,7 @@
 'use server'
 import RegistrationForm from "@/components/competition/registration/RegistrationForm";
 import prisma from "@/lib/prisma";
-import { notFound } from "next/dist/client/components/navigation";
+import { notFound, redirect } from "next/dist/client/components/navigation";
 import StripeBackground from "@/components/StripeBackground";
 import { auth } from "@/lib/auth";
 import { checkUserRegistrationStatus } from "@/lib/competition";
@@ -22,7 +22,7 @@ export default async function Page({ params }: ProblemPageProps) {
     select: { max_team_member: true, id: true, isCompetitionOpenRegistration: true },
   });
 
-  if (!session) {
+  if(!session){
     return;
   }
 
