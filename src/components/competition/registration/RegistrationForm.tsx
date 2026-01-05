@@ -57,7 +57,7 @@ export default function RegistrationForm({
         f1.append("file", instagramFile);
         const res1 = await fetch("/api/image/upload", { method: "POST", body: f1 });
         const json1 = await res1.json();
-        if (!res1.ok) throw new Error(json1.error || "Gagal upload bukti instagram");
+        if (!res1.ok) throw new Error(json1.error || "Failed to upload follow proof");
         instagramProofUrl = json1.url;
       }
       if (profileFile && profileFile.size > 0) {
@@ -65,7 +65,7 @@ export default function RegistrationForm({
         f2.append("file", profileFile);
         const res2 = await fetch("/api/image/upload", { method: "POST", body: f2 });
         const json2 = await res2.json();
-        if (!res2.ok) throw new Error(json2.error || "Gagal upload foto profil");
+        if (!res2.ok) throw new Error(json2.error || "Failed to upload profile image");
         profileImageUrl = json2.url;
       }
 
@@ -74,7 +74,7 @@ export default function RegistrationForm({
 
       formAction(fd);
     } catch {
-      setUploadError("Failed to upload images");
+      setUploadError("Failed to upload images. Image must be less than 5MB.");
     } finally {
       setUploading(false);
     }
