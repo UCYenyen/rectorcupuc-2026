@@ -55,7 +55,7 @@ export default function page() {
             />
 
             <CompetitionPicker
-              src="/competitions/hero/billiard.webp"
+              src="/competitions/hero/billiard-putri.webp"
               link="/competitions/sports/billiard-putri"
               title="Billiard Putri"
               alt="rectorcup"
@@ -87,7 +87,7 @@ export default function page() {
             />
 
             <CompetitionPicker
-              src="/competitions/hero/taekwondo.webp"
+              src="/competitions/hero/taekwondo-putri.webp"
               link="/competitions/sports/taekwondo-putri"
               title="Taekwondo Putri"
               alt="rectorcup"

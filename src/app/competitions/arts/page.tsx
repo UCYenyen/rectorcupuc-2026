@@ -19,7 +19,7 @@ export default function page() {
          <RectorInlineTitle />
         <div className="relative z-2 flex flex-col mb-48 gap-4 w-[90%] justify-center items-center border-8 border-[#AAF3D5] p-4 md:p-12 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
         <CompetitionTitleHeader title="ARTS" shouldFitContent={false} />
-          <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
             <CompetitionPicker
               src="/competitions/hero/dance.webp"
               link="/competitions/register/dance"
@@ -37,14 +37,6 @@ export default function page() {
             />
             
             <CompetitionPicker
-              src="/competitions/hero/duet-singing.webp"
-              link="/competitions/register/duet-singing"
-              title="Duet Singing"
-              alt="rectorcupuc duet-singing"
-              className="w-full h-full aspect-square object-cover"
-            />
-            
-            <CompetitionPicker
               src="/competitions/hero/photography.webp"
               link="/competitions/register/photography"
               title="Photography"
@@ -57,14 +49,6 @@ export default function page() {
               link="/competitions/register/poster"
               title="Poster"
               alt="rectorcupuc poster"
-              className="w-full h-full aspect-square object-cover"
-            />
-            
-            <CompetitionPicker
-              src="/competitions/hero/poetry.webp"
-              link="/competitions/register/poetry"
-              title="Poetry"
-              alt="rectorcupuc poetry"
               className="w-full h-full aspect-square object-cover"
             />
           </div>
