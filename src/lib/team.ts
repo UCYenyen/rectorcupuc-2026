@@ -174,7 +174,7 @@ export async function joinTeamByReferalCode(
   const alreadyRegisteredToAnotherTeam = await prisma.team.findFirst({
     where: {
       competition_id: team.competition_id,
-      members: { some: { user_id: userId } },
+      members: { some: { user_id: userId, join_request_status: { not: "Failed" } } },
     },
   });
 
