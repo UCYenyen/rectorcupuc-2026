@@ -84,7 +84,7 @@ model VerificationToken {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  NIM           String?   @unique
+  NIM           String?
   email         String?   @unique
   faculty       Faculty?
   emailVerified DateTime?

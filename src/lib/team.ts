@@ -155,6 +155,20 @@ export async function joinTeamByReferalCode(userId: string, referalCode: string,
     }
 
     try {
+      // Check if NIM is already used by another user
+      const nimExists = await prisma.user.findFirst({
+        where: { 
+          NIM: nim,
+          NOT: { id: userId }
+        },
+      });
+
+      if (nimExists) {
+        if (followProofUrl) await deleteUploadedImage(followProofUrl);
+        if (profileUrl) await deleteUploadedImage(profileUrl);
+        return { error: "NIM sudah digunakan oleh user lain. Pastikan NIM yang dimasukkan benar." };
+      }
+
       // Update user faculty and NIM
       await prisma.user.update({
         where: { id: userId },

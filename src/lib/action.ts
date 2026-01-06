@@ -81,6 +81,17 @@ export async function registerTeam(
       };
     }
 
+    const nimExists = await prisma.user.findFirst({
+      where: { 
+        NIM: nim,
+        NOT: { id: leaderId }
+      },
+    });
+
+    if (nimExists) {
+      return { error: "NIM sudah digunakan oleh user lain. Pastikan NIM yang dimasukkan benar." };
+    }
+
     console.log("User found:", existingUser.email);
 
     await prisma.user.update({

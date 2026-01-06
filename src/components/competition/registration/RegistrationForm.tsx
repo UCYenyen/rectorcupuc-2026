@@ -22,7 +22,7 @@ export default function RegistrationForm({
   const [userVerified, setUserVerified] = useState(false);
   const [verifying, setVerifying] = useState(true);
   const [networkError, setNetworkError] = useState(false); // <--- NEW: Handle Fetch Failure
-  
+
   const [uploading, setUploading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState<{
@@ -46,11 +46,11 @@ export default function RegistrationForm({
 
     try {
       const response = await fetch(`/api/user/verify/${session.user.id}`);
-      
+
       // Handle non-JSON responses (HTML 500 pages, etc)
       const contentType = response.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
-         throw new Error("Server returned invalid format");
+        throw new Error("Server returned invalid format");
       }
 
       const data = await response.json();
@@ -59,7 +59,7 @@ export default function RegistrationForm({
         setUserVerified(true);
       } else {
         // User is connected but not in DB
-        setUserVerified(false); 
+        setUserVerified(false);
       }
     } catch (error) {
       console.error("Verification error:", error);
@@ -107,12 +107,12 @@ export default function RegistrationForm({
 
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.includes("application/json")) {
-            const data = await response.json();
-            if (!response.ok) throw new Error(data.error || "Upload failed");
-            return data.url;
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || "Upload failed");
+          return data.url;
         } else {
-            if (!response.ok) throw new Error(`Server Error: ${response.status}`);
-            throw new Error("Invalid response from upload server");
+          if (!response.ok) throw new Error(`Server Error: ${response.status}`);
+          throw new Error("Invalid response from upload server");
         }
       } catch (error) {
         if (attempt === maxRetries) throw error;
@@ -169,7 +169,7 @@ export default function RegistrationForm({
       fd.set("profileImageUrl", profileImageUrl);
 
       startTransition(() => formAction(fd));
-      
+
     } catch (error) {
       setFormError(error instanceof Error ? error.message : "Upload failed");
     } finally {
@@ -216,7 +216,7 @@ export default function RegistrationForm({
     return (
       <div className="text-white text-center space-y-4 p-4">
         <div className="text-red-400 font-bold bg-red-900/20 p-4 rounded-lg border border-red-500">
-           Account verification failed. Please relogin.
+          Account verification failed. Please relogin.
         </div>
         <button
           onClick={() => router.push("/api/auth/signout")}
@@ -244,7 +244,7 @@ export default function RegistrationForm({
 
           {(state.error || formError) && (
             <div className="bg-red-950/50 border-2 border-red-600 text-red-200 p-4 rounded-lg font-medium text-sm text-center">
-               ⚠️ {state.error || formError}
+              ⚠️ {state.error || formError}
             </div>
           )}
 
@@ -259,8 +259,16 @@ export default function RegistrationForm({
           </div>
 
           <div className="space-y-2 w-full flex flex-col gap-1">
-            <label htmlFor="nim" className="font-bold text-sm uppercase tracking-wider">NIM</label>
-            <input type="text" id="nim" name="nim" required disabled={uploading}
+            <label htmlFor="nim" className="font-bold text-sm uppercase tracking-wider">
+              NIM (Student ID Number)
+            </label>
+            <input
+              type="text"
+              id="nim"
+              name="nim"
+              required
+              disabled={uploading}
+              inputMode="numeric"
               className="w-full border-2 border-white/20 rounded-lg p-3 bg-black/40 backdrop-blur-xl outline-none focus:border-purple-500 transition-all disabled:opacity-50"
             />
           </div>
