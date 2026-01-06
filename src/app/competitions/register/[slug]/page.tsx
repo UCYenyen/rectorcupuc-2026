@@ -23,7 +23,7 @@ export default async function Page({ params }: ProblemPageProps) {
   });
 
   if(!session){
-    return;
+    return redirect("/auth/signin");
   }
 
   if (!competition) {
