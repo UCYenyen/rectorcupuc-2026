@@ -271,24 +271,23 @@ export default function UserDashboard() {
               </div>
 
               <div className="flex flex-col w-full gap-1">
-                <label className="block text-lg w-full text-start font-bold">
-                  NIM (Student ID Number) <span className="text-red-600">*</span>
-                </label>
+                <label className="block text-lg w-full text-start font-bold uppercase">NIM *</label>
                 <input
                   type="text"
                   value={nim}
                   onChange={(e) => setNim(e.target.value)}
+                  placeholder="Enter your NIM"
                   className="w-full border-2 border-white rounded-lg px-4 py-2 text-white bg-[#1E0843]/50 backdrop-blur-2xl"
-                  placeholder="e.g., 0123456789"
+                  pattern="[0-9]+"
+                  title="NIM should contain only numbers"
                   required
                 />
               </div>
 
               <div className="flex flex-col w-full gap-1">
                 <label className="block text-lg w-full text-start font-bold">
-                  FACULTY <span className="text-red-600">*</span>
+                  FACULTY <span className="text-red-600">* Must match team leader's faculty</span>
                 </label>
-                <p className="text-xs text-gray-600 mb-1">Must match team leader's faculty</p>
                 <select
                   value={faculty}
                   onChange={(e) => setFaculty(e.target.value)}
