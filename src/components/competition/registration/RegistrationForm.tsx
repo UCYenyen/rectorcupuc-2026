@@ -1,6 +1,7 @@
+// src/components/competition/registration/RegistrationForm.tsx
 "use client";
 import { registerTeam, RegisterTeamFormState } from "@/lib/action";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, startTransition } from "react";
 import { useActionState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -15,30 +16,114 @@ export default function RegistrationForm({
   isSolo = false,
 }: RegistrationFormProps) {
   const { data: session, status } = useSession();
-  
-  const isLoggedIn = !!session;
-  const isLoading = status === "loading";
   const router = useRouter();
-  if(!session || !session.user){
-    return null;
-  }
+  
+  const [userVerified, setUserVerified] = useState(false);
+  const [verifying, setVerifying] = useState(true);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<{
+    instagram: boolean;
+    profile: boolean;
+  }>({ instagram: false, profile: false });
 
-  console.log("RegistrationForm session:", session);
-  console.log("RegistrationForm user_id:", session.user.id);
-
-  const leaderId = session.user.id;
+  const leaderId = session?.user?.id || "";
   const registerTeamWithArgs = registerTeam.bind(null, leaderId, slug);
   const [state, formAction] = useActionState<RegisterTeamFormState, FormData>(
     registerTeamWithArgs,
     {}
   );
 
-  const [uploading, setUploading] = useState(false);
-  const [uploadError, setUploadError] = useState<string | null>(null);
+  useEffect(() => {
+    async function verifyUser() {
+      if (status === "loading") return;
+
+      if (!session?.user?.id) {
+        setVerifying(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/user/verify/${session.user.id}`);
+        const data = await response.json();
+
+        if (data.exists) {
+          setUserVerified(true);
+        } else {
+          console.error("User not found in database");
+        }
+      } catch (error) {
+        console.error("Verification error:", error);
+      } finally {
+        setVerifying(false);
+      }
+    }
+
+    verifyUser();
+  }, [session?.user?.id, status]);
+
+  useEffect(() => {
+    if (state.success) {
+      const timer = setTimeout(() => {
+        router.push("/dashboard");
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [state.success, router]);
+
+  const isLoggedIn = !!session;
+  const isLoading = status === "authenticated" ? false : status === "loading";
+
+  async function uploadWithRetry(file: File, maxRetries = 2): Promise<string> {
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+        const response = await fetch("/api/image/upload", {
+          method: "POST",
+          body: formData,
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Upload failed");
+        }
+
+        const data = await response.json();
+        return data.url;
+      } catch (error) {
+        if (attempt === maxRetries) {
+          throw error;
+        }
+        await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, attempt)));
+      }
+    }
+    throw new Error("Upload failed after retries");
+  }
+
+  async function cleanupUploadedImage(url: string) {
+    try {
+      await fetch("/api/image/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
+      });
+    } catch (error) {
+      console.error("Failed to cleanup image:", error);
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setUploadError(null);
+    setUploadProgress({ instagram: false, profile: false });
 
     const formEl = e.currentTarget;
     const fd = new FormData(formEl);
@@ -46,45 +131,90 @@ export default function RegistrationForm({
     const instagramFile = fd.get("instagramProof") as File | null;
     const profileFile = fd.get("profileImage") as File | null;
 
+    if (instagramFile && instagramFile.size > 5 * 1024 * 1024) {
+      setUploadError("Instagram proof must be less than 5MB");
+      return;
+    }
+    if (profileFile && profileFile.size > 5 * 1024 * 1024) {
+      setUploadError("Profile image must be less than 5MB");
+      return;
+    }
+
+    let instagramProofUrl = "";
+    let profileImageUrl = "";
+
     try {
       setUploading(true);
 
-      let instagramProofUrl = "";
-      let profileImageUrl = "";
-
       if (instagramFile && instagramFile.size > 0) {
-        const f1 = new FormData();
-        f1.append("file", instagramFile);
-        const res1 = await fetch("/api/image/upload", { method: "POST", body: f1 });
-        const json1 = await res1.json();
-        if (!res1.ok) throw new Error(json1.error || "Failed to upload follow proof");
-        instagramProofUrl = json1.url;
+        instagramProofUrl = await uploadWithRetry(instagramFile);
+        setUploadProgress(prev => ({ ...prev, instagram: true }));
       }
+
       if (profileFile && profileFile.size > 0) {
-        const f2 = new FormData();
-        f2.append("file", profileFile);
-        const res2 = await fetch("/api/image/upload", { method: "POST", body: f2 });
-        const json2 = await res2.json();
-        if (!res2.ok) throw new Error(json2.error || "Failed to upload profile image");
-        profileImageUrl = json2.url;
+        try {
+          profileImageUrl = await uploadWithRetry(profileFile);
+          setUploadProgress(prev => ({ ...prev, profile: true }));
+        } catch (error) {
+          if (instagramProofUrl) {
+            await cleanupUploadedImage(instagramProofUrl);
+          }
+          throw error;
+        }
       }
 
       fd.set("instagramProofUrl", instagramProofUrl);
       fd.set("profileImageUrl", profileImageUrl);
 
-      formAction(fd);
-    } catch {
-      setUploadError("Failed to upload images. Image must be less than 5MB.");
-    } finally {
+      startTransition(() => {
+        formAction(fd);
+      });
+      
+    } catch (error) {
+      console.error("Upload error:", error);
+      setUploadError(
+        error instanceof Error
+          ? error.message
+          : "Failed to upload images. Please try again."
+      );
       setUploading(false);
     }
   }
 
-  useEffect(() => {
-    if (state.success) {
-      router.push("/dashboard");
-    }
-  }, [state.success, router]);
+  if (!session || !session.user) {
+    return (
+      <div className="text-white text-center">
+        Please log in to register
+      </div>
+    );
+  }
+
+  if (verifying) {
+    return (
+      <div className="text-white text-center">
+        <div className="animate-pulse">Verifying account...</div>
+      </div>
+    );
+  }
+
+  if (!userVerified) {
+    return (
+      <div className="text-white text-center space-y-4">
+        <div className="text-white font-bold">
+          Account login session is not valid.
+        </div>
+        <p className="text-sm">
+          Please log out and log in again
+        </p>
+        <button
+          onClick={() => router.push("/api/auth/signout")}
+          className="bg-black/40 border-3 hover:bg-purple-800 px-4 py-2 rounded-lg"
+        >
+          Log Out
+        </button>
+      </div>
+    );
+  }
 
   return (
     <form
@@ -92,16 +222,25 @@ export default function RegistrationForm({
       className="flex flex-col gap-4 text-white"
     >
       {state.success ? (
-        <div className="text-green-600 font-bold">Registration Successful!</div>
+        <div className="text-center space-y-4">
+          <div className="text-green-600 font-bold text-2xl">✓ Registration Successful!</div>
+          <p className="text-white">Redirecting to dashboard...</p>
+        </div>
       ) : (
         <>
           <h2 className="text-3xl text-white text-center uppercase font-bold">
-            {slug} Registeration
+            {slug} Registration
           </h2>
 
           {state.error && (
             <div className="bg-red-100 border-2 border-red-600 text-red-600 p-3 rounded font-bold text-sm">
               {state.error}
+            </div>
+          )}
+
+          {uploadError && (
+            <div className="bg-red-100 border-2 border-red-600 text-red-600 p-3 rounded font-bold text-sm">
+              {uploadError}
             </div>
           )}
 
@@ -114,7 +253,8 @@ export default function RegistrationForm({
               id="teamName"
               name="teamName"
               required
-              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none"
+              disabled={uploading}
+              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none disabled:opacity-50"
             />
           </div>
 
@@ -127,8 +267,9 @@ export default function RegistrationForm({
               id="nim"
               name="nim"
               required
+              disabled={uploading}
               placeholder="e.g., 0123456789"
-              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none"
+              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none disabled:opacity-50"
             />
           </div>
 
@@ -140,7 +281,8 @@ export default function RegistrationForm({
               id="faculty"
               name="faculty"
               required
-              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none text-white focus:ring-2 focus:ring-[#AAF3D5]"
+              disabled={uploading}
+              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none text-white focus:ring-2 focus:ring-[#AAF3D5] disabled:opacity-50"
             >
               <option value="">Select Faculty</option>
               <option value="SBM">SBM</option>
@@ -155,7 +297,7 @@ export default function RegistrationForm({
 
           <div className="space-y-2 w-full flex flex-col gap-1 items-center justify-center">
             <label htmlFor="instagramProof" className="block text-start w-full font-bold">
-              Screenshot Follow Rector's Instagram
+              Screenshot Follow Rector's Instagram {uploadProgress.instagram && "✓"}
             </label>
             <input
               type="file"
@@ -163,13 +305,14 @@ export default function RegistrationForm({
               name="instagramProof"
               accept="image/*"
               required
-              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl"
+              disabled={uploading}
+              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl disabled:opacity-50"
             />
           </div>
 
           <div className="space-y-2 w-full flex flex-col gap-1 items-center justify-center">
             <label htmlFor="profileImage" className="block text-start w-full font-bold">
-              Selfie Image
+              Selfie Image {uploadProgress.profile && "✓"}
             </label>
             <input
               type="file"
@@ -177,12 +320,18 @@ export default function RegistrationForm({
               name="profileImage"
               accept="image/*"
               required
-              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none"
+              disabled={uploading}
+              className="w-full border-2 rounded p-2 bg-black/40 backdrop-blur-2xl outline-none disabled:opacity-50"
             />
           </div>
 
-          {uploadError && <div className="text-red-600 font-bold text-sm">{uploadError}</div>}
-          {uploading && <div className="text-purple-600 font-bold animate-pulse text-sm">Uploading images...</div>}
+          {uploading && (
+            <div className="text-purple-400 font-bold animate-pulse text-sm text-center">
+              Uploading images... Please wait
+              {uploadProgress.instagram && !uploadProgress.profile && " (1/2)"}
+              {uploadProgress.instagram && uploadProgress.profile && " (2/2)"}
+            </div>
+          )}
 
           {isLoading ? (
             <div className="text-center font-bold">Loading...</div>
@@ -193,10 +342,10 @@ export default function RegistrationForm({
           ) : (
             <button
               type="submit"
-              disabled={uploading}
-              className="bg-black/40 border-white border-3 text-white py-3 px-4 w-full rounded-xl uppercase font-black hover:bg-purple-700 transition-colors disabled:bg-gray-400"
+              disabled={uploading || isLoading}
+              className="bg-black/40 border-white border-3 text-white py-3 px-4 w-full rounded-xl uppercase font-black hover:bg-purple-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
-              {uploading ? "Processing..." : "Register"}
+              {uploading ? "Uploading..." : "Register"}
             </button>
           )}
         </>

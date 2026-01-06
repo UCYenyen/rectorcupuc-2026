@@ -1,3 +1,4 @@
+// src/lib/auth.ts
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -11,6 +12,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
       authorization: {
         params: {
           prompt: "consent",
@@ -32,10 +34,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/auth/signin",
   },
   callbacks: {
-    async signIn({ profile, user, account }) {
+    async signIn({ profile, user }) {
       const email = (profile?.email || user?.email)?.toLowerCase().trim();
 
-      console.log("=== SignIn Callback Debug ===");
+      console.log("=== SignIn Callback ===");
       console.log("Email:", email);
 
       if (!email) {
@@ -48,60 +50,45 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return "/auth/error?error=InvalidDomain";
       }
 
-      try {
-        const dbUser = await prisma.user.findUnique({
-          where: { email: email },
-        });
-
-        console.log("DB User found:", dbUser ? "Yes" : "No");
-
-        if (dbUser) {
-          console.log("Existing user, role:", dbUser.role);
-          await prisma.user.update({
-            where: { email: email },
-            data: { 
-              role: dbUser.role,
-            },
-          });
-        } else {
-          console.log("New user will be created by adapter");
-        }
-
-        console.log("SignIn allowed for:", email);
-        return true;
-
-      } catch (error) {
-        console.error("Database Error during signIn:", error);
-        return true;
-      }
+      console.log("Email validation passed for:", email);
+      return true;
     },
 
-    async jwt({ token, user, account, trigger }) {
-      console.log("=== JWT Callback Debug ===");
+    async jwt({ token, user, trigger }) {
+      console.log("=== JWT Callback ===");
       console.log("Trigger:", trigger);
-      console.log("Token email:", token.email);
+      console.log("User from param:", user?.email);
 
       if (user?.email || trigger === "update") {
         const email = (user?.email || token.email) as string;
-        
+
         try {
-          const dbUser = await prisma.user.findUnique({
+          let dbUser = await prisma.user.findUnique({
             where: { email: email.toLowerCase().trim() },
-            select: { id: true, role: true, faculty: true },
+            select: { id: true, role: true, faculty: true, NIM: true },
           });
 
+          if (!dbUser) {
+            console.log("User not found, waiting for adapter to create...");
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            dbUser = await prisma.user.findUnique({
+              where: { email: email.toLowerCase().trim() },
+              select: { id: true, role: true, faculty: true, NIM: true },
+            });
+          }
+
           if (dbUser) {
-            console.log("User data loaded:", { id: dbUser.id, role: dbUser.role });
+            console.log("JWT: User found", dbUser.id);
             token.id = dbUser.id;
             token.role = dbUser.role;
             token.faculty = dbUser.faculty;
+            token.nim = dbUser.NIM;
           } else {
-            console.warn("User not found in database:", email);
-            token.role = Role.viewer;
-            token.faculty = null;
+            console.error("JWT: User still not found after retry!");
           }
         } catch (error) {
-          console.error("Error fetching user in JWT callback:", error);
+          console.error("JWT callback error:", error);
         }
       }
 
@@ -109,14 +96,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
 
     async session({ session, token }) {
-      if (session.user) {
+      if (session.user && token.id) {
         session.user.id = token.id as string;
         session.user.role = (token.role as Role) || Role.viewer;
         session.user.faculty = token.faculty as Faculty | null;
-        
+
         console.log("=== Session Created ===");
         console.log("User ID:", session.user.id);
-        console.log("Role:", session.user.role);
       }
       return session;
     },

@@ -1,3 +1,4 @@
+// src/lib/action.ts
 "use server";
 import { startMatch, pendMatch, completeMatch } from "@/lib/competition";
 import { registerTeamToCompetition } from "@/lib/competition";
@@ -22,6 +23,18 @@ export interface CreateMatchFormState {
 const ADMIN_PAGE_PATH = "/dashboard/admin/";
 const TEAM_JOIN_REQUESTS_PATH = "dashboard/admin/lo/team-join-requests";
 
+async function cleanupImage(url: string) {
+  try {
+    await fetch(`${process.env.NEXT_PUBLIC_APP_URL || ''}/api/image/delete`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url }),
+    });
+  } catch (error) {
+    console.error("Failed to cleanup image:", url, error);
+  }
+}
+
 export async function registerTeam(
   leaderId: string,
   competitionSlug: string,
@@ -33,6 +46,12 @@ export async function registerTeam(
   const nim = formData.get("nim") as string;
   const instagramProofUrl = formData.get("instagramProofUrl") as string;
   const profileImageUrl = formData.get("profileImageUrl") as string;
+
+  console.log("=== Registration Attempt ===");
+  console.log("Leader ID:", leaderId);
+  console.log("Team Name:", teamName);
+  console.log("Instagram URL:", instagramProofUrl ? "✓" : "✗");
+  console.log("Profile URL:", profileImageUrl ? "✓" : "✗");
 
   if (!leaderId) {
     return { error: "User is not authenticated." };
@@ -51,10 +70,22 @@ export async function registerTeam(
   }
 
   try {
-    // Update user faculty and NIM
+    const existingUser = await prisma.user.findUnique({
+      where: { id: leaderId },
+    });
+
+    if (!existingUser) {
+      console.error("User not found in database:", leaderId);
+      return { 
+        error: "User account not found. Please log out and log in again." 
+      };
+    }
+
+    console.log("User found:", existingUser.email);
+
     await prisma.user.update({
       where: { id: leaderId },
-      data: { 
+      data: {
         faculty: faculty as Faculty,
         NIM: nim
       },
@@ -69,14 +100,30 @@ export async function registerTeam(
     );
 
     if ("error" in registration) {
+      console.error("Registration error:", registration.error);
+      if (instagramProofUrl) await cleanupImage(instagramProofUrl);
+      if (profileImageUrl) await cleanupImage(profileImageUrl);
       return { error: registration.error };
     }
 
+    console.log("Registration successful!");
     revalidatePath("/dashboard");
-    return { success: true };
+    return { success: true, teamId: registration.team.id };
   } catch (error) {
     console.error("Register Team Error:", error);
-    return { error: "Failed to register team." };
+    
+    try {
+      if (instagramProofUrl) await cleanupImage(instagramProofUrl);
+      if (profileImageUrl) await cleanupImage(profileImageUrl);
+    } catch (cleanupError) {
+      console.error("Cleanup error:", cleanupError);
+    }
+
+    return {
+      error: error instanceof Error
+        ? error.message
+        : "Failed to register team."
+    };
   }
 }
 

@@ -22,7 +22,7 @@ export default async function Page({ params }: ProblemPageProps) {
     select: { max_team_member: true, id: true, isCompetitionOpenRegistration: true },
   });
 
-  if(!session){
+  if (!session) {
     return redirect("/auth/signin");
   }
 
@@ -57,8 +57,13 @@ export default async function Page({ params }: ProblemPageProps) {
       <StripeBackground />
       <div className="relative z-10 border-[#AAF3D5] border-4 bg-white/10 backdrop-blur-2xl p-12 rounded-2xl shadow-2xl text-center max-w-md w-full">
         {isRegistered ? (
-          <div className="text-white text-2xl font-bold">
-            You have already registered for this competition.
+          <div className="text-white text-2xl font-bold flex flex-col gap-4">
+            Registration for this competition is successful.
+            <div className="mt-4">
+              <Link href="/competitions" className="bg-black/40 border-white border-3 rounded-lg px-4 py-2 hover:bg-purple-800">
+                Back to Competitions
+              </Link>
+            </div>
           </div>
         ) : (<RegistrationForm
           slug={slug}
