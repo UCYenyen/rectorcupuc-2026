@@ -44,10 +44,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return false;
       }
 
-      if (!email.includes("ciputra.ac.id")) {
-        console.warn(`SignIn Blocked: ${email} is not a valid Ciputra email`);
-        return "/auth/error?error=InvalidDomain";
-      }
+      // if (!email.includes("ciputra.ac.id")) {
+      //   console.warn(`SignIn Blocked: ${email} is not a valid Ciputra email`);
+      //   return "/auth/error?error=InvalidDomain";
+      // }
 
       return true;
     },
