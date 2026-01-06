@@ -27,6 +27,7 @@ interface CompetitionRegistration {
 export default function UserDashboard() {
   const { data: session } = useSession();
   const [registrations, setRegistrations] = useState<CompetitionRegistration[]>([]);
+  const [joinRequests, setJoinRequests] = useState<CompetitionRegistration[]>([]);
   const [showJoinModal, setShowJoinModal] = useState<boolean>(false);
   const [referalCode, setReferalCode] = useState<string>("");
   const [faculty, setFaculty] = useState<string>("");
@@ -58,6 +59,26 @@ export default function UserDashboard() {
   useEffect(() => {
     fetchRegistrations();
   }, [fetchRegistrations]);
+  
+  const fetchJoinRequests = useCallback(async () => {
+    if (!session?.user?.id) return;
+    try {
+      const res = await fetch(`/api/user/${session.user.id}/registrations/member`);
+      if (res.ok) {
+        const data = await res.json();
+        setJoinRequests(data);
+      } else {
+        console.error("Failed to fetch registrations, status:", res.status);
+      }
+    } catch (err) {
+      console.error("Failed to fetch registrations", err);
+    }
+  }, [session?.user?.id]);
+
+  useEffect(() => {
+    fetchJoinRequests();
+  }, [fetchJoinRequests]);
+  
 
   // ANIMASI SAAT MODAL DIBUKA
   useEffect(() => {
@@ -206,10 +227,10 @@ export default function UserDashboard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200/20">
-              {registrations.length === 0 ? (
-                <tr><td colSpan={6} className="px-4 py-8 text-center text-white text-sm sm:text-base">You have not joined any competitions yet.</td></tr>
+              {joinRequests.length === 0 ? (
+                <tr><td colSpan={6} className="px-4 py-8 text-center text-white text-sm sm:text-base">You are either a team leader or have not joined any team yet.</td></tr>
               ) : (
-                registrations.map((reg) => (
+                joinRequests.map((reg) => (
                   <tr key={reg.id} className="bg-black/25 hover:bg-white/10 transition-colors duration-200">
                     <td className="px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-white">{reg.competition.name}</td>
                     <td className="px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm text-white">{reg.competition.category}</td>
