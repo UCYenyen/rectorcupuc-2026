@@ -299,7 +299,6 @@ export default function UserDashboard() {
                   onChange={(e) => setNim(e.target.value)}
                   placeholder="Enter your NIM"
                   className="w-full border-2 border-white rounded-lg px-4 py-2 text-white bg-[#1E0843]/50 backdrop-blur-2xl"
-                  pattern="[0-9]+"
                   title="NIM should contain only numbers"
                   required
                 />
