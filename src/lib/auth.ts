@@ -26,13 +26,41 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60,
   },
+  
+  // PERBAIKAN UTAMA - Cookie Configuration
+  cookies: {
+    pkceCodeVerifier: {
+      name: "next-auth.pkce.code_verifier",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 900 // 15 menit
+      }
+    },
+    sessionToken: {
+      name: process.env.NODE_ENV === "production" 
+        ? "__Secure-next-auth.session-token" 
+        : "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production"
+      }
+    }
+  },
+  
   trustHost: true,
   useSecureCookies: process.env.NODE_ENV === "production",
   secret: process.env.AUTH_SECRET,
+  
   pages: {
     error: "/auth/error",
     signIn: "/auth/signin",
   },
+  
   callbacks: {
     async signIn({ profile, user }) {
       const email = (profile?.email || user?.email)?.toLowerCase().trim();
