@@ -265,7 +265,7 @@ export default function UserDashboard() {
           {/* Tambahkan ref ke modal panel */}
           <div
             ref={modalRef}
-            className="relative z-10 border-[#DFE5E1] bg-gradient-to-r from-[#FFE694] via-white/80 to-white/60 border-4 backdrop-blur-2xl rounded-2xl shadow-2xl text-center max-w-md w-full overflow-hidden"
+            className="relative z-10 max-h-[60vh] overflow-y-auto border-[#DFE5E1] bg-gradient-to-r from-[#FFE694] via-white/80 to-white/60 border-4 backdrop-blur-2xl rounded-2xl shadow-2xl text-center max-w-md w-full overflow-hidden"
           >
             <div className="w-full flex justify-center items-center bg-gradient-to-r from-[#DD7CDF] via-[#FAE39F] to-white/0 py-2 shadow-xs border-b-4 border-[#DFE5E1]">
               <h3 className="text-xl sm:text-2xl text-[#1E0843] font-bold uppercase">
