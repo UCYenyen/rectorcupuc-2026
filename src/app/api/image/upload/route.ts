@@ -38,15 +38,21 @@ export async function POST(req: NextRequest) {
 
     let webpBuffer: Buffer;
     try {
-      webpBuffer = await sharp(buffer)
+      webpBuffer = await sharp(buffer, { failOn: 'none' }) 
+        .rotate() 
         .webp({ quality: 80 })
-        .resize({ width: 1920, height: 1920, fit: "inside", withoutEnlargement: true })
+        .resize({ 
+          width: 1920, 
+          height: 1920, 
+          fit: "inside", 
+          withoutEnlargement: true 
+        })
         .toBuffer();
     } catch (sharpError) {
       console.error("Sharp processing error:", sharpError);
       return NextResponse.json(
-        { error: "Failed to process image" },
-        { status: 500 }
+        { error: "Image file is corrupted or invalid" },
+        { status: 422 } // Gunakan 422 untuk data yang tidak bisa diproses
       );
     }
 
