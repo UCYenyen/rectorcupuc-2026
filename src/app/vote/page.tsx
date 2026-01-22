@@ -1,49 +1,58 @@
 import React from 'react'
 import StripeBackground from '@/components/StripeBackground'
 import RectorInlineTitle from '@/components/competition/RectorInlineTitle'
-import CompetitionTitleHeader from '@/components/competition/CompetitionTitleHeader'
-import PixelCard from '@/components/PixelCard'
-import Image from 'next/image'
-import { SearchIcon } from 'lucide-react'
-interface CircularGalleryPageProps {
-  image: string;
-  text: string
+import VoteCard from '@/components/VoteCard'
+import { SearchIcon, ChevronLeft, ChevronRight } from 'lucide-react'
+import prisma from '@/lib/prisma'
+import Link from 'next/link'
+
+interface VotePageProps {
+  searchParams: Promise<{
+    page?: string;
+  }>;
 }
-export default function page() {
-  const sampleItems: CircularGalleryPageProps[] = [
-    {
-      image: '/competitions/competition-overview.svg',
-      text: 'Sample 1'
+
+export default async function page({ searchParams }: VotePageProps) {
+  const params = await searchParams;
+  const currentPage = Number(params.page) || 1;
+  const ITEMS_PER_PAGE = 8;
+
+  const users = await prisma.competitionRegistration.findMany({
+    where:{
+      registration_status:'Registered'
     },
-    {
-      image: '/competitions/competition-overview.svg',
-      text: 'Sample 2'
-    },
-    {
-      image: '/competitions/competition-overview.svg',
-      text: 'Sample 3'
-    },
-    {
-      image: '/competitions/competition-overview.svg',
-      text: 'Sample 4'
-    },
-    {
-      image: '/competitions/competition-overview.svg',
-      text: 'Sample 1'
-    },
-    {
-      image: '/competitions/competition-overview.svg',
-      text: 'Sample 2'
-    },
-    {
-      image: '/competitions/competition-overview.svg',
-      text: 'Sample 3'
-    },
-    {
-      image: '/competitions/competition-overview.svg',
-      text: 'Sample 4'
+    include:{
+      user:true
     }
-  ];
+  }).then(async (registrations) => {
+    const teamMembers = await prisma.teamMember.findMany({
+      include:{
+        user:true
+      },
+      where:{
+        join_request_status: 'Registered'
+      }
+    })
+    
+    const registrationUsers = registrations.map(item=>({
+      name: item.user.name || 'No Name',
+      imageSrc: item.profile_url || '/placeholder/no-image.svg'
+    }))
+    
+    const teamUsers = teamMembers.map(item=>({
+      name: item.user.name || 'No Name',
+      imageSrc: item.profile_url || '/placeholder/no-image.svg'
+    }))
+    
+    return [...registrationUsers, ...teamUsers]
+  })
+
+  // Pagination logic
+  const totalPages = Math.ceil(users.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedUsers = users.slice(startIndex, endIndex);
+
   return (
     <>
       <div className='w-screen h-[10vh] md:h-[7vh]'></div>
@@ -63,98 +72,40 @@ export default function page() {
             </button>
           </div>
           <div className='relative w-full'>
-            <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-items-center'>
-              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
-                <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
-                  <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
-                  <div className="flex justify-center w-full flex-1 items-center">
-                    <Image src="/uploads/1766293200616.webp" alt="Banana" width={100} height={100} className="object-center object-cover h-full w-full rounded-lg border-white max-h-[800px]" />
-                  </div>
-                  <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
-                </div>
-              </PixelCard>
-              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
-                <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
-                  <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
-                  <div className="flex justify-center w-full flex-1 items-center">
-                    <Image src="/uploads/1766293200616.webp" alt="Banana" width={100} height={100} className="object-center object-cover h-full w-full rounded-lg border-white max-h-[800px]" />
-                  </div>
-                  <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
-                </div>
-              </PixelCard>
-              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
-                <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
-                  <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
-                  <div className="flex justify-center w-full flex-1 items-center">
-                    <Image src="/uploads/1766293200616.webp" alt="Banana" width={100} height={100} className="object-center object-cover h-full w-full rounded-lg border-white max-h-[800px]" />
-                  </div>
-                  <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
-                </div>
-              </PixelCard>
-              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
-                <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
-                  <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
-                  <div className="flex justify-center w-full flex-1 items-center">
-                    <Image src="/uploads/1766293200616.webp" alt="Banana" width={100} height={100} className="object-center object-cover h-full w-full rounded-lg border-white max-h-[800px]" />
-                  </div>
-                  <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
-                </div>
-              </PixelCard>
-              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
-                <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
-                  <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
-                  <div className="flex justify-center w-full flex-1 items-center">
-                    <Image src="/uploads/1766293200616.webp" alt="Banana" width={100} height={100} className="object-center object-cover h-full w-full rounded-lg border-white max-h-[800px]" />
-                  </div>
-                  <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
-                </div>
-              </PixelCard>
-              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
-                <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
-                  <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
-                  <div className="flex justify-center w-full flex-1 items-center">
-                    <Image src="/uploads/1766293200616.webp" alt="Banana" width={100} height={100} className="object-center object-cover h-full w-full rounded-lg border-white max-h-[800px]" />
-                  </div>
-                  <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
-                </div>
-              </PixelCard>
-              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
-                <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
-                  <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
-                  <div className="flex justify-center w-full flex-1 items-center">
-                    <Image src="/uploads/1766293200616.webp" alt="Banana" width={100} height={100} className="object-center object-cover h-full w-full rounded-lg border-white max-h-[800px]" />
-                  </div>
-                  <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
-                </div>
-              </PixelCard>
-              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
-                <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
-                  <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
-                  <div className="flex justify-center w-full flex-1 items-center">
-                    <Image src="/uploads/1766293200616.webp" alt="Banana" width={100} height={100} className="object-center object-cover h-full w-full rounded-lg border-white max-h-[800px]" />
-                  </div>
-                  <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
-                </div>
-              </PixelCard>
-              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
-                <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
-                  <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
-                  <div className="flex justify-center w-full flex-1 items-center">
-                    <Image src="/uploads/1766293200616.webp" alt="Banana" width={100} height={100} className="object-center object-cover h-full w-full rounded-lg border-white max-h-[800px]" />
-                  </div>
-                  <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
-                </div>
-              </PixelCard>
-              <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
-                <div className='absolute inset-0 bg-black/40 backdrop-blur-2xl flex flex-col items-center w-full justify-between p-4 gap-4 overflow-hidden'>
-                  <h2 className="text-white text-2xl font-bold text-center truncate w-full">BANANA</h2>
-                  <div className="flex justify-center w-full flex-1 items-center">
-                    <Image src="/uploads/1766293200616.webp" alt="Banana" width={100} height={100} className="object-center object-cover h-full w-full rounded-lg border-white max-h-[800px]" />
-                  </div>
-                  <button className="bg-black/40 border-white border-3 text-white font-semibold rounded-lg shadow hover:bg-purple-800 duration-200 transition-all w-full">VOTE</button>
-                </div>
-              </PixelCard>
+            <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 justify-items-center'>
+              {paginatedUsers.map((item, index) => (
+                <VoteCard key={index} name={item.name} imageSrc={item.imageSrc} />
+              ))}
             </div>
+          </div>
+
+          {/* Pagination Controls */}
+          <div className="w-full flex justify-center md:justify-end items-center gap-4 mt-8">
+            <Link
+              href={currentPage > 1 ? `?page=${currentPage - 1}` : '#'}
+              className={`px-4 py-2 bg-black/40 border-white border-3 rounded-lg font-bold text-white flex items-center gap-2 transition-all ${
+                currentPage === 1 
+                  ? 'opacity-50 cursor-not-allowed' 
+                  : 'hover:bg-purple-800 hover:scale-105'
+              }`}
+              aria-disabled={currentPage === 1}
+            >
+              <ChevronLeft className="w-5 h-5" />
+              Previous
+            </Link>
+
+            <Link
+              href={currentPage < totalPages ? `?page=${currentPage + 1}` : '#'}
+              className={`px-4 py-2 bg-black/40 border-white border-3 rounded-lg font-bold text-white flex items-center gap-2 transition-all ${
+                currentPage === totalPages 
+                  ? 'opacity-50 cursor-not-allowed' 
+                  : 'hover:bg-purple-800 hover:scale-105'
+              }`}
+              aria-disabled={currentPage === totalPages}
+            >
+              Next
+              <ChevronRight className="w-5 h-5" />
+            </Link>
           </div>
         </div>
       </div>
