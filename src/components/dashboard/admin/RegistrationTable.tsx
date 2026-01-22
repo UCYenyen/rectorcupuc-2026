@@ -29,6 +29,10 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
   
   const faculties = ["SBM", "SCI", "SOT", "SIFT", "SOM", "SOP", "SOC"];
 
+  /* Pagination State */
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
   const filteredRegistrations = registrations.filter((reg) => {
     const matchesCompetition =
       !filteredCompetition || reg.competition.name === filteredCompetition;
@@ -36,8 +40,19 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
       !filteredStatus || reg.registration_status === filteredStatus;
     const matchesFaculty =
       !filteredFaculty || reg.user.faculty === filteredFaculty;
+    // Add logic if there was a search bar, but User didn't explicitly ask for search bar here, 
+    // BUT since I added it to the other table and it's good UX, I might leave it as is 
+    // OR just stick to requested columns. 
+    // The previous code didn't have search. I won't add search unless asked, strictly NIM and pagination.
     return matchesCompetition && matchesStatus && matchesFaculty;
   });
+
+  // Pagination Logic
+  const totalPages = Math.ceil(filteredRegistrations.length / itemsPerPage);
+  const paginatedRegistrations = filteredRegistrations.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   const handleApprove = (id: string) => {
     if (confirm("Are you sure you want to approve this registration?")) {
@@ -125,6 +140,10 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
                 <p className="text-[#AAF3D5]/70 text-xs uppercase tracking-wider font-bold">Leader Name</p>
                 <p className="text-lg">{selectedReg.user.name}</p>
               </div>
+               <div className="space-y-1">
+                 <p className="text-[#AAF3D5]/70 text-xs uppercase tracking-wider font-bold">NIM</p>
+                 <p className="text-lg">{selectedReg.user.NIM || '-'}</p>
+               </div>
               <div className="space-y-1">
                 <p className="text-[#AAF3D5]/70 text-xs uppercase tracking-wider font-bold">Leader Email</p>
                 <p className="text-lg italic">{selectedReg.user.email}</p>
@@ -211,7 +230,10 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
             id="competition-filter"
             className="border-2 border-[#AAF3D5] rounded-lg px-3 py-2 bg-black/30 text-white focus:outline-none focus:ring-2 focus:ring-[#AAF3D5]"
             value={filteredCompetition}
-            onChange={(e) => setFilteredCompetition(e.target.value)}
+            onChange={(e) => {
+              setFilteredCompetition(e.target.value);
+              setCurrentPage(1);
+            }}
           >
             <option value="">All Competitions</option>
             {competitions.map((competition) => (
@@ -231,7 +253,10 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
             id="faculty-filter"
             className="border-2 border-[#AAF3D5] rounded-lg px-3 py-2 bg-black/30 text-white focus:outline-none focus:ring-2 focus:ring-[#AAF3D5]"
             value={filteredFaculty}
-            onChange={(e) => setFilteredFaculty(e.target.value)}
+            onChange={(e) => {
+              setFilteredFaculty(e.target.value);
+              setCurrentPage(1);
+            }}
           >
             <option value="">All Faculties</option>
             {faculties.map((fac) => (
@@ -251,7 +276,10 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
             id="status-filter"
             className="border-2 border-[#AAF3D5] rounded-lg px-3 py-2 bg-black/30 text-white focus:outline-none focus:ring-2 focus:ring-[#AAF3D5]"
             value={filteredStatus}
-            onChange={(e) => setFilteredStatus(e.target.value)}
+            onChange={(e) => {
+              setFilteredStatus(e.target.value);
+              setCurrentPage(1);
+            }}
           >
             <option value="">All Statuses</option>
             {statuses.map((status) => (
@@ -271,6 +299,7 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
               <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Competition</th>
               <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Team Name</th>
               <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Team Leader</th>
+              <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">NIM</th>
               <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Faculty</th>
               <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Registration Date</th>
               <th className="px-6 py-3 text-left bg-gradient-to-b from-[#390D62] to-[#6226A4] text-xs font-medium text-white uppercase tracking-wider border-[#AAF3D5] border-3">Status</th>
@@ -278,13 +307,14 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 text-white">
-            {filteredRegistrations.length > 0 ? (
-              filteredRegistrations.map((registration, index) => (
+            {paginatedRegistrations.length > 0 ? (
+              paginatedRegistrations.map((registration, index) => (
                 <tr key={registration.id}>
-                  <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm">{index + 1}</td>
+                  <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm">{(currentPage - 1) * itemsPerPage + index + 1}</td>
                   <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm font-medium">{registration.competition.name}</td>
                   <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm">{registration.team.name}</td>
                   <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm">{registration.user.name}</td>
+                  <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm">{registration.user.NIM}</td>
                   <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm">{registration.user.faculty || 'N/A'}</td>
                   <td className="px-6 py-4 bg-black/30 border-r whitespace-nowrap text-sm">
                     {new Date(registration.created_at).toLocaleDateString()}
@@ -319,7 +349,7 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
               ))
             ) : (
               <tr>
-                <td colSpan={8} className="px-6 py-4 text-center text-sm text-white">
+                <td colSpan={9} className="px-6 py-4 text-center text-sm text-white">
                   No registrations found matching the current filters
                 </td>
               </tr>
@@ -328,8 +358,97 @@ export default function RegistrationTable({ registrations }: RegistrationTablePr
         </table>
       </div>
 
-      <div className="mt-4 text-sm text-white">
-        Showing {filteredRegistrations.length} of {registrations.length} registrations
+      <div className="mt-4 flex flex-col items-center gap-4 text-white w-full">
+        <div className="text-sm text-center">
+          Showing {Math.min((currentPage - 1) * itemsPerPage + 1, filteredRegistrations.length)} to {Math.min(currentPage * itemsPerPage, filteredRegistrations.length)} of {filteredRegistrations.length} registrations
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="flex gap-2">
+           {/* First Page */}
+           <button
+            onClick={() => setCurrentPage(1)}
+            disabled={currentPage === 1}
+            className="px-3 py-2 border border-[#AAF3D5] rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#AAF3D5]/20 text-[#AAF3D5]"
+            title="First Page"
+          >
+           &lt;&lt;
+          </button>
+
+          {/* Previous Page */}
+          <button
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-3 py-2 border border-[#AAF3D5] rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#AAF3D5]/20 text-[#AAF3D5]"
+            title="Previous Page"
+          >
+            &lt;
+          </button>
+          
+          <div className="flex gap-1">
+             {(() => {
+                const pages = [];
+                if (totalPages <= 7) {
+                   for (let i = 1; i <= totalPages; i++) pages.push(i);
+                } else {
+                   if (currentPage <= 4) {
+                      for (let i = 1; i <= 5; i++) pages.push(i);
+                      pages.push('...');
+                      pages.push(totalPages);
+                   } else if (currentPage >= totalPages - 3) {
+                      pages.push(1);
+                      pages.push('...');
+                      for (let i = totalPages - 4; i <= totalPages; i++) pages.push(i);
+                   } else {
+                      pages.push(1);
+                      pages.push('...');
+                      for (let i = currentPage - 1; i <= currentPage + 1; i++) pages.push(i);
+                      pages.push('...');
+                      pages.push(totalPages);
+                   }
+                }
+
+                return pages.map((page, idx) => (
+                   <button
+                    key={idx}
+                    onClick={() => {
+                       if (typeof page === 'number') setCurrentPage(page);
+                    }}
+                    disabled={page === '...'}
+                    className={`px-3 py-2 border border-[#AAF3D5] rounded-lg min-w-[36px] ${
+                       page === currentPage 
+                          ? 'bg-[#AAF3D5] text-black font-bold' 
+                          : page === '...' 
+                             ? 'border-none text-white cursor-default' 
+                             : 'hover:bg-[#AAF3D5]/20 text-white'
+                    }`}
+                   >
+                     {page}
+                   </button>
+                ));
+             })()}
+          </div>
+
+          {/* Next Page */}
+          <button
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages || totalPages === 0}
+            className="px-3 py-2 border border-[#AAF3D5] rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#AAF3D5]/20 text-[#AAF3D5]"
+            title="Next Page"
+          >
+            &gt;
+          </button>
+          
+           {/* Last Page */}
+          <button
+            onClick={() => setCurrentPage(totalPages)}
+            disabled={currentPage === totalPages || totalPages === 0}
+            className="px-3 py-2 border border-[#AAF3D5] rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#AAF3D5]/20 text-[#AAF3D5]"
+            title="Last Page"
+          >
+            &gt;&gt;
+          </button>
+        </div>
       </div>
     </>
   );
