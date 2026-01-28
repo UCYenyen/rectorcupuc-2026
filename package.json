@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "tsx watch server.ts",
+    "dev": "next dev",
     "build": "prisma generate && next build",
-    "start": "NODE_ENV=production tsx server.ts",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests",
@@ -14,7 +13,8 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:reset": "prisma migrate reset",
     "prisma:deploy": "prisma migrate deploy",
-    "prisma:seed": "prisma db seed"
+    "prisma:seed": "prisma db seed",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
     "@auth/core": "^0.34.3",
@@ -33,6 +33,8 @@
     "next": "16.1.0",
     "next-auth": "5.0.0-beta.30",
     "ogl": "^1.0.11",
+    "pusher": "^5.3.2",
+    "pusher-js": "^8.4.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-icons": "^5.5.0",
