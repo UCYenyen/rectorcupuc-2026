@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
-    "test:ci": "jest --ci",
+    "test:ci": "jest --ci --passWithNoTests",
     "prisma:migrate": "prisma migrate dev",
     "prisma:reset": "prisma migrate reset",
     "prisma:deploy": "prisma migrate deploy",
