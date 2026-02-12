@@ -4,6 +4,7 @@ import { Team as PrismaTeam, TeamMember, User } from "@prisma/client";
 export interface TeamMemberResponse {
   id: string;
   username: string;
+  image?: string | null; // <--- ADD THIS
 }
 
 export interface Team {
@@ -13,6 +14,7 @@ export interface Team {
   competition_id: string;
   created_at: Date;
   updated_at: Date;
+  image?: string;
   current_team_member: number;
   min_team_member: number;
   max_team_member: number;
@@ -40,6 +42,7 @@ export function toTeamResponse(team: TeamWithMembersPayload): Team {
     TeamMembers: team.members.map((member) => ({
       id: member.user_id,
       username: member.user.name || "Unknown",
+      image: member.user.image // <--- ADD THIS (assuming your User model has an 'image' field)
     })),
   };
 }

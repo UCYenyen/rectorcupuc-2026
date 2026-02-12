@@ -48,7 +48,10 @@ export async function createTeam(
 }
 
 export async function getTeamByID(id: string): Promise<Team | null> {
-  if (!id || id === "undefined") return null;
+  if (!id || id === "undefined") {
+    console.log("team id not found")
+    return null; 
+  }
 
   const team = await prisma.team.findUnique({
     where: { id: id },
