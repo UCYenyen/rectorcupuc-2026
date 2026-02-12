@@ -4,6 +4,7 @@ import { Team } from '@prisma/client'
 import { CompetitionContainerProps } from '@/types/competition.md'
 import { CreateMatchFormState } from '@/lib/action';
 import { createMatch } from '@/lib/competition';
+import { CompetitionMatchType } from '@prisma/client';
 
 export default function MatchCreatingForm({ competition }: { competition: CompetitionContainerProps }) {
     const initialState: CreateMatchFormState = {
@@ -87,6 +88,22 @@ export default function MatchCreatingForm({ competition }: { competition: Compet
                     {competition.teams?.map((team: Team) => (
                         <option key={team.id} value={team.id}>
                             {team.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <div className='w-full flex flex-col gap-2 text-left'>
+                <label htmlFor="team2" className='font-semibold'>MATCH TYPE</label>
+                <select
+                    name="match-type"
+                    id="match-type"
+                    required
+                    className='w-full px-4 py-2 rounded-lg border-2 border-white bg-black/20 text-white focus:outline-none focus:ring-2 focus:ring-[#AAF3D5]'
+                >
+                    <option value="" disabled defaultValue="">Pilih match type</option>
+                    {Object.values(CompetitionMatchType).map((type) => (
+                        <option key={type} value={type}>
+                            {type}
                         </option>
                     ))}
                 </select>

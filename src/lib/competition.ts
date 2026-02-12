@@ -2,7 +2,7 @@
 import prisma from "@/lib/prisma";
 import { deleteTeam, createTeam } from "./team";
 import { CompetitionContainerProps, MatchWithTeams } from "@/types/competition.md";
-import { Match } from "@prisma/client";
+import { Match, CompetitionMatchType } from "@prisma/client";
 import { CreateMatchFormState } from "./action";
 
 export async function getAllCompetitions() : Promise<CompetitionContainerProps[]>{
@@ -129,6 +129,14 @@ export async function createMatch(prevState: CreateMatchFormState,
     const startTime = new Date(formData.get("startDate") as string);
     const endTime = new Date(formData.get("endDate") as string);
     const duration = Number(formData.get("duration") as string);
+    const matchType = formData.get("match-type") as string;
+
+    if(matchType === "" || matchType === null){
+        return {
+            ...prevState,
+            error: "Match type is required.",
+        };
+    }
     
     const competition = await prisma.competition.findUnique({
         where: { id: competitionId },
@@ -146,6 +154,7 @@ export async function createMatch(prevState: CreateMatchFormState,
                 team_two_id: team2_id,
                 startTime: startTime,
                 endTime: endTime,
+                match_type: matchType as CompetitionMatchType,
             },
             include:{
                 team_one_reference: true,
