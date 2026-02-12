@@ -59,7 +59,7 @@ export default async function page({ params }: { params: Promise<{ id: string }>
                         {/* 1. Leader Card */}
                         <TeamCard 
                             name={leaderData.name || leaderData.name || "Team Leader"}
-                            imageSrc={leaderData.image || ""} 
+                            image={leaderData.image || ""} 
                         />
 
                         {/* 2. Members Cards */}
@@ -67,7 +67,7 @@ export default async function page({ params }: { params: Promise<{ id: string }>
                             <TeamCard 
                                 key={member.id} 
                                 name={member.username || member.username} // Prefer name, fallback to username
-                                imageSrc={member.image || ""}
+                                image={member.image || ""}
                             />
                         ))}
                         

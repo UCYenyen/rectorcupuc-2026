@@ -6,15 +6,15 @@ import { useState } from 'react'
 
 interface TeamCardProps {
   name: string;
-  imageSrc: string;
+  image: string;
 }
 
 export default function TeamCard({ 
   name, 
-  imageSrc,
+  image,
 }: TeamCardProps) {
   // Keep the fallback image logic
-  const [imgSrc, setImgSrc] = useState(imageSrc || '/placeholder/no-image.svg');
+  const [imgSrc, setImgSrc] = useState(image || '/placeholder/no-image.svg');
 
   return (
     <PixelCard variant="pink" className='border-3 border-white rounded-lg relative h-[320px] max-w-[275px] flex items-stretch'>
