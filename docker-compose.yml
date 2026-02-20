@@ -35,3 +35,5 @@ services:
 networks:
   global_proxy:
     external: true
+  rectorcup_internal: # Change this to match the service
+    driver: bridge
