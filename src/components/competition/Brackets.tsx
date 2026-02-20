@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import React from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 interface Team {
   id: string;
@@ -26,14 +26,16 @@ export default function Brackets({ matches }: BracketsProps) {
   if (!matches || matches.length === 0) {
     return (
       <div className="p-4 sm:p-6">
-        <div className="p-8 text-center text-white/40 border-2 border-dashed border-white/10 rounded-xl">No matches yet for this competition.</div>
+        <div className="p-8 text-center text-white/40 border-2 border-dashed border-white/10 rounded-xl">
+          No matches yet for this competition.
+        </div>
       </div>
     );
   }
 
-  const quarterFinals = matches.filter(m => m.match_type === "QUARTERFINAL");
-  const semiFinals = matches.filter(m => m.match_type === "SEMIFINAL");
-  const finals = matches.filter(m => m.match_type === "FINAL");
+  const quarterFinals = matches.filter((m) => m.match_type === "QUARTERFINAL");
+  const semiFinals = matches.filter((m) => m.match_type === "SEMIFINAL");
+  const finals = matches.filter((m) => m.match_type === "FINAL");
 
   const renderMatchCard = (match: MatchWithTeams) => {
     const team1 = match.team_one_reference || match.teams?.[0];
@@ -51,14 +53,19 @@ export default function Brackets({ matches }: BracketsProps) {
         <div className="flex flex-col gap-3">
           <Link
             href={`/competitions/team/${team1.id}`}
-            className={`flex justify-between items-center p-3 rounded-md border transition-all duration-300 hover:scale-[1.02] hover:brightness-110 active:scale-95 ${match.match_status !== "UPCOMMING" && match.team_one_score > match.team_two_score
-              ? "bg-gradient-to-r from-[#6226A4]/60 to-[#FF6BDB] border-white border-3"
-              : "bg-white/10 border-transparent"
-              }`}
+            className={`flex justify-between items-center p-3 rounded-md border transition-all duration-300 hover:scale-[1.02] hover:brightness-110 active:scale-95 ${
+              match.match_status !== "UPCOMMING" &&
+              match.team_one_score > match.team_two_score
+                ? "bg-gradient-to-r from-[#6226A4]/60 to-[#FF6BDB] border-white border-3"
+                : "bg-white/10 border-transparent"
+            }`}
           >
-            <div className='flex justify-center items-center gap-4'>
+            <div className="flex justify-center items-center gap-4">
               <ArrowRight className="text-white" />
-              <span className="text-white font-bold truncate pr-2">
+              <span
+                className="text-white font-bold truncate max-w-[120px] sm:max-w-[180px]"
+                title={team1?.name || "TBA"}
+              >
                 {team1?.name || "TBA"}
               </span>
             </div>
@@ -69,20 +76,27 @@ export default function Brackets({ matches }: BracketsProps) {
 
           <div className="flex items-center gap-2">
             <div className="flex-grow h-[1px] bg-white/20"></div>
-            <span className="text-[10px] text-white/40 font-bold italic">VS</span>
+            <span className="text-[10px] text-white/40 font-bold italic">
+              VS
+            </span>
             <div className="flex-grow h-[1px] bg-white/20"></div>
           </div>
 
           <Link
             href={`/competitions/team/${team2.id}`}
-            className={`flex justify-between items-center p-3 rounded-md border transition-all duration-300 hover:scale-[1.02] hover:brightness-110 active:scale-95 ${match.match_status === "COMPLETED" && match.team_two_score > match.team_one_score
-              ? "bg-gradient-to-r from-[#E94BFF] to-[#FF6BDB] border-white"
-              : "bg-white/10 border-transparent"
-              }`}
+            className={`flex justify-between items-center p-3 rounded-md border transition-all duration-300 hover:scale-[1.02] hover:brightness-110 active:scale-95 ${
+              match.match_status === "COMPLETED" &&
+              match.team_two_score > match.team_one_score
+                ? "bg-gradient-to-r from-[#E94BFF] to-[#FF6BDB] border-white"
+                : "bg-white/10 border-transparent"
+            }`}
           >
-            <div className='flex gap-4 items-center justify-center'>
+            <div className="flex gap-4 items-center justify-center">
               <ArrowRight className="text-white" />
-              <span className="text-white font-bold truncate pr-2">
+              <span
+                className="text-white font-bold truncate max-w-[120px] sm:max-w-[180px]"
+                title={team2?.name || "TBA"}
+              >
                 {team2?.name || "TBA"}
               </span>
             </div>
@@ -93,12 +107,15 @@ export default function Brackets({ matches }: BracketsProps) {
         </div>
 
         <div className="mt-4 pt-3 border-t border-white/10 flex justify-between items-center">
-          <span className={`text-[10px] px-2 py-1 rounded-full font-bold uppercase ${match.match_status === "COMPLETED"
-            ? "bg-green-500/20 text-green-400"
-            : match.match_status === "ONGOING"
-              ? "bg-yellow-500/20 text-yellow-400 animate-pulse"
-              : "bg-blue-500/20 text-blue-400"
-            }`}>
+          <span
+            className={`text-[10px] px-2 py-1 rounded-full font-bold uppercase ${
+              match.match_status === "COMPLETED"
+                ? "bg-green-500/20 text-green-400"
+                : match.match_status === "ONGOING"
+                  ? "bg-yellow-500/20 text-yellow-400 animate-pulse"
+                  : "bg-blue-500/20 text-blue-400"
+            }`}
+          >
             {match.match_status}
           </span>
 

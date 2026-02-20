@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState, useTransition } from "react";
 import Image from "next/image";
 import TabButton from "@/components/competition/TabButton";
@@ -10,11 +10,25 @@ import { CompetitionContainerProps } from "@/types/competition.md";
 import StripeBackground from "@/components/StripeBackground";
 import RectorInlineTitle from "../RectorInlineTitle";
 
-export default function AdminCompetitionDetailsDataReciever({ competitionData, handleStatusChange }: { competitionData: CompetitionContainerProps, handleStatusChange: (matchId: string, newStatus: "ONGOING" | "COMPLETED" | "UPCOMMING") => Promise<void> }) {
-  const [activeTab, setActiveTab] = useState<"brackets" | "schedule" | "live">("brackets");
+export default function AdminCompetitionDetailsDataReciever({
+  competitionData,
+  handleStatusChange,
+}: {
+  competitionData: CompetitionContainerProps;
+  handleStatusChange: (
+    matchId: string,
+    newStatus: "ONGOING" | "COMPLETED" | "UPCOMMING",
+  ) => Promise<void>;
+}) {
+  const [activeTab, setActiveTab] = useState<"brackets" | "schedule" | "live">(
+    "brackets",
+  );
   const [isPending, startTransition] = useTransition();
 
-  const onStatusChange = async (matchId: string, newStatus: "ONGOING" | "COMPLETED" | "UPCOMMING") => {
+  const onStatusChange = async (
+    matchId: string,
+    newStatus: "ONGOING" | "COMPLETED" | "UPCOMMING",
+  ) => {
     startTransition(async () => {
       await handleStatusChange(matchId, newStatus);
     });
@@ -23,7 +37,9 @@ export default function AdminCompetitionDetailsDataReciever({ competitionData, h
   return (
     <>
       <div className="h-[7vh]"></div>
-      <div className={`relative min-h-screen w-screen overflow-hidden flex flex-col justify-center items-center py-4 sm:py-8 gap-4 ${isPending ? "opacity-70 cursor-wait" : ""}`}>
+      <div
+        className={`relative min-h-screen w-screen overflow-hidden flex flex-col justify-center items-center py-4 sm:py-8 gap-4 ${isPending ? "opacity-70 cursor-wait" : ""}`}
+      >
         <div className="absolute w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[1]"></div>
         <StripeBackground />
         <RectorInlineTitle />
@@ -35,6 +51,25 @@ export default function AdminCompetitionDetailsDataReciever({ competitionData, h
           </div>
 
           <div className="w-full overflow-hidden flex flex-col gap-4 backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40 rounded-lg">
+            {/* Tab buttons — always visible on all screen sizes */}
+            <div className="flex gap-1 sm:gap-2 border-b-2 border-white/20 overflow-x-auto w-full pt-2 px-2">
+              <TabButton
+                label="Brackets"
+                isActive={activeTab === "brackets"}
+                onClick={() => setActiveTab("brackets")}
+              />
+              <TabButton
+                label="Schedule"
+                isActive={activeTab === "schedule"}
+                onClick={() => setActiveTab("schedule")}
+              />
+              <TabButton
+                label="Live Score"
+                isActive={activeTab === "live"}
+                onClick={() => setActiveTab("live")}
+              />
+            </div>
+
             <div className="hidden lg:flex gap-4">
               <div className="flex basis-1/2 flex-col gap-2">
                 <Image
@@ -44,11 +79,6 @@ export default function AdminCompetitionDetailsDataReciever({ competitionData, h
                   height={300}
                   className="w-full h-auto"
                 />
-                <div className="flex gap-1 sm:gap-2 border-b-2 border-white/20 overflow-x-auto w-full">
-                  <TabButton label="Brackets" isActive={activeTab === "brackets"} onClick={() => setActiveTab("brackets")} />
-                  <TabButton label="Schedule" isActive={activeTab === "schedule"} onClick={() => setActiveTab("schedule")} />
-                  <TabButton label="Live Score" isActive={activeTab === "live"} onClick={() => setActiveTab("live")} />
-                </div>
               </div>
               <div className="bg-black/40 flex basis-1/2 backdrop-blur-2xl border-3 border-white rounded-lg w-full">
                 <PacmanAnimation />
@@ -56,10 +86,16 @@ export default function AdminCompetitionDetailsDataReciever({ competitionData, h
             </div>
 
             {activeTab === "brackets" && competitionData.matches && (
-              <AdminBrackets matches={competitionData.matches!!} handleStatusChange={onStatusChange} />
+              <AdminBrackets
+                matches={competitionData.matches!!}
+                handleStatusChange={onStatusChange}
+              />
             )}
             {activeTab === "schedule" && competitionData.matches && (
-              <Schedule matches={competitionData.matches} teams={competitionData.teams!!} />
+              <Schedule
+                matches={competitionData.matches}
+                teams={competitionData.teams!!}
+              />
             )}
             {activeTab === "live" && (
               <LiveScoreController
