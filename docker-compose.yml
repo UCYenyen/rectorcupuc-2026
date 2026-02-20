@@ -15,7 +15,7 @@ services:
       - global_proxy
     volumes:
       - ./.env:/app/.env:ro
-   studio:
+  studio:
     build:
       context: ./
       dockerfile: Dockerfile
