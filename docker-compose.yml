@@ -15,7 +15,6 @@ services:
       - global_proxy
     volumes:
       - ./.env:/app/.env:ro
-
    studio:
     build:
       context: ./
