@@ -19,7 +19,6 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-      target: migrator
     container_name: rectorcup-studio
     command: pnpm prisma studio --port 5557 --browser none
     env_file:
