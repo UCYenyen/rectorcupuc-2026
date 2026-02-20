@@ -16,6 +16,23 @@ services:
     volumes:
       - ./.env:/app/.env:ro
 
+   studio:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: migrator
+    container_name: rectorcup-studio
+    command: pnpm prisma studio --port 5557 --browser none
+    env_file:
+      - .env
+    expose:
+      - "5557"
+    networks:
+      - global_proxy
+      - rectorcup_internal
+    profiles:
+      - manual
+
 networks:
   global_proxy:
     external: true
