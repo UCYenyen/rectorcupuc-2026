@@ -1,6 +1,6 @@
-'use client'
-import { Match, Team } from '@prisma/client';
-import React from 'react';
+"use client";
+import { Match, Team } from "@prisma/client";
+import React from "react";
 
 interface FormattedMatch {
   date: string;
@@ -17,7 +17,13 @@ interface DailySchedule {
 
 type MatchWithVenue = Match & { venue?: string };
 
-export default function Schedule({ matches, teams }: { matches: MatchWithVenue[], teams: Team[] }) {
+export default function Schedule({
+  matches,
+  teams,
+}: {
+  matches: MatchWithVenue[];
+  teams: Team[];
+}) {
   const getTeamName = (teamId: string) => {
     if (!teams || teams.length === 0) return "No Teams Loaded";
 
@@ -27,10 +33,13 @@ export default function Schedule({ matches, teams }: { matches: MatchWithVenue[]
 
   const schedules = (matches || []).reduce<DailySchedule[]>((acc, m) => {
     const startTime = new Date(m.startTime);
-    const date = startTime.toISOString().split('T')[0];
-    const time = startTime.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit'
+    const date = startTime.toLocaleDateString("en-CA", {
+      timeZone: "Asia/Jakarta",
+    }); // 'en-CA' produces YYYY-MM-DD format
+    const time = startTime.toLocaleTimeString("id-ID", {
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "Asia/Jakarta",
     });
 
     const matchData: FormattedMatch = {
@@ -38,10 +47,10 @@ export default function Schedule({ matches, teams }: { matches: MatchWithVenue[]
       time,
       team1Name: getTeamName(m.team_one_id),
       team2Name: getTeamName(m.team_two_id),
-      status: (m.match_status || 'UPCOMMING').toLowerCase(),
+      status: (m.match_status || "UPCOMMING").toLowerCase(),
     };
 
-    const existingDay = acc.find(day => day.date === date);
+    const existingDay = acc.find((day) => day.date === date);
 
     if (existingDay) {
       existingDay.matches.push(matchData);
@@ -54,32 +63,41 @@ export default function Schedule({ matches, teams }: { matches: MatchWithVenue[]
 
   const getStatusColor = (status: string): string => {
     switch (status) {
-      case 'completed':
-        return 'bg-green-500/20 text-green-400 border-green-500';
-      case 'ongoing':
-        return 'bg-red-500/20 text-red-400 border-red-500 animate-pulse';
-      case 'upcomming':
-        return 'bg-yellow-500/20 text-yellow-400 border-yellow-500';
+      case "completed":
+        return "bg-green-500/20 text-green-400 border-green-500";
+      case "ongoing":
+        return "bg-red-500/20 text-red-400 border-red-500 animate-pulse";
+      case "upcomming":
+        return "bg-yellow-500/20 text-yellow-400 border-yellow-500";
       default:
-        return 'bg-gray-500/20 text-gray-400 border-gray-500';
+        return "bg-gray-500/20 text-gray-400 border-gray-500";
     }
   };
 
   return (
     <div className="p-4 sm:p-6">
       {schedules.length === 0 ? (
-        <div className="p-8 text-center text-white/40 border-2 border-dashed border-white/10 rounded-xl">No matches scheduled.</div>
+        <div className="p-8 text-center text-white/40 border-2 border-dashed border-white/10 rounded-xl">
+          No matches scheduled.
+        </div>
       ) : (
         <div className="space-y-6">
           {schedules.map((day) => (
-            <div key={day.date} className="bg-gradient-to-r from-[#390D62]/40 to-[#6226A4]/40 border-2 border-[#AAF3D5] rounded-lg p-4">
+            <div
+              key={day.date}
+              className="bg-gradient-to-r from-[#390D62]/40 to-[#6226A4]/40 border-2 border-[#AAF3D5] rounded-lg p-4"
+            >
               <h3 className="text-lg font-bold text-[#AAF3D5] mb-4">
-                {new Date(day.date).toLocaleDateString('en-US', {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
+                {new Date(day.date + "T00:00:00+07:00").toLocaleDateString(
+                  "id-ID",
+                  {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    timeZone: "Asia/Jakarta",
+                  },
+                )}
               </h3>
               <div className="space-y-3">
                 {day.matches.map((match, matchIndex) => (
@@ -88,14 +106,22 @@ export default function Schedule({ matches, teams }: { matches: MatchWithVenue[]
                     className="bg-black/30 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-white font-bold text-lg">{match.time}</span>
+                      <span className="text-white font-bold text-lg">
+                        {match.time}
+                      </span>
                     </div>
                     <div className="flex-1 flex items-center justify-center gap-3">
-                      <span className="text-white font-medium text-center">{match.team1Name}</span>
+                      <span className="text-white font-medium text-center">
+                        {match.team1Name}
+                      </span>
                       <span className="text-[#AAF3D5] font-bold">VS</span>
-                      <span className="text-white font-medium text-center">{match.team2Name}</span>
+                      <span className="text-white font-medium text-center">
+                        {match.team2Name}
+                      </span>
                     </div>
-                    <div className={`px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(match.status)}`}>
+                    <div
+                      className={`px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(match.status)}`}
+                    >
                       {match.status.toUpperCase()}
                     </div>
                   </div>
