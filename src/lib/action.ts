@@ -25,7 +25,7 @@ const TEAM_JOIN_REQUESTS_PATH = "dashboard/admin/lo/team-join-requests";
 
 async function cleanupImage(url: string) {
   try {
-    await fetch(`${process.env.NEXT_PUBLIC_APP_URL || ''}/api/image/delete`, {
+    await fetch(`${process.env.NEXT_PUBLIC_APP_URL || ""}/api/image/delete`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ url }),
@@ -39,7 +39,7 @@ export async function registerTeam(
   leaderId: string,
   competitionSlug: string,
   prevState: RegisterTeamFormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<RegisterTeamFormState> {
   const teamName = formData.get("teamName") as string;
   const faculty = formData.get("faculty") as string;
@@ -76,20 +76,23 @@ export async function registerTeam(
 
     if (!existingUser) {
       console.error("User not found in database:", leaderId);
-      return { 
-        error: "User account not found. Please log out and log in again." 
+      return {
+        error: "User account not found. Please log out and log in again.",
       };
     }
 
     const nimExists = await prisma.user.findFirst({
-      where: { 
+      where: {
         NIM: nim,
-        NOT: { id: leaderId }
+        NOT: { id: leaderId },
       },
     });
 
     if (nimExists) {
-      return { error: "NIM sudah digunakan oleh user lain. Pastikan NIM yang dimasukkan benar." };
+      return {
+        error:
+          "NIM sudah digunakan oleh user lain. Pastikan NIM yang dimasukkan benar.",
+      };
     }
 
     console.log("User found:", existingUser.email);
@@ -98,7 +101,7 @@ export async function registerTeam(
       where: { id: leaderId },
       data: {
         faculty: faculty as Faculty,
-        NIM: nim
+        NIM: nim,
       },
     });
 
@@ -107,7 +110,7 @@ export async function registerTeam(
       teamName,
       leaderId,
       instagramProofUrl,
-      profileImageUrl
+      profileImageUrl,
     );
 
     if ("error" in registration) {
@@ -122,7 +125,7 @@ export async function registerTeam(
     return { success: true, teamId: registration.team.id };
   } catch (error) {
     console.error("Register Team Error:", error);
-    
+
     try {
       if (instagramProofUrl) await cleanupImage(instagramProofUrl);
       if (profileImageUrl) await cleanupImage(profileImageUrl);
@@ -131,9 +134,8 @@ export async function registerTeam(
     }
 
     return {
-      error: error instanceof Error
-        ? error.message
-        : "Failed to register team."
+      error:
+        error instanceof Error ? error.message : "Failed to register team.",
     };
   }
 }
@@ -168,10 +170,22 @@ export async function setRegistrationPending(registrationId: string) {
   }
 }
 
+export async function deleteRegistration(registrationId: string) {
+  try {
+    await prisma.competitionRegistration.delete({
+      where: { id: registrationId },
+    });
+    revalidatePath(ADMIN_PAGE_PATH);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: "Failed to delete registration." };
+  }
+}
+
 export async function handleMatchChangeStatus(
   matchId: string,
   newStatus: "ONGOING" | "COMPLETED" | "UPCOMMING",
-  slug: string
+  slug: string,
 ) {
   if (newStatus === "ONGOING") {
     await startMatch(matchId, "ONGOING");
@@ -189,7 +203,7 @@ export async function handleUpdateMatchScore(
   matchId: string,
   team1Score: number,
   team2Score: number,
-  slug: string
+  slug: string,
 ) {
   try {
     await updateMatchScoreDB(matchId, team1Score, team2Score);
