@@ -33,14 +33,13 @@ export default function Schedule({
 
   const schedules = (matches || []).reduce<DailySchedule[]>((acc, m) => {
     const startTime = new Date(m.startTime);
-    const date = startTime.toLocaleDateString("en-CA", {
-      timeZone: "Asia/Jakarta",
-    }); // 'en-CA' produces YYYY-MM-DD format
-    const time = startTime.toLocaleTimeString("id-ID", {
-      hour: "2-digit",
-      minute: "2-digit",
-      timeZone: "Asia/Jakarta",
-    });
+    // Manual WIB offset (UTC+7) — lebih aman daripada bergantung locale browser
+    const WIB_MS = 7 * 60 * 60 * 1000;
+    const wibTime = new Date(startTime.getTime() + WIB_MS);
+    const date = wibTime.toISOString().split("T")[0]; // YYYY-MM-DD in WIB
+    const hours = String(wibTime.getUTCHours()).padStart(2, "0");
+    const minutes = String(wibTime.getUTCMinutes()).padStart(2, "0");
+    const time = `${hours}:${minutes} WIB`;
 
     const matchData: FormattedMatch = {
       date,
@@ -88,16 +87,13 @@ export default function Schedule({
               className="bg-gradient-to-r from-[#390D62]/40 to-[#6226A4]/40 border-2 border-[#AAF3D5] rounded-lg p-4"
             >
               <h3 className="text-lg font-bold text-[#AAF3D5] mb-4">
-                {new Date(day.date + "T00:00:00+07:00").toLocaleDateString(
-                  "id-ID",
-                  {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                    timeZone: "Asia/Jakarta",
-                  },
-                )}
+                {new Date(day.date + "T00:00:00Z").toLocaleDateString("id-ID", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  timeZone: "UTC",
+                })}
               </h3>
               <div className="space-y-3">
                 {day.matches.map((match, matchIndex) => (
