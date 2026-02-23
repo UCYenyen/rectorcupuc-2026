@@ -5,6 +5,7 @@ export interface TeamMemberResponse {
   id: string;
   username: string;
   image?: string | null; // <--- ADD THIS
+  faculty?: string;
 }
 
 export interface Team {

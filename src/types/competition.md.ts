@@ -1,4 +1,10 @@
-import { CompetitionCategory, Match, Rules, Team } from "@prisma/client";
+import {
+  CompetitionCategory,
+  Faculty,
+  Match,
+  Rules,
+  Team,
+} from "@prisma/client";
 
 export type MatchWithTeams = Match & {
   team_one_reference: Team;
@@ -26,6 +32,14 @@ export interface TeamInterface extends Team {
   };
 }
 
+export interface TeamWithFaculty extends Team {
+  leader?: {
+    id: string;
+    name: string | null;
+    faculty?: Faculty | null;
+  } | null;
+}
+
 export interface CompetitionRulesModel {
   id: string;
   description: string;
@@ -43,5 +57,5 @@ export interface CompetitionContainerProps {
   category: CompetitionCategory;
   rules?: Rules[];
   matches?: MatchWithTeams[];
-  teams?: Team[];
+  teams?: TeamWithFaculty[];
 }
