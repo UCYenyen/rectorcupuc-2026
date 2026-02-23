@@ -11,28 +11,42 @@ services:
     expose:
       - "3000"
     env_file: .env
+    # Menambahkan environment variable untuk Timezone
+    environment:
+      - TZ=Asia/Jakarta
     networks:
       - global_proxy
     volumes:
       - ./.env:/app/.env:ro
+      # Sinkronisasi waktu sistem host ke dalam container
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+
+  # Prisma Studio
   studio:
     build:
       context: ./
       dockerfile: Dockerfile
     container_name: rectorcup-studio
+    # Tetap gunakan pnpm prisma studio
     command: pnpm prisma studio --port 5557 --browser none
     env_file:
       - .env
+    environment:
+      - TZ=Asia/Jakarta
     expose:
       - "5557"
     networks:
       - global_proxy
       - rectorcup_internal
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     profiles:
       - manual
 
 networks:
   global_proxy:
     external: true
-  rectorcup_internal: # Change this to match the service
+  rectorcup_internal:
     driver: bridge
