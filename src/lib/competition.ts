@@ -44,6 +44,13 @@ export async function getCompetitionBySlug(
       },
       rules: true,
       teams: {
+        where: {
+          competitionRegistrations: {
+            some: {
+              registration_status: "Registered",
+            },
+          },
+        },
         include: {
           leader: {
             select: { id: true, name: true, faculty: true },
