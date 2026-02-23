@@ -32,7 +32,7 @@ export default function BracketsAdmin({ matches, handleStatusChange }: BracketsP
     );
   }
 
-  // const quarterFinals = matches.filter(m => m.match_type === "QUARTERFINAL");
+  const quarterFinals = matches.filter(m => m.match_type === "QUARTERFINAL");
   const semiFinals = matches.filter(m => m.match_type === "SEMIFINAL");
   const finals = matches.filter(m => m.match_type === "FINAL");
 
@@ -87,10 +87,10 @@ export default function BracketsAdmin({ matches, handleStatusChange }: BracketsP
   return (
     <div className="p-4 sm:p-6">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* <div className="flex flex-col gap-4">
+         <div className="flex flex-col gap-4">
           <h1 className="text-2xl font-bold text-white mb-4 border-b-2 border-[#AAF3D5] pb-2">QUARTER FINALS</h1>
           {quarterFinals.length > 0 ? quarterFinals.map(renderMatchCard) : <p className="text-white/40 italic text-sm">No matches scheduled</p>}
-        </div> */}
+        </div> 
         <div className="flex flex-col gap-4">
           <h1 className="text-2xl font-bold text-white mb-4 border-b-2 border-[#AAF3D5] pb-2">SEMI FINALS</h1>
           {semiFinals.length > 0 ? semiFinals.map(renderMatchCard) : <p className="text-white/40 italic text-sm">No matches scheduled</p>}
