@@ -1,12 +1,15 @@
 "use client";
-import { Match, Team } from "@prisma/client";
+import { Match } from "@prisma/client";
+import { TeamWithLeaderFaculty } from "@/types/competition.md";
 import React from "react";
 
 interface FormattedMatch {
   date: string;
   time: string;
   team1Name: string;
+  team1Faculty: string;
   team2Name: string;
+  team2Faculty: string;
   status: string;
 }
 
@@ -22,13 +25,17 @@ export default function Schedule({
   teams,
 }: {
   matches: MatchWithVenue[];
-  teams: Team[];
+  teams: TeamWithLeaderFaculty[];
 }) {
   const getTeamName = (teamId: string) => {
     if (!teams || teams.length === 0) return "No Teams Loaded";
-
     const team = teams.find((t) => String(t.id) === String(teamId));
     return team ? team.name : `Team Not Found (${teamId.substring(0, 5)}...)`;
+  };
+
+  const getTeamFaculty = (teamId: string) => {
+    const team = teams?.find((t) => String(t.id) === String(teamId));
+    return team?.leader?.faculty || "";
   };
 
   const schedules = (matches || []).reduce<DailySchedule[]>((acc, m) => {
@@ -45,7 +52,9 @@ export default function Schedule({
       date,
       time,
       team1Name: getTeamName(m.team_one_id),
+      team1Faculty: getTeamFaculty(m.team_one_id),
       team2Name: getTeamName(m.team_two_id),
+      team2Faculty: getTeamFaculty(m.team_two_id),
       status: (m.match_status || "UPCOMMING").toLowerCase(),
     };
 
@@ -107,13 +116,21 @@ export default function Schedule({
                       </span>
                     </div>
                     <div className="flex-1 flex items-center justify-center gap-3">
-                      <span className="text-white font-medium text-center">
-                        {match.team1Name}
-                      </span>
+                      <div className="flex flex-col items-end">
+                        {match.team1Faculty && (
+                          <span className="text-white font-medium text-center">
+                            {match.team1Name} ({match.team1Faculty})
+                          </span>
+                        )}
+                      </div>
                       <span className="text-[#AAF3D5] font-bold">VS</span>
-                      <span className="text-white font-medium text-center">
-                        {match.team2Name}
-                      </span>
+                      <div className="flex flex-col items-start">
+                        {match.team2Faculty && (
+                          <span className="text-white font-medium text-center">
+                            {match.team2Name} ({match.team2Faculty})
+                          </span> 
+                        )}
+                      </div>
                     </div>
                     <div
                       className={`px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(match.status)}`}

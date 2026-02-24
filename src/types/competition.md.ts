@@ -6,10 +6,18 @@ import {
   Team,
 } from "@prisma/client";
 
+export type TeamWithLeaderFaculty = Team & {
+  leader?: {
+    id: string;
+    name: string | null;
+    faculty?: Faculty | null;
+  } | null;
+};
+
 export type MatchWithTeams = Match & {
-  team_one_reference: Team;
-  team_two_reference: Team;
-  teams?: Team[];
+  team_one_reference: TeamWithLeaderFaculty;
+  team_two_reference: TeamWithLeaderFaculty;
+  teams?: TeamWithLeaderFaculty[];
 };
 
 export interface Competition {

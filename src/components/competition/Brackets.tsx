@@ -5,6 +5,11 @@ import { ArrowRight } from "lucide-react";
 interface Team {
   id: string;
   name: string;
+  leader?: {
+    id: string;
+    name: string | null;
+    faculty?: string | null;
+  } | null;
 }
 
 interface MatchWithTeams {
@@ -62,12 +67,19 @@ export default function Brackets({ matches }: BracketsProps) {
           >
             <div className="flex justify-center items-center gap-4">
               <ArrowRight className="text-white" />
-              <span
-                className="text-white font-bold truncate max-w-[120px] sm:max-w-[180px]"
-                title={team1?.name || "TBA"}
-              >
-                {team1?.name || "TBA"}
-              </span>
+              <div className="flex flex-col">
+                <span
+                  className="text-white font-bold truncate max-w-[120px] sm:max-w-[180px]"
+                  title={team1?.name || "TBA"}
+                >
+                  {team1?.name || "TBA"}
+                </span>
+                {team1?.leader?.faculty && (
+                  <span className="text-[10px] text-[#AAF3D5]/70 font-mono">
+                    {team1.leader.faculty}
+                  </span>
+                )}
+              </div>
             </div>
             <span className="text-white font-black text-xl">
               {match.team_one_score}
@@ -93,12 +105,19 @@ export default function Brackets({ matches }: BracketsProps) {
           >
             <div className="flex gap-4 items-center justify-center">
               <ArrowRight className="text-white" />
-              <span
-                className="text-white font-bold truncate max-w-[120px] sm:max-w-[180px]"
-                title={team2?.name || "TBA"}
-              >
-                {team2?.name || "TBA"}
-              </span>
+              <div className="flex flex-col">
+                <span
+                  className="text-white font-bold truncate max-w-[120px] sm:max-w-[180px]"
+                  title={team2?.name || "TBA"}
+                >
+                  {team2?.name || "TBA"}
+                </span>
+                {team2?.leader?.faculty && (
+                  <span className="text-[10px] text-[#AAF3D5]/70 font-mono">
+                    {team2.leader.faculty}
+                  </span>
+                )}
+              </div>
             </div>
             <span className="text-white font-black text-xl">
               {match.team_two_score}
@@ -133,7 +152,7 @@ export default function Brackets({ matches }: BracketsProps) {
     <div className="p-4 sm:p-6">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* <div className="flex flex-col gap-4"> */}
-          {/* <h1 className="text-2xl font-bold text-white mb-4 border-b-2 border-[#AAF3D5] pb-2">
+        {/* <h1 className="text-2xl font-bold text-white mb-4 border-b-2 border-[#AAF3D5] pb-2">
             QUARTER FINALS
           </h1>
           {quarterFinals.length > 0 ? (

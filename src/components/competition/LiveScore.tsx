@@ -1,25 +1,41 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { io, Socket } from 'socket.io-client';
+import React, { useState, useEffect } from "react";
+import { io, Socket } from "socket.io-client";
 import { MatchWithTeams } from "@/types/competition.md";
 
 let socket: Socket;
 
-export default function LiveScore({ competitionId, initialMatches }: { competitionId: string, initialMatches: MatchWithTeams[] }) {
-  const ongoingMatches = initialMatches?.filter(m => m.match_status === "ONGOING") || [];
-  const [selectedMatchId, setSelectedMatchId] = useState<string>(ongoingMatches[0]?.id || "");
+export default function LiveScore({
+  competitionId,
+  initialMatches,
+}: {
+  competitionId: string;
+  initialMatches: MatchWithTeams[];
+}) {
+  const ongoingMatches =
+    initialMatches?.filter((m) => m.match_status === "ONGOING") || [];
+  const [selectedMatchId, setSelectedMatchId] = useState<string>(
+    ongoingMatches[0]?.id || "",
+  );
   const [liveMatch, setLiveMatch] = useState({
-    team1: "", team2: "", score1: 0, score2: 0,
+    team1: "",
+    team2: "",
+    score1: 0,
+    score2: 0,
+    faculty1: "",
+    faculty2: "",
   });
 
   useEffect(() => {
-    const active = ongoingMatches.find(m => m.id === selectedMatchId);
+    const active = ongoingMatches.find((m) => m.id === selectedMatchId);
     if (active) {
       setLiveMatch({
         team1: active.team_one_reference?.name || "TBA",
         team2: active.team_two_reference?.name || "TBA",
         score1: active.team_one_score,
         score2: active.team_two_score,
+        faculty1: active.team_one_reference?.leader?.faculty || "",
+        faculty2: active.team_two_reference?.leader?.faculty || "",
       });
     }
   }, [selectedMatchId, initialMatches]);
@@ -31,7 +47,7 @@ export default function LiveScore({ competitionId, initialMatches }: { competiti
 
     socket.on("score-updated-client", (data) => {
       if (data.matchId === selectedMatchId) {
-        setLiveMatch(prev => ({
+        setLiveMatch((prev) => ({
           ...prev,
           score1: data.team1Score,
           score2: data.team2Score,
@@ -49,7 +65,9 @@ export default function LiveScore({ competitionId, initialMatches }: { competiti
   if (ongoingMatches.length === 0) {
     return (
       <div className="p-4 sm:p-6">
-        <div className="p-8 text-center text-white/40 border-2 border-dashed border-white/10 rounded-xl">No ongoing matches.</div>
+        <div className="p-8 text-center text-white/40 border-2 border-dashed border-white/10 rounded-xl">
+          No ongoing matches.
+        </div>
       </div>
     );
   }
@@ -57,7 +75,9 @@ export default function LiveScore({ competitionId, initialMatches }: { competiti
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2 px-4">
-        <label className="text-white text-[10px] font-bold uppercase tracking-wider opacity-60">Select Live Match</label>
+        <label className="text-white text-[10px] font-bold uppercase tracking-wider opacity-60">
+          Select Live Match
+        </label>
         <select
           value={selectedMatchId}
           onChange={(e) => setSelectedMatchId(e.target.value)}
@@ -73,8 +93,15 @@ export default function LiveScore({ competitionId, initialMatches }: { competiti
 
       <div className="grid grid-cols-2 gap-4 px-4">
         <div className="flex flex-col gap-3">
-          <div className="bg-gradient-to-r from-[#6226A4] to-[#FF6BDB] p-2 rounded border border-[#AAF3D5] text-center text-white text-xs font-bold truncate">
-            {liveMatch.team1}
+          <div className="bg-gradient-to-r from-[#6226A4] to-[#FF6BDB] p-2 rounded border border-[#AAF3D5] text-center">
+            <div className="text-white text-xs font-bold truncate">
+              {liveMatch.team1}
+            </div>
+            {liveMatch.faculty1 && (
+              <div className="text-[#AAF3D5]/70 text-[10px] font-mono truncate">
+                {liveMatch.faculty1}
+              </div>
+            )}
           </div>
           <div className="bg-[#5B3A8F]/40 border-4 border-[#AAF3D5] rounded-xl aspect-square flex items-center justify-center text-6xl sm:text-8xl font-black text-white">
             {liveMatch.score1}
@@ -82,8 +109,15 @@ export default function LiveScore({ competitionId, initialMatches }: { competiti
         </div>
 
         <div className="flex flex-col gap-3">
-          <div className="bg-gradient-to-r from-[#E94BFF] to-[#FF6BDB] p-2 rounded border border-[#AAF3D5] text-center text-white text-xs font-bold truncate">
-            {liveMatch.team2}
+          <div className="bg-gradient-to-r from-[#E94BFF] to-[#FF6BDB] p-2 rounded border border-[#AAF3D5] text-center">
+            <div className="text-white text-xs font-bold truncate">
+              {liveMatch.team2}
+            </div>
+            {liveMatch.faculty2 && (
+              <div className="text-[#AAF3D5]/70 text-[10px] font-mono truncate">
+                {liveMatch.faculty2}
+              </div>
+            )}
           </div>
           <div className="bg-[#5B3A8F]/40 border-4 border-[#AAF3D5] rounded-xl aspect-square flex items-center justify-center text-6xl sm:text-8xl font-black text-white">
             {liveMatch.score2}
@@ -96,7 +130,9 @@ export default function LiveScore({ competitionId, initialMatches }: { competiti
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
         </span>
-        <span className="text-red-500 font-black text-[10px] uppercase tracking-tighter">Live Update Active</span>
+        <span className="text-red-500 font-black text-[10px] uppercase tracking-tighter">
+          Live Update Active
+        </span>
       </div>
     </div>
   );

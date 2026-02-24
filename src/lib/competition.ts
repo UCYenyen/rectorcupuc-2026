@@ -38,8 +38,20 @@ export async function getCompetitionBySlug(
     include: {
       matches: {
         include: {
-          team_one_reference: true,
-          team_two_reference: true,
+          team_one_reference: {
+            include: {
+              leader: {
+                select: { id: true, name: true, faculty: true },
+              },
+            },
+          },
+          team_two_reference: {
+            include: {
+              leader: {
+                select: { id: true, name: true, faculty: true },
+              },
+            },
+          },
         },
       },
       rules: true,
