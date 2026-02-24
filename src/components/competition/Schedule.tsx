@@ -119,7 +119,8 @@ export default function Schedule({
                       <div className="flex flex-col items-end">
                         {match.team1Faculty && (
                           <span className="text-white font-medium text-center">
-                            {match.team1Name} ({match.team1Faculty})
+                            {/* {match.team1Name} */}
+                             ({match.team1Faculty})
                           </span>
                         )}
                       </div>
@@ -127,7 +128,8 @@ export default function Schedule({
                       <div className="flex flex-col items-start">
                         {match.team2Faculty && (
                           <span className="text-white font-medium text-center">
-                            {match.team2Name} ({match.team2Faculty})
+                            {/* {match.team2Name}  */}
+                            ({match.team2Faculty})
                           </span> 
                         )}
                       </div>

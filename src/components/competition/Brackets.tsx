@@ -70,15 +70,10 @@ export default function Brackets({ matches }: BracketsProps) {
               <div className="flex flex-col">
                 <span
                   className="text-white font-bold truncate max-w-[120px] sm:max-w-[180px]"
-                  title={team1?.name || "TBA"}
+                  title={team2?.leader?.faculty || "TBA"}
                 >
-                  {team1?.name || "TBA"}
+                  {team2?.leader?.faculty || "TBA"}
                 </span>
-                {team1?.leader?.faculty && (
-                  <span className="text-[10px] text-[#AAF3D5]/70 font-mono">
-                    {team1.leader.faculty}
-                  </span>
-                )}
               </div>
             </div>
             <span className="text-white font-black text-xl">
@@ -108,15 +103,10 @@ export default function Brackets({ matches }: BracketsProps) {
               <div className="flex flex-col">
                 <span
                   className="text-white font-bold truncate max-w-[120px] sm:max-w-[180px]"
-                  title={team2?.name || "TBA"}
+                  title={team2?.leader?.faculty || "TBA"}
                 >
-                  {team2?.name || "TBA"}
+                  {team2?.leader?.faculty || "TBA"}
                 </span>
-                {team2?.leader?.faculty && (
-                  <span className="text-[10px] text-[#AAF3D5]/70 font-mono">
-                    {team2.leader.faculty}
-                  </span>
-                )}
               </div>
             </div>
             <span className="text-white font-black text-xl">
