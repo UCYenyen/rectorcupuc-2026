@@ -70,9 +70,9 @@ export default function Brackets({ matches }: BracketsProps) {
               <div className="flex flex-col">
                 <span
                   className="text-white font-bold truncate max-w-[120px] sm:max-w-[180px]"
-                  title={team2?.leader?.faculty || "TBA"}
+                  title={team1?.leader?.faculty || "TBA"}
                 >
-                  {team2?.leader?.faculty || "TBA"}
+                  {team1?.leader?.faculty || "TBA"}
                 </span>
               </div>
             </div>
