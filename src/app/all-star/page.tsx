@@ -55,10 +55,7 @@ export default async function CompetitionPage() {
       <div className="relative min-h-screen w-screen overflow-x-hidden flex flex-col justify-start items-center gap-8 pt-4 md:pt-8">
         <div className="fixed w-full h-full bg-gradient-to-b from-[#390D62] to-[#6226A4] z-[-1]"></div>
         <StripeBackground />
-        <div className="z-10 mt-8 mb-4">
-          <RectorInlineTitle />
-        </div>
-
+        <RectorInlineTitle />
         <SelectedAllStar players={enrichedPlayers} />
       </div>
     </>
