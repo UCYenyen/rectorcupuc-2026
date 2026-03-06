@@ -8,131 +8,6 @@ export type AllStarPlayer = {
 };
 
 export const allStarData: AllStarPlayer[] = [
-  // FUTSAL
-  {
-    name: "Alvin Putra Pujangga",
-    email: "apujanggan@student.ciputra.ac.id",
-    faculty: "SBM",
-    competition: "futsal",
-  },
-  {
-    name: "Taufik",
-    email: "taufik01@student.ciputra.ac.id",
-    faculty: "SBM",
-    competition: "futsal",
-  },
-  {
-    name: "Alexandro Tatipata",
-    email: "aphilipus@student.ciputra.ac.id",
-    faculty: "SBM",
-    competition: "futsal",
-  },
-  {
-    name: "Fabian Achmad Syachrezza",
-    email: "fsyachrezza@student.ciputra.ac.id",
-    faculty: "SBM",
-    competition: "futsal",
-  },
-  {
-    name: "Christopher Sean Emmanuel",
-    email: "cemmanuel@student.ciputra.ac.id",
-    faculty: "SBM",
-    competition: "futsal",
-  },
-  {
-    name: "Michael",
-    email: "michael02@student.ciputra.ac.id",
-    faculty: "SBM",
-    competition: "futsal",
-  },
-  {
-    name: "Muhammad Eggy Rizwar Firdaus",
-    email: "meggyrizwar@student.ciputra.ac.id",
-    faculty: "SBM",
-    competition: "futsal",
-  },
-  {
-    name: "M. Raihan Islamic Pasha",
-    email: "mislamic@student.ciputra.ac.id",
-    faculty: "SBM",
-    competition: "futsal",
-  },
-
-  {
-    name: "Edwardo Faisal Tobyas Tjiptorahardjo",
-    email: "efaisaltobyas@student.ciputra.ac.id",
-    faculty: "SIFT",
-    competition: "futsal",
-  },
-  {
-    name: "Aprilius Satrio Adi Pamungkas",
-    email: "asatrioadi@student.ciputra.ac.id",
-    faculty: "SIFT",
-    competition: "futsal",
-  },
-  {
-    name: "Rigel Aflah Wahyuningrat",
-    email: "rwahyuningrat@student.ciputra.ac.id",
-    faculty: "SIFT",
-    competition: "futsal",
-  },
-  {
-    name: "Dave Tristan Hartono",
-    email: "dtristan@student.ciputra.ac.id",
-    faculty: "SIFT",
-    competition: "futsal",
-  },
-  {
-    name: "Howie Homan",
-    email: "howiehoman01@student.ciputra.ac.id",
-    faculty: "SIFT",
-    competition: "futsal",
-  },
-
-  {
-    name: "Yesaya Jovan Santoso",
-    email: "ysantoso03@student.ciputra.ac.id",
-    faculty: "SCI",
-    competition: "futsal",
-  },
-  {
-    name: "Romansya Putra Sapari",
-    email: "rputrasapari@student.ciputra.ac.id",
-    faculty: "SCI",
-    competition: "futsal",
-  },
-  {
-    name: "Nyoman Aditya Murdana",
-    email: "nmurdana@student.ciputra.ac.id",
-    faculty: "SCI",
-    competition: "futsal",
-  },
-
-  {
-    name: "Ferdyanto Setyo Wibowo",
-    email: "fsetyowibowo@student.ciputra.ac.id",
-    faculty: "SOM",
-    competition: "futsal",
-  },
-  {
-    name: "Bilal Fahim Aslam",
-    email: "bfahimaslam@student.ac.id",
-    faculty: "SOM",
-    competition: "futsal",
-  },
-  {
-    name: "Farrell Louis Limantara",
-    email: "flimantara01@student.ciputra.ac.id",
-    faculty: "SOM",
-    competition: "futsal",
-  },
-  {
-    name: "Oka Suputra Yasa",
-    email: "osuputra@student.ciputra.ac.id",
-    faculty: "SOM",
-    competition: "futsal",
-  },
-
   // BASKET PUTRA
   {
     name: "Alvaro Arya Di Ingrat Sumardi",
@@ -197,4 +72,37 @@ export const allStarData: AllStarPlayer[] = [
     faculty: "SOP",
     competition: "basketball-putra",
   },
+
+  // BASKET PUTRI
+  {
+    name: "Felicia Catherine Kusuma",
+    email: "fcatherine@student.ciputra.ac.id",
+    faculty: "SCI",
+    competition: "basketball-putri",
+  },
+  {
+    name: "Jane Lavinia",
+    email: "jlavinia01@student.ciputra.ac.id",
+    faculty: "SCI",
+    competition: "basketball-putri",
+  },
+  {
+    name: "Valerie Angelina Lim",
+    email: "vangeline04@student.ciputra.ac.id",
+    faculty: "SBM",
+    competition: "basketball-putri",
+  },
+  {
+    name: "Celine Evangelyna Christiawan",
+    email: "cevangelyna@student.ciputra.ac.id",
+    faculty: "SBM",
+    competition: "basketball-putri",
+  },
+  {
+    name: "Scahyian Michell Christmas Kowaas",
+    email: "smichell@student.ciputra.ac.id",
+    faculty: "SIFT",
+    competition: "basketball-putri",
+  },
+  
 ];
