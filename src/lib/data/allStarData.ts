@@ -104,5 +104,73 @@ export const allStarData: AllStarPlayer[] = [
     faculty: "SIFT",
     competition: "basketball-putri",
   },
-  
+
+  // FUTSAL
+  {
+    name: "Yesaya Jovan Santoso",
+    email: "ysantoso03@student.ciputra.ac.id",
+    faculty: "SCI",
+    competition: "futsal",
+  },
+  {
+    name: "Romansya Putra Sapari",
+    email: "rputrasapari@student.ciputra.ac.id",
+    faculty: "SCI",
+    competition: "futsal",
+  },
+  {
+    name: "Ferdyanto Setyo Wibowo",
+    email: "fsetyowibowo@student.ciputra.ac.id",
+    faculty: "SOM",
+    competition: "futsal",
+  },
+  {
+    name: "Edwardo Faisal Tobyas Tjiptorahardjo",
+    email: "efaisaltobyas@student.ciputra.ac.id",
+    faculty: "SIFT",
+    competition: "futsal",
+  },
+  {
+    name: "Aprilius Satrio Adi Pamungkas",
+    email: "asatrioadi@student.ciputra.ac.id",
+    faculty: "SIFT",
+    competition: "futsal",
+  },
+  {
+    name: "Alvin Putra Pujangga",
+    email: "apujanggan@student.ciputra.ac.id",
+    faculty: "SBM",
+    competition: "futsal",
+  },
+  {
+    name: "Taufik",
+    email: "taufik01@student.ciputra.ac.id",
+    faculty: "SBM",
+    competition: "futsal",
+  },
+  {
+    name: "Alexandro Tatipata",
+    email: "aphilipus@student.ciputra.ac.id",
+    faculty: "SBM",
+    competition: "futsal",
+  },
+  {
+    name: "Fabian Achmad Syachrezza",
+    email: "fsyachrezza@student.ciputra.ac.id",
+    faculty: "SBM",
+    competition: "futsal",
+    role: "GK",
+  },
+  {
+    name: "Christopher Sean Emmanuel",
+    email: "cemmanuel@student.ciputra.ac.id",
+    faculty: "SBM",
+    competition: "futsal",
+  },
+  {
+    name: "Michael",
+    email: "michael02@student.ciputra.ac.id",
+    faculty: "SBM",
+    competition: "futsal",
+  },
 ];
