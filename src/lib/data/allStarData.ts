@@ -159,7 +159,6 @@ export const allStarData: AllStarPlayer[] = [
     email: "fsyachrezza@student.ciputra.ac.id",
     faculty: "SBM",
     competition: "futsal",
-    role: "GK",
   },
   {
     name: "Christopher Sean Emmanuel",
