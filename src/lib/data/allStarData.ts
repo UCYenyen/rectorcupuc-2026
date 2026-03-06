@@ -104,6 +104,12 @@ export const allStarData: AllStarPlayer[] = [
     faculty: "SIFT",
     competition: "basketball-putri",
   },
+  {
+    name: "Gwyneth Sungkono ",
+    email: "Gsungkono@student.ciputra.ac.id",
+    faculty: "SIFT",
+    competition: "basketball-putri",
+  },
 
   // FUTSAL
   {
