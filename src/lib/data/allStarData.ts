@@ -119,12 +119,6 @@ export const allStarData: AllStarPlayer[] = [
     competition: "futsal",
   },
   {
-    name: "Romansya Putra Sapari",
-    email: "rputrasapari@student.ciputra.ac.id",
-    faculty: "SCI",
-    competition: "futsal",
-  },
-  {
     name: "Ferdyanto Setyo Wibowo",
     email: "fsetyowibowo@student.ciputra.ac.id",
     faculty: "SOM",
