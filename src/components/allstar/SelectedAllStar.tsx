@@ -5,6 +5,7 @@ import { AllStarPlayer } from "@/lib/data/allStarData";
 
 const competitions = [
   { name: "Basketball Putri", slug: "basketball-putri" },
+  { name: "Futsal", slug: "basketball-putra" },
   { name: "Basketball Putra", slug: "basketball-putra" },
 ];
 
