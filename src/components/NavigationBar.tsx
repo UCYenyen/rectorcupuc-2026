@@ -25,7 +25,7 @@ export default function NavigationBar() {
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "Competitions", href: "/competitions" },
-    // { label: "AllStar", href: "/all-star" },
+    { label: "AllStar", href: "/all-star" },
   ];
 
   const userRole = session?.user?.role;
