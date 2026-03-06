@@ -4,7 +4,7 @@ import Image from "next/image";
 import { AllStarPlayer } from "@/lib/data/allStarData";
 
 const competitions = [
-  { name: "Futsal", slug: "futsal" },
+  { name: "Basketball Putri", slug: "basketball-putri" },
   { name: "Basketball Putra", slug: "basketball-putra" },
 ];
 
