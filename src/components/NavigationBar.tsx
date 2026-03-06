@@ -25,6 +25,7 @@ export default function NavigationBar() {
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "Competitions", href: "/competitions" },
+    { label: "AllStar", href: "/all-star" },
   ];
 
   const userRole = session?.user?.role;
@@ -92,7 +93,7 @@ export default function NavigationBar() {
         </Link>
         <div className="relative z-10 hidden md:flex gap-4 text-white items-center justify-center uppercase">
           {menuItems.map((item) => (
-            <Link key={item.href} href={item.href} className="bg-black/30 backdrop-blur-2xl text-md border-white border-2 rounded-lg px-4 py-2 hover:bg-purple-800 transition-all">
+            <Link key={item.href} href={item.href} className="bg-black/30 backdrop-blur-2xl text-md font-bold border-white border-2 rounded-lg px-4 py-2 hover:bg-purple-800 transition-all">
               {item.label}
             </Link>
           ))}

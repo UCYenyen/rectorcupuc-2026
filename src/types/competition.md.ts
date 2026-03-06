@@ -26,6 +26,11 @@ export interface Competition {
   matches: Match[];
 }
 
+export interface AllStarCompetitionData{
+  id: string,
+  name: string
+}
+
 export interface Registration {
   id: string;
   userId: string;
