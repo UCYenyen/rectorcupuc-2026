@@ -5,7 +5,7 @@ import { AllStarPlayer } from "@/lib/data/allStarData";
 
 const competitions = [
   { name: "Basketball Putri", slug: "basketball-putri" },
-  { name: "Futsal", slug: "basketball-putra" },
+  { name: "Futsal", slug: "futsal" },
   { name: "Basketball Putra", slug: "basketball-putra" },
 ];
 
@@ -98,8 +98,8 @@ export default function SelectedAllStar({
 
       <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredPlayers.length > 0 ? (
-          filteredPlayers.map((player, idx) => (
-            <AllStarPlayerCard key={idx} player={player} />
+          filteredPlayers.map((player) => (
+            <AllStarPlayerCard key={player.email} player={player} />
           ))
         ) : (
           <div className="col-span-full py-12 text-center text-white text-xl font-bold">
