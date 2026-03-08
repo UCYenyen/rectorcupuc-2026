@@ -7,6 +7,7 @@ const competitions = [
   { name: "Basketball Putri", slug: "basketball-putri" },
   { name: "Futsal", slug: "futsal" },
   { name: "Basketball Putra", slug: "basketball-putra" },
+  { name: "Ping Pong", slug: "ping-pong" },
 ];
 
 const faculties = ["All", "SBM", "SCI", "SOT", "SIFT", "SOM", "SOP", "SOC"];
@@ -80,7 +81,7 @@ export default function SelectedAllStar({
           <div className="absolute right-6 pointer-events-none text-xl">▼</div>
         </div>
 
-        <div className="w-full border-4 text-white border-[#AAF3D5] rounded-lg py-2 font-bold bg-gradient-to-r from-[#6427A8] to-[#EB79F0] flex justify-center items-center relative">
+        <div className="w-full border-4 rounded-lg py-2 font-bold flex justify-center items-center relative focus:outline-none focus:ring-2 focus:ring-[#AAF3D5] bg-black/40 text-white cursor-pointer md:text-lg appearance-none text-center">
           <select
             value={selectedFaculty}
             onChange={(e) => setSelectedFaculty(e.target.value)}

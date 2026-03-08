@@ -19,25 +19,22 @@ export default function CompetitionSelect({
   const router = useRouter();
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full border-4 text-white rounded-lg py-2 font-bold flex justify-center items-center relative focus:outline-none focus:ring-2 focus:ring-[#AAF3D5] bg-black/40 cursor-pointer md:text-lg appearance-none text-center">
       <select
         value={activeCompetitionId}
         onChange={(e) => router.push(`?competition=${e.target.value}`)}
-        className="w-full px-4 py-3 rounded-lg border-2 border-white focus:outline-none focus:ring-2 focus:ring-[#AAF3D5] bg-black/40 text-white font-bold cursor-pointer md:text-lg appearance-none text-center"
+        className="appearance-none bg-transparent text-xl md:text-2xl text-center w-full h-full cursor-pointer outline-none uppercase px-8 z-10"
       >
-        <option value="" disabled className="bg-[#390D62] text-white">
+        <option value="" disabled className="text-black">
           Select Competition
         </option>
         {competitions.map((comp) => (
-          <option
-            key={comp.id}
-            value={comp.id}
-            className="bg-[#390D62] text-white text-left font-bold"
-          >
+          <option key={comp.id} value={comp.id} className="text-black">
             {comp.name}
           </option>
         ))}
       </select>
+      <div className="absolute right-6 pointer-events-none text-xl">▼</div>
     </div>
   );
 }

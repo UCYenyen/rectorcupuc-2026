@@ -1,4 +1,4 @@
-export type AllStarPlayer = {
+export type BestVoteCandidates = {
   name: string;
   email: string;
   faculty: string;
@@ -7,7 +7,7 @@ export type AllStarPlayer = {
   image?: string | null;
 };
 
-export const allStarData: AllStarPlayer[] = [
+export const allStarData: BestVoteCandidates[] = [
   // BASKET PUTRA
   {
     name: "Alvaro Arya Di Ingrat Sumardi",
@@ -172,6 +172,7 @@ export const allStarData: AllStarPlayer[] = [
     faculty: "SBM",
     competition: "futsal",
   },
+
   // Ping pong
   {
     name: "Jason Benedict Wu",

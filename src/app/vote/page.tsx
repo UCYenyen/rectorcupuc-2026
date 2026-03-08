@@ -7,6 +7,8 @@ import { SearchIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import prisma from "@/lib/prisma";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
+import { allStarData } from "@/lib/data/bestVoteCandidatesData";
+import CompetitionTitleHeader from "@/components/competition/CompetitionTitleHeader";
 
 interface VotePageProps {
   searchParams: Promise<{
@@ -24,9 +26,21 @@ export default async function page({ searchParams }: VotePageProps) {
   const currentUserId = session?.user?.id;
 
   // 1. Fetch Competitions for Filter
+  const allowedSlugs = [
+    "basketball-putri",
+    "futsal",
+    "basketball-putra",
+    "ping-pong",
+  ];
+
   const competitions = await prisma.competition.findMany({
+    where: {
+      slug: {
+        in: allowedSlugs,
+      },
+    },
     orderBy: { name: "asc" },
-    select: { id: true, name: true },
+    select: { id: true, name: true, slug: true },
   });
 
   const activeCompetitionId =
@@ -36,42 +50,63 @@ export default async function page({ searchParams }: VotePageProps) {
   let users: { id: string; name: string; imageSrc: string }[] = [];
 
   if (activeCompetitionId) {
-    // Individual Registrations
-    const registrations = await prisma.competitionRegistration.findMany({
-      where: {
-        competition_id: activeCompetitionId,
-        registration_status: "Registered",
-      },
-      include: { user: true },
-    });
+    const activeCompetition = competitions.find(
+      (c) => c.id === activeCompetitionId,
+    );
 
-    // Team Members (Joined Logic)
-    const teamMembers = await prisma.teamMember.findMany({
-      where: {
-        join_request_status: "Registered",
-        team: {
-          competition_id: activeCompetitionId,
+    if (activeCompetition && activeCompetition.slug) {
+      const candidatesFromData = allStarData.filter(
+        (c) => c.competition === activeCompetition.slug,
+      );
+      const candidateEmails = candidatesFromData.map((c) => c.email);
+
+      const dbUsers = await prisma.user.findMany({
+        where: {
+          email: { in: candidateEmails },
         },
-      },
-      include: { user: true },
-    });
+      });
 
-    const regUsers = registrations.map((r) => ({
-      id: r.user.id,
-      name: r.user.name || "No Name",
-      imageSrc: r.profile_url || r.user.image || "/placeholder/no-image.svg",
-    }));
+      // Individual Registrations to fetch profile_url
+      const registrations = await prisma.competitionRegistration.findMany({
+        where: {
+          competition_id: activeCompetitionId,
+          user: { email: { in: candidateEmails } },
+        },
+        include: { user: true },
+      });
 
-    const tmUsers = teamMembers.map((tm) => ({
-      id: tm.user.id,
-      name: tm.user.name || "No Name",
-      imageSrc: tm.profile_url || tm.user.image || "/placeholder/no-image.svg",
-    }));
+      // Team Members to fetch profile_url
+      const teamMembers = await prisma.teamMember.findMany({
+        where: {
+          team: {
+            competition_id: activeCompetitionId,
+          },
+          user: { email: { in: candidateEmails } },
+        },
+        include: { user: true },
+      });
 
-    // Merge and deduplicate (just in case)
-    const userMap = new Map();
-    [...regUsers, ...tmUsers].forEach((u) => userMap.set(u.id, u));
-    users = Array.from(userMap.values());
+      users = candidatesFromData.map((candidateInfo) => {
+        const dbUser = dbUsers.find((u) => u.email === candidateInfo.email);
+        const reg = registrations.find(
+          (r) => r.user.email === candidateInfo.email,
+        );
+        const tm = teamMembers.find(
+          (t) => t.user.email === candidateInfo.email,
+        );
+
+        return {
+          id: dbUser?.id || candidateInfo.email,
+          name: candidateInfo.name,
+          imageSrc:
+            candidateInfo.image ||
+            reg?.profile_url ||
+            tm?.profile_url ||
+            dbUser?.image ||
+            "/placeholder/no-image.svg",
+        };
+      });
+    }
   }
 
   // 3. Fetch Vote Counts
@@ -121,6 +156,10 @@ export default async function page({ searchParams }: VotePageProps) {
 
         <div className="relative z-2 mb-48 flex flex-col gap-4 w-[90%] justify-center items-center border-8 border-[#AAF3D5] p-8 md:p-12 rounded-lg shadow-lg backdrop-blur-2xl bg-gradient-to-b from-[#390D62]/40 to-[#6226A4]/40">
           {/* Competition Filter */}
+          <CompetitionTitleHeader
+            shouldFitContent={false}
+            title="Vote Your Allstar"
+          ></CompetitionTitleHeader>
           <CompetitionSelect
             competitions={competitions}
             activeCompetitionId={activeCompetitionId}
