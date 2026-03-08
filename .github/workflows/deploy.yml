@@ -100,16 +100,16 @@ jobs:
             git reset --hard origin/main
 
             # Tarik (Pull) image terbaru dari GHCR
-            docker-compose pull
+            docker compose pull
 
             # Jalankan ulang container dengan image baru (tanpa proses build)
-            docker-compose up -d
+            docker compose up -d
 
             # Hapus image lama yang sudah tidak dipakai untuk menghemat disk space VPS
             docker image prune -f
 
             # Show container status & logs
-            docker-compose ps
-            docker-compose logs --tail=50 app
+            docker compose ps
+            docker compose logs --tail=50 app
             
             echo "Deployment completed successfully!"
