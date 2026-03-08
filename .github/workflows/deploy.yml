@@ -5,11 +5,14 @@ on:
     branches:
       - main
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ucyenyen/rectorcupuc-2026
+
 jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -48,9 +51,35 @@ jobs:
       - name: Run tests
         run: pnpm test:ci
 
+  build-and-push:
+    name: Build and Push to GHCR
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          # Menggunakan tag latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
   deploy:
     name: Deploy to Server
-    needs: test
+    needs: build-and-push
     runs-on: ubuntu-latest
 
     steps:
@@ -61,22 +90,26 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd ~/rectorcupuc-2026
+            cd /home/bryan/rectorcupuc-2026
 
-            # Pull latest changes
+            # Login ke GHCR di VPS menggunakan Personal Access Token (PAT)
+            echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            # Pull perubahan docker-compose.yml terbaru
             git fetch origin main
             git reset --hard origin/main
 
-            # Stop and remove existing container
-            docker-compose down
+            # Tarik (Pull) image terbaru dari GHCR
+            docker-compose pull
 
-            # Rebuild and start container
-            docker-compose up -d --build
+            # Jalankan ulang container dengan image baru (tanpa proses build)
+            docker-compose up -d
 
-            # Show container status
+            # Hapus image lama yang sudah tidak dipakai untuk menghemat disk space VPS
+            docker image prune -f
+
+            # Show container status & logs
             docker-compose ps
-
-            # Show recent logs
             docker-compose logs --tail=50 app
-
+            
             echo "Deployment completed successfully!"
