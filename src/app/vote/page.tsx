@@ -60,6 +60,20 @@ export default async function page({ searchParams }: VotePageProps) {
       );
       const candidateEmails = candidatesFromData.map((c) => c.email);
 
+      // Ensure all candidates exist in the database so voting foreign key constraints are met
+      await Promise.all(
+        candidatesFromData.map((candidate) =>
+          prisma.user.upsert({
+            where: { email: candidate.email },
+            update: {},
+            create: {
+              email: candidate.email,
+              name: candidate.name,
+            },
+          }),
+        ),
+      );
+
       const dbUsers = await prisma.user.findMany({
         where: {
           email: { in: candidateEmails },
