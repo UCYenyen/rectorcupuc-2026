@@ -161,6 +161,12 @@ export const allStarData: AllStarPlayer[] = [
     competition: "futsal",
   },
   {
+    name: "Romansya Putra Sapari",
+    email: "rputrasapari@student.ciputra.ac.id",
+    faculty: "SCI",
+    competition: "futsal",
+  },
+  {
     name: "Christopher Sean Emmanuel",
     email: "cemmanuel@student.ciputra.ac.id",
     faculty: "SBM",

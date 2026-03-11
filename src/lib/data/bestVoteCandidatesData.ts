@@ -191,6 +191,12 @@ export const allStarData: BestVoteCandidates[] = [
     competition: "futsal",
   },
   {
+    name: "Romansya Putra Sapari",
+    email: "rputrasapari@student.ciputra.ac.id",
+    faculty: "SCI",
+    competition: "futsal",
+  },
+  {
     name: "Nyoman Aditya Murdana",
     email: "nmurdana@student.ciputra.ac.id",
     faculty: "SCI",
