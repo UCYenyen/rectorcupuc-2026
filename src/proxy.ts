@@ -65,6 +65,7 @@ export async function proxy(req: NextRequest) {
       if (userRole !== "pdd_website" && userRole !== "liason_officer") {
         return NextResponse.redirect(new URL("/unauthorized", req.url));
       }
+    }
   }
 
   return NextResponse.next();
