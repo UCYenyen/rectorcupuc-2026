@@ -100,6 +100,32 @@ export default async function page({ searchParams }: VotePageProps) {
         include: { user: true },
       });
 
+      // DEBUG: Log fetched data to identify image issues
+      console.log("=== VOTE PAGE DEBUG ===");
+      console.log("Candidate emails from data:", candidateEmails);
+      console.log(
+        "DB Users found:",
+        dbUsers.length,
+        dbUsers.map((u) => ({ email: u.email, image: u.image })),
+      );
+      console.log(
+        "Registrations found:",
+        registrations.length,
+        registrations.map((r) => ({
+          email: r.user?.email,
+          profile_url: r.profile_url,
+        })),
+      );
+      console.log(
+        "Team Members found:",
+        teamMembers.length,
+        teamMembers.map((t) => ({
+          email: t.user?.email,
+          profile_url: t.profile_url,
+        })),
+      );
+      console.log("=== END DEBUG ===");
+
       users = candidatesFromData.map((candidateInfo) => {
         const dbUser = dbUsers.find(
           (u) => u.email?.toLowerCase() === candidateInfo.email.toLowerCase(),

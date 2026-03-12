@@ -33,6 +33,21 @@ export default async function CompetitionPage() {
     },
   });
 
+  // DEBUG: Log fetched data to identify image issues
+  console.log("=== ALL-STAR PAGE DEBUG ===");
+  console.log("Emails searched:", allStarEmails.length);
+  console.log(
+    "DB Users found:",
+    dbUsers.length,
+    dbUsers.map((u) => ({
+      email: u.email,
+      image: u.image,
+      regs: u.competition_registrations?.map((r) => r.profile_url),
+      tms: u.team_members?.map((t) => t.profile_url),
+    })),
+  );
+  console.log("=== END DEBUG ===");
+
   const enrichedPlayers = allStarData.map((player) => {
     const dbUser = dbUsers.find(
       (u) => u.email?.toLowerCase() === player.email.toLowerCase(),
