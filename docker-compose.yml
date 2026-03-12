@@ -18,6 +18,7 @@ services:
       - ./.env:/app/.env:ro
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
+      - ./uploads:/app/public/uploads
 
   # Prisma Studio
   studio:
