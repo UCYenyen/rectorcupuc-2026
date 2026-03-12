@@ -7,11 +7,13 @@ import { allStarData } from "@/lib/data/allStarData";
 export default async function CompetitionPage() {
   const allStarEmails = allStarData.map((player) => player.email);
 
+  const allStarEmailFilters = allStarEmails.map((email) => ({
+    email: { equals: email, mode: "insensitive" as const },
+  }));
+
   const dbUsers = await prisma.user.findMany({
     where: {
-      email: {
-        in: allStarEmails,
-      },
+      OR: allStarEmailFilters,
     },
     select: {
       email: true,
@@ -32,13 +34,22 @@ export default async function CompetitionPage() {
   });
 
   const enrichedPlayers = allStarData.map((player) => {
-    const dbUser = dbUsers.find((u) => u.email === player.email);
+    const dbUser = dbUsers.find(
+      (u) => u.email?.toLowerCase() === player.email.toLowerCase(),
+    );
 
     let userImage = dbUser?.image || null;
-    if (dbUser?.competition_registrations?.length) {
-      userImage = dbUser.competition_registrations[0].profile_url || userImage;
-    } else if (dbUser?.team_members?.length) {
-      userImage = dbUser.team_members[0].profile_url || userImage;
+    const validReg = dbUser?.competition_registrations?.find(
+      (r) => r.profile_url && r.profile_url.trim() !== "",
+    );
+    const validTm = dbUser?.team_members?.find(
+      (t) => t.profile_url && t.profile_url.trim() !== "",
+    );
+
+    if (validReg) {
+      userImage = validReg.profile_url;
+    } else if (validTm) {
+      userImage = validTm.profile_url;
     }
 
     return {

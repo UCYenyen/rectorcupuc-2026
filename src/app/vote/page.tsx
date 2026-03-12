@@ -74,9 +74,13 @@ export default async function page({ searchParams }: VotePageProps) {
         ),
       );
 
+      const candidateEmailFilters = candidateEmails.map((email) => ({
+        email: { equals: email, mode: "insensitive" as const },
+      }));
+
       const dbUsers = await prisma.user.findMany({
         where: {
-          email: { in: candidateEmails },
+          OR: candidateEmailFilters,
         },
       });
 
@@ -84,7 +88,7 @@ export default async function page({ searchParams }: VotePageProps) {
       const registrations = await prisma.competitionRegistration.findMany({
         where: {
           competition_id: activeCompetitionId,
-          user: { email: { in: candidateEmails } },
+          user: { OR: candidateEmailFilters },
         },
         include: { user: true },
       });
@@ -95,18 +99,28 @@ export default async function page({ searchParams }: VotePageProps) {
           team: {
             competition_id: activeCompetitionId,
           },
-          user: { email: { in: candidateEmails } },
+          user: { OR: candidateEmailFilters },
         },
         include: { user: true },
       });
 
       users = candidatesFromData.map((candidateInfo) => {
-        const dbUser = dbUsers.find((u) => u.email === candidateInfo.email);
+        const dbUser = dbUsers.find(
+          (u) => u.email?.toLowerCase() === candidateInfo.email.toLowerCase(),
+        );
         const reg = registrations.find(
-          (r) => r.user.email === candidateInfo.email,
+          (r) =>
+            r.user?.email?.toLowerCase() ===
+              candidateInfo.email.toLowerCase() &&
+            r.profile_url &&
+            r.profile_url.trim() !== "",
         );
         const tm = teamMembers.find(
-          (t) => t.user.email === candidateInfo.email,
+          (t) =>
+            t.user?.email?.toLowerCase() ===
+              candidateInfo.email.toLowerCase() &&
+            t.profile_url &&
+            t.profile_url.trim() !== "",
         );
 
         return {
