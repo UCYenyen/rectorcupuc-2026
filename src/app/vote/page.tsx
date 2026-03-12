@@ -190,6 +190,13 @@ export default async function page({ searchParams }: VotePageProps) {
     }
   }
 
+  // Sort users by vote count (most votes first)
+  users.sort((a, b) => {
+    const votesA = voteCountMap.get(a.id) || 0;
+    const votesB = voteCountMap.get(b.id) || 0;
+    return votesB - votesA;
+  });
+
   // Pagination logic
   const totalPages = Math.ceil(users.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
