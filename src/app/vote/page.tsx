@@ -84,21 +84,17 @@ export default async function page({ searchParams }: VotePageProps) {
         },
       });
 
-      // Individual Registrations to fetch profile_url
+      // Individual Registrations to fetch profile_url (no competition filter, just find any registration with a profile)
       const registrations = await prisma.competitionRegistration.findMany({
         where: {
-          competition_id: activeCompetitionId,
           user: { OR: candidateEmailFilters },
         },
         include: { user: true },
       });
 
-      // Team Members to fetch profile_url
+      // Team Members to fetch profile_url (no competition filter)
       const teamMembers = await prisma.teamMember.findMany({
         where: {
-          team: {
-            competition_id: activeCompetitionId,
-          },
           user: { OR: candidateEmailFilters },
         },
         include: { user: true },
