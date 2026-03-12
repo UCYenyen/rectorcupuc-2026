@@ -26,7 +26,7 @@ export default function NavigationBar() {
     { label: "Home", href: "/" },
     { label: "Competitions", href: "/competitions" },
     // { label: "AllStar", href: "/all-star" },
-    { label: "Vote", href: "/vote" },
+    // { label: "Vote", href: "/vote" },
   ];
 
   const userRole = session?.user?.role;

@@ -61,7 +61,10 @@ export async function proxy(req: NextRequest) {
       ) {
         return NextResponse.redirect(new URL("/unauthorized", req.url));
       }
-    }
+    }else if(pathname.startsWith("/vote")){
+      if (userRole !== "pdd_website" && userRole !== "liason_officer") {
+        return NextResponse.redirect(new URL("/unauthorized", req.url));
+      }
   }
 
   return NextResponse.next();
