@@ -18,7 +18,6 @@ export default async function CompetitionPage() {
     select: {
       email: true,
       name: true,
-      image: true,
       faculty: true,
       team_members: {
         select: {
@@ -41,7 +40,7 @@ export default async function CompetitionPage() {
     dbUsers.length,
     dbUsers.map((u) => ({
       email: u.email,
-      image: u.image,
+      image: u.competition_registrations?.map((r) => r.profile_url),
       regs: u.competition_registrations?.map((r) => r.profile_url),
       tms: u.team_members?.map((t) => t.profile_url),
     })),
@@ -53,7 +52,7 @@ export default async function CompetitionPage() {
       (u) => u.email?.toLowerCase() === player.email.toLowerCase(),
     );
 
-    let userImage = dbUser?.image || null;
+    // Priority: competition_registrations.profile_url > team_members.profile_url
     const validReg = dbUser?.competition_registrations?.find(
       (r) => r.profile_url && r.profile_url.trim() !== "",
     );
@@ -61,11 +60,7 @@ export default async function CompetitionPage() {
       (t) => t.profile_url && t.profile_url.trim() !== "",
     );
 
-    if (validReg) {
-      userImage = validReg.profile_url;
-    } else if (validTm) {
-      userImage = validTm.profile_url;
-    }
+    const userImage = validReg?.profile_url || validTm?.profile_url || null;
 
     return {
       ...player,
