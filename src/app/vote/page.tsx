@@ -78,46 +78,39 @@ export default async function page({ searchParams }: VotePageProps) {
         where: {
           email: { in: candidateEmails },
         },
-      });
-
-      // Individual Registrations to fetch profile_url
-      const registrations = await prisma.competitionRegistration.findMany({
-        where: {
-          competition_id: activeCompetitionId,
-          user: { email: { in: candidateEmails } },
-        },
-        include: { user: true },
-      });
-
-      // Team Members to fetch profile_url
-      const teamMembers = await prisma.teamMember.findMany({
-        where: {
-          team: {
-            competition_id: activeCompetitionId,
+        select: {
+          id: true,
+          email: true,
+          image: true,
+          team_members: {
+            select: {
+              profile_url: true,
+            },
           },
-          user: { email: { in: candidateEmails } },
+          competition_registrations: {
+            select: {
+              profile_url: true,
+            },
+          },
         },
-        include: { user: true },
       });
 
       users = candidatesFromData.map((candidateInfo) => {
         const dbUser = dbUsers.find((u) => u.email === candidateInfo.email);
-        const reg = registrations.find(
-          (r) => r.user.email === candidateInfo.email,
-        );
-        const tm = teamMembers.find(
-          (t) => t.user.email === candidateInfo.email,
-        );
+
+        let userImage = dbUser?.image || null;
+        if (dbUser?.competition_registrations?.length) {
+          userImage =
+            dbUser.competition_registrations[0].profile_url || userImage;
+        } else if (dbUser?.team_members?.length) {
+          userImage = dbUser.team_members[0].profile_url || userImage;
+        }
 
         return {
           id: dbUser?.id || candidateInfo.email,
           name: candidateInfo.name,
           imageSrc:
-            candidateInfo.image ||
-            reg?.profile_url ||
-            tm?.profile_url ||
-            dbUser?.image ||
-            "/placeholder/no-image.svg",
+            candidateInfo.image || userImage || "/placeholder/no-image.svg",
         };
       });
     }
