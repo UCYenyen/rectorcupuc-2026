@@ -9,6 +9,8 @@ import { auth } from "@/lib/auth";
 import Footer from "@/components/Footer";
 import { montserrat, pressStart, brunson } from "./fonts";
 
+import PopUp from "@/components/closing_pop_up/PopUp";
+
 export const metadata: Metadata = {
   title: "Rector Cup",
   description: "The Official Website of Rector Cup",
@@ -22,13 +24,22 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <html lang="en"
-    className={`${montserrat.variable} ${pressStart.variable} ${brunson.variable}`}>
-      <body id="root-layout" className="bg-gradient-to-b from-[#390D62] to-[#6226A4] font-sans antialiased overflow-x-hidden">
+    <html
+      lang="en"
+      className={`${montserrat.variable} ${pressStart.variable} ${brunson.variable}`}
+    >
+      <body
+        id="root-layout"
+        className="bg-gradient-to-b from-[#390D62] to-[#6226A4] font-sans antialiased overflow-x-hidden"
+      >
         <Provider session={session}>
           <NavigationBar />
           {children}
           <Footer />
+
+          {/* ✅ POPUP MASUK SINI */}
+          <PopUp />
+
           {/* <div className="fixed inset-0 z-[9999] pointer-events-none">
             <PixelTrail
               gridSize={50}
@@ -40,6 +51,7 @@ export default async function RootLayout({
             />
           </div> */}
         </Provider>
+
         <Analytics />
         <SpeedInsights />
       </body>
