@@ -146,31 +146,28 @@ export default function UserDashboard() {
                     >
                         <div className="bg-gradient-to-r from-[#DD7CDF] via-[#FAE39F] py-3 border-b-4 border-[#DFE5E1]">
                             <h3 className="text-2xl text-[#1E0843] font-bold uppercase">
-                                RECTOR CUP 2026 - Closing Ceremony 🏆✨
+                                Closing RECTOR CUP 2026
                             </h3>
                         </div>
 
                         <div className="flex flex-col gap-4 px-8 py-6 text-[#1E0843]">
                             <p>
                                 We warmly invite all participants to attend the
-                                <b> Closing Ceremony of Rector Cup 2026! 🎊</b>
+                                <b> Closing of Rector Cup 2026!</b>
                             </p>
 
                             <div className="bg-white/60 border-2 rounded-xl p-4 text-left">
                                 <p>📅 <b>Date & Time:</b></p>
-                                <p>15:30 WIB - End</p>
-                                <p className="text-xs">
-                                    (Open Gate: 15:30 - 16:00 WIB ⏰)
-                                </p>
+                                <p>Monday, 30 March 2026</p>
+                                <p>16:00 WIB - 21:00 WIB</p>
 
                                 <p className="mt-3">📍 <b>Location:</b></p>
-                                <p>Dian Auditorium, 7th Floor, UC Main Building</p>
+                                <p>UC Plaza</p>
                             </div>
 
                             <p>
-                                Let's come together to celebrate the spirit of
-                                sportsmanship and all the incredible moments from
-                                Rector Cup 2026. 💫
+                                Let's come together to celebrate all the incredible moments from
+                                Rector Cup 2026.
                             </p>
 
                             <button
