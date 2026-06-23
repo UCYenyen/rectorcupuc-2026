@@ -36,8 +36,6 @@ export default async function RootLayout({
           <NavigationBar />
           {children}
           <Footer />
-
-          {/* ✅ POPUP MASUK SINI */}
           <PopUp />
 
           {/* <div className="fixed inset-0 z-[9999] pointer-events-none">
